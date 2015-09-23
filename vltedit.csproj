@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{799E1511-D553-4370-842D-16907958B274}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>vltedit</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <Prefer32Bit>false</Prefer32Bit>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <DefineConstants>DEBUG</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>VLTEdit</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>VLTEdit.frmMain</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="VLTEdit\BuildConfig.cs" />
+    <Compile Include="VLTEdit\Types\EACarBodyMotion.cs" />
+    <Compile Include="VLTEdit\UnknownA4.cs" />
+    <Compile Include="VLTEdit\UnknownA8.cs" />
+    <Compile Include="VLTEdit\Types\EAUInt32.cs" />
+    <Compile Include="VLTEdit\Types\EARawType.cs" />
+    <Compile Include="VLTEdit\Types\EAInt32.cs" />
+    <Compile Include="VLTEdit\Types\EAGCollectionKey.cs" />
+    <Compile Include="VLTEdit\Types\EAMatrix.cs" />
+    <Compile Include="VLTEdit\Types\EAUInt16.cs" />
+    <Compile Include="VLTEdit\UnknownAP.cs" />
+    <Compile Include="VLTEdit\Types\EAUInt8.cs" />
+    <Compile Include="VLTEdit\Types\EAText.cs" />
+    <Compile Include="VLTEdit\UnknownAS.cs" />
+    <Compile Include="VLTEdit\Types\EAJunkmanMod.cs" />
+    <Compile Include="VLTEdit\UnknownB0.cs" />
+    <Compile Include="VLTEdit\Types\EABool.cs" />
+    <Compile Include="VLTEdit\VLTCommonValue.cs" />
+    <Compile Include="VLTEdit\Types\TypeMap.cs" />
+    <Compile Include="VLTEdit\Types\EAFloat.cs" />
+    <Compile Include="VLTEdit\UnknownB8.cs" />
+    <Compile Include="VLTEdit\UnknownBA.cs" />
+    <Compile Include="VLTEdit\Types\EABaseType.cs" />
+    <Compile Include="VLTEdit\Types\EAVector3.cs" />
+    <Compile Include="VLTEdit\IBinReadWrite.cs" />
+    <Compile Include="VLTEdit\Types\EAUInt64.cs" />
+    <Compile Include="VLTEdit\HashTracker.cs" />
+    <Compile Include="VLTEdit\Types\EADouble.cs" />
+    <Compile Include="VLTEdit\UnknownC.cs" />
+    <Compile Include="VLTEdit\UnknownC0.cs" />
+    <Compile Include="VLTEdit\Types\EAVector2.cs" />
+    <Compile Include="VLTEdit\Types\EAStringKey.cs" />
+    <Compile Include="VLTEdit\UnknownC6.cs" />
+    <Compile Include="VLTEdit\Types\EABlob.cs" />
+    <Compile Include="VLTEdit\VLTConstants.cs" />
+    <Compile Include="VLTEdit\VLTOtherValue.cs" />
+    <Compile Include="VLTEdit\Types\EAVector4.cs" />
+    <Compile Include="VLTEdit\Types\EAAxlePair.cs" />
+    <Compile Include="VLTEdit\UnknownCY.cs" />
+    <Compile Include="VLTEdit\Types\EAInt8.cs" />
+    <Compile Include="VLTEdit\UnknownDE.cs" />
+    <Compile Include="VLTEdit\UnknownDH.cs" />
+    <Compile Include="VLTEdit\UnknownDI.cs" />
+    <Compile Include="VLTEdit\Types\EAInt16.cs" />
+    <Compile Include="VLTEdit\frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VLTEdit\Types\EARefSpec.cs" />
+    <Compile Include="VLTEdit\VLTClass.cs" />
+    <Compile Include="VLTEdit\UnknownDR.cs" />
+    <Compile Include="VLTEdit\Types\EAUpgradeSpecs.cs" />
+    <Compile Include="VLTEdit\UnknownE.cs" />
+    <Compile Include="VLTEdit\Types\EAInt64.cs" />
+    <Compile Include="VLTEdit\Types\EAArray.cs" />
+    <Compile Include="VLTEdit\HashUtil.cs" />
+    <Compile Include="VLTEdit\Types\DataValueAttribute.cs" />
+    <Compile Include="VLTEdit\UnknownW.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VLTEdit\frmMain.resources" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="VLTEdit\app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

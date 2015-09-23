@@ -1,0 +1,32 @@
+using System;
+using System.IO;
+using System.Text;
+
+namespace VLTEdit
+{
+	public class UnknownAP
+	{
+		public static string a( BinaryReader A_0 )
+		{
+			StringBuilder stringBuilder = new StringBuilder();
+			byte b;
+			do
+			{
+				b = A_0.ReadByte();
+				if( b != 0 )
+				{
+					stringBuilder.Append( (char)b );
+				}
+			}
+			while( b != 0 );
+			return stringBuilder.ToString();
+		}
+
+		public static void a( BinaryWriter A_0, string A_1 )
+		{
+			byte[] bytes = Encoding.ASCII.GetBytes( A_1 );
+			A_0.Write( bytes );
+			A_0.Write( 0 );
+		}
+	}
+}

@@ -125,7 +125,7 @@ namespace VLTEdit
 			int y = 0, z = 0;
 			do
 			{
-				y++;
+				++y;
 				c = this.a( a_ );
 				if( c != null )
 				{
@@ -136,13 +136,13 @@ namespace VLTEdit
 			//Console.WriteLine( "B0: y: " + y ); // NFS:MW AND NFS:C --> 6
 			UnknownDH dh = this.a( VLTOtherValue.TABLE_START ) as UnknownDH;
 			Console.WriteLine( "B0: dh.a(): " + dh.a() ); // NFS:C --> 4173, NFS:MW --> 2637
-			for( int i = 0; i < dh.a(); i++ )
+			for( int i = 0; i < dh.a(); ++i )
 			{
 				if( BuildConfig.CARBON )
 				{
 					Console.WriteLine( "B0: i: " + i ); // NFS:C gets to 1, then fails, HARD
 				}
-				z++;
+				++z;
 				UnknownAS asclz = dh.a( i );
 				asclz.b( a_ ); // TODO read vs b? b, DEFINITELY b
 			}

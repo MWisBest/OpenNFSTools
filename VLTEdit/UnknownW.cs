@@ -63,7 +63,7 @@ namespace VLTEdit
 				A_0.ReadInt32(); // VLTConstants.MW_DEADBEEF
 			}
 			this.ia1 = new int[this.i3];
-			for( int i = 0; i < this.i3; i++ )
+			for( int i = 0; i < this.i3; ++i )
 			{
 				this.ia1[i] = A_0.ReadInt32();
 			}
@@ -78,7 +78,7 @@ namespace VLTEdit
 			{
 				A_0.Write( VLTConstants.MW_DEADBEEF );
 			}
-			for( int i = 0; i < this.i3; i++ )
+			for( int i = 0; i < this.i3; ++i )
 			{
 				A_0.Write( this.ia1[i] );
 			}

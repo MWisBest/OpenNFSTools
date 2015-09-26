@@ -120,7 +120,7 @@ namespace VLTEdit
 			uint[] array = new uint[HashTracker.usedHashes.Count];
 			HashTracker.usedHashes.Keys.CopyTo( array, 0 );
 			uint[] array2 = array;
-			for( int i = 0; i < array2.Length; i++ )
+			for( int i = 0; i < array2.Length; ++i )
 			{
 				uint num = array2[i];
 				if( HashTracker.hashGuesses.ContainsKey( num ) )
@@ -129,7 +129,7 @@ namespace VLTEdit
 				}
 			}
 			array2 = array;
-			for( int i = 0; i < array2.Length; i++ )
+			for( int i = 0; i < array2.Length; ++i )
 			{
 				uint num2 = array2[i];
 				if( !HashTracker.hashGuesses.ContainsKey( num2 ) )

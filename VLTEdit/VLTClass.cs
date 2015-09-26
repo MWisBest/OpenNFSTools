@@ -79,7 +79,7 @@ namespace VLTEdit
 						goto IL_13D;
 					}
 					binaryReader3 = null;
-					for( int j = 0; j < A_0.e(); j++ )
+					for( int j = 0; j < A_0.e(); ++j )
 					{
 						if( A_0.a( j ).c() == a2.hash )
 						{
@@ -102,7 +102,7 @@ namespace VLTEdit
 						goto IL_13D;
 					}
 				IL_1EF:
-					i++;
+					++i;
 					continue;
 				IL_13D:
 					Type type = TypeMap.instance.getTypeForKey( a2.ui2 );
@@ -253,7 +253,7 @@ namespace VLTEdit
 			A_1.a().Seek( num, SeekOrigin.Begin );
 			BinaryReader a_ = new BinaryReader( A_1.a() );
 			this.dqaa1 = new VLTClass.aclz1[this.c61.c()];
-			for( int i = 0; i < this.c61.c(); i++ )
+			for( int i = 0; i < this.c61.c(); ++i )
 			{
 				VLTClass.aclz1 a = new VLTClass.aclz1();
 				a.read( a_ );
@@ -265,7 +265,7 @@ namespace VLTEdit
 
 		public int a( uint A_0 )
 		{
-			for( int i = 0; i < this.dqaa1.Length; i++ )
+			for( int i = 0; i < this.dqaa1.Length; ++i )
 			{
 				if( this.dqaa1[i].hash == A_0 )
 				{

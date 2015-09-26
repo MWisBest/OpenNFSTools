@@ -28,7 +28,7 @@ namespace VLTEdit
 		{
 			int num = A_0.ReadInt32();
 			this.asa1 = new UnknownAS[num];
-			for( int i = 0; i < num; i++ )
+			for( int i = 0; i < num; ++i )
 			{
 				this.asa1[i] = new UnknownAS();
 				this.asa1[i].read( A_0 );
@@ -38,7 +38,7 @@ namespace VLTEdit
 		public override void write( BinaryWriter A_0 )
 		{
 			A_0.Write( this.asa1.Length );
-			for( int i = 0; i < this.asa1.Length; i++ )
+			for( int i = 0; i < this.asa1.Length; ++i )
 			{
 				this.asa1[i].write( A_0 );
 			}

@@ -41,7 +41,7 @@ namespace VLTEdit
 			A_1.a().Seek( num, SeekOrigin.Begin );
 			BinaryReader a_ = new BinaryReader( A_1.a() );
 			this.ht1 = new Hashtable( A_0.b() );
-			for( int i = 0; i < A_0.b(); i++ )
+			for( int i = 0; i < A_0.b(); ++i )
 			{
 				UnknownDE.aclzz a2 = new UnknownDE.aclzz();
 				a2.s1 = UnknownAP.a( a_ );

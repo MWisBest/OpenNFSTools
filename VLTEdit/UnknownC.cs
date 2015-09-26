@@ -131,12 +131,12 @@ namespace VLTEdit
 				A_0.ReadInt32(); // VLTConstants.MW_DEADBEEF
 			}
 			this.uia1 = new uint[this.i4]; // NFS:C Overflow!
-			for( int i = 0; i < this.i4; i++ )
+			for( int i = 0; i < this.i4; ++i )
 			{
 				this.uia1[i] = A_0.ReadUInt32();
 			}
 			this.caa1 = new UnknownC.aclz[this.i1];
-			for( int j = 0; j < this.i1; j++ )
+			for( int j = 0; j < this.i1; ++j )
 			{
 				this.caa1[j] = new UnknownC.aclz();
 				this.caa1[j].read( A_0 );
@@ -156,11 +156,11 @@ namespace VLTEdit
 			{
 				A_0.Write( VLTConstants.MW_DEADBEEF );
 			}
-			for( int i = 0; i < this.i4; i++ )
+			for( int i = 0; i < this.i4; ++i )
 			{
 				A_0.Write( this.uia1[i] );
 			}
-			for( int j = 0; j < this.i1; j++ )
+			for( int j = 0; j < this.i1; ++j )
 			{
 				this.caa1[j].write( A_0 );
 			}

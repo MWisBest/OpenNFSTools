@@ -17,7 +17,7 @@ namespace VLTEdit
 			if( this.len <= 32 )
 			{
 				byte[] array = this.ba1;
-				for( int i = 0; i < array.Length; i++ )
+				for( int i = 0; i < array.Length; ++i )
 				{
 					byte b = array[i];
 					this.data += string.Format( "{0:x}", b ).PadLeft( 2, '0' ) + " ";

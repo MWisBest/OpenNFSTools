@@ -31,7 +31,7 @@ namespace VLTEdit
 			this.length = A_0.ReadInt16();
 			A_0.ReadInt16();
 			ConstructorInfo constructor = this.typ1.GetConstructor( Type.EmptyTypes );
-			for( int i = 0; i < this.curEntries; i++ )
+			for( int i = 0; i < this.curEntries; ++i )
 			{
 				if( this.i1 > 0 && A_0.BaseStream.Position % this.i1 != 0L )
 				{
@@ -89,7 +89,7 @@ namespace VLTEdit
 			A_0.Write( this.maxEntries );
 			A_0.Write( this.length );
 			A_0.Write( (short)0 );
-			for( int i = 0; i < this.curEntries; i++ )
+			for( int i = 0; i < this.curEntries; ++i )
 			{
 				if( this.i1 > 0 && A_0.BaseStream.Position % this.i1 != 0L )
 				{

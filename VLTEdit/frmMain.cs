@@ -511,7 +511,7 @@ namespace VLTEdit
 			{
 				bool flag = false;
 				string[] fileNames = openFileDialog.FileNames;
-				for( int i = 0; i < fileNames.Length; i++ )
+				for( int i = 0; i < fileNames.Length; ++i )
 				{
 					string a_ = fileNames[i];
 					if( this.a( a_, false ) )
@@ -582,7 +582,7 @@ namespace VLTEdit
 		private bool a( UnknownB0 A_0 )
 		{
 			UnknownDH dh = A_0.a( VLTOtherValue.TABLE_START ) as UnknownDH;
-			for( int i = 0; i < dh.a(); i++ )
+			for( int i = 0; i < dh.a(); ++i )
 			{
 				UnknownAS @as = dh.a( i );
 				// MW: Made more legible
@@ -915,7 +915,7 @@ namespace VLTEdit
 			this.search( A_0.ToUpper(), ref arrayList );
 			bool flag = true;
 			string text = "";
-			for( int i = 0; i < A_0.Length; i++ )
+			for( int i = 0; i < A_0.Length; ++i )
 			{
 				char c = A_0[i];
 				if( c == '_' )
@@ -1011,7 +1011,7 @@ namespace VLTEdit
 			if( obj is EAArray )
 			{
 				EAArray m = obj as EAArray;
-				for( int i = 0; i < (int)m.getMaxEntryCount(); i++ )
+				for( int i = 0; i < m.getMaxEntryCount(); ++i )
 				{
 					obj = m.a( i );
 					string text2;
@@ -1172,7 +1172,7 @@ namespace VLTEdit
 													{
 														EAArray m = bb as EAArray;
 														streamWriter.WriteLine( "new VLTOffsetData[] {" );
-														for( int i = 0; i < (int)m.getMaxEntryCount(); i++ )
+														for( int i = 0; i < m.getMaxEntryCount(); ++i )
 														{
 															bb = m.a( i );
 															streamWriter.WriteLine( string.Concat( new string[]
@@ -1381,13 +1381,13 @@ namespace VLTEdit
 						if( noArgs )
 						{
 							directories = directoryInfo.GetDirectories();
-							for( int i = 0; i < directories.Length; i++ )
+							for( int i = 0; i < directories.Length; ++i )
 							{
 								DirectoryInfo directoryInfo2 = directories[i];
 								this.writeToConsole( "[d] " + directoryInfo2.Name );
 							}
 							files = directoryInfo.GetFiles();
-							for( int i = 0; i < files.Length; i++ )
+							for( int i = 0; i < files.Length; ++i )
 							{
 								FileInfo fileInfo3 = files[i];
 								this.writeToConsole( "    " + fileInfo3.Name );
@@ -1395,13 +1395,13 @@ namespace VLTEdit
 							break;
 						}
 						directories = directoryInfo.GetDirectories( text2 );
-						for( int i = 0; i < directories.Length; i++ )
+						for( int i = 0; i < directories.Length; ++i )
 						{
 							DirectoryInfo directoryInfo3 = directories[i];
 							this.writeToConsole( "[d] " + directoryInfo3.Name );
 						}
 						files = directoryInfo.GetFiles( text2 );
-						for( int i = 0; i < files.Length; i++ )
+						for( int i = 0; i < files.Length; ++i )
 						{
 							FileInfo fileInfo4 = files[i];
 							this.writeToConsole( "    " + fileInfo4.Name );
@@ -1695,7 +1695,7 @@ namespace VLTEdit
 								} );
 								TreeNode treeNode2 = this.tvFields.Nodes.Add( text3 );
 								treeNode2.Tag = bb;
-								for( int i = 0; i < (int)m.getMaxEntryCount(); i++ )
+								for( int i = 0; i < m.getMaxEntryCount(); ++i )
 								{
 									TreeNode treeNode3 = treeNode2.Nodes.Add( "[" + i + "]" );
 									treeNode3.Tag = m.a( i );
@@ -1761,7 +1761,7 @@ namespace VLTEdit
 				Type type = bb.GetType();
 				FieldInfo[] fields = type.GetFields();
 				FieldInfo[] array = fields;
-				for( int i = 0; i < array.Length; i++ )
+				for( int i = 0; i < array.Length; ++i )
 				{
 					FieldInfo fieldInfo = array[i];
 					object[] customAttributes = fieldInfo.GetCustomAttributes( typeof( DataValueAttribute ), false );

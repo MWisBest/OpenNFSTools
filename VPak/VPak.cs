@@ -132,7 +132,7 @@ namespace VPak
 
 			foreach( string binandvlt in fileNames )
 			{
-				for( int i = 0; i < 2; i++ )
+				for( int i = 0; i < 2; ++i )
 				{
 					fileStream3 = new FileStream( binandvlt + ( i == 0 ? ".bin" : ".vlt" ), FileMode.Open, FileAccess.Read );
 					binaryReader = new BinaryReader( fileStream3 );
@@ -159,7 +159,7 @@ namespace VPak
 			SubfileHeader[] files = new SubfileHeader[header.internalFileCount];
 			int i;
 
-			for( i = 0; i < header.internalFileCount; i++ )
+			for( i = 0; i < header.internalFileCount; ++i )
 			{
 				files[i].read( binaryReader );
 			}
@@ -170,7 +170,7 @@ namespace VPak
 			int num = 0;
 			string text = "";
 
-			for( i = 0; i < fileTable.Length; i++ )
+			for( i = 0; i < fileTable.Length; ++i )
 			{
 				if( fileTable[i] == 0 )
 				{
@@ -184,23 +184,23 @@ namespace VPak
 				}
 			}
 
-			for( i = 0; i < header.internalFileCount; i++ )
+			for( i = 0; i < header.internalFileCount; ++i )
 			{
 				files[i].internalName = ( hashtable[files[i].fileNumber] as string );
 			}
 
-			for( i = 0; i < header.internalFileCount; i++ )
+			for( i = 0; i < header.internalFileCount; ++i )
 			{
 				Console.WriteLine( "\tOutput: " + files[i].internalName );
 
 				fileStream.Seek( files[i].binLocation, SeekOrigin.Begin );
 				byte[] array3 = binaryReader.ReadBytes( files[i].binLength );
-				int extraZeros = 0;
+				uint extraZeros = 0;
 				try
 				{
 					while( binaryReader.ReadByte() == 0 )
 					{
-						extraZeros++;
+						++extraZeros;
 					}
 				}
 				catch
@@ -213,18 +213,18 @@ namespace VPak
 				while( extraZeros > 0 )
 				{
 					fileStream2.WriteByte( 0 );
-					extraZeros--;
+					--extraZeros;
 				}
 				fileStream2.Close();
 
 				fileStream.Seek( files[i].vltLocation, SeekOrigin.Begin );
 				byte[] array4 = binaryReader.ReadBytes( files[i].vltLength );
-				int extraZerosTwo = 0;
+				uint extraZerosTwo = 0;
 				try
 				{
 					while( binaryReader.ReadByte() == 0 )
 					{
-						extraZerosTwo++;
+						++extraZerosTwo;
 					}
 				}
 				catch
@@ -238,7 +238,7 @@ namespace VPak
 				while( extraZerosTwo > 0 )
 				{
 					fileStream2.WriteByte( 0 );
-					extraZerosTwo--;
+					--extraZerosTwo;
 				}
 
 				fileStream2.Close();
@@ -248,7 +248,7 @@ namespace VPak
 			string text2 = fileInfo.Name.Remove( fileInfo.Name.Length - fileInfo.Extension.Length, fileInfo.Extension.Length ) + ".vls";
 			StreamWriter streamWriter = new StreamWriter( text2 );
 
-			for( i = 0; i < files.Length; i++ )
+			for( i = 0; i < files.Length; ++i )
 			{
 				streamWriter.WriteLine( files[i].internalName );
 			}

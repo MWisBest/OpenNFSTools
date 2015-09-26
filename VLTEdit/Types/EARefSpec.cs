@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 
 namespace VLTEdit
@@ -23,8 +22,13 @@ namespace VLTEdit
 
 		public override void write( BinaryWriter A_0 )
 		{
-			A_0.Write( HashUtil.getHash32( this.refclass ) );
-			A_0.Write( HashUtil.getHash32( this.refcollection ) );
+			// TODO: This doesn't make much sense, what if we got a "0x"-based hash from HashTracker?
+			// Replace with writing ui1 and ui2 for now.
+			//A_0.Write( HashUtil.getHash32( this.refclass ) );
+			//A_0.Write( HashUtil.getHash32( this.refcollection ) );
+			A_0.Write( this.ui1 );
+			A_0.Write( this.ui2 );
+
 			A_0.Write( 0 );
 		}
 

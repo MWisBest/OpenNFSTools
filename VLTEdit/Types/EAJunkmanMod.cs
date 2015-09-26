@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 
 namespace VLTEdit
@@ -25,9 +24,16 @@ namespace VLTEdit
 
 		public override void write( BinaryWriter A_0 )
 		{
-			A_0.Write( HashUtil.getHash32( this.jmclass ) );
-			A_0.Write( HashUtil.getHash32( this.jmcollection ) );
-			A_0.Write( 0 );
+			// TODO: This doesn't make much sense, what if we got a "0x"-based hash from HashTracker?
+			// Replace with writing ui1 and ui2 for now.
+			//A_0.Write( HashUtil.getHash32( this.jmclass ) );
+			//A_0.Write( HashUtil.getHash32( this.jmcollection ) );
+			A_0.Write( this.ui1 );
+			A_0.Write( this.ui2 );
+
+			// TODO: Why on earth was this writing an extra uint? Shouldn't it be reading it up above then??
+			//A_0.Write( 0 );
+
 			A_0.Write( this.factor );
 		}
 	}

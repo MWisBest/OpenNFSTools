@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 
 namespace VLTEdit
@@ -18,7 +17,10 @@ namespace VLTEdit
 
 		public override void write( BinaryWriter A_0 )
 		{
-			A_0.Write( HashUtil.getHash32( this.value ) );
+			// TODO: This doesn't make much sense, what if we got a "0x"-based hash from HashTracker?
+			// Replace with writing stored hash for now
+			//A_0.Write( HashUtil.getHash32( this.value ) );
+			A_0.Write( this.hash );
 		}
 
 		public override string ToString()

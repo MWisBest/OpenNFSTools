@@ -1,5 +1,3 @@
-using System;
-
 namespace VLTEdit
 {
 	public interface UnknownCY

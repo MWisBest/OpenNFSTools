@@ -113,14 +113,14 @@ namespace VLTEdit
 					EABaseType bb;
 					if( a2.isArray() )
 					{
-						bb = EAArray.a( a2, type );
+						bb = new EAArray( a2, type );
 					}
 					else
 					{
 						bb = EABaseType.a( type );
 						if( bb is EARawType )
 						{
-							( bb as EARawType ).a( (int)a2.len );
+							( bb as EARawType ).len = (int)a2.len;
 						}
 					}
 					bb.b( (uint)binaryReader3.BaseStream.Position );

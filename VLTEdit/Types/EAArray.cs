@@ -16,15 +16,12 @@ namespace VLTEdit
 		private uint ui1;
 		private Type typ1;
 
-		public static EAArray a( VLTClass.aclz1 A_0, Type A_1 )
+		public EAArray( VLTClass.aclz1 A_0, Type A_1 )
 		{
-			return new EAArray
-			{
-				i1 = A_0.a(),
-				ui1 = A_0.ui2, // A_0.hash
-				typ1 = A_1,
-				al1 = new ArrayList()
-			};
+			this.i1 = A_0.a();
+			this.ui1 = A_0.ui2;
+			this.typ1 = A_1;
+			this.al1 = new ArrayList();
 		}
 
 		public override void read( BinaryReader A_0 )
@@ -44,7 +41,7 @@ namespace VLTEdit
 				EABaseType bb = constructor.Invoke( null ) as EABaseType;
 				if( bb is EARawType )
 				{
-					( bb as EARawType ).a( (int)this.length );
+					( bb as EARawType ).len = (int)this.length;
 				}
 				bb.b( (uint)A_0.BaseStream.Position );
 				bb.a( false );
@@ -91,7 +88,7 @@ namespace VLTEdit
 			A_0.Write( this.curEntries );
 			A_0.Write( this.maxEntries );
 			A_0.Write( this.length );
-			A_0.Write( 0 );
+			A_0.Write( (short)0 );
 			for( int i = 0; i < (int)this.curEntries; i++ )
 			{
 				if( this.i1 > 0 && A_0.BaseStream.Position % (long)this.i1 != 0L )

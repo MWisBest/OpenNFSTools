@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 
 namespace VLTEdit
@@ -10,11 +9,6 @@ namespace VLTEdit
 		[DataValue( "Data" )]
 		public string data;
 		private byte[] ba1;
-
-		public void a( int A_0 )
-		{
-			this.len = A_0;
-		}
 
 		public override void read( BinaryReader A_0 )
 		{

@@ -256,7 +256,7 @@ namespace VPak
 			streamWriter.Close();
 
 			// Store the VPAK header at the end of the .vls file!
-			fileStream.Seek( (long)0, SeekOrigin.Begin );
+			fileStream.Seek( 0L, SeekOrigin.Begin );
 			byte[] vpakHeaderData = binaryReader.ReadBytes( files[0].binLocation );
 			fileStream2 = new FileStream( text2, FileMode.Append, FileAccess.Write );
 			fileStream2.Write( vpakHeaderData, 0, vpakHeaderData.Length );
@@ -274,7 +274,7 @@ namespace VPak
 		{
 			if( args.Length == 0 )
 			{
-				printUsage();
+				VPak.printUsage();
 				return;
 			}
 			switch( args[0] )
@@ -286,7 +286,7 @@ namespace VPak
 					}
 					else
 					{
-						printUsage();
+						VPak.printUsage();
 					}
 					break;
 				case "-u": // Explicitly unpack a given file, regardless of extension
@@ -296,7 +296,7 @@ namespace VPak
 					}
 					else
 					{
-						printUsage();
+						VPak.printUsage();
 					}
 					break;
 				default:

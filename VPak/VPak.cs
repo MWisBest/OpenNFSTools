@@ -157,9 +157,8 @@ namespace VPak
 			MainHeader header = default( MainHeader );
 			header.read( binaryReader );
 			SubfileHeader[] files = new SubfileHeader[header.internalFileCount];
-			int i;
 
-			for( i = 0; i < header.internalFileCount; ++i )
+			for( int i = 0; i < header.internalFileCount; ++i )
 			{
 				files[i].read( binaryReader );
 			}
@@ -170,7 +169,7 @@ namespace VPak
 			int num = 0;
 			string text = "";
 
-			for( i = 0; i < fileTable.Length; ++i )
+			for( int i = 0; i < fileTable.Length; ++i )
 			{
 				if( fileTable[i] == 0 )
 				{
@@ -184,12 +183,12 @@ namespace VPak
 				}
 			}
 
-			for( i = 0; i < header.internalFileCount; ++i )
+			for( int i = 0; i < header.internalFileCount; ++i )
 			{
 				files[i].internalName = ( hashtable[files[i].fileNumber] as string );
 			}
 
-			for( i = 0; i < header.internalFileCount; ++i )
+			for( int i = 0; i < header.internalFileCount; ++i )
 			{
 				Console.WriteLine( "\tOutput: " + files[i].internalName );
 
@@ -248,7 +247,7 @@ namespace VPak
 			string text2 = fileInfo.Name.Remove( fileInfo.Name.Length - fileInfo.Extension.Length, fileInfo.Extension.Length ) + ".vls";
 			StreamWriter streamWriter = new StreamWriter( text2 );
 
-			for( i = 0; i < files.Length; ++i )
+			for( int i = 0; i < files.Length; ++i )
 			{
 				streamWriter.WriteLine( files[i].internalName );
 			}

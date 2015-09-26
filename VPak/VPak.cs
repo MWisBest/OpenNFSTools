@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using VLTEdit;
@@ -165,7 +164,7 @@ namespace VPak
 
 			fileStream.Seek( header.fileTableLocation, SeekOrigin.Begin );
 			byte[] fileTable = binaryReader.ReadBytes( header.fileTableLength );
-			Hashtable hashtable = new Hashtable( header.internalFileCount );
+			Dictionary<int, string> dicttable = new Dictionary<int, string>( header.internalFileCount );
 			int num = 0;
 			string text = "";
 
@@ -173,7 +172,7 @@ namespace VPak
 			{
 				if( fileTable[i] == 0 )
 				{
-					hashtable.Add( num, text );
+					dicttable.Add( num, text );
 					num = i + 1;
 					text = "";
 				}
@@ -185,7 +184,7 @@ namespace VPak
 
 			for( int i = 0; i < header.internalFileCount; ++i )
 			{
-				files[i].internalName = ( hashtable[files[i].fileNumber] as string );
+				files[i].internalName = dicttable[files[i].fileNumber];
 			}
 
 			for( int i = 0; i < header.internalFileCount; ++i )

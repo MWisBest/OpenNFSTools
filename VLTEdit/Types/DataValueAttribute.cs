@@ -4,24 +4,13 @@ namespace VLTEdit
 {
 	public class DataValueAttribute : Attribute
 	{
-		private string name;
-		private bool hex;
-
-		public bool Hex
-		{
-			get { return this.hex; }
-			set { this.hex = value; }
-		}
-
-		public string Name
-		{
-			get { return this.name; }
-		}
+		public bool Hex { get; set; }
+		public string Name { get; private set; }
 
 		public DataValueAttribute( string name )
 		{
-			this.name = name;
-			this.hex = false;
+			this.Name = name;
+			this.Hex = false;
 		}
 	}
 }

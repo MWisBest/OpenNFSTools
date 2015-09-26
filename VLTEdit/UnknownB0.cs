@@ -23,9 +23,9 @@ namespace VLTEdit
 				num += 16L - num % 16L;
 			}
 			A_1.c().a( (int)( num - position ) );
-			A_0.BaseStream.Seek( position, 0 );
+			A_0.BaseStream.Seek( position, SeekOrigin.Begin );
 			A_1.c().write( A_0 );
-			A_0.BaseStream.Seek( num, 0 );
+			A_0.BaseStream.Seek( num, SeekOrigin.Begin );
 		}
 
 		private UnknownC0 a( BinaryReader A_0 )
@@ -169,13 +169,13 @@ namespace VLTEdit
 			}
 			this.ms1 = new MemoryStream( array );
 			a_ = new BinaryReader( this.ms1 );
-			this.ms1.Seek( 0L, 0 );
+			this.ms1.Seek( 0L, SeekOrigin.Begin );
 			c = this.a( a_ );
 			c.c().a( this.ms1 );
 			if( c.c().d() == VLTOtherValue.BINMAGIC )
 			{
 				int num = (int)this.ms1.Position + c.c().a();
-				while( this.ms1.Position < (long)num )
+				while( this.ms1.Position < num )
 				{
 					string text2 = UnknownAP.a( a_ );
 					if( text2 != "" )

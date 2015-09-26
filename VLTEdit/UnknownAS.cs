@@ -79,16 +79,16 @@ namespace VLTEdit
 			// NFS:C  880012749 (BAD!) --> -1911476553 (BAD!!)
 			// NFS:MW many many times: 72, 464, 496, 536, 576, 616, 656, 696, 736, ... 162488, 162544, 162600
 			//Console.WriteLine( "AS: i3 = " + this.i3.ToString() ); // Problem must be before this;
-			A_0.BaseStream.Seek( (long)this.i3, 0 ); // NFS:C EndOfStream Exception! FIXED?!
+			A_0.BaseStream.Seek( this.i3, SeekOrigin.Begin ); // NFS:C EndOfStream Exception! FIXED?!
 			this.di1 = UnknownDI.a( this.b() );
-			this.di1.setLong( (long)this.i3 );
+			this.di1.setLong( this.i3 );
 			this.di1.a( this );
 			this.di1.read( A_0 );
 		}
 
 		public void a( BinaryWriter A_0 )
 		{
-			A_0.BaseStream.Seek( (long)this.i3, 0 );
+			A_0.BaseStream.Seek( this.i3, SeekOrigin.Begin );
 			this.di1.write( A_0 );
 		}
 

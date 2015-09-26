@@ -75,7 +75,7 @@ namespace VLTEdit
 					if( !a2.c() )
 					{
 						binaryReader3 = binaryReader;
-						binaryReader3.BaseStream.Seek( (long)( num + (int)a2.us1 ), 0 );
+						binaryReader3.BaseStream.Seek(  num + a2.us1, SeekOrigin.Begin );
 						goto IL_13D;
 					}
 					binaryReader3 = null;
@@ -86,14 +86,14 @@ namespace VLTEdit
 							if( A_0.a( j ).a() )
 							{
 								binaryReader3 = binaryReader2;
-								binaryReader3.BaseStream.Seek( (long)A_0.a( j ).e(), 0 );
+								binaryReader3.BaseStream.Seek( A_0.a( j ).e(), SeekOrigin.Begin );
 							}
 							else
 							{
 								UnknownB8 b = a.a( A_0.a( j ).e() );
 								int num2 = b.b();
 								binaryReader3 = binaryReader;
-								binaryReader3.BaseStream.Seek( (long)num2, 0 );
+								binaryReader3.BaseStream.Seek( num2, SeekOrigin.Begin );
 							}
 						}
 					}
@@ -120,7 +120,7 @@ namespace VLTEdit
 						bb = EABaseType.a( type );
 						if( bb is EARawType )
 						{
-							( bb as EARawType ).len = (int)a2.len;
+							( bb as EARawType ).len = a2.len;
 						}
 					}
 					bb.b( (uint)binaryReader3.BaseStream.Position );
@@ -163,7 +163,7 @@ namespace VLTEdit
 
 			public int a()
 			{
-				return 1 << (int)this.b2;
+				return 1 << this.b2;
 			}
 
 			public void read( BinaryReader A_0 )
@@ -250,7 +250,7 @@ namespace VLTEdit
 			this.ui1 = A_0.b();
 			this.a81 = ( A_1.a( VLTOtherValue.TABLE_END ) as UnknownA8 );
 			int num = this.a81.a( A_0.a() ).b();
-			A_1.a().Seek( (long)num, SeekOrigin.Begin );
+			A_1.a().Seek( num, SeekOrigin.Begin );
 			BinaryReader a_ = new BinaryReader( A_1.a() );
 			this.dqaa1 = new VLTClass.aclz1[this.c61.c()];
 			for( int i = 0; i < this.c61.c(); i++ )

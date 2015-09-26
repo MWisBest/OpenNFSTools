@@ -31,17 +31,17 @@ namespace VLTEdit
 			this.length = A_0.ReadInt16();
 			A_0.ReadInt16();
 			ConstructorInfo constructor = this.typ1.GetConstructor( Type.EmptyTypes );
-			for( int i = 0; i < (int)this.curEntries; i++ )
+			for( int i = 0; i < this.curEntries; i++ )
 			{
-				if( this.i1 > 0 && A_0.BaseStream.Position % (long)this.i1 != 0L )
+				if( this.i1 > 0 && A_0.BaseStream.Position % this.i1 != 0L )
 				{
 					Stream expr_69 = A_0.BaseStream;
-					expr_69.Position = expr_69.Position + ( (long)this.i1 - A_0.BaseStream.Position % (long)this.i1 );
+					expr_69.Position = expr_69.Position + ( this.i1 - A_0.BaseStream.Position % this.i1 );
 				}
 				EABaseType bb = constructor.Invoke( null ) as EABaseType;
 				if( bb is EARawType )
 				{
-					( bb as EARawType ).len = (int)this.length;
+					( bb as EARawType ).len = this.length;
 				}
 				bb.b( (uint)A_0.BaseStream.Position );
 				bb.a( false );
@@ -89,12 +89,12 @@ namespace VLTEdit
 			A_0.Write( this.maxEntries );
 			A_0.Write( this.length );
 			A_0.Write( (short)0 );
-			for( int i = 0; i < (int)this.curEntries; i++ )
+			for( int i = 0; i < this.curEntries; i++ )
 			{
-				if( this.i1 > 0 && A_0.BaseStream.Position % (long)this.i1 != 0L )
+				if( this.i1 > 0 && A_0.BaseStream.Position % this.i1 != 0L )
 				{
 					Stream expr_55 = A_0.BaseStream;
-					expr_55.Position = expr_55.Position + ( (long)this.i1 - A_0.BaseStream.Position % (long)this.i1 );
+					expr_55.Position = expr_55.Position + ( this.i1 - A_0.BaseStream.Position % this.i1 );
 				}
 				( this.al1[i] as EABaseType ).write( A_0 );
 			}

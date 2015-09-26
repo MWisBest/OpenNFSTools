@@ -45,12 +45,12 @@ namespace VLTEdit
 
 		public void a( Stream A_0 )
 		{
-			A_0.Seek( this.l1 + 8L, 0 );
+			A_0.Seek( this.l1 + 8L, SeekOrigin.Begin );
 		}
 
 		public void b( Stream A_0 )
 		{
-			A_0.Seek( this.l1 + (long)this.i1, 0 );
+			A_0.Seek( this.l1 + this.i1, SeekOrigin.Begin );
 		}
 
 		public void read( BinaryReader A_0 )

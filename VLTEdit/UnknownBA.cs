@@ -42,7 +42,7 @@ namespace VLTEdit
 
 			for( int k = 0; k < this.i3; k++ )
 			{
-				A_0.BaseStream.Seek( position + (long)array[k], 0 );
+				A_0.BaseStream.Seek( position + array[k], SeekOrigin.Begin );
 				this.sa1[k] = UnknownAP.a( A_0 );
 			}
 		}

@@ -38,7 +38,7 @@ namespace VLTEdit
 		{
 			UnknownA8 a = A_1.a( VLTOtherValue.TABLE_END ) as UnknownA8;
 			int num = a.a( A_0.a() ).b();
-			A_1.a().Seek( (long)num, 0 );
+			A_1.a().Seek( num, SeekOrigin.Begin );
 			BinaryReader a_ = new BinaryReader( A_1.a() );
 			this.ht1 = new Hashtable( A_0.b() );
 			for( int i = 0; i < A_0.b(); i++ )

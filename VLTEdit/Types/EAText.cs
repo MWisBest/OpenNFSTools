@@ -12,7 +12,7 @@ namespace VLTEdit
 		public override void read( BinaryReader A_0 )
 		{
 			this.offset = A_0.ReadUInt32();
-			if( (ulong)this.offset > (ulong)A_0.BaseStream.Length )
+			if( this.offset > (ulong)A_0.BaseStream.Length )
 			{
 				this.offset = base.i();
 			}
@@ -22,7 +22,7 @@ namespace VLTEdit
 				return;
 			}
 			long position = A_0.BaseStream.Position;
-			A_0.BaseStream.Seek( (long)( (ulong)this.offset ), 0 );
+			A_0.BaseStream.Seek( (long)( (ulong)this.offset ), SeekOrigin.Begin );
 			this.value = UnknownAP.a( A_0 );
 			A_0.BaseStream.Seek( position, 0 );
 		}

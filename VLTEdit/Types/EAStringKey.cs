@@ -23,7 +23,7 @@ namespace VLTEdit
 				this.value = "(null)";
 				return;
 			}
-			if( (ulong)this.offset > (ulong)A_0.BaseStream.Length )
+			if( this.offset > (ulong)A_0.BaseStream.Length )
 			{
 				this.value = "(offset is outta here)";
 				return;

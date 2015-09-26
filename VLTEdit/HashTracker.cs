@@ -98,44 +98,6 @@ namespace VLTEdit
 				}
 				text = streamReader.ReadLine();
 			}
-			/*
-			string text;
-			do
-			{
-				text = streamReader.ReadLine();
-				if( text != null )
-				{
-					text = text.Trim();
-				}
-				if( text != null && text != "" && !text.StartsWith( "#" ) )
-				{
-					string[] array = text.Split( new char[] { '\t' } );
-					if( array.Length > 1 )
-					{
-						uint num;
-						if( array[1].StartsWith( "0x" ) )
-						{
-							num = uint.Parse( array[1].Substring( 2 ), NumberStyles.AllowHexSpecifier | NumberStyles.AllowTrailingWhite | NumberStyles.AllowLeadingWhite );
-						}
-						else
-						{
-							num = uint.Parse( array[1], NumberStyles.AllowHexSpecifier | NumberStyles.AllowTrailingWhite | NumberStyles.AllowLeadingWhite );
-						}
-						if( !HashTracker.hashGuesses.ContainsKey( num ) )
-						{
-							HashTracker.hashGuesses.Add( num, array[2] );
-						}
-					}
-					else
-					{
-						uint num = HashUtil.getHash32( text );
-						if( !HashTracker.knownActualHashes.ContainsKey( num ) )
-						{
-							HashTracker.knownActualHashes.Add( num, text );
-						}
-					}
-				}
-			} while( text != null );*/
 			streamReader.Close();
 		}
 

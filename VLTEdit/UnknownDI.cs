@@ -22,11 +22,6 @@ namespace VLTEdit
 			this.l1 = A_0;
 		}
 
-		public UnknownAS j()
-		{
-			return this.as1;
-		}
-
 		public void a( UnknownAS A_0 )
 		{
 			this.as1 = A_0;

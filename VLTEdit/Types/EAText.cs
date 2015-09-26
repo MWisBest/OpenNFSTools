@@ -14,7 +14,7 @@ namespace VLTEdit
 			this.offset = A_0.ReadUInt32();
 			if( this.offset > (ulong)A_0.BaseStream.Length )
 			{
-				this.offset = base.i();
+				this.offset = base.ui1;
 			}
 			if( this.offset == 0u )
 			{

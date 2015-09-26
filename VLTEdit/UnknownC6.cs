@@ -4,63 +4,14 @@ namespace VLTEdit
 {
 	public class UnknownC6 : UnknownDI
 	{
-		private uint ui1;
+		public uint ui1;
 		private int i1;
-		private int i2;
-		private int i3;
+		public int i2;
+		public int i3;
 		private int i4;
 		private int i5;
-		private int i6;
+		public int i6;
 		private int i7;
-
-		public uint b()
-		{
-			return this.ui1;
-		}
-
-		public int e()
-		{
-			return this.i1;
-		}
-
-		public void b( int A_0 )
-		{
-			this.i1 = A_0;
-		}
-
-		public int f()
-		{
-			return this.i4;
-		}
-
-		public void c( int A_0 )
-		{
-			this.i4 = A_0;
-		}
-
-		public int c()
-		{
-			return this.i2;
-		}
-
-		public void a( int A_0 )
-		{
-			this.i2 = A_0;
-		}
-		public int d()
-		{
-			return this.i6;
-		}
-
-		public void d( int A_0 )
-		{
-			this.i6 = A_0;
-		}
-
-		public int a()
-		{
-			return this.i3;
-		}
 
 		public override void read( BinaryReader A_0 )
 		{

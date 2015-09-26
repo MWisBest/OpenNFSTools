@@ -8,18 +8,8 @@ namespace VLTEdit
 		/*public const int i1 = 0;
 		public const int i2 = 1;*/
 		private int i3;
-		private uint[] uia1;
-		private string[] sa1;
-
-		public uint b( int A_0 )
-		{
-			return this.uia1[A_0];
-		}
-
-		public string a( int A_0 )
-		{
-			return this.sa1[A_0];
-		}
+		public uint[] uia1;
+		public string[] sa1;
 
 		public override void read( BinaryReader A_0 )
 		{

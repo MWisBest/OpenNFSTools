@@ -4,8 +4,8 @@ namespace VLTEdit
 {
 	public class EAJunkmanMod : EABaseType // OBF: at.cs
 	{
-		private uint ui1;
-		private uint ui2;
+		private uint junkui1;
+		private uint junkui2;
 		[DataValue( "Class" )]
 		public string jmclass;
 		[DataValue( "Collection" )]
@@ -15,11 +15,11 @@ namespace VLTEdit
 
 		public override void read( BinaryReader A_0 )
 		{
-			this.ui1 = A_0.ReadUInt32();
-			this.ui2 = A_0.ReadUInt32();
+			this.junkui1 = A_0.ReadUInt32();
+			this.junkui2 = A_0.ReadUInt32();
 			this.factor = A_0.ReadSingle();
-			this.jmclass = HashTracker.getValueForHash( this.ui1 );
-			this.jmcollection = HashTracker.getValueForHash( this.ui2 );
+			this.jmclass = HashTracker.getValueForHash( this.junkui1 );
+			this.jmcollection = HashTracker.getValueForHash( this.junkui2 );
 		}
 
 		public override void write( BinaryWriter A_0 )
@@ -28,8 +28,8 @@ namespace VLTEdit
 			// Replace with writing ui1 and ui2 for now.
 			//A_0.Write( HashUtil.getHash32( this.jmclass ) );
 			//A_0.Write( HashUtil.getHash32( this.jmcollection ) );
-			A_0.Write( this.ui1 );
-			A_0.Write( this.ui2 );
+			A_0.Write( this.junkui1 );
+			A_0.Write( this.junkui2 );
 
 			// TODO: Why on earth was this writing an extra uint? Shouldn't it be reading it up above then??
 			//A_0.Write( 0 );

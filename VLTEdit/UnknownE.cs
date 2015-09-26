@@ -4,24 +4,9 @@ namespace VLTEdit
 {
 	public class UnknownE : IBinReadWrite
 	{
-		private VLTOtherValue ce1;
+		public VLTOtherValue ce1;
 		private int i1;
 		private long l1;
-
-		public VLTOtherValue d()
-		{
-			return this.ce1;
-		}
-
-		public void a( VLTOtherValue A_0 )
-		{
-			this.ce1 = A_0;
-		}
-
-		public int b()
-		{
-			return this.i1;
-		}
 
 		public void a( int A_0 )
 		{
@@ -31,11 +16,6 @@ namespace VLTEdit
 		public int a()
 		{
 			return this.i1 - 8;
-		}
-
-		public void b( int A_0 )
-		{
-			this.i1 = A_0 + 8;
 		}
 
 		public bool c()

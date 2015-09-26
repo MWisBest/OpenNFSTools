@@ -7,22 +7,7 @@ namespace VLTEdit
 	[DefaultMember( "Item" )]
 	public class UnknownDH : UnknownC0, IEnumerable
 	{
-		private UnknownAS[] asa1;
-
-		public UnknownAS a( int A_0 )
-		{
-			return this.asa1[A_0];
-		}
-
-		public void a( int A_0, UnknownAS A_1 )
-		{
-			this.asa1[A_0] = A_1;
-		}
-
-		public int a()
-		{
-			return this.asa1.Length;
-		}
+		public UnknownAS[] asa1;
 
 		public override void read( BinaryReader A_0 )
 		{

@@ -1,5 +1,5 @@
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
@@ -8,31 +8,26 @@ namespace VLTEdit
 	[DefaultMember( "Item" )]
 	public class UnknownA8 : UnknownC0
 	{
-		private ArrayList al1;
-		private Hashtable ht1;
-		private ArrayList al2;
+		private List<UnknownB8> genb8list;
+		private List<UnknownB8> genb8listTwo;
+		private Dictionary<int, UnknownB8> genht1;
 
 		public UnknownB8 a( int A_0 )
 		{
-			return this.ht1[A_0] as UnknownB8;
-		}
-
-		public void a( int A_0, UnknownB8 A_1 )
-		{
-			this.ht1[A_0] = A_1;
+			return this.genht1[A_0];
 		}
 
 		public void a( Stream A_0 )
 		{
 			BinaryWriter binaryWriter = new BinaryWriter( A_0 );
-			IEnumerator enumerator = this.al2.GetEnumerator();
+			IEnumerator<UnknownB8> enumerator = this.genb8listTwo.GetEnumerator();
 			try
 			{
 				while( enumerator.MoveNext() )
 				{
-					UnknownB8 b = (UnknownB8)enumerator.Current;
-					binaryWriter.BaseStream.Seek( b.c(), SeekOrigin.Begin );
-					binaryWriter.Write( b.b() );
+					UnknownB8 b = enumerator.Current;
+					binaryWriter.BaseStream.Seek( b.i1, SeekOrigin.Begin );
+					binaryWriter.Write( b.i2 );
 				}
 			}
 			finally
@@ -47,9 +42,9 @@ namespace VLTEdit
 
 		public override void read( BinaryReader A_0 )
 		{
-			this.al1 = new ArrayList();
-			this.ht1 = new Hashtable();
-			this.al2 = new ArrayList();
+			this.genb8list = new List<UnknownB8>();
+			this.genb8listTwo = new List<UnknownB8>();
+			this.genht1 = new Dictionary<int, UnknownB8>();
 			bool flag = false;
 			bool flag2 = false;
 			UnknownB8 b;
@@ -57,17 +52,17 @@ namespace VLTEdit
 			{
 				b = new UnknownB8();
 				b.read( A_0 );
-				this.al1.Add( b );
-				if( b.d() == 2 && ( b.a() == 0 || b.a() == 1 ) )
+				this.genb8list.Add( b );
+				if( b.s1 == 2 && ( b.s2 == 0 || b.s2 == 1 ) )
 				{
-					if( b.a() == 1 )
+					if( b.s2 == 1 )
 					{
 						flag = false;
 						flag2 = true;
 					}
 					else
 					{
-						if( b.a() == 0 )
+						if( b.s2 == 0 )
 						{
 							flag = true;
 							flag2 = false;
@@ -76,35 +71,35 @@ namespace VLTEdit
 				}
 				else
 				{
-					if( b.d() == 1 )
+					if( b.s1 == 1 )
 					{
 						if( flag )
 						{
-							this.ht1[b.c()] = b;
+							this.genht1[b.i1] = b;
 						}
 						if( flag2 )
 						{
-							this.al2.Add( b );
+							this.genb8listTwo.Add( b );
 						}
 					}
 					else
 					{
-						if( b.d() != 3 || b.a() != 1 )
+						if( b.s1 != 3 || b.s2 != 1 )
 						{
 							break;
 						}
 						if( flag )
 						{
-							this.ht1[b.c()] = b;
+							this.genht1[b.i1] = b;
 						}
 						if( flag2 )
 						{
-							this.al2.Add( b );
+							this.genb8listTwo.Add( b );
 						}
 					}
 				}
 			}
-			if( b.d() == 0 )
+			if( b.s1 == 0 )
 			{
 				return;
 			}
@@ -113,13 +108,12 @@ namespace VLTEdit
 
 		public override void write( BinaryWriter A_0 )
 		{
-			IEnumerator enumerator = this.al1.GetEnumerator();
+			IEnumerator<UnknownB8> enumerator = this.genb8list.GetEnumerator();
 			try
 			{
 				while( enumerator.MoveNext() )
 				{
-					UnknownB8 b = (UnknownB8)enumerator.Current;
-					b.write( A_0 );
+					enumerator.Current.write( A_0 );
 				}
 			}
 			finally

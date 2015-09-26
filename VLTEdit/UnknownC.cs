@@ -8,30 +8,10 @@ namespace VLTEdit
 	{
 		public class aclz : IBinReadWrite
 		{
-			private uint ui1;
-			private int i1;
+			public uint ui1;
+			public int i1;
 			private short sh1;
 			private short sh2;
-
-			public uint c()
-			{
-				return this.ui1;
-			}
-
-			public int e()
-			{
-				return this.i1;
-			}
-
-			public short b()
-			{
-				return this.sh1;
-			}
-
-			public short d()
-			{
-				return this.sh2;
-			}
 
 			public bool a()
 			{
@@ -62,50 +42,16 @@ namespace VLTEdit
 			}
 		}
 
-		private uint hash;
-		private uint ui2;
-		private uint ui3;
-		private int i1; // NFS:C --> Removed?
+		public uint hash;
+		public uint ui2;
+		public uint ui3;
+		public int i1; // NFS:C --> Removed?
 		private int i2;
 		private int i3;
 		private int i4;
-		private int i5;
+		public int i5;
 		private uint[] uia1;
-		private UnknownC.aclz[] caa1;
-
-		public uint ui()
-		{
-			return this.hash;
-		}
-
-		public uint f()
-		{
-			return this.ui2;
-		}
-
-		public uint b()
-		{
-			return this.ui3;
-		}
-		public int d()
-		{
-			return this.i4;
-		}
-
-		public int e()
-		{
-			return this.i1;
-		}
-
-		public int a()
-		{
-			return this.i5;
-		}
-
-		public UnknownC.aclz a( int A_0 )
-		{
-			return this.caa1[A_0];
-		}
+		public UnknownC.aclz[] caa1;
 
 		public override void read( BinaryReader A_0 )
 		{

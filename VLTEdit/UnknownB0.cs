@@ -1,5 +1,5 @@
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 namespace VLTEdit
@@ -8,25 +8,9 @@ namespace VLTEdit
 	{
 		private string s1;
 		private string s2;
-		private ArrayList al1;
+		private List<UnknownC0> genc0list;
 		private MemoryStream ms1;
 		private MemoryStream ms2;
-
-		private void a( BinaryWriter A_0, UnknownC0 A_1 )
-		{
-			long position = A_0.BaseStream.Position;
-			A_0.BaseStream.Seek( 8L, SeekOrigin.Current );
-			A_1.write( A_0 );
-			long num = A_0.BaseStream.Position;
-			if( num % 16L != 0L )
-			{
-				num += 16L - num % 16L;
-			}
-			A_1.c().a( (int)( num - position ) );
-			A_0.BaseStream.Seek( position, SeekOrigin.Begin );
-			A_1.c().write( A_0 );
-			A_0.BaseStream.Seek( num, SeekOrigin.Begin );
-		}
 
 		private UnknownC0 a( BinaryReader A_0 )
 		{
@@ -39,7 +23,7 @@ namespace VLTEdit
 			e.read( A_0 );
 			if( e.c() )
 			{
-				VLTOtherValue ce = e.d();
+				VLTOtherValue ce = e.ce1;
 				UnknownC0 c;
 
 				switch( ce )
@@ -81,13 +65,13 @@ namespace VLTEdit
 
 		public UnknownC0 a( VLTOtherValue A_0 )
 		{
-			IEnumerator enumerator = this.al1.GetEnumerator();
+			IEnumerator<UnknownC0> enumerator = this.genc0list.GetEnumerator();
 			try
 			{
 				while( enumerator.MoveNext() )
 				{
-					UnknownC0 c = (UnknownC0)enumerator.Current;
-					if( c.c().d() == A_0 )
+					UnknownC0 c = enumerator.Current;
+					if( c.e1.ce1 == A_0 )
 					{
 						return c;
 					}
@@ -119,39 +103,23 @@ namespace VLTEdit
 			byte[] array = new byte[A_0.Length];
 			A_0.Read( array, 0, array.Length ); // array.Length --> .vlt FileSize
 			this.ms2 = new MemoryStream( array );
-			this.al1 = new ArrayList();
+			this.genc0list = new List<UnknownC0>();
 			BinaryReader a_ = new BinaryReader( this.ms2 );
 			UnknownC0 c;
-			int y = 0, z = 0;
-			do
+			while( ( c = this.a( a_ ) ) != null )
 			{
-				++y;
-				c = this.a( a_ );
-				if( c != null )
-				{
-					this.al1.Add( c );
-				}
+				this.genc0list.Add( c );
 			}
-			while( c != null );
-			//Console.WriteLine( "B0: y: " + y ); // NFS:MW AND NFS:C --> 6
 			UnknownDH dh = this.a( VLTOtherValue.TABLE_START ) as UnknownDH;
-			Console.WriteLine( "B0: dh.a(): " + dh.a() ); // NFS:C --> 4173, NFS:MW --> 2637
-			for( int i = 0; i < dh.a(); ++i )
+			for( int i = 0; i < dh.asa1.Length; ++i )
 			{
-				if( BuildConfig.CARBON )
-				{
-					Console.WriteLine( "B0: i: " + i ); // NFS:C gets to 1, then fails, HARD
-				}
-				++z;
-				UnknownAS asclz = dh.a( i );
-				asclz.b( a_ ); // TODO read vs b? b, DEFINITELY b
+				dh.asa1[i].b( a_ ); // TODO read vs b? b, DEFINITELY b
 			}
-			Console.WriteLine( "B0: z: " + z ); // NFS:C does not get here, NFS:MW 2367
 			if( A_1 == null )
 			{
 				DirectoryInfo directoryInfo = new DirectoryInfo( this.s2 );
 				UnknownBA ba = this.a( VLTOtherValue.VLTMAGIC ) as UnknownBA;
-				string text = ba.a( 1 );
+				string text = ba.sa1[1];
 				FileInfo[] files = directoryInfo.GetFiles( text );
 				if( files.Length == 0 )
 				{
@@ -171,10 +139,10 @@ namespace VLTEdit
 			a_ = new BinaryReader( this.ms1 );
 			this.ms1.Seek( 0L, SeekOrigin.Begin );
 			c = this.a( a_ );
-			c.c().a( this.ms1 );
-			if( c.c().d() == VLTOtherValue.BINMAGIC )
+			c.e1.a( this.ms1 );
+			if( c.e1.ce1 == VLTOtherValue.BINMAGIC )
 			{
-				int num = (int)this.ms1.Position + c.c().a();
+				int num = (int)this.ms1.Position + c.e1.a();
 				while( this.ms1.Position < num )
 				{
 					string text2 = UnknownAP.a( a_ );

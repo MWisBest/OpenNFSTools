@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -59,13 +60,14 @@ namespace VLTEdit
 		private MenuItem ar;
 		private MenuItem @as;
 		private Container at = null;
-		private ArrayList au = new ArrayList();
+		private List<UnknownB0> au = new List<UnknownB0>();
 		private UnknownDE av = null;
 
 		public frmMain()
 		{
 			this.g();
 		}
+
 		protected override void Dispose( bool A_0 )
 		{
 			if( A_0 && this.at != null )
@@ -74,6 +76,7 @@ namespace VLTEdit
 			}
 			base.Dispose( A_0 );
 		}
+
 		private void g()
 		{
 			this.ae = new MainMenu();
@@ -432,30 +435,31 @@ namespace VLTEdit
 			UnknownB0 b = new UnknownB0();
 			this.writeToConsole( "Loading: " + A_0 );
 			b.a( A_0 );
-			if( this.b( b ) )
+			if( this.bOne( b ) )
 			{
 				UnknownBA ba = b.a( VLTOtherValue.VLTMAGIC ) as UnknownBA;
-				string text = ba.a( 0 );
-				MenuItem menuItem = new MenuItem( text, new EventHandler( this.b ) );
+				string text = ba.sa1[0];
+				MenuItem menuItem = new MenuItem( text, new EventHandler( this.bFour ) );
 				this.miUnload.MenuItems.Add( menuItem );
 				result = true;
 			}
 			if( A_1 )
 			{
-				this.b();
+				this.bTwo();
 			}
 			return result;
 		}
+
 		private void unloadFile( string A_0 )
 		{
-			IEnumerator enumerator = this.au.GetEnumerator();
+			IEnumerator<UnknownB0> enumerator = this.au.GetEnumerator();
 			try
 			{
 				while( enumerator.MoveNext() )
 				{
-					UnknownB0 b = (UnknownB0)enumerator.Current;
+					UnknownB0 b = enumerator.Current;
 					UnknownBA ba = b.a( VLTOtherValue.VLTMAGIC ) as UnknownBA;
-					string text = ba.a( 0 );
+					string text = ba.sa1[0];
 					if( text == A_0 )
 					{
 						this.writeToConsole( "Unloading: " + text );
@@ -482,7 +486,7 @@ namespace VLTEdit
 						}
 						this.au.Remove( b );
 						this.d();
-						this.b();
+						this.bTwo();
 						break;
 					}
 				}
@@ -496,6 +500,7 @@ namespace VLTEdit
 				}
 			}
 		}
+
 		private void showOpenFileDialog()
 		{
 			OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -521,20 +526,20 @@ namespace VLTEdit
 				}
 				if( flag )
 				{
-					this.b();
+					this.bTwo();
 				}
 			}
 		}
+
 		private void d()
 		{
 			this.av = new UnknownDE();
-			IEnumerator enumerator = this.au.GetEnumerator();
+			IEnumerator<UnknownB0> enumerator = this.au.GetEnumerator();
 			try
 			{
 				while( enumerator.MoveNext() )
 				{
-					UnknownB0 a_ = (UnknownB0)enumerator.Current;
-					this.a( a_ );
+					this.aTwo( enumerator.Current );
 				}
 			}
 			finally
@@ -546,18 +551,19 @@ namespace VLTEdit
 				}
 			}
 		}
-		private bool b( UnknownB0 A_0 )
+
+		// TODO: opt
+		private bool bOne( UnknownB0 A_0 )
 		{
 			UnknownBA ba = A_0.a( VLTOtherValue.VLTMAGIC ) as UnknownBA;
-			uint num = ba.b( 0 );
-			IEnumerator enumerator = this.au.GetEnumerator();
+			uint num = ba.uia1[0];
+			IEnumerator<UnknownB0> enumerator = this.au.GetEnumerator();
 			try
 			{
 				while( enumerator.MoveNext() )
 				{
-					UnknownB0 b = (UnknownB0)enumerator.Current;
-					UnknownBA ba2 = b.a( VLTOtherValue.VLTMAGIC ) as UnknownBA;
-					if( ba2.b( 0 ) == num )
+					UnknownBA ba2 = enumerator.Current.a( VLTOtherValue.VLTMAGIC ) as UnknownBA;
+					if( ba2.uia1[0] == num )
 					{
 						MessageBox.Show( "This VLT data file has already been loaded.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand );
 						return false;
@@ -572,51 +578,47 @@ namespace VLTEdit
 					disposable.Dispose();
 				}
 			}
-			if( this.a( A_0 ) )
-			{
-				this.au.Add( A_0 );
-				return true;
-			}
-			return false;
+			this.aTwo( A_0 );
+			this.au.Add( A_0 );
+			return true;
 		}
-		private bool a( UnknownB0 A_0 )
+
+		private void aTwo( UnknownB0 A_0 )
 		{
 			UnknownDH dh = A_0.a( VLTOtherValue.TABLE_START ) as UnknownDH;
-			for( int i = 0; i < dh.a(); ++i )
+			for( int i = 0; i < dh.asa1.Length; ++i )
 			{
-				UnknownAS @as = dh.a( i );
+				UnknownAS @as = dh.asa1[i];
 				// MW: Made more legible
-				switch( @as.b() )
+				switch( @as.b21 )
 				{
 					case VLTCommonValue.RARE:
-						this.av.am( @as.a().g(), A_0 );
+						this.av.am( @as.di1.g(), A_0 );
 						break;
 					case VLTCommonValue.UNCOMMON:
-						this.av.a( @as.a().k(), A_0 );
+						this.av.a( @as.di1.k(), A_0 );
 						break;
 					case VLTCommonValue.COMMON:
-						UnknownC c = @as.a().i();
-						VLTClass dq = this.av.b( c.f() );
-						dq.f().a( c, A_0 );
+						UnknownC c = @as.di1.i();
+						VLTClass dq = this.av.b( c.ui2 );
+						dq.dqb1.a( c, A_0 );
 						break;
 					default:
 						System.Console.WriteLine( "Unknown 'VLTCommonValue'" );
 						break;
 				}
 			}
-			return true;
 		}
 
 		private void listLoadedFiles()
 		{
-			IEnumerator enumerator = this.au.GetEnumerator();
+			IEnumerator<UnknownB0> enumerator = this.au.GetEnumerator();
 			try
 			{
 				while( enumerator.MoveNext() )
 				{
-					UnknownB0 b = (UnknownB0)enumerator.Current;
-					UnknownBA ba = b.a( VLTOtherValue.VLTMAGIC ) as UnknownBA;
-					this.writeToConsole( ba.a( 0 ) );
+					UnknownBA ba = enumerator.Current.a( VLTOtherValue.VLTMAGIC ) as UnknownBA;
+					this.writeToConsole( ba.sa1[0] );
 				}
 			}
 			finally
@@ -631,14 +633,14 @@ namespace VLTEdit
 
 		private void f( string A_0 )
 		{
-			IEnumerator enumerator = this.au.GetEnumerator();
+			IEnumerator<UnknownB0> enumerator = this.au.GetEnumerator();
 			try
 			{
 				while( enumerator.MoveNext() )
 				{
-					UnknownB0 b = (UnknownB0)enumerator.Current;
+					UnknownB0 b = enumerator.Current;
 					UnknownBA ba = b.a( VLTOtherValue.VLTMAGIC ) as UnknownBA;
-					string text = ba.a( 0 );
+					string text = ba.sa1[0];
 					if( text == A_0 )
 					{
 						this.writeToConsole( "Items in " + text );
@@ -649,7 +651,7 @@ namespace VLTEdit
 							while( enumerator2.MoveNext() )
 							{
 								UnknownAS @as = (UnknownAS)enumerator2.Current;
-								VLTCommonValue b2 = @as.b();
+								VLTCommonValue b2 = @as.b21;
 								if( b2 != VLTCommonValue.UNCOMMON )
 								{
 									if( b2 != VLTCommonValue.COMMON )
@@ -661,13 +663,13 @@ namespace VLTEdit
 									}
 									else
 									{
-										UnknownC c = @as.a().i();
-										this.writeToConsole( "- Row: " + HashTracker.getValueForHash( c.f() ) + "/" + this.a( this.av.b( c.f() ).f().a( c.ui() ) ) );
+										UnknownC c = @as.di1.i();
+										this.writeToConsole( "- Row: " + HashTracker.getValueForHash( c.ui2 ) + "/" + this.a( this.av.b( c.ui2 ).dqb1.a( c.hash ) ) );
 									}
 								}
 								else
 								{
-									this.writeToConsole( "- Class: " + HashTracker.getValueForHash( @as.d() ) );
+									this.writeToConsole( "- Class: " + HashTracker.getValueForHash( @as.ui1 ) );
 								}
 							}
 							break;
@@ -692,7 +694,9 @@ namespace VLTEdit
 				}
 			}
 		}
-		private void b()
+
+		// TODO: Opt
+		private void bTwo()
 		{
 			bool flag = true;
 			this.classGrid.Visible = false;
@@ -703,7 +707,7 @@ namespace VLTEdit
 				return;
 			}
 			this.tv.BeginUpdate();
-			Hashtable hashtable = new Hashtable();
+			Dictionary<string, TreeNode> dict = new Dictionary<string, TreeNode>();
 			TreeNode treeNode = this.tv.Nodes.Add( "Database" );
 			treeNode.Tag = this.av;
 			IEnumerator enumerator = this.av.GetEnumerator();
@@ -712,12 +716,12 @@ namespace VLTEdit
 				while( enumerator.MoveNext() )
 				{
 					VLTClass dq = (VLTClass)enumerator.Current;
-					string text = HashTracker.getValueForHash( dq.g() );
+					string text = HashTracker.getValueForHash( dq.ui1 );
 					treeNode.TreeView.Sorted = true;
 					TreeNode treeNode2 = treeNode.Nodes.Add( text );
 					treeNode.TreeView.Sorted = false;
 					treeNode2.Tag = dq;
-					IEnumerator enumerator2 = dq.f().GetEnumerator();
+					IEnumerator enumerator2 = dq.dqb1.GetEnumerator();
 					try
 					{
 						while( enumerator2.MoveNext() )
@@ -725,14 +729,14 @@ namespace VLTEdit
 							UnknownDR dr = (UnknownDR)enumerator2.Current;
 							TreeNode treeNode3;
 							string text2;
-							if( dr.b().b() == 0u )
+							if( dr.c1.ui3 == 0u )
 							{
 								treeNode3 = treeNode2;
 							}
 							else
 							{
-								text2 = string.Format( "{0:x},{1:x}", dq.g(), dr.b().b() );
-								treeNode3 = ( hashtable[text2] as TreeNode );
+								text2 = string.Format( "{0:x},{1:x}", dq.ui1, dr.c1.ui3 );
+								treeNode3 = dict[text2];
 							}
 							if( treeNode3 == null )
 							{
@@ -748,17 +752,18 @@ namespace VLTEdit
 							}
 							text = string.Concat( new object[]
 							{
-								HashTracker.getValueForHash(dr.b().ui()),
+								HashTracker.getValueForHash(dr.c1.hash),
 								" [",
-								dq.b().d(),
+								dq.c61.i6,
 								"+",
-								dr.b().e(),
+								dr.c1.i1,
 								"]"
 							} );
 							treeNode3 = treeNode3.Nodes.Add( text );
 							treeNode3.Tag = dr;
-							text2 = string.Format( "{0:x},{1:x}", dq.g(), dr.b().ui() );
-							hashtable.Add( text2, treeNode3 );
+							text2 = string.Format( "{0:x},{1:x}", dq.ui1, dr.c1.hash );
+							dict[text2] = treeNode3;
+							//dict.Add( text2, treeNode3 );
 						}
 					}
 					finally
@@ -781,6 +786,7 @@ namespace VLTEdit
 			}
 			this.tv.EndUpdate();
 		}
+
 		private void writeToConsole( string A_0 )
 		{
 			if( this.txtConsole.Text != "" )
@@ -791,21 +797,22 @@ namespace VLTEdit
 			this.txtConsole.SelectionStart = this.txtConsole.Text.Length;
 			this.txtConsole.Refresh();
 		}
+
 		private string a( UnknownDR A_0 )
 		{
-			VLTClass dq = A_0.d();
-			string text = HashTracker.getValueForHash( A_0.b().ui() );
-			if( A_0.b().b() == 0u )
+			VLTClass dq = A_0.dq1;
+			string text = HashTracker.getValueForHash( A_0.c1.hash );
+			if( A_0.c1.ui3 == 0u )
 			{
 				return text;
 			}
-			return this.a( dq.f().a( A_0.b().b() ) ) + "/" + text;
+			return this.a( dq.dqb1.a( A_0.c1.ui3 ) ) + "/" + text;
 		}
 
 		/**
-		 * Searches open files for the specified entry name/hash; stores results in the given ArrayList
+		 * Searches open files for the specified entry name/hash; stores results in the given List
 		 */
-		private void search( string A_0, ref ArrayList A_1 )
+		private void search( string A_0, ref List<string> A_1 )
 		{
 			uint num;
 			if( A_0.StartsWith( "0x" ) )
@@ -822,9 +829,9 @@ namespace VLTEdit
 				while( enumerator.MoveNext() )
 				{
 					VLTClass dq = (VLTClass)enumerator.Current;
-					if( dq.g() == num )
+					if( dq.ui1 == num )
 					{
-						string text = A_0 + ": Found match for class: " + HashTracker.getValueForHash( dq.g() );
+						string text = A_0 + ": Found match for class: " + HashTracker.getValueForHash( dq.ui1 );
 						if( !A_1.Contains( text ) )
 						{
 							A_1.Add( text );
@@ -842,7 +849,7 @@ namespace VLTEdit
 								{
 									A_0,
 									": Found match for field: ",
-									HashTracker.getValueForHash(dq.g()),
+									HashTracker.getValueForHash(dq.ui1),
 									"/",
 									HashTracker.getValueForHash(a.hash)
 								} );
@@ -861,19 +868,19 @@ namespace VLTEdit
 							disposable.Dispose();
 						}
 					}
-					enumerator2 = dq.f().GetEnumerator();
+					enumerator2 = dq.dqb1.GetEnumerator();
 					try
 					{
 						while( enumerator2.MoveNext() )
 						{
 							UnknownDR dr = (UnknownDR)enumerator2.Current;
-							if( dr.b().ui() == num )
+							if( dr.c1.hash == num )
 							{
 								string text = string.Concat( new string[]
 								{
 									A_0,
 									": Found match for row: ",
-									HashTracker.getValueForHash(dq.g()),
+									HashTracker.getValueForHash(dq.ui1),
 									"/",
 									this.a(dr)
 								} );
@@ -909,10 +916,10 @@ namespace VLTEdit
 		 */
 		private void search( string A_0 )
 		{
-			ArrayList arrayList = new ArrayList();
-			this.search( A_0, ref arrayList ); // TODO: Check that files are open!
-			this.search( A_0.ToLower(), ref arrayList );
-			this.search( A_0.ToUpper(), ref arrayList );
+			List<string> strList = new List<string>();
+			this.search( A_0, ref strList ); // TODO: Check that files are open!
+			this.search( A_0.ToLower(), ref strList );
+			this.search( A_0.ToUpper(), ref strList );
 			bool flag = true;
 			string text = "";
 			for( int i = 0; i < A_0.Length; ++i )
@@ -935,18 +942,17 @@ namespace VLTEdit
 					}
 				}
 			}
-			this.search( text, ref arrayList );
-			this.search( text.ToLower(), ref arrayList );
-			this.search( text.ToUpper(), ref arrayList );
-			if( arrayList.Count > 0 )
+			this.search( text, ref strList );
+			this.search( text.ToLower(), ref strList );
+			this.search( text.ToUpper(), ref strList );
+			if( strList.Count > 0 )
 			{
-				IEnumerator enumerator = arrayList.GetEnumerator();
+				IEnumerator<string> enumerator = strList.GetEnumerator();
 				try
 				{
 					while( enumerator.MoveNext() )
 					{
-						string a_ = (string)enumerator.Current;
-						this.writeToConsole( a_ );
+						this.writeToConsole( enumerator.Current );
 					}
 					return;
 				}
@@ -961,16 +967,17 @@ namespace VLTEdit
 			}
 			this.writeToConsole( "No matches found." );
 		}
+
 		private void a( VLTClass A_0, string A_1 )
 		{
-			this.writeToConsole( string.Format( "Dumping contents of class: {0}, field: {1}", HashTracker.getValueForHash( A_0.g() ), A_1 ) );
-			IEnumerator enumerator = A_0.f().GetEnumerator();
+			this.writeToConsole( string.Format( "Dumping contents of class: {0}, field: {1}", HashTracker.getValueForHash( A_0.ui1 ), A_1 ) );
+			IEnumerator enumerator = A_0.dqb1.GetEnumerator();
 			try
 			{
 				while( enumerator.MoveNext() )
 				{
 					UnknownDR dr = (UnknownDR)enumerator.Current;
-					if( dr.b().b() == 0u )
+					if( dr.c1.ui3 == 0u )
 					{
 						this.a( dr, A_1 );
 					}
@@ -985,6 +992,7 @@ namespace VLTEdit
 				}
 			}
 		}
+
 		private void a( UnknownDR A_0, string A_1 )
 		{
 			uint a_;
@@ -998,22 +1006,23 @@ namespace VLTEdit
 			}
 			this.a( A_0, a_ );
 		}
+
 		private void a( UnknownDR A_0, uint A_1 )
 		{
-			VLTClass dq = A_0.d();
+			VLTClass dq = A_0.dq1;
 			int num = dq.a( A_1 );
 			if( num == -1 )
 			{
 				throw new Exception( "Not a valid field value." );
 			}
 			string text = this.a( A_0 );
-			object obj = A_0.a( num );
+			object obj = A_0.bba1[num];
 			if( obj is EAArray )
 			{
 				EAArray m = obj as EAArray;
 				for( int i = 0; i < m.getMaxEntryCount(); ++i )
 				{
-					obj = m.a( i );
+					obj = m.genlist[i];
 					string text2;
 					if( obj == null )
 					{
@@ -1039,13 +1048,13 @@ namespace VLTEdit
 				}
 				this.writeToConsole( string.Format( "{0}: {1}", text, text3 ) );
 			}
-			IEnumerator enumerator = dq.f().GetEnumerator();
+			IEnumerator enumerator = dq.dqb1.GetEnumerator();
 			try
 			{
 				while( enumerator.MoveNext() )
 				{
 					UnknownDR dr = (UnknownDR)enumerator.Current;
-					if( dr.b().b() == A_0.b().ui() )
+					if( dr.c1.ui3 == A_0.c1.hash )
 					{
 						this.a( dr, A_1 );
 					}
@@ -1060,11 +1069,14 @@ namespace VLTEdit
 				}
 			}
 		}
+
 		private bool c( string A_0 )
 		{
 			return !A_0.StartsWith( "unk_" );
 		}
-		private string b( string A_0 )
+
+		// TODO: opt
+		private string bThree( string A_0 )
 		{
 			string text = A_0;
 			if( text.StartsWith( "0x" ) )
@@ -1089,6 +1101,7 @@ namespace VLTEdit
 			}
 			return text;
 		}
+
 		private void classdump()
 		{
 
@@ -1102,18 +1115,18 @@ namespace VLTEdit
 				while( enumerator.MoveNext() )
 				{
 					VLTClass dq = (VLTClass)enumerator.Current;
-					string text = this.b( HashTracker.getValueForHash( dq.g() ) );
+					string text = this.bThree( HashTracker.getValueForHash( dq.ui1 ) );
 					if( this.c( text ) )
 					{
 						streamWriter.WriteLine( "\tnamespace " + text + " {" );
-						streamWriter.WriteLine( "\t\tpublic abstract class " + this.b( text + "_base" ) + " {" );
+						streamWriter.WriteLine( "\t\tpublic abstract class " + this.bThree( text + "_base" ) + " {" );
 						IEnumerator enumerator2 = dq.GetEnumerator();
 						try
 						{
 							while( enumerator2.MoveNext() )
 							{
 								VLTClass.aclz1 a = (VLTClass.aclz1)enumerator2.Current;
-								string text2 = this.b( HashTracker.getValueForHash( a.hash ) );
+								string text2 = this.bThree( HashTracker.getValueForHash( a.hash ) );
 								if( this.c( text2 ) )
 								{
 									streamWriter.WriteLine( string.Concat( new string[]
@@ -1136,14 +1149,14 @@ namespace VLTEdit
 							}
 						}
 						streamWriter.WriteLine( "\t\t}" );
-						enumerator2 = dq.f().GetEnumerator();
+						enumerator2 = dq.dqb1.GetEnumerator();
 						try
 						{
 							while( enumerator2.MoveNext() )
 							{
 								UnknownDR dr = (UnknownDR)enumerator2.Current;
 								int num = 0;
-								string text3 = this.b( HashTracker.getValueForHash( dr.b().ui() ) );
+								string text3 = this.bThree( HashTracker.getValueForHash( dr.c1.hash ) );
 								if( this.c( text3 ) )
 								{
 									streamWriter.WriteLine( string.Concat( new string[]
@@ -1161,10 +1174,10 @@ namespace VLTEdit
 										while( enumerator3.MoveNext() )
 										{
 											VLTClass.aclz1 a2 = (VLTClass.aclz1)enumerator3.Current;
-											EABaseType bb = dr.a( num++ );
-											if( !a2.c() || dr.b( num - 1 ) )
+											EABaseType bb = dr.bba1[num++];
+											if( !a2.c() || dr.booa1[num - 1] )
 											{
-												string text4 = this.b( HashTracker.getValueForHash( a2.hash ) );
+												string text4 = this.bThree( HashTracker.getValueForHash( a2.hash ) );
 												if( this.c( text4 ) )
 												{
 													streamWriter.Write( "\t\t\t\t" + text4 + " = " );
@@ -1174,13 +1187,13 @@ namespace VLTEdit
 														streamWriter.WriteLine( "new VLTOffsetData[] {" );
 														for( int i = 0; i < m.getMaxEntryCount(); ++i )
 														{
-															bb = m.a( i );
+															bb = m.genlist[i];
 															streamWriter.WriteLine( string.Concat( new string[]
 															{
 																"\t\t\t\t\tnew VLTOffsetData(VLTOffsetType.",
-																bb.g() ? "Vlt" : "Bin",
+																bb.boo1 ? "Vlt" : "Bin",
 																", ",
-																string.Format("0x{0:x}", bb.i()),
+																string.Format("0x{0:x}", bb.ui1),
 																")",
 																(i != (int)(m.getMaxEntryCount() - 1)) ? "," : ""
 															} ) );
@@ -1192,9 +1205,9 @@ namespace VLTEdit
 														streamWriter.WriteLine( string.Concat( new string[]
 														{
 															"new VLTOffsetData(VLTOffsetType.",
-															bb.g() ? "Vlt" : "Bin",
+															bb.boo1 ? "Vlt" : "Bin",
 															", ",
-															string.Format("0x{0:x}", bb.i()),
+															string.Format("0x{0:x}", bb.ui1),
 															");"
 														} ) );
 													}
@@ -1238,6 +1251,7 @@ namespace VLTEdit
 			streamWriter.WriteLine( "}" );
 			streamWriter.Close();
 		}
+
 		private void a( string A_0 )
 		{
 			string[] array = A_0.Split( new char[] { ' ' }, 2 );
@@ -1287,7 +1301,7 @@ namespace VLTEdit
 					case "reparse":
 						this.writeToConsole( "Reparsing all VLTs..." );
 						this.d();
-						this.b();
+						this.bTwo();
 						break;
 					case "cls":
 					case "clear":
@@ -1483,6 +1497,7 @@ namespace VLTEdit
 				this.writeToConsole( "Error while executing: " + A_0 );
 			}
 		}
+
 		private void j( object A_0, EventArgs A_1 )
 		{
 			if( this.tv.SelectedNode != null )
@@ -1496,13 +1511,14 @@ namespace VLTEdit
 				if( selectedNode.Tag is VLTClass )
 				{
 					VLTClass dq = selectedNode.Tag as VLTClass;
-					Clipboard.SetDataObject( HashTracker.getValueForHash( dq.g() ) );
+					Clipboard.SetDataObject( HashTracker.getValueForHash( dq.ui1 ) );
 					return;
 				}
 				UnknownDR dr = selectedNode.Tag as UnknownDR;
-				Clipboard.SetDataObject( HashTracker.getValueForHash( dr.b().ui() ) );
+				Clipboard.SetDataObject( HashTracker.getValueForHash( dr.c1.hash ) );
 			}
 		}
+
 		private void i( object A_0, EventArgs A_1 )
 		{
 			if( this.tv.SelectedNode != null )
@@ -1516,14 +1532,15 @@ namespace VLTEdit
 				if( selectedNode.Tag is VLTClass )
 				{
 					VLTClass dq = selectedNode.Tag as VLTClass;
-					Clipboard.SetDataObject( HashTracker.getValueForHash( dq.g() ) );
+					Clipboard.SetDataObject( HashTracker.getValueForHash( dq.ui1 ) );
 					return;
 				}
 				UnknownDR dr = selectedNode.Tag as UnknownDR;
-				VLTClass dq2 = dr.d();
-				Clipboard.SetDataObject( HashTracker.getValueForHash( dq2.g() ) + "/" + this.a( dr ) );
+				VLTClass dq2 = dr.dq1;
+				Clipboard.SetDataObject( HashTracker.getValueForHash( dq2.ui1 ) + "/" + this.a( dr ) );
 			}
 		}
+
 		private void h( object A_0, EventArgs A_1 )
 		{
 			if( this.tvFields.SelectedNode != null )
@@ -1535,16 +1552,17 @@ namespace VLTEdit
 					EABaseType bb2 = selectedNode.Parent.Tag as EAArray;
 					Clipboard.SetDataObject( string.Concat( new object[]
 					{
-						HashTracker.getValueForHash(bb2.h()),
+						HashTracker.getValueForHash(bb2.ui3),
 						"[",
-						bb.k(),
+						bb.i1,
 						"]"
 					} ) );
 					return;
 				}
-				Clipboard.SetDataObject( HashTracker.getValueForHash( bb.h() ) );
+				Clipboard.SetDataObject( HashTracker.getValueForHash( bb.ui3 ) );
 			}
 		}
+
 		private void g( object A_0, EventArgs A_1 )
 		{
 			if( this.tvFields.SelectedNode != null )
@@ -1553,10 +1571,11 @@ namespace VLTEdit
 				if( selectedNode.Tag is EABaseType && !( selectedNode.Tag is EAArray ) )
 				{
 					EABaseType bb = selectedNode.Tag as EABaseType;
-					Clipboard.SetDataObject( string.Format( "0x{0}", bb.i() ) );
+					Clipboard.SetDataObject( string.Format( "0x{0}", bb.ui1 ) );
 				}
 			}
 		}
+
 		private void f( object A_0, EventArgs A_1 )
 		{
 			if( this.tvFields.SelectedNode != null )
@@ -1565,10 +1584,11 @@ namespace VLTEdit
 				if( selectedNode.Tag is EABaseType && !( selectedNode.Tag is EAArray ) )
 				{
 					EABaseType bb = selectedNode.Tag as EABaseType;
-					Clipboard.SetDataObject( string.Format( "{0}:0x{1}", bb.g() ? "vlt" : "bin", bb.i() ) );
+					Clipboard.SetDataObject( string.Format( "{0}:0x{1}", bb.boo1 ? "vlt" : "bin", bb.ui1 ) );
 				}
 			}
 		}
+
 		private void e( object A_0, EventArgs A_1 )
 		{
 			if( this.tvFields.SelectedNode != null )
@@ -1579,22 +1599,28 @@ namespace VLTEdit
 					treeNode = treeNode.Parent;
 				}
 				EABaseType bb = treeNode.Tag as EABaseType;
-				this.a( bb.m(), bb.h() );
+				this.a( bb.m(), bb.ui3 );
 			}
 		}
+
 		private void menuExitClicked( object A_0, EventArgs A_1 )
 		{
 			this.exit();
 		}
+
 		private void menuOpenClicked( object A_0, EventArgs A_1 )
 		{
 			this.showOpenFileDialog();
 		}
-		private void b( object A_0, EventArgs A_1 )
+
+		// TODO: opt
+		private void bFour( object A_0, EventArgs A_1 )
 		{
 			MenuItem menuItem = A_0 as MenuItem;
 			this.unloadFile( menuItem.Text );
 		}
+
+		// TODO: opt
 		private void b( object A_0, TreeViewEventArgs A_1 )
 		{
 			object tag = A_1.Node.Tag;
@@ -1640,7 +1666,7 @@ namespace VLTEdit
 				( (DataView)currencyManager.List ).AllowEdit = false;
 				( (DataView)currencyManager.List ).AllowDelete = false;
 
-				UnknownA8 a2 = dq.c().a( VLTOtherValue.TABLE_END ) as UnknownA8;
+				UnknownA8 a2 = dq.b01.a( VLTOtherValue.TABLE_END ) as UnknownA8;
 				this.classGrid.Update();
 				return;
 			}
@@ -1668,7 +1694,7 @@ namespace VLTEdit
 					}
 				}
 				UnknownDR dr = tag as UnknownDR;
-				VLTClass dq2 = dr.d();
+				VLTClass dq2 = dr.dq1;
 				this.tvFields.BeginUpdate();
 				this.tvFields.Nodes.Clear();
 				int num = 0;
@@ -1678,8 +1704,8 @@ namespace VLTEdit
 					while( enumerator.MoveNext() )
 					{
 						VLTClass.aclz1 a3 = (VLTClass.aclz1)enumerator.Current;
-						EABaseType bb = dr.a( num++ );
-						if( !a3.c() || dr.b( num - 1 ) )
+						EABaseType bb = dr.bba1[num++];
+						if( !a3.c() || dr.booa1[num - 1] )
 						{
 							if( a3.isArray() )
 							{
@@ -1698,7 +1724,7 @@ namespace VLTEdit
 								for( int i = 0; i < m.getMaxEntryCount(); ++i )
 								{
 									TreeNode treeNode3 = treeNode2.Nodes.Add( "[" + i + "]" );
-									treeNode3.Tag = m.a( i );
+									treeNode3.Tag = m.genlist[i];
 									if( treeNode2.Text == text && treeNode3.Text == text2 )
 									{
 										treeNode = treeNode3;
@@ -1741,12 +1767,13 @@ namespace VLTEdit
 					}
 				}
 				this.tvFields.EndUpdate();
-				UnknownA8 a4 = dr.c().a( VLTOtherValue.TABLE_END ) as UnknownA8;
+				UnknownA8 a4 = dr.b01.a( VLTOtherValue.TABLE_END ) as UnknownA8;
 				return;
 			}
 			this.classGrid.Visible = false;
 			this.pnlData.Visible = false;
 		}
+
 		private void tvFields_AfterSelect( object A_0, TreeViewEventArgs A_1 )
 		{
 			object tag = A_1.Node.Tag;
@@ -1798,15 +1825,15 @@ namespace VLTEdit
 				( (DataView)currencyManager.List ).AllowEdit = false;
 				( (DataView)currencyManager.List ).AllowDelete = false;
 
-				this.lblFieldType.Text = "Type: " + HashTracker.getValueForHash( bb.j() );
+				this.lblFieldType.Text = "Type: " + HashTracker.getValueForHash( bb.ui2 );
 				if( BuildConfig.DEBUG )
 				{
 					this.writeToConsole( "bb.GetType(): " + type.ToString() ); // Here, we're getting the proper type! Great!
-					this.writeToConsole( "bb.j(): " + string.Format( "0x{0:x}", bb.j() ) ); // Here, we're derping! OMG!
+					this.writeToConsole( "bb.j(): " + string.Format( "0x{0:x}", bb.ui2 ) ); // Here, we're derping! OMG!
 				}
-				UnknownBA ba = bb.m().c().a( VLTOtherValue.VLTMAGIC ) as UnknownBA;
-				string text = ba.a( 0 );
-				this.lblFieldOffset.Text = string.Format( "Offset: {0}:0x{1:x}  ({2})", bb.g() ? "vlt" : "bin", bb.i(), text );
+				UnknownBA ba = bb.m().b01.a( VLTOtherValue.VLTMAGIC ) as UnknownBA;
+				string text = ba.sa1[0];
+				this.lblFieldOffset.Text = string.Format( "Offset: {0}:0x{1:x}  ({2})", bb.boo1 ? "vlt" : "bin", bb.ui1, text );
 				this.dataGrid.Update();
 				return;
 			}

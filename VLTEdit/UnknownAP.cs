@@ -9,15 +9,10 @@ namespace VLTEdit
 		{
 			StringBuilder stringBuilder = new StringBuilder();
 			byte b;
-			do
+			while( ( b = A_0.ReadByte() ) != 0 )
 			{
-				b = A_0.ReadByte();
-				if( b != 0 )
-				{
-					stringBuilder.Append( (char)b );
-				}
+				stringBuilder.Append( (char)b );
 			}
-			while( b != 0 );
 			return stringBuilder.ToString();
 		}
 

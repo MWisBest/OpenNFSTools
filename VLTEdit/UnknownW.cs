@@ -8,49 +8,9 @@ namespace VLTEdit
 	{
 		private int i1;
 		private int i2;
-		private int i3;
-		private int i4;
-		private int[] ia1;
-
-		public int b( int A_0 )
-		{
-			return this.ia1[A_0];
-		}
-
-		public void a( int A_0, int A_1 )
-		{
-			this.ia1[A_0] = A_1;
-		}
-
-		public int b()
-		{
-			return this.i3;
-		}
-
-		public int c()
-		{
-			return this.i1;
-		}
-
-		public void a( int A_0 )
-		{
-			this.i1 = A_0;
-		}
-
-		public int d()
-		{
-			return this.i2;
-		}
-
-		public void c( int A_0 )
-		{
-			this.i2 = A_0;
-		}
-
-		public int a()
-		{
-			return this.i4;
-		}
+		public int i3;
+		public int i4;
+		public int[] ia1;
 
 		public override void read( BinaryReader A_0 )
 		{

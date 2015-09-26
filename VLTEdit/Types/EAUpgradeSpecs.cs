@@ -4,8 +4,8 @@ namespace VLTEdit
 {
 	public class EAUpgradeSpecs : EABaseType
 	{
-		private uint ui1;
-		private uint ui2;
+		private uint upgrdui1;
+		private uint upgrdui2;
 		[DataValue( "Class" )]
 		public string usclass;
 		[DataValue( "Collection" )]
@@ -15,12 +15,12 @@ namespace VLTEdit
 
 		public override void read( BinaryReader A_0 )
 		{
-			this.ui1 = A_0.ReadUInt32();
-			this.ui2 = A_0.ReadUInt32();
+			this.upgrdui1 = A_0.ReadUInt32();
+			this.upgrdui2 = A_0.ReadUInt32();
 			A_0.ReadInt32();
 			this.level = A_0.ReadUInt32();
-			this.usclass = HashTracker.getValueForHash( this.ui1 );
-			this.uscollection = HashTracker.getValueForHash( this.ui2 );
+			this.usclass = HashTracker.getValueForHash( this.upgrdui1 );
+			this.uscollection = HashTracker.getValueForHash( this.upgrdui2 );
 		}
 
 		public override void write( BinaryWriter A_0 )
@@ -29,8 +29,8 @@ namespace VLTEdit
 			// Replace with writing ui1 and ui2 for now.
 			//A_0.Write( HashUtil.getHash32( this.usclass ) );
 			//A_0.Write( HashUtil.getHash32( this.uscollection ) );
-			A_0.Write( this.ui1 );
-			A_0.Write( this.ui2 );
+			A_0.Write( this.upgrdui1 );
+			A_0.Write( this.upgrdui2 );
 			A_0.Write( 0 );
 			A_0.Write( this.level );
 		}

@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -45,7 +43,7 @@ namespace VLTEdit
 				string text = HashTracker.knownActualHashes[hash];
 				if( !HashTracker.usedHashes.ContainsKey( hash ) && !HashTracker.ht3.ContainsKey( hash ) )
 				{
-					HashTracker.usedHashes.Add( hash, text );
+					HashTracker.usedHashes[hash] = text;
 				}
 				return text;
 			}
@@ -54,7 +52,7 @@ namespace VLTEdit
 				string text2 = HashTracker.hashGuesses[hash];
 				if( !HashTracker.usedHashes.ContainsKey( hash ) && !HashTracker.ht3.ContainsKey( hash ) )
 				{
-					HashTracker.usedHashes.Add( hash, text2 );
+					HashTracker.usedHashes[hash] = text2;
 				}
 				return text2;
 			}
@@ -64,8 +62,8 @@ namespace VLTEdit
 		public static void loadHashes( string fileName )
 		{
 			StreamReader streamReader = new StreamReader( fileName );
-			string text = streamReader.ReadLine();
-			while( text != null )
+			string text;
+			while( ( text = streamReader.ReadLine() ) != null )
 			{
 				text = text.Trim();
 				if( text != "" && !text.StartsWith( "#" ) )
@@ -84,7 +82,7 @@ namespace VLTEdit
 						}
 						if( !HashTracker.hashGuesses.ContainsKey( num ) )
 						{
-							HashTracker.hashGuesses.Add( num, array[2] );
+							HashTracker.hashGuesses[num] = array[2];
 						}
 					}
 					else
@@ -92,11 +90,10 @@ namespace VLTEdit
 						num = HashUtil.getHash32( text );
 						if( !HashTracker.knownActualHashes.ContainsKey( num ) )
 						{
-							HashTracker.knownActualHashes.Add( num, text );
+							HashTracker.knownActualHashes[num] = text;
 						}
 					}
 				}
-				text = streamReader.ReadLine();
 			}
 			streamReader.Close();
 		}
@@ -106,7 +103,7 @@ namespace VLTEdit
 			uint num = HashUtil.getHash32( A_0 );
 			if( !HashTracker.ht3.ContainsKey( num ) )
 			{
-				HashTracker.ht3.Add( num, A_0 );
+				HashTracker.ht3[num] = A_0;
 				if( HashTracker.knownActualHashes.ContainsKey( num ) )
 				{
 					HashTracker.knownActualHashes.Remove( num );

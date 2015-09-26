@@ -4,8 +4,8 @@ namespace VLTEdit
 {
 	public class EARefSpec : EABaseType // OBF: dm.cs
 	{
-		private uint ui1;
-		private uint ui2;
+		private uint refui1;
+		private uint refui2;
 		[DataValue( "Class" )]
 		public string refclass;
 		[DataValue( "Collection" )]
@@ -13,11 +13,11 @@ namespace VLTEdit
 
 		public override void read( BinaryReader A_0 )
 		{
-			this.ui1 = A_0.ReadUInt32();
-			this.ui2 = A_0.ReadUInt32();
+			this.refui1 = A_0.ReadUInt32();
+			this.refui2 = A_0.ReadUInt32();
 			A_0.ReadInt32();
-			this.refclass = HashTracker.getValueForHash( this.ui1 );
-			this.refcollection = HashTracker.getValueForHash( this.ui2 );
+			this.refclass = HashTracker.getValueForHash( this.refui1 );
+			this.refcollection = HashTracker.getValueForHash( this.refui2 );
 		}
 
 		public override void write( BinaryWriter A_0 )
@@ -26,8 +26,8 @@ namespace VLTEdit
 			// Replace with writing ui1 and ui2 for now.
 			//A_0.Write( HashUtil.getHash32( this.refclass ) );
 			//A_0.Write( HashUtil.getHash32( this.refcollection ) );
-			A_0.Write( this.ui1 );
-			A_0.Write( this.ui2 );
+			A_0.Write( this.refui1 );
+			A_0.Write( this.refui2 );
 
 			A_0.Write( 0 );
 		}

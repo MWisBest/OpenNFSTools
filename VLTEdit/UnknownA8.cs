@@ -31,7 +31,7 @@ namespace VLTEdit
 				while( enumerator.MoveNext() )
 				{
 					UnknownB8 b = (UnknownB8)enumerator.Current;
-					binaryWriter.BaseStream.Seek( (long)b.c(), 0 );
+					binaryWriter.BaseStream.Seek( b.c(), SeekOrigin.Begin );
 					binaryWriter.Write( b.b() );
 				}
 			}

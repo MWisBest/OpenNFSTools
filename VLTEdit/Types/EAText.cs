@@ -24,7 +24,7 @@ namespace VLTEdit
 			long position = A_0.BaseStream.Position;
 			A_0.BaseStream.Seek( (long)( (ulong)this.offset ), SeekOrigin.Begin );
 			this.value = UnknownAP.a( A_0 );
-			A_0.BaseStream.Seek( position, 0 );
+			A_0.BaseStream.Seek( position, SeekOrigin.Begin );
 		}
 
 		public override void write( BinaryWriter A_0 )

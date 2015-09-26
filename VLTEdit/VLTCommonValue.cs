@@ -8,7 +8,6 @@ namespace VLTEdit
 	{
 		RARE = 0xCBBC628Fu, // 8F62BCCB, 1 instance in NFS:MW and NFS:C db.vlt
 
-
 		UNCOMMON = 0x5E970CBCu, // BC0C975E, 57 instances in NFS:MW db.vlt, 80 instances in NFS:C db.vlt
 
 		// often 16 bytes between instances in NFS:MW VLT, but only 12 in NFS:C VLT! 

@@ -164,7 +164,7 @@ namespace VPak
 				files[i].read( binaryReader );
 			}
 
-			fileStream.Seek( (long)header.fileTableLocation, 0 );
+			fileStream.Seek( header.fileTableLocation, SeekOrigin.Begin );
 			byte[] fileTable = binaryReader.ReadBytes( header.fileTableLength );
 			Hashtable hashtable = new Hashtable( header.internalFileCount );
 			int num = 0;
@@ -193,7 +193,7 @@ namespace VPak
 			{
 				Console.WriteLine( "\tOutput: " + files[i].internalName );
 
-				fileStream.Seek( (long)files[i].binLocation, 0 );
+				fileStream.Seek( files[i].binLocation, SeekOrigin.Begin );
 				byte[] array3 = binaryReader.ReadBytes( files[i].binLength );
 				int extraZeros = 0;
 				try
@@ -217,7 +217,7 @@ namespace VPak
 				}
 				fileStream2.Close();
 
-				fileStream.Seek( (long)files[i].vltLocation, 0 );
+				fileStream.Seek( files[i].vltLocation, SeekOrigin.Begin );
 				byte[] array4 = binaryReader.ReadBytes( files[i].vltLength );
 				int extraZerosTwo = 0;
 				try

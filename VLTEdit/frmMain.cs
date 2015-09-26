@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -411,15 +410,18 @@ namespace VLTEdit
 			this.pnlBottom.ResumeLayout( false );
 			base.ResumeLayout( false );
 		}
+
 		[STAThread]
 		private static void Main()
 		{
 			Application.Run( new frmMain() );
 		}
+
 		private void exit()
 		{
 			Application.Exit();
 		}
+
 		private bool a( string A_0, bool A_1 )
 		{
 			bool result = false;
@@ -505,7 +507,7 @@ namespace VLTEdit
 			openFileDialog.Title = "Open VLT";
 			openFileDialog.Filter = "VLT Files (*.vlt)|*.vlt";
 			openFileDialog.Multiselect = true;
-			if( (int)openFileDialog.ShowDialog() == 1 )
+			if( openFileDialog.ShowDialog() == DialogResult.OK )
 			{
 				bool flag = false;
 				string[] fileNames = openFileDialog.FileNames;
@@ -737,7 +739,7 @@ namespace VLTEdit
 								if( flag )
 								{
 									DialogResult dialogResult = MessageBox.Show( "Could not find parent data row. Did you forget to load a dependency?\nThe hierarchy will be flattened.", "Warning", MessageBoxButtons.OK ); // TODO: , 48);
-									if( (int)dialogResult == 2 )
+									if( dialogResult == DialogResult.Cancel )
 									{
 										flag = false;
 									}
@@ -1813,6 +1815,7 @@ namespace VLTEdit
 			this.dataGrid.DataSource = null;
 			this.dataGrid.Update();
 		}
+
 		private void onLoad( object A_0, EventArgs A_1 )
 		{
 			this.writeToConsole( "VLTEdit " + Application.ProductVersion );
@@ -1824,6 +1827,7 @@ namespace VLTEdit
 			}
 			this.txtConsoleInput.Focus();
 		}
+
 		private void writeTestInfo()
 		{
 			this.writeToConsole( "typeof( EAInt32 ) == " + typeof( EAInt32 ).ToString() );

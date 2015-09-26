@@ -18,15 +18,15 @@ namespace VLTEdit
 
 		static HashTracker()
 		{
-			ht3 = new Dictionary<uint, string>();
-			usedHashes = new Dictionary<uint, string>();
+			HashTracker.ht3 = new Dictionary<uint, string>();
+			HashTracker.usedHashes = new Dictionary<uint, string>();
 			HashTracker.init();
 		}
 
 		public static void init()
 		{
-			knownActualHashes = new Dictionary<uint, string>();
-			hashGuesses = new Dictionary<uint, string>();
+			HashTracker.knownActualHashes = new Dictionary<uint, string>();
+			HashTracker.hashGuesses = new Dictionary<uint, string>();
 			string hashFile = ( new FileInfo( Application.ExecutablePath ) ).Directory.FullName + "\\hashes.txt";
 			if( File.Exists( hashFile ) )
 			{

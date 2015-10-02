@@ -20,7 +20,7 @@ namespace VLTEdit
 		{
 			byte[] bytes = Encoding.ASCII.GetBytes( A_1 );
 			A_0.Write( bytes );
-			A_0.Write( 0 );
+			A_0.Write( (byte)0 );
 		}
 	}
 }

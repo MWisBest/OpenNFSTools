@@ -13,10 +13,6 @@ namespace VLTEdit
 
 		public static UnknownDI a( VLTCommonValue A_0 )
 		{
-			if( BuildConfig.CARBON )
-			{
-				Console.WriteLine( "DI: VLTCommonValue: " + A_0.ToString() );
-			}
 			switch( A_0 )
 			{
 				case VLTCommonValue.COMMON:
@@ -26,7 +22,6 @@ namespace VLTEdit
 				case VLTCommonValue.RARE:
 					return new UnknownW();
 				default:
-					Console.WriteLine( "DI: WTF VLTCommonValue: " + A_0.ToString() );
 					return null;
 			}
 		}

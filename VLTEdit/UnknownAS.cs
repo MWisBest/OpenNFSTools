@@ -12,18 +12,6 @@ namespace VLTEdit
 		private int i3;
 		public UnknownDI di1;
 
-		public void print()
-		{
-			Console.WriteLine( "AS: ui1: " + ui1 );
-			Console.WriteLine( "AS: b21: " + b21 );
-			if( !BuildConfig.CARBON )
-			{
-				Console.WriteLine( "AS: i1: " + i1 );
-			}
-			Console.WriteLine( "AS: i2: " + i2 );
-			Console.WriteLine( "AS: i3: " + i3 );
-		}
-
 		public void b( BinaryReader A_0 ) // TODO: NFS:C
 		{
 			// NFS:C  880012749 (BAD!) --> -1911476553 (BAD!!)

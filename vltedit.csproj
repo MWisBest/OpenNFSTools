@@ -135,7 +135,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="VLTEdit\frmMain.resources" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\Settings.settings">

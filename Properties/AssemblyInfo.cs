@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using static VLTEdit.BuildConfig;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -29,4 +30,5 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion( "1.1.*" )]
+[assembly: AssemblyVersion( MAJOR_VER + "." + MINOR_VER + ".*" )]
+[assembly: AssemblyInformationalVersion( MAJOR_VER + "." + MINOR_VER + "." + PATCH_VER )]

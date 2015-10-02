@@ -42,35 +42,35 @@ namespace VLTEdit
 				// NOTE: C# doesn't allow fallthroughs, so as a workaround we use goto's instead.
 				case 11:
 					c += (uint)toHash[10 + num] << 24;
-					goto TEN;
-				case 10: TEN:
+					goto case 10;
+				case 10:
 					c += (uint)toHash[9 + num] << 16;
-					goto NINE;
-				case 9:  NINE:
+					goto case 9;
+				case 9:
 					c += (uint)toHash[8 + num] << 8;
-					goto EIGHT;
-				case 8:  EIGHT:
+					goto case 8;
+				case 8:
 					b += (uint)toHash[7 + num] << 24;
-					goto SEVEN;
-				case 7:  SEVEN:
+					goto case 7;
+				case 7:
 					b += (uint)toHash[6 + num] << 16;
-					goto SIX;
-				case 6:  SIX:
+					goto case 6;
+				case 6:
 					b += (uint)toHash[5 + num] << 8;
-					goto FIVE;
-				case 5:  FIVE:
+					goto case 5;
+				case 5:
 					b += (uint)toHash[4 + num];
-					goto FOUR;
-				case 4:  FOUR:
+					goto case 4;
+				case 4:
 					a += (uint)toHash[3 + num] << 24;
-					goto THREE;
-				case 3:  THREE:
+					goto case 3;
+				case 3:
 					a += (uint)toHash[2 + num] << 16;
-					goto TWO;
-				case 2:  TWO:
+					goto case 2;
+				case 2:
 					a += (uint)toHash[1 + num] << 8;
-					goto ONE;
-				case 1:  ONE:
+					goto case 1;
+				case 1:
 					a += (uint)toHash[num];
 					break;
 				default:
@@ -117,71 +117,71 @@ namespace VLTEdit
 				// NOTE: C# doesn't allow fallthroughs, so as a workaround we use goto's instead.
 				case 23:
 					c += (ulong)toHash[22] << 56;
-					goto TWENTYTWO;
-				case 22: TWENTYTWO:
+					goto case 22;
+				case 22:
 					c += (ulong)toHash[21] << 48;
-					goto TWENTYONE;
-				case 21: TWENTYONE:
+					goto case 21;
+				case 21:
 					c += (ulong)toHash[20] << 40;
-					goto TWENTY;
-				case 20: TWENTY:
+					goto case 20;
+				case 20:
 					c += (ulong)toHash[19] << 32;
-					goto NINETEEN;
-				case 19: NINETEEN:
+					goto case 19;
+				case 19:
 					c += (ulong)toHash[18] << 24;
-					goto EIGHTEEN;
-				case 18: EIGHTEEN:
+					goto case 18;
+				case 18:
 					c += (ulong)toHash[17] << 16;
-					goto SEVENTEEN;
-				case 17: SEVENTEEN:
+					goto case 17;
+				case 17:
 					c += (ulong)toHash[16] << 8;
-					goto SIXTEEN;
-				case 16: SIXTEEN:
+					goto case 16;
+				case 16:
 					b += (ulong)toHash[15] << 56;
-					goto FIFTEEN;
-				case 15: FIFTEEN:
+					goto case 15;
+				case 15:
 					b += (ulong)toHash[14] << 48;
-					goto FOURTEEN;
-				case 14: FOURTEEN:
+					goto case 14;
+				case 14:
 					b += (ulong)toHash[13] << 40;
-					goto THIRTEEN;
-				case 13: THIRTEEN:
+					goto case 13;
+				case 13:
 					b += (ulong)toHash[12] << 32;
-					goto TWELVE;
-				case 12: TWELVE:
+					goto case 12;
+				case 12:
 					b += (ulong)toHash[11] << 24;
-					goto ELEVEN;
-				case 11: ELEVEN:
+					goto case 11;
+				case 11:
 					b += (ulong)toHash[10] << 16;
-					goto TEN;
-				case 10: TEN:
+					goto case 10;
+				case 10:
 					b += (ulong)toHash[9] << 8;
-					goto NINE;
-				case 9:  NINE:
+					goto case 9;
+				case 9:
 					b += (ulong)toHash[8];
-					goto EIGHT;
-				case 8:  EIGHT:
+					goto case 8;
+				case 8:
 					a += (ulong)toHash[7] << 56;
-					goto SEVEN;
-				case 7:  SEVEN:
+					goto case 7;
+				case 7:
 					a += (ulong)toHash[6] << 48;
-					goto SIX;
-				case 6:  SIX:
+					goto case 6;
+				case 6:
 					a += (ulong)toHash[5] << 40;
-					goto FIVE;
-				case 5:  FIVE:
+					goto case 5;
+				case 5:
 					a += (ulong)toHash[4] << 32;
-					goto FOUR;
-				case 4:  FOUR:
+					goto case 4;
+				case 4:
 					a += (ulong)toHash[3] << 24;
-					goto THREE;
-				case 3:  THREE:
+					goto case 3;
+				case 3:
 					a += (ulong)toHash[2] << 16;
-					goto TWO;
-				case 2:  TWO:
+					goto case 2;
+				case 2:
 					a += (ulong)toHash[1] << 8;
-					goto ONE;
-				case 1:  ONE:
+					goto case 1;
+				case 1:
 					a += (ulong)toHash[0];
 					break;
 				default:

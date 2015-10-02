@@ -49,14 +49,14 @@ namespace VLTEdit
 
 			public void a( UnknownC A_0, UnknownB0 A_1 )
 			{
-				BinaryReader binaryReader = new BinaryReader( A_1.a() );
-				BinaryReader binaryReader2 = new BinaryReader( A_1.b() );
+				BinaryReader binaryReader = new BinaryReader( A_1.ms1 );
+				BinaryReader binaryReader2 = new BinaryReader( A_1.ms2 );
 				UnknownDR dr = new UnknownDR( this.vltClass.c61.i2 );
 				UnknownA8 a = A_1.a( VLTOtherValue.TABLE_END ) as UnknownA8;
-				int num = a.a( A_0.i5 ).i2;
-				dr.a( A_1 );
-				dr.a( this.vltClass );
-				dr.a( A_0 );
+				int num = a.genht1[A_0.i5].i2;
+				dr.b01 = A_1;
+				dr.dq1 = this.vltClass;
+				dr.c1 = A_0;
 				for( int i = 0; i < this.vltClass.c61.i2; ++i )
 				{
 					VLTClass.aclz1 a2 = this.vltClass.dqaa1[i];
@@ -80,7 +80,7 @@ namespace VLTEdit
 								}
 								else
 								{
-									UnknownB8 b = a.a( A_0.caa1[j].i1 );
+									UnknownB8 b = a.genht1[A_0.caa1[j].i1];
 									binaryReader3 = binaryReader;
 									binaryReader3.BaseStream.Seek( b.i2, SeekOrigin.Begin );
 								}
@@ -192,9 +192,9 @@ namespace VLTEdit
 			this.c61 = A_0;
 			this.ui1 = A_0.ui1;
 			UnknownA8 a81 = ( A_1.a( VLTOtherValue.TABLE_END ) as UnknownA8 );
-			int num = a81.a( A_0.i3 ).i2;
-			A_1.a().Seek( num, SeekOrigin.Begin );
-			BinaryReader a_ = new BinaryReader( A_1.a() );
+			int num = a81.genht1[A_0.i3].i2;
+			A_1.ms1.Seek( num, SeekOrigin.Begin );
+			BinaryReader a_ = new BinaryReader( A_1.ms1 );
 			this.dqaa1 = new VLTClass.aclz1[this.c61.i2];
 			for( int i = 0; i < this.c61.i2; ++i )
 			{

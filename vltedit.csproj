@@ -111,7 +111,6 @@
     <Compile Include="VLTEdit\VLTOtherValue.cs" />
     <Compile Include="VLTEdit\Types\EAVector4.cs" />
     <Compile Include="VLTEdit\Types\EAAxlePair.cs" />
-    <Compile Include="VLTEdit\UnknownCY.cs" />
     <Compile Include="VLTEdit\Types\EAInt8.cs" />
     <Compile Include="VLTEdit\UnknownDE.cs" />
     <Compile Include="VLTEdit\UnknownDH.cs" />

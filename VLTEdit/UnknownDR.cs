@@ -13,21 +13,6 @@ namespace VLTEdit
 		public bool[] booa1;
 		public VLTClass dq1;
 
-		public void a( VLTClass A_0 )
-		{
-			this.dq1 = A_0;
-		}
-
-		public void a( UnknownB0 A_0 )
-		{
-			this.b01 = A_0;
-		}
-
-		public void a( UnknownC A_0 )
-		{
-			this.c1 = A_0;
-		}
-
 		public UnknownDR( int count )
 		{
 			this.bba1 = new EABaseType[count];

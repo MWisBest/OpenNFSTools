@@ -10,12 +10,7 @@ namespace VLTEdit
 	{
 		private List<UnknownB8> genb8list;
 		private List<UnknownB8> genb8listTwo;
-		private Dictionary<int, UnknownB8> genht1;
-
-		public UnknownB8 a( int A_0 )
-		{
-			return this.genht1[A_0];
-		}
+		public Dictionary<int, UnknownB8> genht1;
 
 		public void a( Stream A_0 )
 		{

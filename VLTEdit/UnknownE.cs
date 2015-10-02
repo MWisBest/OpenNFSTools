@@ -8,11 +8,6 @@ namespace VLTEdit
 		private int i1;
 		private long l1;
 
-		public void a( int A_0 )
-		{
-			this.i1 = A_0;
-		}
-
 		public int a()
 		{
 			return this.i1 - 8;
@@ -42,7 +37,7 @@ namespace VLTEdit
 
 		public void write( BinaryWriter A_0 )
 		{
-			A_0.Write( (int)this.ce1 );
+			A_0.Write( (uint)this.ce1 );
 			A_0.Write( this.i1 );
 		}
 	}

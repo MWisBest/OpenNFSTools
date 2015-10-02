@@ -3,29 +3,14 @@ using System.IO;
 
 namespace VLTEdit
 {
-	public abstract class UnknownDI : UnknownCY, IBinReadWrite
+	public abstract class UnknownDI : IBinReadWrite
 	{
-		protected UnknownAS as1;
-		protected long l1;
+		public UnknownAS as1;
+		public long l1;
 
 		public abstract void read( BinaryReader br );
 
 		public abstract void write( BinaryWriter bw );
-
-		public long getLong()
-		{
-			return this.l1;
-		}
-
-		public void setLong( long A_0 )
-		{
-			this.l1 = A_0;
-		}
-
-		public void a( UnknownAS A_0 )
-		{
-			this.as1 = A_0;
-		}
 
 		public static UnknownDI a( VLTCommonValue A_0 )
 		{

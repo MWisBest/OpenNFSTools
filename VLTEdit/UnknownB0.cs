@@ -9,8 +9,8 @@ namespace VLTEdit
 		private string s1;
 		private string s2;
 		private List<UnknownC0> genc0list;
-		private MemoryStream ms1;
-		private MemoryStream ms2;
+		public MemoryStream ms1;
+		public MemoryStream ms2;
 
 		private UnknownC0 a( BinaryReader A_0 )
 		{
@@ -44,23 +44,13 @@ namespace VLTEdit
 						break;
 				}
 
-				c.a( e );
+				c.e1 = e;
 				c.read( A_0 );
 				e.b( A_0.BaseStream );
 				return c;
 			}
 
 			return null;
-		}
-
-		public Stream a()
-		{
-			return this.ms1;
-		}
-
-		public Stream b()
-		{
-			return this.ms2;
 		}
 
 		public UnknownC0 a( VLTOtherValue A_0 )

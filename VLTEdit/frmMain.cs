@@ -600,7 +600,7 @@ namespace VLTEdit
 						break;
 					case VLTCommonValue.COMMON:
 						UnknownC c = @as.di1.i();
-						VLTClass dq = this.av.b( c.ui2 );
+						VLTClass dq = this.av.genht2[c.ui2];
 						dq.dqb1.a( c, A_0 );
 						break;
 					default:
@@ -664,7 +664,7 @@ namespace VLTEdit
 									else
 									{
 										UnknownC c = @as.di1.i();
-										this.writeToConsole( "- Row: " + HashTracker.getValueForHash( c.ui2 ) + "/" + this.a( this.av.b( c.ui2 ).dqb1.a( c.hash ) ) );
+										this.writeToConsole( "- Row: " + HashTracker.getValueForHash( c.ui2 ) + "/" + this.a( this.av.genht2[c.ui2].dqb1.a( c.hash ) ) );
 									}
 								}
 								else

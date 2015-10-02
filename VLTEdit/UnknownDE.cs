@@ -17,19 +17,19 @@ namespace VLTEdit
 		}
 
 		private Dictionary<uint, aclzz> genht1;
-		private Dictionary<uint, VLTClass> genht2;
+		public Dictionary<uint, VLTClass> genht2;
 
-		public VLTClass b( uint A_0 )
+		/*public VLTClass b( uint A_0 )
 		{
 			return this.genht2[A_0]; // NOTE: if frontend is loaded before db, NPE here...
-		}
+		}*/
 
 		public void am( UnknownW A_0, UnknownB0 A_1 )
 		{
 			UnknownA8 a = A_1.a( VLTOtherValue.TABLE_END ) as UnknownA8;
-			int num = a.a( A_0.i4 ).i2;
-			A_1.a().Seek( num, SeekOrigin.Begin );
-			BinaryReader a_ = new BinaryReader( A_1.a() );
+			int num = a.genht1[A_0.i4].i2;
+			A_1.ms1.Seek( num, SeekOrigin.Begin );
+			BinaryReader a_ = new BinaryReader( A_1.ms1 );
 			this.genht1 = new Dictionary<uint, aclzz>( A_0.i3 );
 			for( int i = 0; i < A_0.i3; ++i )
 			{

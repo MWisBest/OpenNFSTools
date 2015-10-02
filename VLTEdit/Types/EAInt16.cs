@@ -7,14 +7,14 @@ namespace VLTEdit
 		[DataValue( "Value" )]
 		public short value;
 
-		public override void read( BinaryReader A_0 )
+		public override void read( BinaryReader br )
 		{
-			this.value = A_0.ReadInt16();
+			this.value = br.ReadInt16();
 		}
 
-		public override void write( BinaryWriter A_0 )
+		public override void write( BinaryWriter bw )
 		{
-			A_0.Write( this.value );
+			bw.Write( this.value );
 		}
 
 		public override string ToString()

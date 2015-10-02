@@ -156,26 +156,26 @@ namespace VLTEdit
 				return 1 << this.b2;
 			}
 
-			public void read( BinaryReader A_0 )
+			public void read( BinaryReader br )
 			{
-				this.hash = A_0.ReadUInt32();
-				this.ui2 = A_0.ReadUInt32();
-				this.us1 = A_0.ReadUInt16();
-				this.len = A_0.ReadUInt16();
-				this.count = A_0.ReadInt16();
-				this.b1 = A_0.ReadByte();
-				this.b2 = A_0.ReadByte();
+				this.hash = br.ReadUInt32();
+				this.ui2 = br.ReadUInt32();
+				this.us1 = br.ReadUInt16();
+				this.len = br.ReadUInt16();
+				this.count = br.ReadInt16();
+				this.b1 = br.ReadByte();
+				this.b2 = br.ReadByte();
 			}
 
-			public void write( BinaryWriter A_0 )
+			public void write( BinaryWriter bw )
 			{
-				A_0.Write( this.hash );
-				A_0.Write( this.ui2 );
-				A_0.Write( this.us1 );
-				A_0.Write( this.len );
-				A_0.Write( this.count );
-				A_0.Write( this.b1 );
-				A_0.Write( this.b2 );
+				bw.Write( this.hash );
+				bw.Write( this.ui2 );
+				bw.Write( this.us1 );
+				bw.Write( this.len );
+				bw.Write( this.count );
+				bw.Write( this.b1 );
+				bw.Write( this.b2 );
 			}
 		}
 

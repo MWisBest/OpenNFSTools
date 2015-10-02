@@ -18,30 +18,30 @@ namespace VLTEdit
 				return ( this.sh2 & 32 ) != 0;
 			}
 
-			public void read( BinaryReader A_0 )
+			public void read( BinaryReader br )
 			{
-				this.ui1 = A_0.ReadUInt32();
+				this.ui1 = br.ReadUInt32();
 
 				// position is casted here because the main thing that references this needs it as an int anyway.
-				this.position = (int)A_0.BaseStream.Position;
+				this.position = (int)br.BaseStream.Position;
 
 				if( !BuildConfig.CARBON )
 				{
-					A_0.ReadInt32(); // VLTConstants.MW_DEADBEEF
+					br.ReadInt32(); // VLTConstants.MW_DEADBEEF
 				}
-				this.sh1 = A_0.ReadInt16();
-				this.sh2 = A_0.ReadInt16();
+				this.sh1 = br.ReadInt16();
+				this.sh2 = br.ReadInt16();
 			}
 
-			public void write( BinaryWriter A_0 )
+			public void write( BinaryWriter bw )
 			{
-				A_0.Write( this.ui1 );
+				bw.Write( this.ui1 );
 				if( !BuildConfig.CARBON )
 				{
-					A_0.Write( VLTConstants.MW_DEADBEEF );
+					bw.Write( VLTConstants.MW_DEADBEEF );
 				}
-				A_0.Write( this.sh1 );
-				A_0.Write( this.sh2 );
+				bw.Write( this.sh1 );
+				bw.Write( this.sh2 );
 			}
 		}
 

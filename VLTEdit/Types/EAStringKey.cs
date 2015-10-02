@@ -13,40 +13,40 @@ namespace VLTEdit
 		[DataValue( "Value" )]
 		public string value;
 
-		public override void read( BinaryReader A_0 )
+		public override void read( BinaryReader br )
 		{
-			this.hash64 = A_0.ReadUInt64();
-			this.hash32 = A_0.ReadUInt32();
-			this.offset = A_0.ReadUInt32();
+			this.hash64 = br.ReadUInt64();
+			this.hash32 = br.ReadUInt32();
+			this.offset = br.ReadUInt32();
 			if( this.offset == 0u )
 			{
 				this.value = "(null)";
 				return;
 			}
-			if( this.offset > (ulong)A_0.BaseStream.Length )
+			if( this.offset > (ulong)br.BaseStream.Length )
 			{
 				this.value = "(offset is outta here)";
 				return;
 			}
-			long position = A_0.BaseStream.Position;
-			A_0.BaseStream.Seek( (long)( (ulong)this.offset ), SeekOrigin.Begin );
-			this.value = UnknownAP.a( A_0 );
-			A_0.BaseStream.Seek( position, SeekOrigin.Begin );
+			long position = br.BaseStream.Position;
+			br.BaseStream.Seek( (long)( (ulong)this.offset ), SeekOrigin.Begin );
+			this.value = UnknownAP.a( br );
+			br.BaseStream.Seek( position, SeekOrigin.Begin );
 		}
 
-		public override void write( BinaryWriter A_0 )
+		public override void write( BinaryWriter bw )
 		{
 			if( this.offset == 0u )
 			{
-				A_0.Write( 0uL );
-				A_0.Write( 0u );
+				bw.Write( 0uL );
+				bw.Write( 0u );
 			}
 			else
 			{
-				A_0.Write( this.hash64 );
-				A_0.Write( this.hash32 );
+				bw.Write( this.hash64 );
+				bw.Write( this.hash32 );
 			}
-			A_0.Write( this.offset );
+			bw.Write( this.offset );
 		}
 
 		public override string ToString()

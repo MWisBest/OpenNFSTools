@@ -9,16 +9,16 @@ namespace VLTEdit
 		[DataValue( "Y" )]
 		public float y;
 
-		public override void read( BinaryReader A_0 )
+		public override void read( BinaryReader br )
 		{
-			this.x = A_0.ReadSingle();
-			this.y = A_0.ReadSingle();
+			this.x = br.ReadSingle();
+			this.y = br.ReadSingle();
 		}
 
-		public override void write( BinaryWriter A_0 )
+		public override void write( BinaryWriter bw )
 		{
-			A_0.Write( this.x );
-			A_0.Write( this.y );
+			bw.Write( this.x );
+			bw.Write( this.y );
 		}
 		public override string ToString()
 		{

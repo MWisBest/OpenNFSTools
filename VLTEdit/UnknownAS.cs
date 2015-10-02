@@ -23,32 +23,32 @@ namespace VLTEdit
 			this.di1.read( A_0 );
 		}
 
-		public void read( BinaryReader A_0 )
+		public void read( BinaryReader br )
 		{
-			this.ui1 = A_0.ReadUInt32();
-			this.b21 = (VLTCommonValue)A_0.ReadUInt32();
+			this.ui1 = br.ReadUInt32();
+			this.b21 = (VLTCommonValue)br.ReadUInt32();
 			if( !BuildConfig.CARBON )
 			{
-				this.i1 = A_0.ReadInt32(); // Removed in NFS:C
+				this.i1 = br.ReadInt32(); // Removed in NFS:C
 			}
 			else
 			{
 				this.i1 = 0; // Set to something at least though.
 			}
-			this.i2 = A_0.ReadInt32();
-			this.i3 = A_0.ReadInt32();
+			this.i2 = br.ReadInt32();
+			this.i3 = br.ReadInt32();
 		}
 
-		public void write( BinaryWriter A_0 )
+		public void write( BinaryWriter bw )
 		{
-			A_0.Write( this.ui1 );
-			A_0.Write( (uint)this.b21 );
+			bw.Write( this.ui1 );
+			bw.Write( (uint)this.b21 );
 			if( !BuildConfig.CARBON )
 			{
-				A_0.Write( this.i1 ); // Removed in NFS:C
+				bw.Write( this.i1 ); // Removed in NFS:C
 			}
-			A_0.Write( this.i2 );
-			A_0.Write( this.i3 );
+			bw.Write( this.i2 );
+			bw.Write( this.i3 );
 		}
 	}
 }

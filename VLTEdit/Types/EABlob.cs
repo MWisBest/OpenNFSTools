@@ -9,16 +9,16 @@ namespace VLTEdit
 		[DataValue( "Offset", Hex = true )]
 		public uint offset;
 
-		public override void read( BinaryReader A_0 )
+		public override void read( BinaryReader br )
 		{
-			this.length = A_0.ReadUInt32();
-			this.offset = A_0.ReadUInt32();
+			this.length = br.ReadUInt32();
+			this.offset = br.ReadUInt32();
 		}
 
-		public override void write( BinaryWriter A_0 )
+		public override void write( BinaryWriter bw )
 		{
-			A_0.Write( this.length );
-			A_0.Write( this.offset );
+			bw.Write( this.length );
+			bw.Write( this.offset );
 		}
 	}
 }

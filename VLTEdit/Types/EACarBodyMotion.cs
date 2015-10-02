@@ -11,18 +11,18 @@ namespace VLTEdit
 		[DataValue( "Value3" )]
 		public float value3;
 
-		public override void read( BinaryReader A_0 )
+		public override void read( BinaryReader br )
 		{
-			this.value1 = A_0.ReadSingle();
-			this.value2 = A_0.ReadSingle();
-			this.value3 = A_0.ReadSingle();
+			this.value1 = br.ReadSingle();
+			this.value2 = br.ReadSingle();
+			this.value3 = br.ReadSingle();
 		}
 
-		public override void write( BinaryWriter A_0 )
+		public override void write( BinaryWriter bw )
 		{
-			A_0.Write( this.value1 );
-			A_0.Write( this.value2 );
-			A_0.Write( this.value3 );
+			bw.Write( this.value1 );
+			bw.Write( this.value2 );
+			bw.Write( this.value3 );
 		}
 	}
 }

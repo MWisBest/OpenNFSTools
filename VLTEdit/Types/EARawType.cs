@@ -10,9 +10,9 @@ namespace VLTEdit
 		public string data;
 		private byte[] ba1;
 
-		public override void read( BinaryReader A_0 )
+		public override void read( BinaryReader br )
 		{
-			this.ba1 = A_0.ReadBytes( this.len );
+			this.ba1 = br.ReadBytes( this.len );
 			this.data = "";
 			if( this.len <= 32 )
 			{
@@ -23,9 +23,9 @@ namespace VLTEdit
 			}
 		}
 
-		public override void write( BinaryWriter A_0 )
+		public override void write( BinaryWriter bw )
 		{
-			A_0.Write( this.ba1 );
+			bw.Write( this.ba1 );
 		}
 	}
 }

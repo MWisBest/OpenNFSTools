@@ -28,17 +28,17 @@ namespace VLTEdit
 			A_0.Seek( this.position + this.i1, SeekOrigin.Begin );
 		}
 
-		public void read( BinaryReader A_0 )
+		public void read( BinaryReader br )
 		{
-			this.position = A_0.BaseStream.Position;
-			this.ce1 = (VLTOtherValue)A_0.ReadInt32();
-			this.i1 = A_0.ReadInt32();
+			this.position = br.BaseStream.Position;
+			this.ce1 = (VLTOtherValue)br.ReadInt32();
+			this.i1 = br.ReadInt32();
 		}
 
-		public void write( BinaryWriter A_0 )
+		public void write( BinaryWriter bw )
 		{
-			A_0.Write( (uint)this.ce1 );
-			A_0.Write( this.i1 );
+			bw.Write( (uint)this.ce1 );
+			bw.Write( this.i1 );
 		}
 	}
 }

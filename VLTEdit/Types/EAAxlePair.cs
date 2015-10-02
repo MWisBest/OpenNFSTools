@@ -9,16 +9,16 @@ namespace VLTEdit
 		[DataValue( "Rear" )]
 		public float rear;
 
-		public override void read( BinaryReader A_0 )
+		public override void read( BinaryReader br )
 		{
-			this.front = A_0.ReadSingle();
-			this.rear = A_0.ReadSingle();
+			this.front = br.ReadSingle();
+			this.rear = br.ReadSingle();
 		}
 
-		public override void write( BinaryWriter A_0 )
+		public override void write( BinaryWriter bw )
 		{
-			A_0.Write( this.front );
-			A_0.Write( this.rear );
+			bw.Write( this.front );
+			bw.Write( this.rear );
 		}
 
 		public override string ToString()

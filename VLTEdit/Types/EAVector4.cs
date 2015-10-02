@@ -13,20 +13,20 @@ namespace VLTEdit
 		[DataValue( "W" )]
 		public float w;
 
-		public override void read( BinaryReader A_0 )
+		public override void read( BinaryReader br )
 		{
-			this.x = A_0.ReadSingle();
-			this.y = A_0.ReadSingle();
-			this.z = A_0.ReadSingle();
-			this.w = A_0.ReadSingle();
+			this.x = br.ReadSingle();
+			this.y = br.ReadSingle();
+			this.z = br.ReadSingle();
+			this.w = br.ReadSingle();
 		}
 
-		public override void write( BinaryWriter A_0 )
+		public override void write( BinaryWriter bw )
 		{
-			A_0.Write( this.x );
-			A_0.Write( this.y );
-			A_0.Write( this.z );
-			A_0.Write( this.w );
+			bw.Write( this.x );
+			bw.Write( this.y );
+			bw.Write( this.z );
+			bw.Write( this.w );
 		}
 
 		public override string ToString()

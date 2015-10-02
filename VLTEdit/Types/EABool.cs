@@ -7,16 +7,16 @@ namespace VLTEdit
 		[DataValue( "Value" )]
 		public bool value;
 
-		public override void read( BinaryReader A_0 )
+		public override void read( BinaryReader br )
 		{
 			// TODO: Do we need to read an entire int here?
-			this.value = A_0.ReadBoolean();
+			this.value = br.ReadBoolean();
 		}
 
-		public override void write( BinaryWriter A_0 )
+		public override void write( BinaryWriter bw )
 		{
 			// As well as write one here?
-			A_0.Write( this.value );
+			bw.Write( this.value );
 		}
 
 		public override string ToString()

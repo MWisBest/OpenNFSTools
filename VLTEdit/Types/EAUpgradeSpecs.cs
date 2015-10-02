@@ -13,26 +13,26 @@ namespace VLTEdit
 		[DataValue( "Level" )]
 		public uint level;
 
-		public override void read( BinaryReader A_0 )
+		public override void read( BinaryReader br )
 		{
-			this.upgrdui1 = A_0.ReadUInt32();
-			this.upgrdui2 = A_0.ReadUInt32();
-			A_0.ReadInt32();
-			this.level = A_0.ReadUInt32();
+			this.upgrdui1 = br.ReadUInt32();
+			this.upgrdui2 = br.ReadUInt32();
+			br.ReadInt32();
+			this.level = br.ReadUInt32();
 			this.usclass = HashTracker.getValueForHash( this.upgrdui1 );
 			this.uscollection = HashTracker.getValueForHash( this.upgrdui2 );
 		}
 
-		public override void write( BinaryWriter A_0 )
+		public override void write( BinaryWriter bw )
 		{
 			// TODO: This doesn't make much sense, what if we got a "0x"-based hash from HashTracker?
 			// Replace with writing ui1 and ui2 for now.
 			//A_0.Write( HashUtil.getHash32( this.usclass ) );
 			//A_0.Write( HashUtil.getHash32( this.uscollection ) );
-			A_0.Write( this.upgrdui1 );
-			A_0.Write( this.upgrdui2 );
-			A_0.Write( 0 );
-			A_0.Write( this.level );
+			bw.Write( this.upgrdui1 );
+			bw.Write( this.upgrdui2 );
+			bw.Write( 0 );
+			bw.Write( this.level );
 		}
 	}
 }

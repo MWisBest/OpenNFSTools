@@ -37,44 +37,44 @@ namespace VLTEdit
 		[DataValue( "M[4,4]" )]
 		public float m44;
 
-		public override void read( BinaryReader A_0 )
+		public override void read( BinaryReader br )
 		{
-			this.m11 = A_0.ReadSingle();
-			this.m12 = A_0.ReadSingle();
-			this.m13 = A_0.ReadSingle();
-			this.m14 = A_0.ReadSingle();
-			this.m21 = A_0.ReadSingle();
-			this.m22 = A_0.ReadSingle();
-			this.m23 = A_0.ReadSingle();
-			this.m24 = A_0.ReadSingle();
-			this.m31 = A_0.ReadSingle();
-			this.m32 = A_0.ReadSingle();
-			this.m33 = A_0.ReadSingle();
-			this.m34 = A_0.ReadSingle();
-			this.m41 = A_0.ReadSingle();
-			this.m42 = A_0.ReadSingle();
-			this.m43 = A_0.ReadSingle();
-			this.m44 = A_0.ReadSingle();
+			this.m11 = br.ReadSingle();
+			this.m12 = br.ReadSingle();
+			this.m13 = br.ReadSingle();
+			this.m14 = br.ReadSingle();
+			this.m21 = br.ReadSingle();
+			this.m22 = br.ReadSingle();
+			this.m23 = br.ReadSingle();
+			this.m24 = br.ReadSingle();
+			this.m31 = br.ReadSingle();
+			this.m32 = br.ReadSingle();
+			this.m33 = br.ReadSingle();
+			this.m34 = br.ReadSingle();
+			this.m41 = br.ReadSingle();
+			this.m42 = br.ReadSingle();
+			this.m43 = br.ReadSingle();
+			this.m44 = br.ReadSingle();
 		}
 
-		public override void write( BinaryWriter A_0 )
+		public override void write( BinaryWriter bw )
 		{
-			A_0.Write( this.m11 );
-			A_0.Write( this.m12 );
-			A_0.Write( this.m13 );
-			A_0.Write( this.m14 );
-			A_0.Write( this.m21 );
-			A_0.Write( this.m22 );
-			A_0.Write( this.m23 );
-			A_0.Write( this.m24 );
-			A_0.Write( this.m31 );
-			A_0.Write( this.m32 );
-			A_0.Write( this.m33 );
-			A_0.Write( this.m34 );
-			A_0.Write( this.m41 );
-			A_0.Write( this.m42 );
-			A_0.Write( this.m43 );
-			A_0.Write( this.m44 );
+			bw.Write( this.m11 );
+			bw.Write( this.m12 );
+			bw.Write( this.m13 );
+			bw.Write( this.m14 );
+			bw.Write( this.m21 );
+			bw.Write( this.m22 );
+			bw.Write( this.m23 );
+			bw.Write( this.m24 );
+			bw.Write( this.m31 );
+			bw.Write( this.m32 );
+			bw.Write( this.m33 );
+			bw.Write( this.m34 );
+			bw.Write( this.m41 );
+			bw.Write( this.m42 );
+			bw.Write( this.m43 );
+			bw.Write( this.m44 );
 		}
 	}
 }

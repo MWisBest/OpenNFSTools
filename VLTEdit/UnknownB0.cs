@@ -6,8 +6,7 @@ namespace VLTEdit
 {
 	public class UnknownB0
 	{
-		private string s1;
-		private string s2;
+		private string directory;
 		private List<UnknownC0> genc0list;
 		public MemoryStream ms1;
 		public MemoryStream ms2;
@@ -80,9 +79,7 @@ namespace VLTEdit
 
 		public void a( string A_0 )
 		{
-			FileInfo fileInfo = new FileInfo( A_0 );
-			this.s2 = fileInfo.Directory.FullName;
-			this.s1 = A_0;
+			this.directory = ( new FileInfo( A_0 ) ).Directory.FullName;
 			FileStream fileStream = new FileStream( A_0, FileMode.Open, FileAccess.Read );
 			this.a( fileStream, null );
 			fileStream.Close();
@@ -107,7 +104,7 @@ namespace VLTEdit
 			}
 			if( A_1 == null )
 			{
-				DirectoryInfo directoryInfo = new DirectoryInfo( this.s2 );
+				DirectoryInfo directoryInfo = new DirectoryInfo( this.directory );
 				UnknownBA ba = this.a( VLTOtherValue.VLTMAGIC ) as UnknownBA;
 				string text = ba.sa1[1];
 				FileInfo[] files = directoryInfo.GetFiles( text );

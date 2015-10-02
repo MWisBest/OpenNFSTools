@@ -31,7 +31,6 @@ namespace VLTEdit
 			//Console.WriteLine( "AS: i3 = " + this.i3.ToString() ); // Problem must be before this;
 			A_0.BaseStream.Seek( this.i3, SeekOrigin.Begin ); // NFS:C EndOfStream Exception! FIXED?!
 			this.di1 = UnknownDI.a( this.b21 );
-			this.di1.l1 = this.i3;
 			this.di1.as1 = this;
 			this.di1.read( A_0 );
 		}

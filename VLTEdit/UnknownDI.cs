@@ -6,7 +6,6 @@ namespace VLTEdit
 	public abstract class UnknownDI : IBinReadWrite
 	{
 		public UnknownAS as1;
-		public long l1;
 
 		public abstract void read( BinaryReader br );
 

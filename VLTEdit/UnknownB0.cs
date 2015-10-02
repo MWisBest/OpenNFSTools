@@ -4,7 +4,7 @@ using System.IO;
 
 namespace VLTEdit
 {
-	public class UnknownB0
+	public class UnknownB0 : ITrimmable
 	{
 		private string directory;
 		private List<UnknownC0> genc0list;
@@ -97,6 +97,9 @@ namespace VLTEdit
 			{
 				this.genc0list.Add( c );
 			}
+
+			this.Trim();
+
 			UnknownDH dh = this.a( VLTOtherValue.TABLE_START ) as UnknownDH;
 			for( int i = 0; i < dh.asa1.Length; ++i )
 			{
@@ -141,6 +144,14 @@ namespace VLTEdit
 			}
 			UnknownA8 a = this.a( VLTOtherValue.TABLE_END ) as UnknownA8;
 			a.a( this.ms1 );
+		}
+
+		public void Trim()
+		{
+			if( BuildConfig.TRIMMING_ENABLED )
+			{
+				this.genc0list.TrimExcess();
+			}
 		}
 	}
 }

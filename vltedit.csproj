@@ -74,6 +74,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="VLTEdit\BuildConfig.cs" />
+    <Compile Include="VLTEdit\ITrimmable.cs" />
     <Compile Include="VLTEdit\Types\EACarBodyMotion.cs" />
     <Compile Include="VLTEdit\UnknownA4.cs" />
     <Compile Include="VLTEdit\UnknownA8.cs" />

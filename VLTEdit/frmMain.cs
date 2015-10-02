@@ -602,6 +602,10 @@ namespace VLTEdit
 						UnknownC c = @as.di1.asUnknownC();
 						VLTClass dq = this.av.genht2[c.ui2];
 						dq.dqb1.a( c, A_0 );
+						if( i == dh.asa1.Length - 1 )
+						{
+							dq.dqb1.Trim();
+						}
 						break;
 					default:
 						System.Console.WriteLine( "Unknown 'VLTCommonValue'" );
@@ -1599,7 +1603,7 @@ namespace VLTEdit
 					treeNode = treeNode.Parent;
 				}
 				EABaseType bb = treeNode.Tag as EABaseType;
-				this.a( bb.m(), bb.ui3 );
+				this.a( bb.dr1, bb.ui3 );
 			}
 		}
 
@@ -1831,7 +1835,7 @@ namespace VLTEdit
 					this.writeToConsole( "bb.GetType(): " + type.ToString() ); // Here, we're getting the proper type! Great!
 					this.writeToConsole( "bb.j(): " + string.Format( "0x{0:x}", bb.ui2 ) ); // Here, we're derping! OMG!
 				}
-				UnknownBA ba = bb.m().b01.a( VLTOtherValue.VLTMAGIC ) as UnknownBA;
+				UnknownBA ba = bb.dr1.b01.a( VLTOtherValue.VLTMAGIC ) as UnknownBA;
 				string text = ba.sa1[0];
 				this.lblFieldOffset.Text = string.Format( "Offset: {0}:0x{1:x}  ({2})", bb.boo1 ? "vlt" : "bin", bb.ui1, text );
 				this.dataGrid.Update();

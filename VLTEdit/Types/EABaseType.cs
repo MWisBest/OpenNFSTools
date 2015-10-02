@@ -11,42 +11,7 @@ namespace VLTEdit
 		public uint ui2;
 		public uint ui3;
 		public int i1;
-		private UnknownDR dr1;
-
-		public UnknownDR m()
-		{
-			return this.dr1;
-		}
-
-		public void a( UnknownDR A_0 )
-		{
-			this.dr1 = A_0;
-		}
-
-		public void b( int A_0 )
-		{
-			this.i1 = A_0;
-		}
-
-		public void setUITwo( uint A_0 )
-		{
-			this.ui2 = A_0;
-		}
-
-		public void c( uint A_0 )
-		{
-			this.ui3 = A_0;
-		}
-
-		public void b( uint A_0 )
-		{
-			this.ui1 = A_0;
-		}
-
-		public void a( bool A_0 )
-		{
-			this.boo1 = A_0;
-		}
+		public UnknownDR dr1;
 
 		public static EABaseType a( Type A_0 )
 		{

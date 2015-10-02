@@ -7,7 +7,7 @@ using System.Reflection;
 namespace VLTEdit
 {
 	[DefaultMember( "Item" )]
-	public class EAArray : EABaseType, IEnumerable<EABaseType> // OBF: m.cs
+	public class EAArray : EABaseType, IEnumerable<EABaseType>, ITrimmable // OBF: m.cs
 	{
 		private short curEntries;
 		private short maxEntries;
@@ -44,14 +44,16 @@ namespace VLTEdit
 				{
 					( bb as EARawType ).len = this.length;
 				}
-				bb.b( (uint)br.BaseStream.Position );
-				bb.a( false );
-				bb.setUITwo( this.earrayui1 ); // TODO: What are we REALLY setting this to? this.ui1 is our hash... or is it not supposed to be?
-				bb.a( base.m() );
-				bb.b( i );
+				bb.ui1 = (uint)br.BaseStream.Position;
+				bb.boo1 = false;
+				bb.ui2 = this.earrayui1; // TODO: What are we REALLY setting this to? this.ui1 is our hash... or is it not supposed to be?
+				bb.dr1 = base.dr1;
+				bb.i1 = i;
 				bb.read( br );
 				this.genlist.Add( bb );
 			}
+
+			this.Trim();
 		}
 
 		public short getCurrentEntryCount()
@@ -89,6 +91,14 @@ namespace VLTEdit
 		IEnumerator IEnumerable.GetEnumerator()
 		{
 			return this.GetEnumerator();
+		}
+
+		public void Trim()
+		{
+			if( BuildConfig.TRIMMING_ENABLED )
+			{
+				this.genlist.TrimExcess();
+			}
 		}
 	}
 }

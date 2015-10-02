@@ -11,7 +11,7 @@ namespace VLTEdit
 	public class VLTClass : IComparable<VLTClass>, IEnumerable // OBF: dq.cs
 	{
 		[DefaultMember( "Item" )]
-		public class bie : IEnumerable<UnknownDR> // OBF: b
+		public class bie : IEnumerable<UnknownDR>, ITrimmable // OBF: b
 		{
 			private VLTClass vltClass;
 			private List<UnknownDR> drList;
@@ -109,15 +109,23 @@ namespace VLTEdit
 							( bb as EARawType ).len = a2.len;
 						}
 					}
-					bb.b( (uint)binaryReader3.BaseStream.Position );
-					bb.a( binaryReader3 == binaryReader2 );
-					bb.setUITwo( a2.ui2 );
-					bb.c( a2.hash );
-					bb.a( dr );
+					bb.ui1 = (uint)binaryReader3.BaseStream.Position;
+					bb.boo1 = ( binaryReader3 == binaryReader2 );
+					bb.ui2 = a2.ui2;
+					bb.ui3 = a2.hash;
+					bb.dr1 = dr;
 					bb.read( binaryReader3 );
 					dr.a( i, bb );
 				}
 				this.drList.Add( dr );
+			}
+
+			public void Trim()
+			{
+				if( BuildConfig.TRIMMING_ENABLED )
+				{
+					this.drList.TrimExcess();
+				}
 			}
 
 			public IEnumerator<UnknownDR> GetEnumerator()

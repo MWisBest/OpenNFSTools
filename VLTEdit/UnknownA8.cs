@@ -14,15 +14,15 @@ namespace VLTEdit
 
 		public void a( Stream A_0 )
 		{
-			BinaryWriter binaryWriter = new BinaryWriter( A_0 );
+			BinaryWriter bw = new BinaryWriter( A_0 );
 			IEnumerator<UnknownB8> enumerator = this.genb8listTwo.GetEnumerator();
 			try
 			{
 				while( enumerator.MoveNext() )
 				{
 					UnknownB8 b = enumerator.Current;
-					binaryWriter.BaseStream.Seek( b.i1, SeekOrigin.Begin );
-					binaryWriter.Write( b.i2 );
+					bw.BaseStream.Seek( b.i1, SeekOrigin.Begin );
+					bw.Write( b.i2 );
 				}
 			}
 			finally

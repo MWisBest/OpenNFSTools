@@ -593,13 +593,13 @@ namespace VLTEdit
 				switch( @as.b21 )
 				{
 					case VLTCommonValue.RARE:
-						this.av.am( @as.di1.g(), A_0 );
+						this.av.am( @as.di1.asUnknownW(), A_0 );
 						break;
 					case VLTCommonValue.UNCOMMON:
-						this.av.a( @as.di1.k(), A_0 );
+						this.av.a( @as.di1.asUnknownC6(), A_0 );
 						break;
 					case VLTCommonValue.COMMON:
-						UnknownC c = @as.di1.i();
+						UnknownC c = @as.di1.asUnknownC();
 						VLTClass dq = this.av.genht2[c.ui2];
 						dq.dqb1.a( c, A_0 );
 						break;
@@ -663,7 +663,7 @@ namespace VLTEdit
 									}
 									else
 									{
-										UnknownC c = @as.di1.i();
+										UnknownC c = @as.di1.asUnknownC();
 										this.writeToConsole( "- Row: " + HashTracker.getValueForHash( c.ui2 ) + "/" + this.a( this.av.genht2[c.ui2].dqb1.a( c.hash ) ) );
 									}
 								}

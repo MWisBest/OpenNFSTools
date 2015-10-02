@@ -14,17 +14,17 @@ namespace VLTEdit
 		public class bie : IEnumerable<UnknownDR> // OBF: b
 		{
 			private VLTClass vltClass;
-			private List<UnknownDR> l1;
+			private List<UnknownDR> drList;
 
 			public bie( VLTClass vltClass )
 			{
 				this.vltClass = vltClass;
-				this.l1 = new List<UnknownDR>();
+				this.drList = new List<UnknownDR>();
 			}
 
 			public UnknownDR a( uint A_0 )
 			{
-				IEnumerator<UnknownDR> enumerator = this.l1.GetEnumerator();
+				IEnumerator<UnknownDR> enumerator = this.drList.GetEnumerator();
 				try
 				{
 					while( enumerator.MoveNext() )
@@ -117,12 +117,12 @@ namespace VLTEdit
 					bb.read( binaryReader3 );
 					dr.a( i, bb );
 				}
-				this.l1.Add( dr );
+				this.drList.Add( dr );
 			}
 
 			public IEnumerator<UnknownDR> GetEnumerator()
 			{
-				return this.l1.GetEnumerator();
+				return this.drList.GetEnumerator();
 			}
 
 			IEnumerator IEnumerable.GetEnumerator()
@@ -165,7 +165,6 @@ namespace VLTEdit
 				this.count = A_0.ReadInt16();
 				this.b1 = A_0.ReadByte();
 				this.b2 = A_0.ReadByte();
-				//System.Console.WriteLine( this.ui1.ToString() + ":" + this.ui2.ToString() + ":" + this.us1.ToString() + ":" + this.us2.ToString() + ":" + this.sh1.ToString() + ":" + this.b1.ToString() + ":" + this.b2.ToString() );
 			}
 
 			public void write( BinaryWriter A_0 )
@@ -194,12 +193,12 @@ namespace VLTEdit
 			UnknownA8 a81 = ( A_1.a( VLTOtherValue.TABLE_END ) as UnknownA8 );
 			int num = a81.genht1[A_0.i3].i2;
 			A_1.ms1.Seek( num, SeekOrigin.Begin );
-			BinaryReader a_ = new BinaryReader( A_1.ms1 );
+			BinaryReader br = new BinaryReader( A_1.ms1 );
 			this.dqaa1 = new VLTClass.aclz1[this.c61.i2];
 			for( int i = 0; i < this.c61.i2; ++i )
 			{
 				VLTClass.aclz1 a = new VLTClass.aclz1();
-				a.read( a_ );
+				a.read( br );
 				HashTracker.getValueForHash( a.hash );
 				this.dqaa1[i] = a;
 			}

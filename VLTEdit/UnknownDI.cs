@@ -31,17 +31,17 @@ namespace VLTEdit
 			}
 		}
 
-		public UnknownW g()
+		public UnknownW asUnknownW()
 		{
 			return this as UnknownW;
 		}
 
-		public UnknownC6 k()
+		public UnknownC6 asUnknownC6()
 		{
 			return this as UnknownC6;
 		}
 
-		public UnknownC i()
+		public UnknownC asUnknownC()
 		{
 			return this as UnknownC;
 		}

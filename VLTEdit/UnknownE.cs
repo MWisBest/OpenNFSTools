@@ -6,7 +6,7 @@ namespace VLTEdit
 	{
 		public VLTOtherValue ce1;
 		private int i1;
-		private long l1;
+		private long position;
 
 		public int a()
 		{
@@ -20,17 +20,17 @@ namespace VLTEdit
 
 		public void a( Stream A_0 )
 		{
-			A_0.Seek( this.l1 + 8L, SeekOrigin.Begin );
+			A_0.Seek( this.position + 8L, SeekOrigin.Begin );
 		}
 
 		public void b( Stream A_0 )
 		{
-			A_0.Seek( this.l1 + this.i1, SeekOrigin.Begin );
+			A_0.Seek( this.position + this.i1, SeekOrigin.Begin );
 		}
 
 		public void read( BinaryReader A_0 )
 		{
-			this.l1 = A_0.BaseStream.Position;
+			this.position = A_0.BaseStream.Position;
 			this.ce1 = (VLTOtherValue)A_0.ReadInt32();
 			this.i1 = A_0.ReadInt32();
 		}

@@ -12,38 +12,38 @@ namespace VLTEdit
 		public int position;
 		public int[] ia1;
 
-		public override void read( BinaryReader A_0 )
+		public override void read( BinaryReader br )
 		{
-			this.i1 = A_0.ReadInt32();
-			this.i2 = A_0.ReadInt32();
-			this.i3 = A_0.ReadInt32();
+			this.i1 = br.ReadInt32();
+			this.i2 = br.ReadInt32();
+			this.i3 = br.ReadInt32();
 
 			// position is casted here because the main thing that references this needs it as an int anyway.
-			this.position = (int)A_0.BaseStream.Position;
+			this.position = (int)br.BaseStream.Position;
 
 			if( !BuildConfig.CARBON )
 			{
-				A_0.ReadInt32(); // VLTConstants.MW_DEADBEEF
+				br.ReadInt32(); // VLTConstants.MW_DEADBEEF
 			}
 			this.ia1 = new int[this.i3];
 			for( int i = 0; i < this.i3; ++i )
 			{
-				this.ia1[i] = A_0.ReadInt32();
+				this.ia1[i] = br.ReadInt32();
 			}
 		}
 
-		public override void write( BinaryWriter A_0 )
+		public override void write( BinaryWriter bw )
 		{
-			A_0.Write( this.i1 );
-			A_0.Write( this.i2 );
-			A_0.Write( this.i3 );
+			bw.Write( this.i1 );
+			bw.Write( this.i2 );
+			bw.Write( this.i3 );
 			if( !BuildConfig.CARBON )
 			{
-				A_0.Write( VLTConstants.MW_DEADBEEF );
+				bw.Write( VLTConstants.MW_DEADBEEF );
 			}
 			for( int i = 0; i < this.i3; ++i )
 			{
-				A_0.Write( this.ia1[i] );
+				bw.Write( this.ia1[i] );
 			}
 		}
 	}

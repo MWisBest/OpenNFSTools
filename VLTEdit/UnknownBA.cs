@@ -11,51 +11,51 @@ namespace VLTEdit
 		public uint[] uia1;
 		public string[] sa1;
 
-		public override void read( BinaryReader A_0 )
+		public override void read( BinaryReader br )
 		{
-			this.i3 = A_0.ReadInt32();
+			this.i3 = br.ReadInt32();
 			this.uia1 = new uint[this.i3];
 			this.sa1 = new string[this.i3];
 			int[] array = new int[this.i3];
 
 			for( int i = 0; i < this.i3; ++i )
 			{
-				this.uia1[i] = A_0.ReadUInt32();
+				this.uia1[i] = br.ReadUInt32();
 			}
 
 			for( int j = 0; j < this.i3; ++j )
 			{
-				array[j] = A_0.ReadInt32();
+				array[j] = br.ReadInt32();
 			}
 
-			long position = A_0.BaseStream.Position;
+			long position = br.BaseStream.Position;
 
 			for( int k = 0; k < this.i3; ++k )
 			{
-				A_0.BaseStream.Seek( position + array[k], SeekOrigin.Begin );
-				this.sa1[k] = UnknownAP.a( A_0 );
+				br.BaseStream.Seek( position + array[k], SeekOrigin.Begin );
+				this.sa1[k] = UnknownAP.a( br );
 			}
 		}
 
-		public override void write( BinaryWriter A_0 )
+		public override void write( BinaryWriter bw )
 		{
 			int num = 0;
-			A_0.Write( this.i3 );
+			bw.Write( this.i3 );
 
 			for( int i = 0; i < this.i3; ++i )
 			{
-				A_0.Write( this.uia1[i] );
+				bw.Write( this.uia1[i] );
 			}
 
 			for( int j = 0; j < this.i3; ++j )
 			{
-				A_0.Write( num );
+				bw.Write( num );
 				num += this.sa1[j].Length + 1;
 			}
 
 			for( int k = 0; k < this.i3; ++k )
 			{
-				UnknownAP.a( A_0, this.sa1[k] );
+				UnknownAP.a( bw, this.sa1[k] );
 			}
 		}
 	}

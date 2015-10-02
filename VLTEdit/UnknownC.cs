@@ -56,65 +56,65 @@ namespace VLTEdit
 		private uint[] uia1;
 		public UnknownC.aclz[] caa1;
 
-		public override void read( BinaryReader A_0 )
+		public override void read( BinaryReader br )
 		{
-			this.hash = A_0.ReadUInt32(); //hash in NFS:MW at least...
-			this.ui2 = A_0.ReadUInt32();
-			this.ui3 = A_0.ReadUInt32();
-			this.i1 = A_0.ReadInt32();
-			this.i2 = A_0.ReadInt32(); // Always 0 in NFS:MW
-			this.i3 = A_0.ReadInt32();
+			this.hash = br.ReadUInt32(); //hash in NFS:MW at least...
+			this.ui2 = br.ReadUInt32();
+			this.ui3 = br.ReadUInt32();
+			this.i1 = br.ReadInt32();
+			this.i2 = br.ReadInt32(); // Always 0 in NFS:MW
+			this.i3 = br.ReadInt32();
 			if( BuildConfig.CARBON )
 			{
 				//this.i4 = A_0.ReadInt16();
 				//A_0.ReadInt16();
-				this.i4 = A_0.ReadInt32(); // Int16 in NFS:C? Fits into Int16 in NFS:MW... :/
+				this.i4 = br.ReadInt32(); // Int16 in NFS:C? Fits into Int16 in NFS:MW... :/
 			}
 			else
 			{
-				this.i4 = A_0.ReadInt32(); // Int16 in NFS:C? Fits into Int16 in NFS:MW
+				this.i4 = br.ReadInt32(); // Int16 in NFS:C? Fits into Int16 in NFS:MW
 			}
 
 			// position is casted here because the only place that references this needs it as an int anyway.
-			this.position = (int)A_0.BaseStream.Position;
+			this.position = (int)br.BaseStream.Position;
 
 			if( !BuildConfig.CARBON )
 			{
-				A_0.ReadInt32(); // VLTConstants.MW_DEADBEEF
+				br.ReadInt32(); // VLTConstants.MW_DEADBEEF
 			}
 			this.uia1 = new uint[this.i4]; // NFS:C Overflow!
 			for( int i = 0; i < this.i4; ++i )
 			{
-				this.uia1[i] = A_0.ReadUInt32();
+				this.uia1[i] = br.ReadUInt32();
 			}
 			this.caa1 = new UnknownC.aclz[this.i1];
 			for( int j = 0; j < this.i1; ++j )
 			{
 				this.caa1[j] = new UnknownC.aclz();
-				this.caa1[j].read( A_0 );
+				this.caa1[j].read( br );
 			}
 		}
 
-		public override void write( BinaryWriter A_0 )
+		public override void write( BinaryWriter bw )
 		{
-			A_0.Write( this.hash );
-			A_0.Write( this.ui2 );
-			A_0.Write( this.ui3 );
-			A_0.Write( this.i1 );
-			A_0.Write( this.i2 );
-			A_0.Write( this.i3 );
-			A_0.Write( this.i4 );
+			bw.Write( this.hash );
+			bw.Write( this.ui2 );
+			bw.Write( this.ui3 );
+			bw.Write( this.i1 );
+			bw.Write( this.i2 );
+			bw.Write( this.i3 );
+			bw.Write( this.i4 );
 			if( !BuildConfig.CARBON )
 			{
-				A_0.Write( VLTConstants.MW_DEADBEEF );
+				bw.Write( VLTConstants.MW_DEADBEEF );
 			}
 			for( int i = 0; i < this.i4; ++i )
 			{
-				A_0.Write( this.uia1[i] );
+				bw.Write( this.uia1[i] );
 			}
 			for( int j = 0; j < this.i1; ++j )
 			{
-				this.caa1[j].write( A_0 );
+				this.caa1[j].write( bw );
 			}
 		}
 	}

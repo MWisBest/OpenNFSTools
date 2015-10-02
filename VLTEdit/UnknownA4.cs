@@ -6,14 +6,14 @@ namespace VLTEdit
 	{
 		private byte[] ba1;
 
-		public override void read( BinaryReader A_0 )
+		public override void read( BinaryReader br )
 		{
-			this.ba1 = A_0.ReadBytes( this.e1.a() );
+			this.ba1 = br.ReadBytes( this.e1.a() );
 		}
 
-		public override void write( BinaryWriter A_0 )
+		public override void write( BinaryWriter bw )
 		{
-			A_0.Write( this.ba1 );
+			bw.Write( this.ba1 );
 		}
 	}
 }

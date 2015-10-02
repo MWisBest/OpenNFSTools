@@ -9,23 +9,23 @@ namespace VLTEdit
 	{
 		public UnknownAS[] asa1;
 
-		public override void read( BinaryReader A_0 )
+		public override void read( BinaryReader br )
 		{
-			int num = A_0.ReadInt32();
+			int num = br.ReadInt32();
 			this.asa1 = new UnknownAS[num];
 			for( int i = 0; i < num; ++i )
 			{
 				this.asa1[i] = new UnknownAS();
-				this.asa1[i].read( A_0 );
+				this.asa1[i].read( br );
 			}
 		}
 
-		public override void write( BinaryWriter A_0 )
+		public override void write( BinaryWriter bw )
 		{
-			A_0.Write( this.asa1.Length );
+			bw.Write( this.asa1.Length );
 			for( int i = 0; i < this.asa1.Length; ++i )
 			{
-				this.asa1[i].write( A_0 );
+				this.asa1[i].write( bw );
 			}
 		}
 

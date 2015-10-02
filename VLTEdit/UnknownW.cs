@@ -9,7 +9,7 @@ namespace VLTEdit
 		private int i1;
 		private int i2;
 		public int i3;
-		public int i4;
+		public int position;
 		public int[] ia1;
 
 		public override void read( BinaryReader A_0 )
@@ -17,7 +17,10 @@ namespace VLTEdit
 			this.i1 = A_0.ReadInt32();
 			this.i2 = A_0.ReadInt32();
 			this.i3 = A_0.ReadInt32();
-			this.i4 = (int)A_0.BaseStream.Position;
+
+			// position is casted here because the main thing that references this needs it as an int anyway.
+			this.position = (int)A_0.BaseStream.Position;
+
 			if( !BuildConfig.CARBON )
 			{
 				A_0.ReadInt32(); // VLTConstants.MW_DEADBEEF

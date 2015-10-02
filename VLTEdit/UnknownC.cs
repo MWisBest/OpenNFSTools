@@ -9,7 +9,7 @@ namespace VLTEdit
 		public class aclz : IBinReadWrite
 		{
 			public uint ui1;
-			public int i1;
+			public int position;
 			private short sh1;
 			private short sh2;
 
@@ -21,7 +21,10 @@ namespace VLTEdit
 			public void read( BinaryReader A_0 )
 			{
 				this.ui1 = A_0.ReadUInt32();
-				this.i1 = (int)A_0.BaseStream.Position;
+
+				// position is casted here because the main thing that references this needs it as an int anyway.
+				this.position = (int)A_0.BaseStream.Position;
+
 				if( !BuildConfig.CARBON )
 				{
 					A_0.ReadInt32(); // VLTConstants.MW_DEADBEEF
@@ -49,7 +52,7 @@ namespace VLTEdit
 		private int i2;
 		private int i3;
 		private int i4;
-		public int i5;
+		public int position;
 		private uint[] uia1;
 		public UnknownC.aclz[] caa1;
 
@@ -71,7 +74,10 @@ namespace VLTEdit
 			{
 				this.i4 = A_0.ReadInt32(); // Int16 in NFS:C? Fits into Int16 in NFS:MW
 			}
-			this.i5 = (int)A_0.BaseStream.Position;
+
+			// position is casted here because the only place that references this needs it as an int anyway.
+			this.position = (int)A_0.BaseStream.Position;
+
 			if( !BuildConfig.CARBON )
 			{
 				A_0.ReadInt32(); // VLTConstants.MW_DEADBEEF

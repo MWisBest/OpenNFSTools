@@ -27,7 +27,7 @@ namespace VLTEdit
 		public void am( UnknownW A_0, UnknownB0 A_1 )
 		{
 			UnknownA8 a = A_1.a( VLTOtherValue.TABLE_END ) as UnknownA8;
-			int num = a.genht1[A_0.i4].i2;
+			int num = a.genht1[A_0.position].i2;
 			A_1.ms1.Seek( num, SeekOrigin.Begin );
 			BinaryReader a_ = new BinaryReader( A_1.ms1 );
 			this.genht1 = new Dictionary<uint, aclzz>( A_0.i3 );

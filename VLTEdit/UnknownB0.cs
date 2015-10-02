@@ -129,7 +129,7 @@ namespace VLTEdit
 			c.e1.a( this.ms1 );
 			if( c.e1.ce1 == VLTOtherValue.BINMAGIC )
 			{
-				int num = (int)this.ms1.Position + c.e1.a();
+				long num = this.ms1.Position + c.e1.a();
 				while( this.ms1.Position < num )
 				{
 					string text2 = UnknownAP.a( a_ );

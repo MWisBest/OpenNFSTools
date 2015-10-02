@@ -7,7 +7,7 @@ namespace VLTEdit
 		public uint ui1;
 		private int i1;
 		public int i2;
-		public int i3;
+		public int position;
 		private int i4;
 		private int i5;
 		public int i6;
@@ -18,7 +18,10 @@ namespace VLTEdit
 			this.ui1 = A_0.ReadUInt32();
 			this.i1 = A_0.ReadInt32();
 			this.i2 = A_0.ReadInt32();
-			this.i3 = (int)A_0.BaseStream.Position;
+
+			// position is casted here because the main thing that references this needs it as an int anyway.
+			this.position = (int)A_0.BaseStream.Position;
+
 			if( !BuildConfig.CARBON )
 			{
 				A_0.ReadInt32(); // VLTConstants.MW_DEADBEEF

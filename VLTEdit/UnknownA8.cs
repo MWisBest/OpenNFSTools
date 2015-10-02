@@ -14,15 +14,15 @@ namespace VLTEdit
 
 		public void a( Stream A_0 )
 		{
-			BinaryWriter binaryWriter = new BinaryWriter( A_0 );
+			BinaryWriter bw = new BinaryWriter( A_0 );
 			IEnumerator<UnknownB8> enumerator = this.genb8listTwo.GetEnumerator();
 			try
 			{
 				while( enumerator.MoveNext() )
 				{
 					UnknownB8 b = enumerator.Current;
-					binaryWriter.BaseStream.Seek( b.i1, SeekOrigin.Begin );
-					binaryWriter.Write( b.i2 );
+					bw.BaseStream.Seek( b.i1, SeekOrigin.Begin );
+					bw.Write( b.i2 );
 				}
 			}
 			finally
@@ -35,7 +35,7 @@ namespace VLTEdit
 			}
 		}
 
-		public override void read( BinaryReader A_0 )
+		public override void read( BinaryReader br )
 		{
 			this.genb8list = new List<UnknownB8>();
 			this.genb8listTwo = new List<UnknownB8>();
@@ -46,7 +46,7 @@ namespace VLTEdit
 			while( true )
 			{
 				b = new UnknownB8();
-				b.read( A_0 );
+				b.read( br );
 				this.genb8list.Add( b );
 				if( b.s1 == 2 && ( b.s2 == 0 || b.s2 == 1 ) )
 				{
@@ -104,14 +104,14 @@ namespace VLTEdit
 			throw new Exception( "Unknown ptr type." );
 		}
 
-		public override void write( BinaryWriter A_0 )
+		public override void write( BinaryWriter bw )
 		{
 			IEnumerator<UnknownB8> enumerator = this.genb8list.GetEnumerator();
 			try
 			{
 				while( enumerator.MoveNext() )
 				{
-					enumerator.Current.write( A_0 );
+					enumerator.Current.write( bw );
 				}
 			}
 			finally

@@ -14,14 +14,19 @@ namespace VLTEdit
 		public override void read( BinaryReader br )
 		{
 			this.ba1 = br.ReadBytes( this.len );
-			this.data = "";
+			this.data = string.Empty;
 			if( this.len <= 32 )
 			{
-				StringBuilder sb = new StringBuilder();
+				StringBuilder sb = new StringBuilder( this.ba1.Length * 3 - 1 );
+				int i = 0;
 
-				for( int i = 0; i < this.ba1.Length; ++i )
+				while( i < this.ba1.Length )
 				{
-					sb.Append( this.ba1[i].ToString( "x" ).PadLeft( 2, '0' ) ).Append( ' ' );
+					sb.Append( this.ba1[i].ToString( "x" ).PadLeft( 2, '0' ) );
+					if( ++i != this.ba1.Length )
+					{
+						sb.Append( ' ' );
+					}
 				}
 
 				this.data = sb.ToString();

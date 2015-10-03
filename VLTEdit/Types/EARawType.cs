@@ -21,7 +21,7 @@ namespace VLTEdit
 
 				for( int i = 0; i < this.ba1.Length; ++i )
 				{
-					sb.Append( this.ba1[i].ToString( "x" ).PadLeft( 2, '0' ) ).Append( " " );
+					sb.Append( this.ba1[i].ToString( "x" ).PadLeft( 2, '0' ) ).Append( ' ' );
 				}
 
 				this.data = sb.ToString();

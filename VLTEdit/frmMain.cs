@@ -52,14 +52,11 @@ namespace VLTEdit
 		private ContextMenu ai;
 		private MenuItem mi8;
 		private MenuItem ak;
-		private MenuItem al;
-		private MenuItem am;
 		private MenuItem an;
 		private MenuItem ao;
 		private MenuItem ap;
 		private MenuItem aq;
 		private MenuItem ar;
-		private MenuItem @as;
 		private Container at = null;
 		private List<UnknownB0> au = new List<UnknownB0>();
 		private UnknownDE av = null;
@@ -90,8 +87,6 @@ namespace VLTEdit
 			this.miExit = new MenuItem();
 			this.miHelp = new MenuItem();
 			this.ak = new MenuItem();
-			this.al = new MenuItem();
-			this.am = new MenuItem();
 			this.tv = new TreeView();
 			this.af = new ContextMenu();
 			this.mi6 = new MenuItem();
@@ -126,7 +121,6 @@ namespace VLTEdit
 			this.txtConsole = new TextBox();
 			this.txtConsoleInput = new TextBox();
 			this.splitter3 = new Splitter();
-			this.@as = new MenuItem();
 			this.classGrid.BeginInit();
 			this.pnlData.SuspendLayout();
 			this.dataGrid.BeginInit();
@@ -160,18 +154,11 @@ namespace VLTEdit
 			this.miHelp.Index = 1;
 			this.miHelp.MenuItems.AddRange( new MenuItem[]
 			{
-				this.ak,
-				this.al,
-				this.am,
-				this.@as
+				this.ak
 			} );
 			this.miHelp.Text = "&Help";
 			this.ak.Index = 0;
-			this.ak.Text = "Sorry, no help here. :)";
-			this.al.Index = 1;
-			this.al.Text = "-";
-			this.am.Index = 2;
-			this.am.Text = "VLTEdit by Arushan";
+			this.ak.Text = "Sorry, no help here! :)";
 			this.tv.BackColor = SystemColors.Window;
 			this.tv.ContextMenu = this.af;
 			this.tv.Dock = DockStyle.Left;
@@ -395,8 +382,6 @@ namespace VLTEdit
 			this.splitter3.Size = new Size( 852, 4 );
 			this.splitter3.TabIndex = 5;
 			this.splitter3.TabStop = false;
-			this.@as.Index = 3;
-			this.@as.Text = "Contact: oneforaru@gmail.com";
 			this.AutoScaleBaseSize = new Size( 5, 13 );
 			base.ClientSize = new Size( 852, 593 );
 			base.Controls.Add( this.pnlData );

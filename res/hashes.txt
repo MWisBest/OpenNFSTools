@@ -1,0 +1,1205 @@
+##################################################################
+# AUTO LIST
+# The following values will be hashed automatically by VLTEdit.
+# You do not need to provide the hash value.
+##################################################################
+
+# GodGell 
+LAG
+ENGINE_BRAKING
+IDLE
+Interval
+Tranny
+Opponents
+PSI
+infractions
+speeding
+resisting_arrest
+reckless_driving
+hit_and_run
+milestonetypes
+suvs
+MAX_TRAFFIC
+CopDensity
+NUM_CHECKPOINTS
+SELECTABLE
+MinHeat
+SpeedHighway
+BRAKE_LOCK
+visuallook
+ZoneType
+sender
+param
+sunset
+Region
+trailer
+Trailer
+fragment
+japanese
+window
+Color1
+Color2
+Color3
+Color4
+Spin
+Colour1
+AmbientColour
+Reputation
+CashReward
+RequiredBounty
+NumRacesRequired
+SpawnPoint
+SkillLevel
+scriptname
+SHIFT_SPEED
+ShiftSpeed
+ChargeTime
+
+# Linkin
+pursuitbreaker
+
+# Aru
+acceltrans
+Album
+amount
+ANGLE
+Artist
+ASPECT_RATIO
+audiosystem
+barrierbreak
+Barriers
+blindedinchains
+bloodandthunder
+blue
+Bounty
+BRAKES
+brokensword
+bsidewinsagain
+CarType
+CashValue
+CatchUp
+CG
+chopper
+CLASS
+collision
+colour
+Cost
+COST_TO_STATE
+damage
+decadence
+DefPlay
+DIFFERENTIAL
+Dimensions
+distance
+doyathang
+Drag
+DRAG
+DRAG_COEFFICIENT
+Emitters
+english
+feelslikeitshould
+firedup
+FORCE
+french
+GEAR_RATIO
+german
+graph
+Gravity
+GRAVITY
+green
+handofblood
+HEIGHT
+italian
+length
+letsmove
+Locales
+manufacturer
+MASS
+MAX_RPM
+MaxHeat
+MaxHeatLevel
+MODEL
+MOMENT
+mostwanted
+Name
+ninethou
+normal
+NumParticles
+onegoodreason
+Pan
+ParticleEffect
+PathEvent
+Power
+Radius
+red
+RED_LINE
+RIDE_HEIGHT
+RideHeight
+RIM_SIZE
+RoadNoise
+ROLL_CENTER
+ROLLING_RESISTANCE
+Rotation
+scrape
+SECTION_WIDTH
+setsgoup
+shapeshifter
+shiftpattern
+Size
+skinnyman
+SongName
+spanish
+Speed
+SPOOL
+starter
+STEERING
+stitch
+stream
+taoofthemachine
+target
+Texture
+tilted
+TORQUE
+totalled
+TRACK_WIDTH
+TrafficLevel
+TrafficPattern
+turbosfx
+UpgradeLevel
+pvehicle
+wecontrol
+WHEEL_BASE
+Width
+youllbeundermywheels
+youmustfollow
+ZBias
+trafficpattern
+frontend
+controller
+junkman
+music
+speech
+world
+effects
+engineaudio
+collisionreactions
+off_road
+assault
+Boss
+RaceLength
+Children
+Shortcuts
+CollectorsEditionRace
+FINAL_GEAR
+FOV
+Vehicles
+aivehicle
+pursuitlevels
+pursuitescalation
+pursuitsupport
+visuallookeffect
+CollectionName
+simsurface
+speechtune
+audioimpact
+audioscrape
+ecar
+camerainfo
+emittergroup
+emitterdata
+emitteruv
+visuallooktransition
+fecooling
+timeofdaylighting
+fuelcell_effect
+system
+presetride
+ocean
+visualrgbtweaker
+aud_moment_strm
+MilestoneType
+
+# Captured from Game (Aru)
+AutoSpawnTriggerType
+BEHAVIOR_MECHANIC_AUDIO
+BEHAVIOR_MECHANIC_EFFECTS
+BEHAVIOR_MECHANIC_RESET
+bl10
+bl11
+bl12
+bl13
+bl14
+bl15
+bl2
+bl3
+bl4
+bl5
+bl6
+bl7
+bl8
+bl9
+BossRace
+brakes
+CAMERAACTION_CHANGE
+CAMERAACTION_DEBUG
+CAMERAACTION_ENABLE_ICE
+CAMERAACTION_LOOKBACK
+CAMERAACTION_PULLBACK
+CannedPath
+castrolgt
+ce_997s
+ce_c6r
+ce_camaro
+ce_corvette
+ce_elise
+ce_gt2
+ce_gtrstreet
+ce_sl500
+ce_sl65
+ce_supra
+challengeseries
+ChanceOfRain
+chassis
+Checkpoint
+chopperspecs
+CopsInRace
+CopSpawnPoints
+CopSpawnType
+damagespecs
+DDayRace
+DEBUGACTION_DROPCAR
+DEBUGACTION_LOOK_D_DOWN
+DEBUGACTION_LOOK_D_LEFT
+DEBUGACTION_LOOK_D_RIGHT
+DEBUGACTION_LOOK_D_UP
+DEBUGACTION_LOOK_DOWN
+DEBUGACTION_LOOK_LEFT
+DEBUGACTION_LOOK_RIGHT
+DEBUGACTION_LOOK_UP
+DEBUGACTION_MOVE_BACK
+DEBUGACTION_MOVE_D_BACK
+DEBUGACTION_MOVE_D_FORWARD
+DEBUGACTION_MOVE_D_LEFT
+DEBUGACTION_MOVE_D_RIGHT
+DEBUGACTION_MOVE_DOWN
+DEBUGACTION_MOVE_FORWARD
+DEBUGACTION_MOVE_LEFT
+DEBUGACTION_MOVE_RIGHT
+DEBUGACTION_MOVE_UP
+DEBUGACTION_SIMSTEP
+DEBUGACTION_SUPER_TURBO
+DEBUGACTION_TOGGLEAI
+DEBUGACTION_TOGGLECARCOLOUR
+DEBUGACTION_TOGGLEDEMOCAMERAS
+DEBUGACTION_TOGGLESIMSTEP
+DEBUGACTION_TURBO
+DoCountdown
+DZ_BOTTOM
+DZ_FRONT
+DZ_LEFT
+DZ_LFRONT
+DZ_LREAR
+DZ_REAR
+DZ_RFRONT
+DZ_RIGHT
+DZ_RREAR
+DZ_TOP
+engagetrigger
+engine
+FRONTENDACTION_ACCEPT
+FRONTENDACTION_BUTTON0
+FRONTENDACTION_BUTTON1
+FRONTENDACTION_BUTTON2
+FRONTENDACTION_BUTTON3
+FRONTENDACTION_BUTTON4
+FRONTENDACTION_BUTTON5
+FRONTENDACTION_CANCEL
+FRONTENDACTION_CANCEL_ALT
+FRONTENDACTION_DOWN
+FRONTENDACTION_LEFT
+FRONTENDACTION_LTRIGGER
+FRONTENDACTION_RDOWN
+FRONTENDACTION_RIGHT
+FRONTENDACTION_RLEFT
+FRONTENDACTION_RRIGHT
+FRONTENDACTION_RTRIGGER
+FRONTENDACTION_RUP
+FRONTENDACTION_START
+FRONTENDACTION_UP
+GAMEACTION_BACK
+GAMEACTION_BRAKE
+GAMEACTION_DEBUGHUMAN1
+GAMEACTION_DEBUGHUMAN2
+GAMEACTION_DEBUGHUMAN3
+GAMEACTION_DEBUGHUMAN4
+GAMEACTION_FORWARD
+GAMEACTION_GAMEBREAKER
+GAMEACTION_GAS
+GAMEACTION_HANDBRAKE
+GAMEACTION_JUMP
+GAMEACTION_NOS
+GAMEACTION_RESET
+GAMEACTION_SHIFTDOWN
+GAMEACTION_SHIFTUP
+GAMEACTION_STEERLEFT
+GAMEACTION_STEERRIGHT
+GAMEACTION_TURNLEFT
+GAMEACTION_TURNRIGHT
+HUDACTION_SKIPNIS
+ICEACTION_ALT_1
+ICEACTION_BUBBLE_BACK
+ICEACTION_BUBBLE_DOWN
+ICEACTION_BUBBLE_FORTH
+ICEACTION_BUBBLE_IN
+ICEACTION_BUBBLE_LEFT
+ICEACTION_BUBBLE_OUT
+ICEACTION_BUBBLE_RIGHT
+ICEACTION_BUBBLE_SPIN_LEFT
+ICEACTION_BUBBLE_SPIN_RIGHT
+ICEACTION_BUBBLE_TILT_DOWN
+ICEACTION_BUBBLE_TILT_UP
+ICEACTION_BUBBLE_UP
+ICEACTION_CANCEL
+ICEACTION_CLIP_IN
+ICEACTION_CLIP_OUT
+ICEACTION_COPY
+ICEACTION_CUT
+ICEACTION_DOWN
+ICEACTION_DUTCH_LEFT
+ICEACTION_DUTCH_RIGHT
+ICEACTION_FAST_LEFT
+ICEACTION_FAST_RIGHT
+ICEACTION_GRAB_LEFT
+ICEACTION_GRAB_RIGHT
+ICEACTION_HELP
+ICEACTION_HIDE
+ICEACTION_INSERT
+ICEACTION_LEFT
+ICEACTION_LETTERBOX_IN
+ICEACTION_LETTERBOX_OUT
+ICEACTION_PASTE
+ICEACTION_PLAY
+ICEACTION_RIGHT
+ICEACTION_SCREENSHOT
+ICEACTION_SCREENSHOT_STREAM
+ICEACTION_SELECT
+ICEACTION_SHAKE_FRQ_DEC
+ICEACTION_SHAKE_FRQ_INC
+ICEACTION_SHAKE_MAG_DEC
+ICEACTION_SHAKE_MAG_INC
+ICEACTION_SHUTTLE_DOWN
+ICEACTION_SHUTTLE_LEFT
+ICEACTION_SHUTTLE_RIGHT
+ICEACTION_SHUTTLE_SPEED_DEC
+ICEACTION_SHUTTLE_SPEED_INC
+ICEACTION_SHUTTLE_UP
+ICEACTION_SIMSPEED_DEC
+ICEACTION_SIMSPEED_INC
+ICEACTION_UNDO
+ICEACTION_UP
+ICEACTION_ZOOM_IN
+ICEACTION_ZOOM_OUT
+induction
+IntroCameraTrack
+IntroMessageID
+IntroMovie
+IntroNIS
+KnockoutsPerLap
+LicensedMusic
+LIGHT_COPBLUE
+LIGHT_COPRED
+LIGHT_COPWHITE
+logs_drop
+MasterCheckpoint
+MilestoneBiggerIsBetter
+MilestoneName
+NISShell
+nos
+NumLaps
+OvertimePenaltyPerSec
+Position
+vehicle
+racefinish
+racestart
+RandomSpawnTriggers
+ResetsPlayer
+rigidbodyspecs
+RollingStart
+SharedCheckpoints
+SpeedTrapList
+ThreshholdSpeed
+ThreshholdValue
+TimeBonus
+tires
+TokenValue
+transmission
+VOIPACTION_PUSHTOTALK
+
+
+encounters
+geoheatlevels
+nis_triggers
+nis_trigger_race_start
+nis_trigger_race_end
+nis_trigger_pip
+nis_trigger_arrest
+pip_event_trigger
+dynamicsurface
+lightshaders
+linemeshstyle
+fuelcell_emitter
+lightstreak
+fecameras
+lightmaterials
+aud_switch_loop
+partoptions
+frontend_sfx
+RaceTriggers
+RaceList
+Corners
+name
+win
+Row
+Column
+rewardcard
+Area
+area
+RewardCards
+rewardcards
+Unit
+Difficulty
+online
+offline
+online_xp
+online_xp_01
+online_xp_02
+online_xp_03a
+online_xp_03b
+online_xp_03c
+online_xp_03d
+online_xp_04a
+online_xp_04b
+online_xp_05a
+online_xp_05b
+online_xp_05c
+online_xp_05d
+online_xp_06
+online_xp_07a
+online_xp_07b
+online_xp_07c
+online_xp_07d
+online_xp_08
+online_xp_09a
+online_xp_09b
+online_xp_09c
+online_xp_09d
+online_xp_10a
+online_xp_10b
+online_xp_10c
+online_xp_10d
+online_xp_11
+online_xp_12
+online_xp_13a
+online_xp_13b
+online_xp_13c
+online_xp_13d
+online_xp_14
+online_xp_15
+online_xp_16a
+online_xp_16b
+online_xp_16c
+online_xp_16d
+online_xp_17
+online_xp_18a
+online_xp_18b
+online_xp_18c
+online_xp_18d
+online_xp_19
+online_xp_20a
+online_xp_20b
+online_xp_20c
+online_xp_20d
+online_xp_21
+online_xp_22
+online_xp_23a
+online_xp_23b
+online_xp_24a
+online_xp_24b
+online_xp_24c
+online_xp_24d
+online_xp_25
+online_xp_26
+online_xp_27
+online_xp_28
+online_xp_29
+online_xp_30
+online_xp_31a
+online_xp_31b
+online_xp_32
+online_xp_33
+online_xp_34
+online_xp_35a
+online_xp_35b
+online_xp_35c
+online_xp_35d
+online_xp_36
+online_xp_37
+online_xp_38
+online_xp_39
+online_xp_40a
+online_xp_40b
+online_xp_40c
+online_xp_40d
+online_xp_41
+online_xp_42
+online_xp_44
+online_xp_47
+online_xp_50
+default_car
+RaceCar
+
+# For Pro Street
+
+enabled
+#test
+Hub
+Hubs
+Race
+racing
+racer
+king
+org
+ORG
+Organization
+lose
+physics
+windtunnel
+Cars
+wheel
+challenge
+speed_challenge
+speedchallenge
+drag
+grip
+car_list
+all_cars
+tuned_cars
+kits
+car_kit
+kit_type
+KitType
+blueprint
+BluePrint
+performance_stats
+OrgBody
+body
+roof
+lights
+Lighting
+visual
+TargetTime
+sliders
+threshold
+DAMAGE_LEVEL
+damage_levels
+physics_tuning
+Cars
+parts
+Parts
+car_parts
+CarParts
+paint
+backup
+Enable
+Active
+skirt
+headlight
+
+
+HubType
+HubPlayType
+Variant
+WingmanShortcutTriggerHint
+ShortcutType
+CarClass
+OpponentType
+OpponentTeam
+OpponentGender
+AI_MistakeLevel
+AI_AggressionLevel
+MapTriangle
+MapCurve
+MapCurveRef
+MapCurvePoint
+AudioState
+AudioCornerType
+PresetRide
+PresetRides
+PresetName
+Autosculpt
+livery
+Livery
+part_type
+type
+Type
+drivetrain
+drivetrain_package
+part_physics
+suspension
+Suspension
+driver
+roll_cage
+base
+bumper_front
+bumper_rear
+wheel_rear
+wheel_front
+headlight_left
+headlight_right
+headlight_glass_left
+headlight_glass_right
+brakelight_left
+brakelight_right
+window_tint
+window_front_right
+window_front_left
+window_rear_left
+window_rear_right
+window_front
+window_rear
+doorhandle_rear_left
+doorhandle_rear_right
+doorhandle_front_left
+doorhandle_front_right
+fender_rear_left
+fender_rear_right
+fender_front_left
+fender_front_right
+door_left
+door_right
+door_rear_left
+door_rear_right
+brakes_front
+brakes_rear
+brake_rotor_front
+brake_rotor_rear
+universal_spoiler_base
+spoiler_lip
+steering_wheel
+brakelight_glass_left
+brakelight_glass_right
+exhaust
+forced_induction
+FORCED_INDUCTION
+ForcedInduction
+seat_left
+seat_right
+bumper_front_extra
+Nos
+package
+Decal
+scale
+Scale
+front
+bottom
+side
+
+
+A1
+AERO_CG
+AERO_COEFFICIENT
+AERO_COEFFICIENT_90_DEG_LOSS
+AERO_COEFFICIENT_MAX_GROUND_EFFECT
+AERO_COEFFICIENT_MAX_LIFT
+AERO_COEFFICIENT_OFFTHROTTLE
+BACK_IN_GRIP_ANGLE
+BodyRoll
+C2
+CAMBER_LEFT
+CASTER
+CLUTCH_KICK_ENGAGE_TIMER
+CLUTCH_KICK_TORQUE_MULT
+CLUTCH_SLIP
+COUNTER_STEER_MIN_ANGLE
+COUNTER_STEER_RANGE_THROTTLE_EFFECT
+COUNTER_STEER_STRENGTH_MAX
+COUNTER_STEER_STRENGTH_MED
+COUNTER_STEER_STRENGTH_MIN
+CSvsFZ
+CTRL_ExtraBrakingLevel
+CTRL_SlideSidewayLevel
+DOWNSHIFT_CLUTCH
+DOWNSHIFT_THROTTLE
+DRIFT_ANGLE_CURVE
+DRIFT_EBRAKE_GRIP_SCALE
+DRIFT_EXTRA_THROTTLE_VELOCITY
+DRIFT_FORWARD_FORCE
+DRIFT_KMU_MULTIPLIER
+DRIVESHAFT_TORQUE_EFFECT
+DRIVESHAFT_TORQUE_MAX
+DYNAMIC_GRIP
+EBRAKE
+ENGINE_ANTIBOG_MAX_MULT
+ENGINE_ANTIBOG_RAMP_TIME
+ENGINE_BRAKING_NEUTRAL
+ENGINE_BRAKING_SLOWSPEED
+ENGINE_SHIFT_DOWN_DYNAMIC_FACTOR
+EXTRA_COUNTER_STEER
+EXTRA_FISHTAIL_TORQUE
+FLOW_RATE
+FLYWHEEL_MASS
+FLYWHEEL_MASS_NEUTRAL_MULT
+FORCED_INDUCTION
+FRONT_WEIGHT_BIAS
+GRIP_SCALE
+GROUNDEFFECT_HEIGHT_RATIO
+HIGH_BOOST
+Kmu
+LIFT_HEIGHT_RATIO
+LOW_BOOST
+MeasuredPerformance
+MIN_TIRE_TRACTION_TO_SHIFT_UP
+MIN_TIRE_TRACTION_TO_SHIFT_UP_FIRST_GEAR
+Mu0
+NOS_CAPACITY
+NOS_GRIP_INCREASE
+OUT_OF_GRIP_ANGLE
+PerformanceBias
+RENDER_MOTION
+REVERSE_SPEED_LIMITER
+REVERSE_STEERING_SPEED_MULT
+REVERSE_TO_FORWARD_FORCE
+REVERSE_TORQUE_MULTIPLIER
+SHOCK_BLOWOUT
+SHOCK_DIGRESSION
+SHOCK_EXT_STIFFNESS
+SHOCK_STIFFNESS
+SHOCK_VALVING
+SLIP_TO_GRIP_STRENGTH
+SLIP_TO_GRIP_TIME
+SPEED_LIMITER
+SPRING_PROGRESSION
+STATIC_GRIP
+STATIC_GRIP_OFFTHROTTLE
+STEERING_ALIGNING_TORQUE
+STEERING_RANGE
+STEERING_SPEED
+SWAYBAR_STIFFNESS
+TANK_SLAPPER_TIMER
+TENSOR_SCALE
+THROTTLE_CONTROL_CURVE
+Toe
+TORQUE_CONVERTER
+TORQUE_SLIP_SLOPE0
+TORQUE_SPLIT
+TRAVEL
+UPSHIFT_CLUTCH
+UPSHIFT_THROTTLE
+YAW_CONTROL
+YAW_CONTROL_ANGLE
+YAW_SPEED
+TireSkidWidth
+KitWheelOffsetRear
+KitWheelOffsetFront
+racetable
+supportracetable
+supporttable
+FullEngagementRadius
+BackupCallTimer
+NumCopsToTriggerBackup
+FullEngagementCopCount
+FogHazeColourScale
+FogSkyColour
+FogDistanceScale
+FogSkyColourScale
+CarSpecScale
+FogHazeColour
+WheelSpokeCount
+VerbalType
+IMMOBILE_OBJECTS_COLLISIONS
+IsCustomizable
+NOSEffect
+EngineBlownEffect
+EVTPath
+BinIndex
+AEMS_MiscBanks
+handler_owner
+stateref
+WooshType
+message_id
+TireOffsets
+AEMS_WNBanks
+SHOCK_DIGRESSION
+SHOCK_EXT_STIFFNESS
+SHOCK_STIFFNESS
+SHOCK_VALVING
+SHOCK_FORCE
+SHOCK_TIME
+WheelSpokeCount
+ROLL_ALIGN_SCALE
+ROLL_ANG
+ROLL_RATE
+BodyDive
+BodyRoll
+BodySquat
+FFB_DRIFT_SKID
+FFB_ROLL
+ROLLING_RESISTANCE
+
+# K1llMAn
+BlackBloomIntensity
+ColourBloomIntensity
+ColourBloomTint
+Desaturation
+DetailMapIntensity
+DiffuseColour
+racing
+Racing
+SpecularColour
+
+# FOX
+GEAR_EFFICIENCY
+SPRING_STIFFNESS
+TORQUE_BOOST
+RESPAWN_TIME
+FrontCamber
+blownengine
+trail
+FRONT_AXLE
+350z
+LATERAL_GRIP
+skyline
+region
+TimeLimit
+bytecode
+Template
+CamberRear
+CamberFront
+light_flares_cg
+TRAFFIC_SPEED
+JUMP_CAM
+jumpcam
+BossRaces
+InitiallyUnlocked
+FECompressions
+TurboSND
+ReflectionOffset
+WheelHopScale
+WheelWell
+WheelEffectFrequency
+WheelEffectIntensity
+WheelSurfaceEffect
+evadetimeout
+engine_package
+transmission_package
+chassis_package
+nos_package
+tires_package
+brakes_package
+induction_package
+
+911turbo_top
+997s_top
+a3_top
+a4_top
+carreragt_top
+caymans_top
+clio_top
+clk500_top
+cobaltss_top
+corvette_top
+cts_top
+db9_top
+eclipsegt_top
+elise_top
+fordgt_top
+gallardo_top
+gti_top
+gto_top
+imprezawrx_top
+is300_top
+lancerevo8_top
+monaro_top
+murcielago_top
+mustanggt_top
+punto_top
+rx7_top
+rx8_top
+sl500_top
+slr_top
+supra_top
+tt_top
+viper_top
+
+997s_base
+sl500_base
+punto_base
+clio_base
+is300_base
+mustanggt_base
+gto_base
+cts_base
+a3_base
+db9_base
+a4_base
+caymans_base
+rx8_base
+elise_base
+eclipsegt_base
+tt_base
+
+nos_base
+nos_top
+
+engine_upgrades
+transmission_upgrades
+chassis_upgrades
+nos_upgrades
+tires_upgrades
+brakes_upgrades
+induction_upgrades
+
+ResetTime
+MinRPM
+MaxRPM
+trafvan
+traftruck
+trafstreet
+roadblockcopmidsize
+roadblockcopghost
+roadblockgto
+roadblockgtoghost
+roadblockcopsporthench
+roadblockcopsportghost
+HeliFuelTime
+OutroNIS
+brakelight_inner
+reverselight_inner
+headlight_inner
+coplightblue_inner
+coplightred_inner
+coplightwhite_inner
+DifficultyLevel
+heattable
+lamppost_inner
+ShiftSND
+foglight_inner
+BustSpeed
+AEMS_FEBanks
+IDXPath
+BIGPath
+CSIPath
+
+# MW
+a3_20t
+a4_32
+m3_gtr
+m3_gtre46
+carrera_gt
+corvette_car
+vehicles
+imprezzawrx
+iamroc
+lamppost_outer
+headlight_outer
+SpeedStreet
+
+##################################################################
+# MANUAL LIST (Guess List)
+# The following values are guesses. To add to this list, enter
+# your values in the following form:
+#    your name <tab> hash value without 0x <tab> guess name
+# It is recommended that your guess name has a * at the end to
+# differentiate between auto list values.
+##################################################################
+
+godgell	b1dd9c1c	imprezawrx*
+
+aru	0c2da793	camera_close*
+aru	7e6ba5c8	common_sounds*
+aru	b668787d	unlockable_2*
+aru	3b874697	unlockable_enum*
+aru	9849f8df	fe_sounds*
+aru	bd6f7135	skid_sounds*
+aru	9e8fd078	idx_file*
+aru	b699b7be	effect_exhaust*
+aru	585517f3	camera_bumper*
+aru	368a544c	car_type*
+aru	e6e5c2a3	nis_sounds_link*
+aru	6ce23062	bin_number*
+aru	4b675dc8	camera_drift*
+aru	fbcf1a48	is_car_buyable*
+aru	292001fb	evt_file*
+aru	d9cca9a3	effect_engineblow*
+aru	60cec115	effect_nos*
+aru	8445af47	target_value*
+aru	e48df448	misc_sounds*
+aru	857fe432	state_activity*
+aru	918c796e	current_state*
+aru	737714de	licensed_music_list*
+aru	edc8a0bf	viper_1*
+aru	eb1fd1bf	stitch_sounds*
+aru	916aa05d	wind_sounds*
+aru	3b9bbfc2	target_value_2*
+aru	a2f24773	bigmus_file*
+aru	25621dc5	next_states*
+aru	ccf03cb3	camera_far*
+aru	1002ea65	car_part_info*
+aru	10204a90	camera_superfar*
+aru	3d3f7fc7	nis_sounds*
+aru	d76a6fad	camera_pursuit*
+aru	09af94ed	__always_zero*
+aru	4166fa80	sound_aems*
+aru	7d7d256a	licensed_music*
+aru	d74c1435	camera_hood*
+aru	0663aaf3	roadnoise_sounds*
+aru	fb1533a6	csi_file*
+aru	a7ef40ef	races_fe_menu*
+aru	baf89280	unlock_upgrades*
+aru	d5a174aa	races_boss*
+aru	58dc14c0	race_engage*
+aru	9652af0f	traffic_spawn*
+aru	64893da8	zones*
+aru	50104d90	race_end_rewards*
+aru	740e9b4a	bl_number*
+aru	60f99f57	required_bl_level*
+aru	104e9d16	behavior_mechanic*
+aru	eacb7696	tractor_or_trailer*
+aru	f099b6ac	racers_or_challenge_traffic*
+aru	4164f5f9	surface_type*
+aru	9f4709c6	rigid_body_type*	# 1 = vehicle, 2 = other
+aru	998dd0db	is_showcase*
+aru	2ad67092	non_p2p_race*
+
+fox	aa032196	nos_duration*
+fox	8f952090	tire_width*
+fox	12a14452	nos_refill_time*
+fox	97a0d2df	MPH_needed_for_refill*
+fox	ac733de3	nos_refill_delay*
+fox	868dffdd	roll_resistance*
+fox	d4b0cc11	freeroam_table*
+fox	80deb840	HeatlevelProgressionTime*
+fox	1e2a1051	bounty_per_10secs*
+fox	e4211f4f	starting_heat_level*
+fox	bf49a7d9	audio_set_params*
+fox	c07c8040	TAKEDOWN_BOUNTY*
+fox	f093aacf	type*
+fox	08e34911	CarBodyMotion1*
+fox	73117117	CarBodyMotion2*
+
+fox	ee2c326f	BOOST_VARIANCE*
+fox	e679f9cd	subaruimprezawrx_2002*
+fox	6df0abfe	appears_in_races*
+fox	aacbe2e7	HANDLING_BARS*
+fox	ac1c0d2f	INDUCTION_MULTIPLIER*
+fox	f7649e63	light_flare_size*
+fox	1f158097	AIR_PRESSURE*
+
+fox	9bf0f433	CopCarSpawnInterval*
+
+fox	7648c884	CopCarReplaceDelay*
+fox	db66950c	CopBlockingFrequency*
+fox	a6cb6eff	NumCopsInPatrol*
+fox	6e590f57	NumHitsToTriggerPatrol*
+fox	3c4e7ace	HeatlevelDurationScale*
+fox	a00de933	MinCTSToTriggerPatrol*
+fox	2b154825	HeadOnRamFrequency*
+fox	b09d16bd	StaticRoadblockFrequency*
+fox	bef78612	ComboContinuityTimeout*
+fox	e4e4bc48	FirstBlockDeployTimeout*
+fox	24e25513	UpshiftRearBodyLiftAngle*
+a12	e95257c2	XAxisRotation*
+fox	a9633fde	TireMaxTurnAngle*
+fox	79356463	TireTurnRate*
+
+a12	2e44c2e3	large_torus*
+a12	b7dff090	bottom_out_crash_resistance*
+a12	493a8a87	hanging_wood_sign*
+a12	023a0371	sailboat_mast*
+a12	4def9a87	immobile_car*
+a12	3dcfa673	sunny*
+a12	b902cfad	sunset*
+a12	59c373c3	cloudy*
+a12	d835d0c8	rain*
+a12	d4167df9	object_crash_resistance*
+a12	e1a55d9b	friction_with_object*
+a12	3fb1b342	friction_with_ground*
+a12	519c53b1	friction_with_walls*
+a12	e1a5ce21	heat_lvl_1*
+a12	3582b651	heat_lvl_1_race*
+a12	5cae20a1	heat_lvl_1_hard*
+a12	abe83a53	heat_lvl_1_race_hard*
+a12	6f9ce5c1	heat_lvl_2*
+a12	30e997db	heat_lvl_2_race*
+a12	5c9da40b	heat_lvl_3*
+a12	14c63b25	heat_lvl_3_race*
+a12	7d4a777e	heat_lvl_4*
+a12	e486fd21	heat_lvl_4_race*
+a12	59b2caef	heat_lvl_5*
+a12	b5375272	heat_lvl_5_race*
+a12	ed01800f 	heat_lvl_5_hard*
+a12	e715fe65	heat_lvl_5_race_hard*
+a12	b8f1f245	heat_lvl_6*
+a12	a5e742ea	heat_lvl_6_race*
+a12	8d5ed471	heat_lvl_6_hard*
+a12	95a54cf2	heat_lvl_6_race_hard*
+a12	f3e10b20	heat_lvl_7*
+a12	d6609b33	heat_lvl_7_race*
+a12	048fa05d	world_crash_resistance*
+a12	75a2bcd7	crash_type*
+a12	99b357bb	object_impact_dramatization*
+a12	b1304fde	Third_Axle_Placement*
+a12	80e657ff	Engine_Rumble_Rate*
+a12	e2c63383	Torque_Roll_Frequency*
+a12	e91f59bd	Engine_Rumble_Frequency*
+a12	f947fe58	Engine_Rumble_Intensity*
+a12	faad3e61	Torque_Roll_Intensity*
+a12	1b5ea2c7	Clips_Through_Walls*
+a12	bf2fdb5c	Traffic_Density*
+a12	d9102c65	SKIN1_Is_Paint*
+a12	0491aa02	corvette_cop*
+a12	4793843b	infinite_mass*
+a12	499cb7bd	health_multiplier*
+a12	c802a18d	health_loss_rate*
+a12	97f059b7	vehicle_health*
+
+a12	0755409c	Small_Turbo_2_0*
+a12	2b16df5d	Exotic_Turbo_2*
+a12	08f716bd	Exotic_Turbo_0*
+a12	556596db	Small_Turbo_2_1*
+a12	87847a68	Cobra_Supercharger*
+a12	81c64c37	Small_Turbo_2_2*
+a12	572af7ce	Generic_Supercharger*
+a12	6329736a	Mercedes_Supercharger*
+a12	8491a9c9	Exotic_Turbo_1*
+a12	9e45f0b2	Small_Turbo_1*
+a12	73216c79	Small_Turbo_0*
+a12	0ae4739d	Large_Turbo_1*
+a12	664ecb21	Small_Turbo_2*
+a12	3f333115	Medium_Turbo_2*
+a12	051b079e	Mustang_Supercharger*
+a12	9d10a557	Medium_Turbo_0*
+a12	aa6ba0b0	Medium_Turbo_1*
+a12	097c7b7d	bmwm3*
+
+mw	ee0011e3	IMMOBILE*
+
+# Additional Stuff for Carbon
+
+aru	4d42ad7f	default_car_muscle*
+aru	99512d6b	default_car_tuner*
+aru	db28617d	default_car_exotic*
+aru	93fd9fda	vlt_file_name*
+aru	a78403ec	race_internal_name*
+aru	ac3a1010	exp_level*
+aru	8e55cb74	unlock*
+aru	2d90e13a	onlineunlocks*
+aru	201cbc7e	part_data*
+aru	18643449	part_type_name*
+
+aru	82db3963	cameras*
+aru	00fcf8e7	is_hood_camera*
+aru	18395404	is_hood_camera_2*
+aru	8566ca51	is_drift_camera*
+aru	fab01034	is_ingame_camera*
+aru	5cbfb150	is_bumper_camera*

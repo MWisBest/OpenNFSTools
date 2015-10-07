@@ -1,4 +1,7 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace VLTEdit
@@ -12,26 +15,38 @@ namespace VLTEdit
 		private static void mix32( ref uint a, ref uint b, ref uint c )
 		{
 			a = c >> 13 ^ ( a - b - c );
-			b = a << 8 ^ ( b - c - a );
+			b = a <<  8 ^ ( b - c - a );
 			c = b >> 13 ^ ( c - a - b );
 			a = c >> 12 ^ ( a - b - c );
 			b = a << 16 ^ ( b - c - a );
-			c = b >> 5 ^ ( c - a - b );
-			a = c >> 3 ^ ( a - b - c );
+			c = b >>  5 ^ ( c - a - b );
+			a = c >>  3 ^ ( a - b - c );
 			b = a << 10 ^ ( b - c - a );
 			c = b >> 15 ^ ( c - a - b );
 		}
 
+		private static uint mix32_final( uint a, uint b, uint c )
+		{
+			a = c >> 13 ^ ( a - b - c );
+			b = a <<  8 ^ ( b - c - a );
+			c = b >> 13 ^ ( c - a - b );
+			a = c >> 12 ^ ( a - b - c );
+			b = a << 16 ^ ( b - c - a );
+			c = b >>  5 ^ ( c - a - b );
+			a = c >>  3 ^ ( a - b - c );
+			b = a << 10 ^ ( b - c - a );
+			return b >> 15 ^ ( c - a - b );
+		}
+
 		public static uint getHash32( string toHash, uint magic = 0xABCDEF00u )
 		{
-			int num = 0;
-			int i = toHash.Length;
+			int num = 0, i = toHash.Length;
 			uint a = 0x9E3779B9u, b = 0x9E3779B9u, c = magic;
 			while( i >= 12 )
 			{
-				a += (uint)( toHash[num] + ( (uint)toHash[1 + num] << 8 ) + ( (uint)toHash[2 + num] << 16 ) + ( (uint)toHash[3 + num] << 24 ) );
-				b += (uint)( toHash[4 + num] + ( (uint)toHash[5 + num] << 8 ) + ( (uint)toHash[6 + num] << 16 ) + ( (uint)toHash[7 + num] << 24 ) );
-				c += (uint)( toHash[8 + num] + ( (uint)toHash[9 + num] << 8 ) + ( (uint)toHash[10 + num] << 16 ) + ( (uint)toHash[11 + num] << 24 ) );
+				a += ( toHash[num] + ( (uint)toHash[1 + num] << 8 ) + ( (uint)toHash[2 + num] << 16 ) + ( (uint)toHash[3 + num] << 24 ) );
+				b += ( toHash[4 + num] + ( (uint)toHash[5 + num] << 8 ) + ( (uint)toHash[6 + num] << 16 ) + ( (uint)toHash[7 + num] << 24 ) );
+				c += ( toHash[8 + num] + ( (uint)toHash[9 + num] << 8 ) + ( (uint)toHash[10 + num] << 16 ) + ( (uint)toHash[11 + num] << 24 ) );
 				mix32( ref a, ref b, ref c );
 				num += 12;
 				i -= 12;
@@ -59,7 +74,7 @@ namespace VLTEdit
 					b += (uint)toHash[5 + num] << 8;
 					goto case 5;
 				case 5:
-					b += (uint)toHash[4 + num];
+					b += toHash[4 + num];
 					goto case 4;
 				case 4:
 					a += (uint)toHash[3 + num] << 24;
@@ -71,29 +86,139 @@ namespace VLTEdit
 					a += (uint)toHash[1 + num] << 8;
 					goto case 1;
 				case 1:
-					a += (uint)toHash[num];
+					a += toHash[num];
 					break;
 				default:
 					break;
 			}
-			mix32( ref a, ref b, ref c );
-			return c;
+
+			// micro-optimization: avoids ref overhead and skips 1 assignment by having a separate function for this.
+			return mix32_final( a, b, c );
 		}
+
+
+		public static void bruteforce32( object hashobj )
+		{
+			string hashstring = hashobj as string;
+			uint hash = 0;
+			bool lowercase = true;
+
+			if( hashstring.StartsWith( "U" ) )
+			{
+				lowercase = false;
+				hashstring = hashstring.Substring( 1 );
+			}
+
+			if( hashstring.StartsWith( "0x" ) )
+			{
+				hash = uint.Parse( hashstring.Substring( 2 ), NumberStyles.AllowHexSpecifier | NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite );
+			}
+			else
+			{
+				hash = uint.Parse( hashstring );
+			}
+
+			Bruteforce bf = new Bruteforce();
+			bf.charset = ( lowercase ? Bruteforce.charset_lower : Bruteforce.charset_upper );
+
+			// Keep an instance of the form,
+			// otherwise if the window loses focus when our thread is running and we try to spit out a result it won't work.
+			frmMain formInstance = ( (frmMain)( System.Windows.Forms.Form.ActiveForm ) );
+
+			formInstance.writeToConsole( "Trying to crack hash: " + hash );
+			foreach( string combo in bf )
+			{
+				if( getHash32( combo ) == hash )
+				{
+					formInstance.writeToConsole( hash.ToString() + " could be: " + combo );
+				}
+			}
+			formInstance.writeToConsole( "Exhausted cracking: " + hash );
+		}
+
+
+		public class Bruteforce : IEnumerable<string>
+		{
+			private StringBuilder sb = new StringBuilder();
+			//public string charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz";
+			//public const string stringset = "abcdefghijklmnopqrstuvwxyz";
+			public static readonly char[] charset_lower =
+				{ '_', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
+			public static readonly char[] charset_upper =
+				{ '_', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
+			public char[] charset;
+			// NOTICE: IMPORTANT: !!!: MAKE SURE THIS MATCHES THE LENGTH OF CHARSET ABOVE!!
+			public const ulong len = 27;
+
+			// NOTICE: IMPORTANT: !!!: max is the highest value where ( 2 ** 64 - 1 ) - ( len ** max ) is a positive number!
+			public const uint max = 13;
+			public const uint min = 1;
+
+			public IEnumerator<string> GetEnumerator()
+			{
+				for( uint x = min; x <= max; ++x )
+				{
+					ulong total = (ulong)Math.Pow( len, x );
+					ulong counter = 0;
+					sb = new StringBuilder( (int)x );
+					while( counter < total )
+					{
+						string a = factoradic( counter, x );
+						yield return a;
+						++counter;
+					}
+				}
+			}
+
+			private string factoradic( ulong l, uint power )
+			{
+				sb.Length = 0;
+				while( power > 0 )
+				{
+                    sb.Append( charset[l % len] );
+					l /= len;
+					--power;
+				}
+				return sb.ToString();
+			}
+
+			IEnumerator IEnumerable.GetEnumerator()
+			{
+				return this.GetEnumerator();
+			}
+		}
+
 
 		private static void mix64( ref ulong a, ref ulong b, ref ulong c )
 		{
 			a = c >> 43 ^ ( a - b - c );
-			b = a << 9 ^ ( b - c - a );
-			c = b >> 8 ^ ( c - a - b );
+			b = a <<  9 ^ ( b - c - a );
+			c = b >>  8 ^ ( c - a - b );
 			a = c >> 38 ^ ( a - b - c );
 			b = a << 23 ^ ( b - c - a );
-			c = b >> 5 ^ ( c - a - b );
+			c = b >>  5 ^ ( c - a - b );
 			a = c >> 35 ^ ( a - b - c );
 			b = a << 49 ^ ( b - c - a );
 			c = b >> 11 ^ ( c - a - b );
 			a = c >> 12 ^ ( a - b - c );
 			b = a << 18 ^ ( b - c - a );
 			c = b >> 22 ^ ( c - a - b );
+		}
+
+		private static ulong mix64_final( ulong a, ulong b, ulong c )
+		{
+			a = c >> 43 ^ ( a - b - c );
+			b = a <<  9 ^ ( b - c - a );
+			c = b >>  8 ^ ( c - a - b );
+			a = c >> 38 ^ ( a - b - c );
+			b = a << 23 ^ ( b - c - a );
+			c = b >>  5 ^ ( c - a - b );
+			a = c >> 35 ^ ( a - b - c );
+			b = a << 49 ^ ( b - c - a );
+			c = b >> 11 ^ ( c - a - b );
+			a = c >> 12 ^ ( a - b - c );
+			b = a << 18 ^ ( b - c - a );
+			return b >> 22 ^ ( c - a - b );
 		}
 
 		public static ulong getHash64( string toHash, ulong magic = 0x11223344ABCDEF00uL )
@@ -158,7 +283,7 @@ namespace VLTEdit
 					b += (ulong)toHash[9] << 8;
 					goto case 9;
 				case 9:
-					b += (ulong)toHash[8];
+					b += toHash[8];
 					goto case 8;
 				case 8:
 					a += (ulong)toHash[7] << 56;
@@ -182,13 +307,14 @@ namespace VLTEdit
 					a += (ulong)toHash[1] << 8;
 					goto case 1;
 				case 1:
-					a += (ulong)toHash[0];
+					a += toHash[0];
 					break;
 				default:
 					break;
 			}
-			mix64( ref a, ref b, ref c );
-			return c;
+
+			// micro-optimization: avoids ref overhead and skips 1 assignment by having a separate function for this.
+			return mix64_final( a, b, c );
 		}
 	}
 }

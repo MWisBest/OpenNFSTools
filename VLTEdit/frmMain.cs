@@ -8,6 +8,7 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace VLTEdit
@@ -62,6 +63,8 @@ namespace VLTEdit
 		private Container at = null;
 		private List<UnknownB0> au = new List<UnknownB0>();
 		private UnknownDE av = null;
+
+		private Dictionary<string, Thread> bruteforceThreads = new Dictionary<string, Thread>();
 
 		public frmMain()
 		{
@@ -791,7 +794,7 @@ namespace VLTEdit
 			this.tv.EndUpdate();
 		}
 
-		private void writeToConsole( string A_0 )
+		public void writeToConsole( string A_0 )
 		{
 			if( this.txtConsole.Text != "" )
 			{
@@ -1318,6 +1321,44 @@ namespace VLTEdit
 							break;
 						}
 						this.writeToConsole( string.Format( "hex({0})=0x{1:x}", ulong.Parse( text2 ), ulong.Parse( text2 ) ) );
+						break;
+					case "bf":
+					case "bf32":
+					case "bruteforce":
+					case "bruteforce32":
+						if( noArgs )
+						{
+							this.writeToConsole( "Error in command." );
+							break;
+						}
+						if( bruteforceThreads.ContainsKey( text2 ) )
+						{
+							this.writeToConsole( "Thread already running." );
+							break;
+						}
+						Thread t = new Thread( HashUtil.bruteforce32 );
+						t.Priority = ThreadPriority.Highest;
+						t.IsBackground = true;
+						t.Start( text2 );
+						bruteforceThreads.Add( text2, t );
+						break;
+					case "bfstop":
+					case "bfstop32":
+					case "stopbf":
+					case "stopbf32":
+						if( noArgs )
+						{
+							this.writeToConsole( "Error in command." );
+							break;
+						}
+						if( !bruteforceThreads.ContainsKey( text2 ) )
+						{
+							this.writeToConsole( "No such thread." );
+							break;
+						}
+						bruteforceThreads[text2].Abort();
+						bruteforceThreads.Remove( text2 );
+						this.writeToConsole( "Killed thread." );
 						break;
 					case "hash":
 					case "hash32":

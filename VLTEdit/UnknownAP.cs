@@ -7,13 +7,13 @@ namespace VLTEdit
 	{
 		public static string a( BinaryReader A_0 )
 		{
-			StringBuilder stringBuilder = new StringBuilder();
+			StringBuilder sb = new StringBuilder();
 			byte b;
 			while( ( b = A_0.ReadByte() ) != 0 )
 			{
-				stringBuilder.Append( (char)b );
+				sb.Append( (char)b );
 			}
-			return stringBuilder.ToString();
+			return sb.ToString();
 		}
 
 		public static void a( BinaryWriter A_0, string A_1 )

@@ -10,7 +10,7 @@ namespace VLTEdit
 
 		public TypeMap()
 		{
-			this.typeDictionary = new Dictionary<uint, Type>( 24 );
+			this.typeDictionary = new Dictionary<uint, Type>( 25 );
 			
 			this.typeDictionary.Add( HashUtil.getHash32( "EA::Reflection::Int8" ), typeof( EAInt8 ) );
 			this.typeDictionary.Add( HashUtil.getHash32( "EA::Reflection::Int16" ), typeof( EAInt16 ) );
@@ -35,6 +35,7 @@ namespace VLTEdit
 			this.typeDictionary.Add( HashUtil.getHash32( "CarBodyMotion" ), typeof( EACarBodyMotion ) );
 			this.typeDictionary.Add( HashUtil.getHash32( "GCollectionKey" ), typeof( EAGCollectionKey ) );
 			this.typeDictionary.Add( HashUtil.getHash32( "JunkmanMod" ), typeof( EAJunkmanMod ) );
+			this.typeDictionary.Add( HashUtil.getHash32( "TrafficPatternRecord" ), typeof( EATrafficPatternRecord ) );
 			this.typeDictionary.Add( HashUtil.getHash32( "UpgradeSpecs" ), typeof( EAUpgradeSpecs ) );
 		}
 

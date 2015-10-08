@@ -1096,7 +1096,6 @@ fox	f7649e63	light_flare_size*
 fox	1f158097	AIR_PRESSURE*
 
 fox	9bf0f433	CopCarSpawnInterval*
-
 fox	7648c884	CopCarReplaceDelay*
 fox	db66950c	CopBlockingFrequency*
 fox	a6cb6eff	NumCopsInPatrol*
@@ -1125,26 +1124,6 @@ a12	d4167df9	object_crash_resistance*
 a12	e1a55d9b	friction_with_object*
 a12	3fb1b342	friction_with_ground*
 a12	519c53b1	friction_with_walls*
-a12	e1a5ce21	heat_lvl_1*
-a12	3582b651	heat_lvl_1_race*
-a12	5cae20a1	heat_lvl_1_hard*
-a12	abe83a53	heat_lvl_1_race_hard*
-a12	6f9ce5c1	heat_lvl_2*
-a12	30e997db	heat_lvl_2_race*
-a12	5c9da40b	heat_lvl_3*
-a12	14c63b25	heat_lvl_3_race*
-a12	7d4a777e	heat_lvl_4*
-a12	e486fd21	heat_lvl_4_race*
-a12	59b2caef	heat_lvl_5*
-a12	b5375272	heat_lvl_5_race*
-a12	ed01800f 	heat_lvl_5_hard*
-a12	e715fe65	heat_lvl_5_race_hard*
-a12	b8f1f245	heat_lvl_6*
-a12	a5e742ea	heat_lvl_6_race*
-a12	8d5ed471	heat_lvl_6_hard*
-a12	95a54cf2	heat_lvl_6_race_hard*
-a12	f3e10b20	heat_lvl_7*
-a12	d6609b33	heat_lvl_7_race*
 a12	048fa05d	world_crash_resistance*
 a12	75a2bcd7	crash_type*
 a12	99b357bb	object_impact_dramatization*
@@ -1183,6 +1162,56 @@ a12	aa6ba0b0	Medium_Turbo_1*
 a12	097c7b7d	bmwm3*
 
 mw	ee0011e3	IMMOBILE*
+
+
+a12	e1a5ce21	HeatLevel1*
+a12	6f9ce5c1	HeatLevel2*
+a12	5c9da40b	HeatLevel3*
+a12	7d4a777e	HeatLevel4*
+a12	59b2caef	HeatLevel5*
+a12	b8f1f245	HeatLevel6*
+a12	f3e10b20	HeatLevel7*
+a12	8d5ed471	HeatLevel6Hard*
+a12	5cae20a1	HeatLevel1Hard*
+a12	ed01800f 	HeatLevel5Hard*
+
+a12	3582b651	HeatLevel1Race*
+a12	30e997db	HeatLevel2Race*
+a12	14c63b25	HeatLevel3Race*
+a12	e486fd21	HeatLevel4Race*
+a12	b5375272	HeatLevel5Race*
+a12	a5e742ea	HeatLevel6Race*
+a12	d6609b33	HeatLevel7Race*
+a12	abe83a53	HeatLevel1RaceHard*
+a12	95a54cf2	HeatLevel6RaceHard*
+a12	e715fe65	HeatLevel5RaceHard*
+
+
+mw	0df9f010	SupportLevel1*
+mw	95eee1c8	SupportLevel2*
+mw	78ef642a	SupportLevel3*
+mw	df56a880	SupportLevel4*
+mw	547ffa9d	SupportLevel5*
+mw	2ba2702e	SupportLevel6*
+mw	58e0b59e	SupportLevel7*
+mw	b62620a3	SupportLevel8*
+mw	71cfa987	SupportLevel9*
+mw	be4e5262	SupportLevel10*
+
+mw	461def6d	SupportLevel1Race*
+mw	3552aee3	SupportLevel2Race*
+mw	25ebd04f	SupportLevel3Race*
+mw	0ee2206a	SupportLevel4Race*
+mw	26d8cf98	SupportLevel5Race*
+mw	a29c60f3	SupportLevel6Race*
+mw	61679794	SupportLevel7Race*
+mw	0508b7f3	SupportLevel8Race*
+mw	95a9110d	SupportLevel9Race*
+mw	26bb7f6c	SupportLevel10Race*
+
+mw	3c6dbcb3	SupportAir*
+mw	a73c3512	SupportHeavy*
+mw	ebd53935	SupportLeader*
 
 # Additional Stuff for Carbon
 

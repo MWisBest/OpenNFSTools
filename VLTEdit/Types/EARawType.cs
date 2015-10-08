@@ -1,7 +1,7 @@
 using System.IO;
 using System.Text;
 
-namespace VLTEdit
+namespace VLTEdit.Types
 {
 	public class EARawType : EABaseType // OBF: ad.cs
 	{

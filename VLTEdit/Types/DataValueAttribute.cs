@@ -1,6 +1,6 @@
 using System;
 
-namespace VLTEdit
+namespace VLTEdit.Types
 {
 	public class DataValueAttribute : Attribute
 	{

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Reflection;
+using VLTEdit.Types;
 
 namespace VLTEdit
 {

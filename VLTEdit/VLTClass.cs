@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using VLTEdit.Types;
 
 // TODO Collections.Generic IComparable IEnumerable etc
 namespace VLTEdit

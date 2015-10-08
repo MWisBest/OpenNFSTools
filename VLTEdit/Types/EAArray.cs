@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
-namespace VLTEdit
+namespace VLTEdit.Types
 {
 	[DefaultMember( "Item" )]
 	public class EAArray : EABaseType, IEnumerable<EABaseType>, ITrimmable // OBF: m.cs

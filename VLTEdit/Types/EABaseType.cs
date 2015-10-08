@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Reflection;
 
-namespace VLTEdit
+namespace VLTEdit.Types
 {
 	public abstract class EABaseType : IBinReadWrite // OBF: bb.cs
 	{

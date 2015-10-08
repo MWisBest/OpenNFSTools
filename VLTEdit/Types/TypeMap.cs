@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace VLTEdit
+namespace VLTEdit.Types
 {
 	public class TypeMap
 	{

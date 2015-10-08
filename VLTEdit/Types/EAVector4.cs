@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace VLTEdit
+namespace VLTEdit.Types
 {
 	public class EAVector4 : EABaseType
 	{

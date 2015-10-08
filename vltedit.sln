@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vltedit", "vltedit.csproj", "{799E1511-D553-4370-842D-16907958B274}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VLTEdit", "VLTEdit\VLTEdit.csproj", "{799E1511-D553-4370-842D-16907958B274}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vpak", "vpak.csproj", "{FA4798AA-A8F9-4AFD-A029-D34CC229CD61}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VPak", "VPak\VPak.csproj", "{FA4798AA-A8F9-4AFD-A029-D34CC229CD61}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "brutejenkins", "Tools\brutejenkins\brutejenkins.vcxproj", "{C943D81D-8DDC-4071-BDCF-7DFD222366A9}"
 EndProject

@@ -36,13 +36,8 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IBinReadWrite.cs" />
     <Compile Include="VPak.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\VLTEdit\VLTEdit.csproj">
-      <Project>{799e1511-d553-4370-842d-16907958b274}</Project>
-      <Name>VLTEdit</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

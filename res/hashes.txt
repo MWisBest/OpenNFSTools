@@ -1183,10 +1183,20 @@ NewRim
 NewWindowTint
 NewVinyl
 NewHood
+NewRimPaint
 NewNumbers
 NewBodyKit
 NewSpoiler
 NewRoofScoop
+
+# frontend
+cam_damping
+cam_angle
+cam_periods
+cam_fov
+cam_blur
+NameId
+WarningLevel
 
 # fuelcell_effect
 contrail
@@ -1377,8 +1387,6 @@ aru	e6e5c2a3	nis_sounds_link*
 aru	6ce23062	bin_number*
 aru	4b675dc8	camera_drift*
 aru	fbcf1a48	is_car_buyable*
-aru	d9cca9a3	effect_engineblow*
-aru	60cec115	effect_nos*
 aru	8445af47	target_value*
 aru	e48df448	misc_sounds*
 aru	857fe432	state_activity*

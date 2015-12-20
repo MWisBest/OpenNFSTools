@@ -990,7 +990,11 @@ IDXPath
 BIGPath
 CSIPath
 
-# MW
+## MW ##
+# toplevel
+aud_stitch_loop
+
+# tbd
 a3_20t
 a4_32
 m3_gtr
@@ -999,10 +1003,356 @@ carrera_gt
 corvette_car
 vehicles
 imprezzawrx
-iamroc
-lamppost_outer
+
+# acceltrans
+muscle_fast
+muscle_med
+suv_fast
+sport_fast
+tuner_fast
+tuner_med
+
+# aivehicle
+cscopmidsize
+cssuv
+PlayerCollisions
+DetachmentID
+AccelerationMultiplier
+
+# aud_moment_stm
+ai_totalled
+car_carrier
+crash_cam
+engine_breakdown
+game_camera
+jump_cam
+prison_jump
+pursuit_breaker_moments
+spot_cop_camera
+thunder_close
+thunder_distant
+VolSlot
+IsPositioned
+
+# audioimpact
+smackables
+coin_spray
+car_2_car
+car_2_car_front
+car_2_car_side
+car_2_ground
+car_2_ground_bottomout
+car_2_ground_roll
+car_2_smackable
+car_2_wall
+car_2_wall_front
+car_2_wall_side
+smackable_2_car
+cardboard_2_car
+cone_2_car
+crate_2_car
+dumpster_2_car
+glass_2_car
+panel_2_car
+rake_2_car
+sign_2_car
+tire_2_car
+tree_2_car
+vend_mach_2_car
+wood_2_car
+smackable_2_world
+cardboard_2_world
+cone_2_world
+crate_2_world
+dumpster_2_world
+glass_2_world
+panel_2_world
+rake_2_world
+shrub_2_world
+sign_2_world
+tire_2_world
+vend_mach_2_world
+wood_2_world
+glass_shatter
+shrub_break
+tree_break
+PursuitsAcceltrans
+STITCH_LEVEL_0
+STITCH_LEVEL_1
+STITCH_LEVEL_2
+STITCH_LEVEL_3
+
+# audioscrape
+smackable_2_ground
+
+# audiosystem
+AEMS_StitchBanks
+AEMS_SkidBanks
+
+# camerainfo
+TILTING
+STIFFNESS
+
+# chopperspecs
+DRIVE_SPEED
+SCALE_STEERING
+PITCH_ALIGN_SCALE
+SAME_ALIGN_SCALE
+YAW_DAMP
+ROLL_SPEED_MIN
+
+# collisionreactions
+REAR_REACTION
+FRONT_REACTION
+cscopsuv
+roadblocksuvheavy
+roadblocksuvlight
+
+# controller
+streetlight_scale
+REACTION_PICK
+REACTION_TURBO
+REACTION_LOOKUP
+REACTION_LOOKDOWN
+REACTION_LOOKLEFT
+REACTION_LOOKRIGHT
+
+# damagespecs
+HP_THRESHOLD
+HIT_POINTS
+
+# ecar
+SlipFX
+SteerSpeed
+SkidFX
+IsSkinned
+ShiftAngle
+EngineRev
+EngineRevSpeed
+ExtraPitch
+DamageEffect
+DeathEffect
+
+# effects
+AudioQuadratic
+EmitterQuadratic
+InheritVelocity
+FogEnable
+
+# emitterdata
+VolumeExtent
+VelocityStart
+VolumeCenter
+RotationVariance
+VelocityDelta
+MotionLive
+SpeedVariance
+KeyPositions
+FarClip
+MotionInherit
+AxisConstraint
+Life
+TextureAnimation
+SpreadAngle
+OnCycle
+StartDelay
+LifeVariance
+
+# emittergroup
+IntensityRanges
+
+# emitteruv
+EndV
+EndU
+StartU
+StartV
+
+# engineaudio
+CarID
+AEMSVol
+Priority
+SweetBank
+
+# explosion
+BaseMaterial
+
+# fecooling
+NewPaint
+NewDecal
+NewRim
+NewWindowTint
+NewVinyl
+NewHood
+NewNumbers
+NewBodyKit
+NewSpoiler
+NewRoofScoop
+
+# fuelcell_effect
+contrail
+
+# fuelcell_emitter
+VelocityInherit
+GravityDelta
+HeightStart
+LengthStart
+LengthDelta
+GravityStart
+
+# induction
+VACUUM
+
+# light_flares_cg
+green_flare
 headlight_outer
+lamppost_outer
+sun_flare
+traffic_light
+traffic_light_red
+MinScale
+MinSize
+flare_texture
+MaxSize
+
+# milestonetypes
+LocalizationTag
+
+# music
+iamroc
+
+# nos
+RECHARGE_MIN
+RECHARGE_MAX
+RECHARGE_MAX_SPEED
+RECHARGE_MIN_SPEED
+NOS_DISENGAGE
+
+# ocean
+reflection_amount
+
+# pursuitlevels
+heat_01
+heat_02
+heat_03
+heat_04
+heat_05
+heat_06
+heat_07
+heat_08
+heat_09
+heat_10
+race_01
+race_02
+race_03
+race_04
+race_05
+race_06
+race_07
+race_08
+race_09
+race_10
+CollapseInnerRadius
+RefspecTollgates
+OverwritingLength
+CollapseAggression
+CopFormations
+NumCiviHitsFor911
+StaggerFormationTime
+CollapseOuterRadius
+TimeBetweenFirstFourSpawn
+CTSFor911
+harriers_cops
+CollapseSpeed
+TuneCop2
+
+# pvehicle
+HornType
+DefaultPresetRide
+HandlingRating
+RandomOpponent
+PlayerUsable
+OnHitGround
+HitchHeat
+OnHitWorld
+RiskCar_Tier
+EventSequencer
+
+# rigidbodyspecs
+DRAG_ANGULAR
+GROUND_FRICTION
+BASE_MATERIAL
+WALL_FRICTION
+OBJ_FRICTION
+OBJ_ELASTICITY
+SLEEP_VELOCITY
+immobile
+torus
+
+# shiftpattern
+BankName
+
+# simsurface
+DEBUG_COLOUR
+WORLD_FRICTION
+RenderNoise
+DRIVE_GRIP
+STICK
+
+# smackable
+ExplosionEffect
+DROPOUT
+no_trigger
+AUTO_SIMPLIFY
+DETACH_FORCE
+CAN_SIMPLIFY
+SimplePhysics
+
+# speech
+expiry
+DeadAir
+MaxPlayback
+BackTime
+priority
+interrupt
+SpeechID
+CullingRange
+Clarity
+InitDelay
+
+# speechtune
+BlowbyInterval
+PriorityWeight
+RetailerTasks
+
+# system
+SimTasks
+SimControls
+
+# timeofdaylighting
+overcast
+dusk_overcast
+sunny
+dusk_sunny
+
+# trafficpattern
 SpeedStreet
+SpawnTime
+
+# transmission
+OPTIMAL_SHIFT
+
+# visuallookeffect
+magnitude
+camera_flash
+
+# world
+MAX_NEWTONS
+MAX_FRAGMENTS
+MAX_SMACKABLES
+CONTROLLER_CURVE
+TRAFFIC_TYPES
+
+
 
 ##################################################################
 # MANUAL LIST (Guess List)
@@ -1020,8 +1370,6 @@ aru	7e6ba5c8	common_sounds*
 aru	b668787d	unlockable_2*
 aru	3b874697	unlockable_enum*
 aru	9849f8df	fe_sounds*
-aru	bd6f7135	skid_sounds*
-aru	9e8fd078	idx_file*
 aru	b699b7be	effect_exhaust*
 aru	585517f3	camera_bumper*
 aru	368a544c	car_type*
@@ -1029,7 +1377,6 @@ aru	e6e5c2a3	nis_sounds_link*
 aru	6ce23062	bin_number*
 aru	4b675dc8	camera_drift*
 aru	fbcf1a48	is_car_buyable*
-aru	292001fb	evt_file*
 aru	d9cca9a3	effect_engineblow*
 aru	60cec115	effect_nos*
 aru	8445af47	target_value*
@@ -1037,11 +1384,8 @@ aru	e48df448	misc_sounds*
 aru	857fe432	state_activity*
 aru	918c796e	current_state*
 aru	737714de	licensed_music_list*
-aru	edc8a0bf	viper_1*
-aru	eb1fd1bf	stitch_sounds*
 aru	916aa05d	wind_sounds*
 aru	3b9bbfc2	target_value_2*
-aru	a2f24773	bigmus_file*
 aru	25621dc5	next_states*
 aru	ccf03cb3	camera_far*
 aru	1002ea65	car_part_info*
@@ -1053,7 +1397,6 @@ aru	4166fa80	sound_aems*
 aru	7d7d256a	licensed_music*
 aru	d74c1435	camera_hood*
 aru	0663aaf3	roadnoise_sounds*
-aru	fb1533a6	csi_file*
 aru	a7ef40ef	races_fe_menu*
 aru	baf89280	unlock_upgrades*
 aru	d5a174aa	races_boss*
@@ -1065,82 +1408,42 @@ aru	740e9b4a	bl_number*
 aru	60f99f57	required_bl_level*
 aru	104e9d16	behavior_mechanic*
 aru	eacb7696	tractor_or_trailer*
-aru	f099b6ac	racers_or_challenge_traffic*
-aru	4164f5f9	surface_type*
-aru	9f4709c6	rigid_body_type*	# 1 = vehicle, 2 = other
 aru	998dd0db	is_showcase*
 aru	2ad67092	non_p2p_race*
 
-fox	aa032196	nos_duration*
-fox	8f952090	tire_width*
-fox	12a14452	nos_refill_time*
-fox	97a0d2df	MPH_needed_for_refill*
-fox	ac733de3	nos_refill_delay*
-fox	868dffdd	roll_resistance*
-fox	d4b0cc11	freeroam_table*
 fox	80deb840	HeatlevelProgressionTime*
 fox	1e2a1051	bounty_per_10secs*
 fox	e4211f4f	starting_heat_level*
-fox	bf49a7d9	audio_set_params*
 fox	c07c8040	TAKEDOWN_BOUNTY*
-fox	f093aacf	type*
-fox	08e34911	CarBodyMotion1*
-fox	73117117	CarBodyMotion2*
 
-fox	ee2c326f	BOOST_VARIANCE*
 fox	e679f9cd	subaruimprezawrx_2002*
-fox	6df0abfe	appears_in_races*
-fox	aacbe2e7	HANDLING_BARS*
 fox	ac1c0d2f	INDUCTION_MULTIPLIER*
-fox	f7649e63	light_flare_size*
 fox	1f158097	AIR_PRESSURE*
 
-fox	9bf0f433	CopCarSpawnInterval*
-fox	7648c884	CopCarReplaceDelay*
-fox	db66950c	CopBlockingFrequency*
 fox	a6cb6eff	NumCopsInPatrol*
-fox	6e590f57	NumHitsToTriggerPatrol*
 fox	3c4e7ace	HeatlevelDurationScale*
-fox	a00de933	MinCTSToTriggerPatrol*
 fox	2b154825	HeadOnRamFrequency*
 fox	b09d16bd	StaticRoadblockFrequency*
 fox	bef78612	ComboContinuityTimeout*
 fox	e4e4bc48	FirstBlockDeployTimeout*
-fox	24e25513	UpshiftRearBodyLiftAngle*
-a12	e95257c2	XAxisRotation*
 fox	a9633fde	TireMaxTurnAngle*
-fox	79356463	TireTurnRate*
 
-a12	2e44c2e3	large_torus*
 a12	b7dff090	bottom_out_crash_resistance*
 a12	493a8a87	hanging_wood_sign*
 a12	023a0371	sailboat_mast*
 a12	4def9a87	immobile_car*
-a12	3dcfa673	sunny*
-a12	b902cfad	sunset*
-a12	59c373c3	cloudy*
-a12	d835d0c8	rain*
 a12	d4167df9	object_crash_resistance*
-a12	e1a55d9b	friction_with_object*
-a12	3fb1b342	friction_with_ground*
-a12	519c53b1	friction_with_walls*
 a12	048fa05d	world_crash_resistance*
 a12	75a2bcd7	crash_type*
-a12	99b357bb	object_impact_dramatization*
 a12	b1304fde	Third_Axle_Placement*
 a12	80e657ff	Engine_Rumble_Rate*
-a12	e2c63383	Torque_Roll_Frequency*
 a12	e91f59bd	Engine_Rumble_Frequency*
 a12	f947fe58	Engine_Rumble_Intensity*
 a12	faad3e61	Torque_Roll_Intensity*
 a12	1b5ea2c7	Clips_Through_Walls*
-a12	bf2fdb5c	Traffic_Density*
-a12	d9102c65	SKIN1_Is_Paint*
 a12	0491aa02	corvette_cop*
 a12	4793843b	infinite_mass*
-a12	499cb7bd	health_multiplier*
 a12	c802a18d	health_loss_rate*
-a12	97f059b7	vehicle_health*
 
 a12	0755409c	Small_Turbo_2_0*
 a12	2b16df5d	Exotic_Turbo_2*
@@ -1160,31 +1463,6 @@ a12	051b079e	Mustang_Supercharger*
 a12	9d10a557	Medium_Turbo_0*
 a12	aa6ba0b0	Medium_Turbo_1*
 a12	097c7b7d	bmwm3*
-
-mw	ee0011e3	IMMOBILE*
-
-
-a12	e1a5ce21	HeatLevel1*
-a12	6f9ce5c1	HeatLevel2*
-a12	5c9da40b	HeatLevel3*
-a12	7d4a777e	HeatLevel4*
-a12	59b2caef	HeatLevel5*
-a12	b8f1f245	HeatLevel6*
-a12	f3e10b20	HeatLevel7*
-a12	8d5ed471	HeatLevel6Hard*
-a12	5cae20a1	HeatLevel1Hard*
-a12	ed01800f 	HeatLevel5Hard*
-
-a12	3582b651	HeatLevel1Race*
-a12	30e997db	HeatLevel2Race*
-a12	14c63b25	HeatLevel3Race*
-a12	e486fd21	HeatLevel4Race*
-a12	b5375272	HeatLevel5Race*
-a12	a5e742ea	HeatLevel6Race*
-a12	d6609b33	HeatLevel7Race*
-a12	abe83a53	HeatLevel1RaceHard*
-a12	95a54cf2	HeatLevel6RaceHard*
-a12	e715fe65	HeatLevel5RaceHard*
 
 
 mw	0df9f010	SupportLevel1*
@@ -1212,6 +1490,7 @@ mw	26bb7f6c	SupportLevel10Race*
 mw	3c6dbcb3	SupportAir*
 mw	a73c3512	SupportHeavy*
 mw	ebd53935	SupportLeader*
+
 
 # Additional Stuff for Carbon
 

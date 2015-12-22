@@ -1019,16 +1019,20 @@ PlayerCollisions
 DetachmentID
 AccelerationMultiplier
 
-# aud_moment_stm
+# aud_moment_strm
 ai_totalled
+amphitheatre
 car_carrier
 crash_cam
 engine_breakdown
 game_camera
+jacknife
 jump_cam
+porch
 prison_jump
 pursuit_breaker_moments
 spot_cop_camera
+stripmall
 thunder_close
 thunder_distant
 VolSlot

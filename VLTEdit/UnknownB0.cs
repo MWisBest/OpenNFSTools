@@ -54,24 +54,11 @@ namespace VLTEdit
 
 		public UnknownC0 a( VLTOtherValue A_0 )
 		{
-			IEnumerator<UnknownC0> enumerator = this.genc0list.GetEnumerator();
-			try
+			foreach( UnknownC0 c in this.genc0list )
 			{
-				while( enumerator.MoveNext() )
+				if( c.e1.ce1 == A_0 )
 				{
-					UnknownC0 c = enumerator.Current;
-					if( c.e1.ce1 == A_0 )
-					{
-						return c;
-					}
-				}
-			}
-			finally
-			{
-				IDisposable disposable = enumerator as IDisposable;
-				if( disposable != null )
-				{
-					disposable.Dispose();
+					return c;
 				}
 			}
 			return null;

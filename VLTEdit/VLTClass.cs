@@ -25,24 +25,11 @@ namespace VLTEdit
 
 			public UnknownDR a( uint A_0 )
 			{
-				IEnumerator<UnknownDR> enumerator = this.drList.GetEnumerator();
-				try
+				foreach( UnknownDR dr in this.drList )
 				{
-					while( enumerator.MoveNext() )
+					if( dr.c1.hash == A_0 )
 					{
-						UnknownDR dr = enumerator.Current;
-						if( dr.c1.hash == A_0 )
-						{
-							return dr;
-						}
-					}
-				}
-				finally
-				{
-					IDisposable disposable = enumerator as IDisposable;
-					if( disposable != null )
-					{
-						disposable.Dispose();
+						return dr;
 					}
 				}
 				return null;

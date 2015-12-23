@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -441,51 +440,25 @@ namespace VLTEdit
 
 		private void unloadFile( string A_0 )
 		{
-			IEnumerator<UnknownB0> enumerator = this.au.GetEnumerator();
-			try
+			foreach( UnknownB0 b in this.au )
 			{
-				while( enumerator.MoveNext() )
+				UnknownBA ba = b.a( VLTOtherValue.VLTMAGIC ) as UnknownBA;
+				string text = ba.sa1[0];
+				if( text == A_0 )
 				{
-					UnknownB0 b = enumerator.Current;
-					UnknownBA ba = b.a( VLTOtherValue.VLTMAGIC ) as UnknownBA;
-					string text = ba.sa1[0];
-					if( text == A_0 )
+					this.writeToConsole( "Unloading: " + text );
+					foreach( MenuItem menuItem in this.miUnload.MenuItems )
 					{
-						this.writeToConsole( "Unloading: " + text );
-						IEnumerator enumerator2 = this.miUnload.MenuItems.GetEnumerator();
-						try
+						if( menuItem.Text == A_0 )
 						{
-							while( enumerator2.MoveNext() )
-							{
-								MenuItem menuItem = (MenuItem)enumerator2.Current;
-								if( menuItem.Text == A_0 )
-								{
-									this.miUnload.MenuItems.Remove( menuItem );
-									break;
-								}
-							}
+							this.miUnload.MenuItems.Remove( menuItem );
+							break;
 						}
-						finally
-						{
-							IDisposable disposable = enumerator2 as IDisposable;
-							if( disposable != null )
-							{
-								disposable.Dispose();
-							}
-						}
-						this.au.Remove( b );
-						this.d();
-						this.bTwo();
-						break;
 					}
-				}
-			}
-			finally
-			{
-				IDisposable disposable = enumerator as IDisposable;
-				if( disposable != null )
-				{
-					disposable.Dispose();
+					this.au.Remove( b );
+					this.d();
+					this.bTwo();
+					break;
 				}
 			}
 		}
@@ -504,10 +477,8 @@ namespace VLTEdit
 			if( openFileDialog.ShowDialog() == DialogResult.OK )
 			{
 				bool flag = false;
-				string[] fileNames = openFileDialog.FileNames;
-				for( int i = 0; i < fileNames.Length; ++i )
+				foreach( string a_ in openFileDialog.FileNames )
 				{
-					string a_ = fileNames[i];
 					if( this.a( a_, false ) )
 					{
 						flag = true;
@@ -523,21 +494,9 @@ namespace VLTEdit
 		private void d()
 		{
 			this.av = new UnknownDE();
-			IEnumerator<UnknownB0> enumerator = this.au.GetEnumerator();
-			try
+			foreach( UnknownB0 b in this.au )
 			{
-				while( enumerator.MoveNext() )
-				{
-					this.aTwo( enumerator.Current );
-				}
-			}
-			finally
-			{
-				IDisposable disposable = enumerator as IDisposable;
-				if( disposable != null )
-				{
-					disposable.Dispose();
-				}
+				this.aTwo( b );
 			}
 		}
 
@@ -546,25 +505,13 @@ namespace VLTEdit
 		{
 			UnknownBA ba = A_0.a( VLTOtherValue.VLTMAGIC ) as UnknownBA;
 			uint num = ba.uia1[0];
-			IEnumerator<UnknownB0> enumerator = this.au.GetEnumerator();
-			try
+			foreach( UnknownB0 b in this.au )
 			{
-				while( enumerator.MoveNext() )
+				UnknownBA ba2 = b.a( VLTOtherValue.VLTMAGIC ) as UnknownBA;
+				if( ba2.uia1[0] == num )
 				{
-					UnknownBA ba2 = enumerator.Current.a( VLTOtherValue.VLTMAGIC ) as UnknownBA;
-					if( ba2.uia1[0] == num )
-					{
-						MessageBox.Show( "This VLT data file has already been loaded.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand );
-						return false;
-					}
-				}
-			}
-			finally
-			{
-				IDisposable disposable = enumerator as IDisposable;
-				if( disposable != null )
-				{
-					disposable.Dispose();
+					MessageBox.Show( "This VLT data file has already been loaded.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand );
+					return false;
 				}
 			}
 			this.aTwo( A_0 );
@@ -605,85 +552,47 @@ namespace VLTEdit
 
 		private void listLoadedFiles()
 		{
-			IEnumerator<UnknownB0> enumerator = this.au.GetEnumerator();
-			try
+			foreach( UnknownB0 b in this.au )
 			{
-				while( enumerator.MoveNext() )
-				{
-					UnknownBA ba = enumerator.Current.a( VLTOtherValue.VLTMAGIC ) as UnknownBA;
-					this.writeToConsole( ba.sa1[0] );
-				}
-			}
-			finally
-			{
-				IDisposable disposable = enumerator as IDisposable;
-				if( disposable != null )
-				{
-					disposable.Dispose();
-				}
+				UnknownBA ba = b.a( VLTOtherValue.VLTMAGIC ) as UnknownBA;
+				this.writeToConsole( ba.sa1[0] );
 			}
 		}
 
 		private void f( string A_0 )
 		{
-			IEnumerator<UnknownB0> enumerator = this.au.GetEnumerator();
-			try
+			foreach( UnknownB0 b in this.au )
 			{
-				while( enumerator.MoveNext() )
+				UnknownBA ba = b.a( VLTOtherValue.VLTMAGIC ) as UnknownBA;
+				string text = ba.sa1[0];
+				if( text == A_0 )
 				{
-					UnknownB0 b = enumerator.Current;
-					UnknownBA ba = b.a( VLTOtherValue.VLTMAGIC ) as UnknownBA;
-					string text = ba.sa1[0];
-					if( text == A_0 )
+					this.writeToConsole( "Items in " + text );
+					UnknownDH dh = b.a( VLTOtherValue.TABLE_START ) as UnknownDH;
+					foreach( UnknownAS @as in dh )
 					{
-						this.writeToConsole( "Items in " + text );
-						UnknownDH dh = b.a( VLTOtherValue.TABLE_START ) as UnknownDH;
-						IEnumerator enumerator2 = dh.GetEnumerator();
-						try
+						VLTCommonValue b2 = @as.b21;
+						if( b2 != VLTCommonValue.UNCOMMON )
 						{
-							while( enumerator2.MoveNext() )
+							if( b2 != VLTCommonValue.COMMON )
 							{
-								UnknownAS @as = (UnknownAS)enumerator2.Current;
-								VLTCommonValue b2 = @as.b21;
-								if( b2 != VLTCommonValue.UNCOMMON )
+								if( b2 == VLTCommonValue.RARE )
 								{
-									if( b2 != VLTCommonValue.COMMON )
-									{
-										if( b2 == VLTCommonValue.RARE )
-										{
-											this.writeToConsole( "- Database" );
-										}
-									}
-									else
-									{
-										UnknownC c = @as.di1.asUnknownC();
-										this.writeToConsole( "- Row: " + HashTracker.getValueForHash( c.ui2 ) + "/" + this.a( this.av.genht2[c.ui2].dqb1.a( c.hash ) ) );
-									}
-								}
-								else
-								{
-									this.writeToConsole( "- Class: " + HashTracker.getValueForHash( @as.ui1 ) );
+									this.writeToConsole( "- Database" );
 								}
 							}
-							break;
+							else
+							{
+								UnknownC c = @as.di1.asUnknownC();
+								this.writeToConsole( "- Row: " + HashTracker.getValueForHash( c.ui2 ) + "/" + this.a( this.av.genht2[c.ui2].dqb1.a( c.hash ) ) );
+							}
 						}
-						finally
+						else
 						{
-							IDisposable disposable = enumerator2 as IDisposable;
-							if( disposable != null )
-							{
-								disposable.Dispose();
-							}
+							this.writeToConsole( "- Class: " + HashTracker.getValueForHash( @as.ui1 ) );
 						}
 					}
-				}
-			}
-			finally
-			{
-				IDisposable disposable = enumerator as IDisposable;
-				if( disposable != null )
-				{
-					disposable.Dispose();
+					break;
 				}
 			}
 		}
@@ -703,78 +612,52 @@ namespace VLTEdit
 			Dictionary<string, TreeNode> dict = new Dictionary<string, TreeNode>();
 			TreeNode treeNode = this.tv.Nodes.Add( "Database" );
 			treeNode.Tag = this.av;
-			IEnumerator enumerator = this.av.GetEnumerator();
-			try
+			foreach( VLTClass dq in this.av )
 			{
-				while( enumerator.MoveNext() )
+				string text = HashTracker.getValueForHash( dq.ui1 );
+				treeNode.TreeView.Sorted = true;
+				TreeNode treeNode2 = treeNode.Nodes.Add( text );
+				treeNode.TreeView.Sorted = false;
+				treeNode2.Tag = dq;
+				foreach( UnknownDR dr in dq.dqb1 )
 				{
-					VLTClass dq = (VLTClass)enumerator.Current;
-					string text = HashTracker.getValueForHash( dq.ui1 );
-					treeNode.TreeView.Sorted = true;
-					TreeNode treeNode2 = treeNode.Nodes.Add( text );
-					treeNode.TreeView.Sorted = false;
-					treeNode2.Tag = dq;
-					IEnumerator enumerator2 = dq.dqb1.GetEnumerator();
-					try
+					TreeNode treeNode3;
+					string text2;
+					if( dr.c1.ui3 == 0u )
 					{
-						while( enumerator2.MoveNext() )
+						treeNode3 = treeNode2;
+					}
+					else
+					{
+						text2 = string.Format( "{0:x},{1:x}", dq.ui1, dr.c1.ui3 );
+						treeNode3 = dict[text2];
+					}
+					if( treeNode3 == null )
+					{
+						if( flag )
 						{
-							UnknownDR dr = (UnknownDR)enumerator2.Current;
-							TreeNode treeNode3;
-							string text2;
-							if( dr.c1.ui3 == 0u )
+							DialogResult dialogResult = MessageBox.Show( "Could not find parent data row. Did you forget to load a dependency?\nThe hierarchy will be flattened.", "Warning", MessageBoxButtons.OK ); // TODO: , 48);
+							if( dialogResult == DialogResult.Cancel )
 							{
-								treeNode3 = treeNode2;
+								flag = false;
 							}
-							else
-							{
-								text2 = string.Format( "{0:x},{1:x}", dq.ui1, dr.c1.ui3 );
-								treeNode3 = dict[text2];
-							}
-							if( treeNode3 == null )
-							{
-								if( flag )
-								{
-									DialogResult dialogResult = MessageBox.Show( "Could not find parent data row. Did you forget to load a dependency?\nThe hierarchy will be flattened.", "Warning", MessageBoxButtons.OK ); // TODO: , 48);
-									if( dialogResult == DialogResult.Cancel )
-									{
-										flag = false;
-									}
-								}
-								treeNode3 = treeNode2;
-							}
-							text = string.Concat( new object[]
-							{
+						}
+						treeNode3 = treeNode2;
+					}
+					text = string.Concat( new object[]
+					{
 								HashTracker.getValueForHash(dr.c1.hash),
 								" [",
 								dq.c61.i6,
 								"+",
 								dr.c1.i1,
 								"]"
-							} );
-							treeNode3 = treeNode3.Nodes.Add( text );
-							treeNode3.Tag = dr;
-							text2 = string.Format( "{0:x},{1:x}", dq.ui1, dr.c1.hash );
-							dict[text2] = treeNode3;
-							//dict.Add( text2, treeNode3 );
-						}
-					}
-					finally
-					{
-						IDisposable disposable = enumerator2 as IDisposable;
-						if( disposable != null )
-						{
-							disposable.Dispose();
-						}
-					}
-				}
-			}
-			finally
-			{
-				IDisposable disposable = enumerator as IDisposable;
-				if( disposable != null )
-				{
-					disposable.Dispose();
+					} );
+					treeNode3 = treeNode3.Nodes.Add( text );
+					treeNode3.Tag = dr;
+					text2 = string.Format( "{0:x},{1:x}", dq.ui1, dr.c1.hash );
+					dict[text2] = treeNode3;
+					//dict.Add( text2, treeNode3 );
 				}
 			}
 			this.tv.EndUpdate();
@@ -816,90 +699,54 @@ namespace VLTEdit
 			{
 				num = HashUtil.getHash32( A_0 );
 			}
-			IEnumerator enumerator = this.av.GetEnumerator();
-			try
+
+			foreach( VLTClass dq in this.av )
 			{
-				while( enumerator.MoveNext() )
+				if( dq.ui1 == num )
 				{
-					VLTClass dq = (VLTClass)enumerator.Current;
-					if( dq.ui1 == num )
+					string text = A_0 + ": Found match for class: " + HashTracker.getValueForHash( dq.ui1 );
+					if( !A_1.Contains( text ) )
 					{
-						string text = A_0 + ": Found match for class: " + HashTracker.getValueForHash( dq.ui1 );
-						if( !A_1.Contains( text ) )
-						{
-							A_1.Add( text );
-						}
+						A_1.Add( text );
 					}
-					IEnumerator enumerator2 = dq.GetEnumerator();
-					try
+				}
+
+				foreach( VLTClass.aclz1 a in dq )
+				{
+					if( a.hash == num )
 					{
-						while( enumerator2.MoveNext() )
+						string text = string.Concat( new string[]
 						{
-							VLTClass.aclz1 a = (VLTClass.aclz1)enumerator2.Current;
-							if( a.hash == num )
-							{
-								string text = string.Concat( new string[]
-								{
 									A_0,
 									": Found match for field: ",
 									HashTracker.getValueForHash(dq.ui1),
 									"/",
 									HashTracker.getValueForHash(a.hash)
-								} );
-								if( !A_1.Contains( text ) )
-								{
-									A_1.Add( text );
-								}
-							}
+						} );
+						if( !A_1.Contains( text ) )
+						{
+							A_1.Add( text );
 						}
 					}
-					finally
+				}
+
+				foreach( UnknownDR dr in dq.dqb1 )
+				{
+					if( dr.c1.hash == num )
 					{
-						IDisposable disposable = enumerator2 as IDisposable;
-						if( disposable != null )
+						string text = string.Concat( new string[]
 						{
-							disposable.Dispose();
-						}
-					}
-					enumerator2 = dq.dqb1.GetEnumerator();
-					try
-					{
-						while( enumerator2.MoveNext() )
-						{
-							UnknownDR dr = (UnknownDR)enumerator2.Current;
-							if( dr.c1.hash == num )
-							{
-								string text = string.Concat( new string[]
-								{
 									A_0,
 									": Found match for row: ",
 									HashTracker.getValueForHash(dq.ui1),
 									"/",
 									this.a(dr)
-								} );
-								if( !A_1.Contains( text ) )
-								{
-									A_1.Add( text );
-								}
-							}
-						}
-					}
-					finally
-					{
-						IDisposable disposable = enumerator2 as IDisposable;
-						if( disposable != null )
+						} );
+						if( !A_1.Contains( text ) )
 						{
-							disposable.Dispose();
+							A_1.Add( text );
 						}
 					}
-				}
-			}
-			finally
-			{
-				IDisposable disposable = enumerator as IDisposable;
-				if( disposable != null )
-				{
-					disposable.Dispose();
 				}
 			}
 		}
@@ -915,9 +762,8 @@ namespace VLTEdit
 			this.search( A_0.ToUpper(), ref strList );
 			bool flag = true;
 			string text = "";
-			for( int i = 0; i < A_0.Length; ++i )
+			foreach( char c in A_0.ToCharArray() )
 			{
-				char c = A_0[i];
 				if( c == '_' )
 				{
 					flag = true;
@@ -940,23 +786,11 @@ namespace VLTEdit
 			this.search( text.ToUpper(), ref strList );
 			if( strList.Count > 0 )
 			{
-				IEnumerator<string> enumerator = strList.GetEnumerator();
-				try
+				foreach( string str in strList )
 				{
-					while( enumerator.MoveNext() )
-					{
-						this.writeToConsole( enumerator.Current );
-					}
-					return;
+					this.writeToConsole( str );
 				}
-				finally
-				{
-					IDisposable disposable = enumerator as IDisposable;
-					if( disposable != null )
-					{
-						disposable.Dispose();
-					}
-				}
+				return;
 			}
 			this.writeToConsole( "No matches found." );
 		}
@@ -964,24 +798,11 @@ namespace VLTEdit
 		private void a( VLTClass A_0, string A_1 )
 		{
 			this.writeToConsole( string.Format( "Dumping contents of class: {0}, field: {1}", HashTracker.getValueForHash( A_0.ui1 ), A_1 ) );
-			IEnumerator enumerator = A_0.dqb1.GetEnumerator();
-			try
+			foreach( UnknownDR dr in A_0.dqb1 )
 			{
-				while( enumerator.MoveNext() )
+				if( dr.c1.ui3 == 0u )
 				{
-					UnknownDR dr = (UnknownDR)enumerator.Current;
-					if( dr.c1.ui3 == 0u )
-					{
-						this.a( dr, A_1 );
-					}
-				}
-			}
-			finally
-			{
-				IDisposable disposable = enumerator as IDisposable;
-				if( disposable != null )
-				{
-					disposable.Dispose();
+					this.a( dr, A_1 );
 				}
 			}
 		}
@@ -1041,24 +862,11 @@ namespace VLTEdit
 				}
 				this.writeToConsole( string.Format( "{0}: {1}", text, text3 ) );
 			}
-			IEnumerator enumerator = dq.dqb1.GetEnumerator();
-			try
+			foreach( UnknownDR dr in dq.dqb1 )
 			{
-				while( enumerator.MoveNext() )
+				if( dr.c1.ui3 == A_0.c1.hash )
 				{
-					UnknownDR dr = (UnknownDR)enumerator.Current;
-					if( dr.c1.ui3 == A_0.c1.hash )
-					{
-						this.a( dr, A_1 );
-					}
-				}
-			}
-			finally
-			{
-				IDisposable disposable = enumerator as IDisposable;
-				if( disposable != null )
-				{
-					disposable.Dispose();
+					this.a( dr, A_1 );
 				}
 			}
 		}
@@ -1097,150 +905,105 @@ namespace VLTEdit
 
 		private void classdump()
 		{
-
 			StreamWriter streamWriter = new StreamWriter( ( new FileInfo( Application.ExecutablePath ) ).Directory.FullName + "\\temp.cs", false, Encoding.ASCII );
 			streamWriter.WriteLine( "using System;" );
 			streamWriter.WriteLine( "using mwperf;" );
 			streamWriter.WriteLine( "namespace mwperf.VLTTables {" );
-			IEnumerator enumerator = this.av.GetEnumerator();
-			try
+
+			foreach( VLTClass dq in this.av )
 			{
-				while( enumerator.MoveNext() )
+				string text = this.bThree( HashTracker.getValueForHash( dq.ui1 ) );
+				if( this.c( text ) )
 				{
-					VLTClass dq = (VLTClass)enumerator.Current;
-					string text = this.bThree( HashTracker.getValueForHash( dq.ui1 ) );
-					if( this.c( text ) )
+					streamWriter.WriteLine( "\tnamespace " + text + " {" );
+					streamWriter.WriteLine( "\t\tpublic abstract class " + this.bThree( text + "_base" ) + " {" );
+
+					foreach( VLTClass.aclz1 a in dq )
 					{
-						streamWriter.WriteLine( "\tnamespace " + text + " {" );
-						streamWriter.WriteLine( "\t\tpublic abstract class " + this.bThree( text + "_base" ) + " {" );
-						IEnumerator enumerator2 = dq.GetEnumerator();
-						try
+						string text2 = this.bThree( HashTracker.getValueForHash( a.hash ) );
+						if( this.c( text2 ) )
 						{
-							while( enumerator2.MoveNext() )
+							streamWriter.WriteLine( string.Concat( new string[]
 							{
-								VLTClass.aclz1 a = (VLTClass.aclz1)enumerator2.Current;
-								string text2 = this.bThree( HashTracker.getValueForHash( a.hash ) );
-								if( this.c( text2 ) )
-								{
-									streamWriter.WriteLine( string.Concat( new string[]
-									{
 										"\t\t\tpublic static VLTOffsetData",
 										a.isArray() ? "[]" : "",
 										" ",
 										text2,
 										";"
-									} ) );
-								}
-							}
+							} ) );
 						}
-						finally
+					}
+
+					streamWriter.WriteLine( "\t\t}" );
+
+					foreach( UnknownDR dr in dq.dqb1 )
+					{
+						int num = 0;
+						string text3 = this.bThree( HashTracker.getValueForHash( dr.c1.hash ) );
+						if( this.c( text3 ) )
 						{
-							IDisposable disposable = enumerator2 as IDisposable;
-							if( disposable != null )
+							streamWriter.WriteLine( string.Concat( new string[]
 							{
-								disposable.Dispose();
-							}
-						}
-						streamWriter.WriteLine( "\t\t}" );
-						enumerator2 = dq.dqb1.GetEnumerator();
-						try
-						{
-							while( enumerator2.MoveNext() )
-							{
-								UnknownDR dr = (UnknownDR)enumerator2.Current;
-								int num = 0;
-								string text3 = this.bThree( HashTracker.getValueForHash( dr.c1.hash ) );
-								if( this.c( text3 ) )
-								{
-									streamWriter.WriteLine( string.Concat( new string[]
-									{
 										"\t\tpublic class ",
 										text3,
 										" : ",
 										text,
 										"_base {"
-									} ) );
-									streamWriter.WriteLine( "\t\t\tstatic " + text3 + "() {" );
-									IEnumerator enumerator3 = dq.GetEnumerator();
-									try
+							} ) );
+							streamWriter.WriteLine( "\t\t\tstatic " + text3 + "() {" );
+
+							foreach( VLTClass.aclz1 a2 in dq )
+							{
+								EABaseType bb = dr.bba1[num++];
+								if( !a2.c() || dr.booa1[num - 1] )
+								{
+									string text4 = this.bThree( HashTracker.getValueForHash( a2.hash ) );
+									if( this.c( text4 ) )
 									{
-										while( enumerator3.MoveNext() )
+										streamWriter.Write( "\t\t\t\t" + text4 + " = " );
+										if( a2.isArray() )
 										{
-											VLTClass.aclz1 a2 = (VLTClass.aclz1)enumerator3.Current;
-											EABaseType bb = dr.bba1[num++];
-											if( !a2.c() || dr.booa1[num - 1] )
+											EAArray m = bb as EAArray;
+											streamWriter.WriteLine( "new VLTOffsetData[] {" );
+											for( int i = 0; i < m.getMaxEntryCount(); ++i )
 											{
-												string text4 = this.bThree( HashTracker.getValueForHash( a2.hash ) );
-												if( this.c( text4 ) )
+												bb = m.genlist[i];
+												streamWriter.WriteLine( string.Concat( new string[]
 												{
-													streamWriter.Write( "\t\t\t\t" + text4 + " = " );
-													if( a2.isArray() )
-													{
-														EAArray m = bb as EAArray;
-														streamWriter.WriteLine( "new VLTOffsetData[] {" );
-														for( int i = 0; i < m.getMaxEntryCount(); ++i )
-														{
-															bb = m.genlist[i];
-															streamWriter.WriteLine( string.Concat( new string[]
-															{
 																"\t\t\t\t\tnew VLTOffsetData(VLTOffsetType.",
 																bb.boo1 ? "Vlt" : "Bin",
 																", ",
 																string.Format("0x{0:x}", bb.ui1),
 																")",
 																(i != (int)(m.getMaxEntryCount() - 1)) ? "," : ""
-															} ) );
-														}
-														streamWriter.WriteLine( "\t\t\t\t};" );
-													}
-													else
-													{
-														streamWriter.WriteLine( string.Concat( new string[]
-														{
+												} ) );
+											}
+											streamWriter.WriteLine( "\t\t\t\t};" );
+										}
+										else
+										{
+											streamWriter.WriteLine( string.Concat( new string[]
+											{
 															"new VLTOffsetData(VLTOffsetType.",
 															bb.boo1 ? "Vlt" : "Bin",
 															", ",
 															string.Format("0x{0:x}", bb.ui1),
 															");"
-														} ) );
-													}
-												}
-											}
+											} ) );
 										}
 									}
-									finally
-									{
-										IDisposable disposable = enumerator3 as IDisposable;
-										if( disposable != null )
-										{
-											disposable.Dispose();
-										}
-									}
-									streamWriter.WriteLine( "\t\t\t}" );
-									streamWriter.WriteLine( "\t\t}" );
 								}
 							}
+
+							streamWriter.WriteLine( "\t\t\t}" );
+							streamWriter.WriteLine( "\t\t}" );
 						}
-						finally
-						{
-							IDisposable disposable = enumerator2 as IDisposable;
-							if( disposable != null )
-							{
-								disposable.Dispose();
-							}
-						}
-						streamWriter.WriteLine( "\t}" );
 					}
+
+					streamWriter.WriteLine( "\t}" );
 				}
 			}
-			finally
-			{
-				IDisposable disposable = enumerator as IDisposable;
-				if( disposable != null )
-				{
-					disposable.Dispose();
-				}
-			}
+
 			streamWriter.WriteLine( "}" );
 			streamWriter.Close();
 		}
@@ -1426,29 +1189,25 @@ namespace VLTEdit
 						if( noArgs )
 						{
 							directories = directoryInfo.GetDirectories();
-							for( int i = 0; i < directories.Length; ++i )
+							foreach( DirectoryInfo directoryInfo2 in directories )
 							{
-								DirectoryInfo directoryInfo2 = directories[i];
 								this.writeToConsole( "[d] " + directoryInfo2.Name );
 							}
 							files = directoryInfo.GetFiles();
-							for( int i = 0; i < files.Length; ++i )
+							foreach( FileInfo fileInfo3 in files )
 							{
-								FileInfo fileInfo3 = files[i];
 								this.writeToConsole( "    " + fileInfo3.Name );
 							}
 							break;
 						}
 						directories = directoryInfo.GetDirectories( text2 );
-						for( int i = 0; i < directories.Length; ++i )
+						foreach( DirectoryInfo directoryInfo3 in directories )
 						{
-							DirectoryInfo directoryInfo3 = directories[i];
 							this.writeToConsole( "[d] " + directoryInfo3.Name );
 						}
 						files = directoryInfo.GetFiles( text2 );
-						for( int i = 0; i < files.Length; ++i )
+						foreach( FileInfo fileInfo4 in files )
 						{
-							FileInfo fileInfo4 = files[i];
 							this.writeToConsole( "    " + fileInfo4.Name );
 						}
 						break;
@@ -1666,28 +1425,17 @@ namespace VLTEdit
 				dataTable.Columns.Add( "Type", typeof( string ) );
 				dataTable.Columns.Add( "Length", typeof( ushort ) );
 				dataTable.Columns.Add( "Count", typeof( short ) );
-				IEnumerator enumerator = dq.GetEnumerator();
-				try
+
+				foreach( VLTClass.aclz1 a in dq )
 				{
-					while( enumerator.MoveNext() )
-					{
-						VLTClass.aclz1 a = (VLTClass.aclz1)enumerator.Current;
-						DataRow dataRow = dataTable.NewRow();
-						dataRow[0] = HashTracker.getValueForHash( a.hash );
-						dataRow[1] = HashTracker.getValueForHash( a.ui2 );
-						dataRow[2] = a.len;
-						dataRow[3] = a.count;
-						dataTable.Rows.Add( dataRow );
-					}
+					DataRow dataRow = dataTable.NewRow();
+					dataRow[0] = HashTracker.getValueForHash( a.hash );
+					dataRow[1] = HashTracker.getValueForHash( a.ui2 );
+					dataRow[2] = a.len;
+					dataRow[3] = a.count;
+					dataTable.Rows.Add( dataRow );
 				}
-				finally
-				{
-					IDisposable disposable = enumerator as IDisposable;
-					if( disposable != null )
-					{
-						disposable.Dispose();
-					}
-				}
+
 				this.classGrid.DataSource = dataSet;
 				this.classGrid.DataMember = "Fields";
 
@@ -1729,63 +1477,52 @@ namespace VLTEdit
 				this.tvFields.BeginUpdate();
 				this.tvFields.Nodes.Clear();
 				int num = 0;
-				IEnumerator enumerator = dq2.GetEnumerator();
-				try
+
+				foreach( VLTClass.aclz1 a3 in dq2 )
 				{
-					while( enumerator.MoveNext() )
+					EABaseType bb = dr.bba1[num++];
+					if( !a3.c() || dr.booa1[num - 1] )
 					{
-						VLTClass.aclz1 a3 = (VLTClass.aclz1)enumerator.Current;
-						EABaseType bb = dr.bba1[num++];
-						if( !a3.c() || dr.booa1[num - 1] )
+						if( a3.isArray() )
 						{
-							if( a3.isArray() )
+							EAArray m = bb as EAArray;
+							string text3 = string.Concat( new object[]
 							{
-								EAArray m = bb as EAArray;
-								string text3 = string.Concat( new object[]
-								{
 									HashTracker.getValueForHash(a3.hash),
 									" [",
 									m.getMaxEntryCount(),
 									"/",
 									m.getCurrentEntryCount(),
 									"]"
-								} );
-								TreeNode treeNode2 = this.tvFields.Nodes.Add( text3 );
-								treeNode2.Tag = bb;
-								for( int i = 0; i < m.getMaxEntryCount(); ++i )
+							} );
+							TreeNode treeNode2 = this.tvFields.Nodes.Add( text3 );
+							treeNode2.Tag = bb;
+							for( int i = 0; i < m.getMaxEntryCount(); ++i )
+							{
+								TreeNode treeNode3 = treeNode2.Nodes.Add( "[" + i + "]" );
+								treeNode3.Tag = m.genlist[i];
+								if( treeNode2.Text == text && treeNode3.Text == text2 )
 								{
-									TreeNode treeNode3 = treeNode2.Nodes.Add( "[" + i + "]" );
-									treeNode3.Tag = m.genlist[i];
-									if( treeNode2.Text == text && treeNode3.Text == text2 )
-									{
-										treeNode = treeNode3;
-									}
-								}
-								if( treeNode2.Text == text && treeNode == null )
-								{
-									treeNode = treeNode2;
+									treeNode = treeNode3;
 								}
 							}
-							else
+							if( treeNode2.Text == text && treeNode == null )
 							{
-								TreeNode treeNode4 = this.tvFields.Nodes.Add( HashTracker.getValueForHash( a3.hash ) );
-								treeNode4.Tag = bb;
-								if( treeNode4.Text == text )
-								{
-									treeNode = treeNode4;
-								}
+								treeNode = treeNode2;
+							}
+						}
+						else
+						{
+							TreeNode treeNode4 = this.tvFields.Nodes.Add( HashTracker.getValueForHash( a3.hash ) );
+							treeNode4.Tag = bb;
+							if( treeNode4.Text == text )
+							{
+								treeNode = treeNode4;
 							}
 						}
 					}
 				}
-				finally
-				{
-					IDisposable disposable = enumerator as IDisposable;
-					if( disposable != null )
-					{
-						disposable.Dispose();
-					}
-				}
+
 				if( this.tvFields.Nodes.Count > 0 )
 				{
 					if( treeNode == null )
@@ -1818,10 +1555,8 @@ namespace VLTEdit
 				dataTable.Columns.Add( "Value", typeof( string ) );
 				Type type = bb.GetType();
 				FieldInfo[] fields = type.GetFields();
-				FieldInfo[] array = fields;
-				for( int i = 0; i < array.Length; ++i )
+				foreach( FieldInfo fieldInfo in fields )
 				{
-					FieldInfo fieldInfo = array[i];
 					object[] customAttributes = fieldInfo.GetCustomAttributes( typeof( DataValueAttribute ), false );
 					if( customAttributes != null && customAttributes.Length == 1 && customAttributes[0] is DataValueAttribute )
 					{

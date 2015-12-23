@@ -23,9 +23,9 @@ namespace VLTEdit
 		public override void write( BinaryWriter bw )
 		{
 			bw.Write( this.asa1.Length );
-			for( int i = 0; i < this.asa1.Length; ++i )
+			foreach( UnknownAS asa in this.asa1 )
 			{
-				this.asa1[i].write( bw );
+				asa.write( bw );
 			}
 		}
 

@@ -185,10 +185,6 @@ namespace VPak
 			for( int i = 0; i < header.internalFileCount; ++i )
 			{
 				files[i].internalName = dicttable[files[i].fileNumber];
-			}
-
-			for( int i = 0; i < header.internalFileCount; ++i )
-			{
 				Console.WriteLine( "\tOutput: " + files[i].internalName );
 
 				fileStream.Seek( files[i].binLocation, SeekOrigin.Begin );
@@ -246,9 +242,9 @@ namespace VPak
 			string text2 = fileInfo.Name.Remove( fileInfo.Name.Length - fileInfo.Extension.Length, fileInfo.Extension.Length ) + ".vls";
 			StreamWriter streamWriter = new StreamWriter( text2 );
 
-			for( int i = 0; i < files.Length; ++i )
+			foreach( SubfileHeader sh in files )
 			{
-				streamWriter.WriteLine( files[i].internalName );
+				streamWriter.WriteLine( sh.internalName );
 			}
 
 			streamWriter.Close();

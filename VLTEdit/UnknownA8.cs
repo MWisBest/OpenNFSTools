@@ -15,23 +15,10 @@ namespace VLTEdit
 		public void a( Stream A_0 )
 		{
 			BinaryWriter bw = new BinaryWriter( A_0 );
-			IEnumerator<UnknownB8> enumerator = this.genb8listTwo.GetEnumerator();
-			try
+			foreach( UnknownB8 b in this.genb8listTwo )
 			{
-				while( enumerator.MoveNext() )
-				{
-					UnknownB8 b = enumerator.Current;
-					bw.BaseStream.Seek( b.i1, SeekOrigin.Begin );
-					bw.Write( b.i2 );
-				}
-			}
-			finally
-			{
-				IDisposable disposable = enumerator as IDisposable;
-				if( disposable != null )
-				{
-					disposable.Dispose();
-				}
+				bw.BaseStream.Seek( b.i1, SeekOrigin.Begin );
+				bw.Write( b.i2 );
 			}
 		}
 
@@ -106,21 +93,9 @@ namespace VLTEdit
 
 		public override void write( BinaryWriter bw )
 		{
-			IEnumerator<UnknownB8> enumerator = this.genb8list.GetEnumerator();
-			try
+			foreach( UnknownB8 b in this.genb8list )
 			{
-				while( enumerator.MoveNext() )
-				{
-					enumerator.Current.write( bw );
-				}
-			}
-			finally
-			{
-				IDisposable disposable = enumerator as IDisposable;
-				if( disposable != null )
-				{
-					disposable.Dispose();
-				}
+				b.write( bw );
 			}
 		}
 

@@ -1111,6 +1111,7 @@ FRONT_REACTION
 cscopsuv
 roadblocksuvheavy
 roadblocksuvlight
+suvlight
 
 # controller
 streetlight_scale

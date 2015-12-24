@@ -14,11 +14,11 @@ namespace VLTEdit
 		{
 			switch( A_0 )
 			{
-				case VLTCommonValue.COMMON:
+				case VLTCommonValue.ROW:
 					return new UnknownC();
-				case VLTCommonValue.UNCOMMON:
+				case VLTCommonValue.CLASS:
 					return new UnknownC6();
-				case VLTCommonValue.RARE:
+				case VLTCommonValue.ROOT:
 					return new UnknownW();
 				default:
 					return null;

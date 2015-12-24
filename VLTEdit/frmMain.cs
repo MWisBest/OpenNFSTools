@@ -528,13 +528,13 @@ namespace VLTEdit
 				// MW: Made more legible
 				switch( @as.b21 )
 				{
-					case VLTCommonValue.RARE:
+					case VLTCommonValue.ROOT:
 						this.av.am( @as.di1.asUnknownW(), A_0 );
 						break;
-					case VLTCommonValue.UNCOMMON:
+					case VLTCommonValue.CLASS:
 						this.av.a( @as.di1.asUnknownC6(), A_0 );
 						break;
-					case VLTCommonValue.COMMON:
+					case VLTCommonValue.ROW:
 						UnknownC c = @as.di1.asUnknownC();
 						VLTClass dq = this.av.genht2[c.ui2];
 						dq.dqb1.a( c, A_0 );
@@ -572,11 +572,11 @@ namespace VLTEdit
 					foreach( UnknownAS @as in dh )
 					{
 						VLTCommonValue b2 = @as.b21;
-						if( b2 != VLTCommonValue.UNCOMMON )
+						if( b2 != VLTCommonValue.CLASS )
 						{
-							if( b2 != VLTCommonValue.COMMON )
+							if( b2 != VLTCommonValue.ROW )
 							{
-								if( b2 == VLTCommonValue.RARE )
+								if( b2 == VLTCommonValue.ROOT )
 								{
 									this.writeToConsole( "- Database" );
 								}
@@ -876,30 +876,21 @@ namespace VLTEdit
 			return !A_0.StartsWith( "unk_" );
 		}
 
-		// TODO: opt
-		private string bThree( string A_0 )
+		private string bThree( string text )
 		{
-			string text = A_0;
-			if( text.StartsWith( "0x" ) )
-			{
-				text = "unk_" + text;
-			}
-			if( text == "default" )
-			{
-				text = "_default";
-			}
-			if( text == "null" )
-			{
-				text = "_null";
-			}
 			if( text.EndsWith( "*" ) )
 			{
 				text = text.Substring( 0, text.Length - 1 );
 			}
-			if( text.ToCharArray()[0] >= '0' && text.ToCharArray()[0] <= '9' )
+			if( text.StartsWith( "0x" ) )
 			{
-				text = "_" + text;
+				return "unk_" + text;
 			}
+			else if( text == "default" || text == "null" || ( text.ToCharArray()[0] >= '0' && text.ToCharArray()[0] <= '9' ) )
+			{
+				return "_" + text;
+			}
+
 			return text;
 		}
 

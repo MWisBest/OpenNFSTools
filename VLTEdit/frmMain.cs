@@ -572,24 +572,18 @@ namespace VLTEdit
 					foreach( UnknownAS @as in dh )
 					{
 						VLTCommonValue b2 = @as.b21;
-						if( b2 != VLTCommonValue.CLASS )
+						switch( @as.b21 )
 						{
-							if( b2 != VLTCommonValue.ROW )
-							{
-								if( b2 == VLTCommonValue.ROOT )
-								{
-									this.writeToConsole( "- Database" );
-								}
-							}
-							else
-							{
+							case VLTCommonValue.CLASS:
+								this.writeToConsole( "- Class: " + HashTracker.getValueForHash( @as.ui1 ) );
+								break;
+							case VLTCommonValue.ROW:
 								UnknownC c = @as.di1.asUnknownC();
 								this.writeToConsole( "- Row: " + HashTracker.getValueForHash( c.ui2 ) + "/" + this.a( this.av.genht2[c.ui2].dqb1.a( c.hash ) ) );
-							}
-						}
-						else
-						{
-							this.writeToConsole( "- Class: " + HashTracker.getValueForHash( @as.ui1 ) );
+								break;
+							case VLTCommonValue.ROOT:
+								this.writeToConsole( "- Database" );
+								break;
 						}
 					}
 					break;
@@ -999,7 +993,7 @@ namespace VLTEdit
 			streamWriter.Close();
 		}
 
-		private void a( string A_0 )
+		private void consoleCommandHandler( string A_0 )
 		{
 			string[] array = A_0.Split( new char[] { ' ' }, 2 );
 			string text = array[0];
@@ -1632,7 +1626,7 @@ namespace VLTEdit
 					this.txtConsoleInput.Text = "";
 					this.txtConsoleInput.Refresh();
 					this.writeToConsole( "> " + text );
-					this.a( text );
+					this.consoleCommandHandler( text );
 					this.txtConsoleInput.Focus();
 					A_1.Handled = true;
 				}

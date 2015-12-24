@@ -4,7 +4,7 @@ namespace VLTEdit.Types
 {
 	public class EAGCollectionKey : EABaseType // OBF: al.cs
 	{
-		[DataValue( "Hash" )]
+		[DataValue( "Hash", Hex = true )]
 		public uint hash;
 		[DataValue( "Value" )]
 		public string value;

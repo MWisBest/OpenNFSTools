@@ -1,11 +1,12 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
 namespace VLTEdit
 {
 	[DefaultMember( "Item" )]
-	public class UnknownDH : UnknownC0, IEnumerable
+	public class UnknownDH : UnknownC0, IEnumerable<UnknownAS>
 	{
 		public UnknownAS[] asa1;
 
@@ -29,9 +30,14 @@ namespace VLTEdit
 			}
 		}
 
-		public IEnumerator GetEnumerator()
+		public IEnumerator<UnknownAS> GetEnumerator()
 		{
-			return this.asa1.GetEnumerator();
+			return (IEnumerator<UnknownAS>)this.asa1.GetEnumerator();
 		}
-	}
+
+		IEnumerator IEnumerable.GetEnumerator()
+		{
+			return this.GetEnumerator();
+		}
+    }
 }

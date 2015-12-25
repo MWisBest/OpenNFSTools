@@ -1,8 +1,8 @@
 using System.IO;
 
-namespace VLTEdit
+namespace VLTEdit.Table
 {
-	public class UnknownC6 : UnknownDI
+	public class ClassEntry : BaseEntry
 	{
 		public uint ui1;
 		private int i1;

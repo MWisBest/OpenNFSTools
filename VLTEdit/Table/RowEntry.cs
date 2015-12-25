@@ -1,10 +1,10 @@
 using System.IO;
 using System.Reflection;
 
-namespace VLTEdit
+namespace VLTEdit.Table
 {
 	[DefaultMember( "Item" )]
-	public class UnknownC : UnknownDI
+	public class RowEntry : BaseEntry
 	{
 		public class aclz : IBinReadWrite
 		{
@@ -54,7 +54,7 @@ namespace VLTEdit
 		private int i4;
 		public int position;
 		private uint[] uia1;
-		public UnknownC.aclz[] caa1;
+		public RowEntry.aclz[] caa1;
 
 		public override void read( BinaryReader br )
 		{
@@ -78,19 +78,27 @@ namespace VLTEdit
 			// position is casted here because the only place that references this needs it as an int anyway.
 			this.position = (int)br.BaseStream.Position;
 
+			/*
+			if( br.ReadInt32() != VLTConstants.MW_DEADBEEF ) // Only NFS:MW has this extra garbage data.
+			{
+				br.BaseStream.Seek( -4L, SeekOrigin.Current );
+			}*/
+			
+			
 			if( !BuildConfig.CARBON )
 			{
 				br.ReadInt32(); // VLTConstants.MW_DEADBEEF
 			}
+
 			this.uia1 = new uint[this.i4]; // NFS:C Overflow!
 			for( int i = 0; i < this.i4; ++i )
 			{
 				this.uia1[i] = br.ReadUInt32();
 			}
-			this.caa1 = new UnknownC.aclz[this.i1];
+			this.caa1 = new RowEntry.aclz[this.i1];
 			for( int j = 0; j < this.i1; ++j )
 			{
-				this.caa1[j] = new UnknownC.aclz();
+				this.caa1[j] = new RowEntry.aclz();
 				this.caa1[j].read( br );
 			}
 		}

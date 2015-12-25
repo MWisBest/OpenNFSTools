@@ -1,10 +1,10 @@
-namespace VLTEdit
+namespace VLTEdit.Table
 {
 	/**
 	 * These seem to represent some sort of values found in the VLT files.
 	 * They are stored here in opposite endianness (e.x. 2383490743 becomes B72E118E, NOT 8E112EB7).
 	 */
-	public enum VLTCommonValue : uint
+	public enum EntryType : uint
 	{
 		ROOT = 0xCBBC628Fu, // 8F62BCCB, 1 instance in NFS:MW and NFS:C db.vlt
 

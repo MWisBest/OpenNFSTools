@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Reflection;
+using VLTEdit.Table;
 using VLTEdit.Types;
 
 namespace VLTEdit
@@ -9,7 +10,7 @@ namespace VLTEdit
 	public class UnknownDR : IEnumerable // OBF: dr.cs
 	{
 		public UnknownB0 b01;
-		public UnknownC c1;
+		public RowEntry c1;
 		public EABaseType[] bba1;
 		public bool[] booa1;
 		public VLTClass dq1;

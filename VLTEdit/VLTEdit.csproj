@@ -92,7 +92,7 @@
     <Compile Include="Types\EAJunkmanMod.cs" />
     <Compile Include="UnknownB0.cs" />
     <Compile Include="Types\EABool.cs" />
-    <Compile Include="VLTCommonValue.cs" />
+    <Compile Include="Table\EntryType.cs" />
     <Compile Include="Types\TypeMap.cs" />
     <Compile Include="Types\EAFloat.cs" />
     <Compile Include="UnknownB8.cs" />
@@ -103,11 +103,11 @@
     <Compile Include="Types\EAUInt64.cs" />
     <Compile Include="HashTracker.cs" />
     <Compile Include="Types\EADouble.cs" />
-    <Compile Include="UnknownC.cs" />
+    <Compile Include="Table\RowEntry.cs" />
     <Compile Include="UnknownC0.cs" />
     <Compile Include="Types\EAVector2.cs" />
     <Compile Include="Types\EAStringKey.cs" />
-    <Compile Include="UnknownC6.cs" />
+    <Compile Include="Table\ClassEntry.cs" />
     <Compile Include="Types\EABlob.cs" />
     <Compile Include="VLTConstants.cs" />
     <Compile Include="VLTOtherValue.cs" />
@@ -116,7 +116,7 @@
     <Compile Include="Types\EAInt8.cs" />
     <Compile Include="UnknownDE.cs" />
     <Compile Include="UnknownDH.cs" />
-    <Compile Include="UnknownDI.cs" />
+    <Compile Include="Table\BaseEntry.cs" />
     <Compile Include="Types\EAInt16.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
@@ -130,7 +130,7 @@
     <Compile Include="Types\EAArray.cs" />
     <Compile Include="HashUtil.cs" />
     <Compile Include="Types\DataValueAttribute.cs" />
-    <Compile Include="UnknownW.cs" />
+    <Compile Include="Table\RootEntry.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

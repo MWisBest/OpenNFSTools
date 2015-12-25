@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using VLTEdit.Table;
 using VLTEdit.Types;
 
 // TODO Collections.Generic IComparable IEnumerable etc
@@ -35,7 +36,7 @@ namespace VLTEdit
 				return null;
 			}
 
-			public void a( UnknownC A_0, UnknownB0 A_1 )
+			public void a( RowEntry A_0, UnknownB0 A_1 )
 			{
 				BinaryReader binaryReader = new BinaryReader( A_1.ms1 );
 				BinaryReader binaryReader2 = new BinaryReader( A_1.ms2 );
@@ -177,11 +178,11 @@ namespace VLTEdit
 
 		public UnknownB0 b01;
 		public uint ui1;
-		public UnknownC6 c61;
+		public ClassEntry c61;
 		public VLTClass.aclz1[] dqaa1;
 		public VLTClass.bie dqb1;
 
-		public void a( UnknownC6 A_0, UnknownB0 A_1 )
+		public void a( ClassEntry A_0, UnknownB0 A_1 )
 		{
 			this.b01 = A_1;
 			this.c61 = A_0;

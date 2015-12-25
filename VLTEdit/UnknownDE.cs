@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using VLTEdit.Table;
 
 namespace VLTEdit
 {
@@ -23,7 +24,7 @@ namespace VLTEdit
 			return this.genht2[A_0]; // NOTE: if frontend is loaded before db, NPE here...
 		}*/
 
-		public void am( UnknownW A_0, UnknownB0 A_1 )
+		public void am( RootEntry A_0, UnknownB0 A_1 )
 		{
 			UnknownA8 a = A_1.a( VLTOtherValue.TABLE_END ) as UnknownA8;
 			int num = a.genht1[A_0.position].i2;
@@ -42,7 +43,7 @@ namespace VLTEdit
 			this.genht2 = new Dictionary<uint, VLTClass>();
 		}
 
-		public void a( UnknownC6 A_0, UnknownB0 A_1 )
+		public void a( ClassEntry A_0, UnknownB0 A_1 )
 		{
 			VLTClass dq = new VLTClass();
 			dq.a( A_0, A_1 );

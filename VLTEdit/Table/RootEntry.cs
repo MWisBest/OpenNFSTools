@@ -1,10 +1,10 @@
 using System.IO;
 using System.Reflection;
 
-namespace VLTEdit
+namespace VLTEdit.Table
 {
 	[DefaultMember( "Item" )]
-	public class UnknownW : UnknownDI
+	public class RootEntry : BaseEntry
 	{
 		private int i1;
 		private int i2;

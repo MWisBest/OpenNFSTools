@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using VLTEdit.Table;
 using VLTEdit.Types;
 
 namespace VLTEdit
@@ -528,14 +529,14 @@ namespace VLTEdit
 				// MW: Made more legible
 				switch( @as.b21 )
 				{
-					case VLTCommonValue.ROOT:
-						this.av.am( @as.di1.asUnknownW(), A_0 );
+					case EntryType.ROOT:
+						this.av.am( @as.di1.asRootEntry(), A_0 );
 						break;
-					case VLTCommonValue.CLASS:
-						this.av.a( @as.di1.asUnknownC6(), A_0 );
+					case EntryType.CLASS:
+						this.av.a( @as.di1.asClassEntry(), A_0 );
 						break;
-					case VLTCommonValue.ROW:
-						UnknownC c = @as.di1.asUnknownC();
+					case EntryType.ROW:
+						RowEntry c = @as.di1.asRowEntry();
 						VLTClass dq = this.av.genht2[c.ui2];
 						dq.dqb1.a( c, A_0 );
 						if( i == dh.asa1.Length - 1 )
@@ -571,17 +572,17 @@ namespace VLTEdit
 					UnknownDH dh = b.a( VLTOtherValue.TABLE_START ) as UnknownDH;
 					foreach( UnknownAS @as in dh )
 					{
-						VLTCommonValue b2 = @as.b21;
+						EntryType b2 = @as.b21;
 						switch( @as.b21 )
 						{
-							case VLTCommonValue.CLASS:
+							case EntryType.CLASS:
 								this.writeToConsole( "- Class: " + HashTracker.getValueForHash( @as.ui1 ) );
 								break;
-							case VLTCommonValue.ROW:
-								UnknownC c = @as.di1.asUnknownC();
+							case EntryType.ROW:
+								RowEntry c = @as.di1.asRowEntry();
 								this.writeToConsole( "- Row: " + HashTracker.getValueForHash( c.ui2 ) + "/" + this.a( this.av.genht2[c.ui2].dqb1.a( c.hash ) ) );
 								break;
-							case VLTCommonValue.ROOT:
+							case EntryType.ROOT:
 								this.writeToConsole( "- Database" );
 								break;
 						}

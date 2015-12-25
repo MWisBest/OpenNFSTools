@@ -6,12 +6,13 @@ using System.Reflection;
 using VLTEdit.Table;
 using VLTEdit.Types;
 
+// TODO Collections.Generic IComparable IEnumerable etc
 namespace VLTEdit
 {
 	[DefaultMember( "Item" )]
-	public class VLTClass : IComparable<VLTClass>, IEnumerable<VLTClass.aclz1> // OBF: dq.cs
+	public class VLTClass : IComparable<VLTClass>, IEnumerable // OBF: dq.cs
 	{
-        [DefaultMember( "Item" )]
+		[DefaultMember( "Item" )]
 		public class bie : IEnumerable<UnknownDR>, ITrimmable // OBF: b
 		{
 			private VLTClass vltClass;
@@ -219,14 +220,9 @@ namespace VLTEdit
 			return this.ui1.CompareTo( A_0.ui1 );
 		}
 
-		public IEnumerator<VLTClass.aclz1> GetEnumerator()
+		public IEnumerator GetEnumerator()
 		{
-			return (IEnumerator<VLTClass.aclz1>)this.dqaa1.GetEnumerator();
-		}
-
-		IEnumerator IEnumerable.GetEnumerator()
-		{
-			return this.GetEnumerator();
+			return this.dqaa1.GetEnumerator();
 		}
 	}
 }

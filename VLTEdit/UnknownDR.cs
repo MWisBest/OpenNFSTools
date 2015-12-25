@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.Reflection;
 using VLTEdit.Table;
 using VLTEdit.Types;
@@ -8,7 +7,7 @@ namespace VLTEdit
 {
 	// VLTRoot?!
 	[DefaultMember( "Item" )]
-	public class UnknownDR : IEnumerable<EABaseType> // OBF: dr.cs
+	public class UnknownDR : IEnumerable // OBF: dr.cs
 	{
 		public UnknownB0 b01;
 		public RowEntry c1;
@@ -28,14 +27,9 @@ namespace VLTEdit
 			this.bba1[A_0] = A_1;
 		}
 
-		public IEnumerator<EABaseType> GetEnumerator()
+		public IEnumerator GetEnumerator()
 		{
-			return (IEnumerator<EABaseType>)this.bba1.GetEnumerator();
-		}
-
-		IEnumerator IEnumerable.GetEnumerator()
-		{
-			return this.GetEnumerator();
+			return this.bba1.GetEnumerator();
 		}
 	}
 }

@@ -891,107 +891,108 @@ namespace VLTEdit
 
 		private void classdump()
 		{
-			StreamWriter streamWriter = new StreamWriter( ( new FileInfo( Application.ExecutablePath ) ).Directory.FullName + "\\temp.cs", false, Encoding.ASCII );
-			streamWriter.WriteLine( "using System;" );
-			streamWriter.WriteLine( "using mwperf;" );
-			streamWriter.WriteLine( "namespace mwperf.VLTTables {" );
-
-			foreach( VLTClass dq in this.av )
+			using( StreamWriter streamWriter = new StreamWriter( ( new FileInfo( Application.ExecutablePath ) ).Directory.FullName + "\\temp.cs", false, Encoding.ASCII ) )
 			{
-				string text = this.bThree( HashTracker.getValueForHash( dq.ui1 ) );
-				if( this.c( text ) )
-				{
-					streamWriter.WriteLine( "\tnamespace " + text + " {" );
-					streamWriter.WriteLine( "\t\tpublic abstract class " + this.bThree( text + "_base" ) + " {" );
+				streamWriter.WriteLine( "using System;" );
+				streamWriter.WriteLine( "using mwperf;" );
+				streamWriter.WriteLine( "namespace mwperf.VLTTables {" );
 
-					foreach( VLTClass.aclz1 a in dq )
+				foreach( VLTClass dq in this.av )
+				{
+					string text = this.bThree( HashTracker.getValueForHash( dq.ui1 ) );
+					if( this.c( text ) )
 					{
-						string text2 = this.bThree( HashTracker.getValueForHash( a.hash ) );
-						if( this.c( text2 ) )
+						streamWriter.WriteLine( "\tnamespace " + text + " {" );
+						streamWriter.WriteLine( "\t\tpublic abstract class " + this.bThree( text + "_base" ) + " {" );
+
+						foreach( VLTClass.aclz1 a in dq )
 						{
-							streamWriter.WriteLine( string.Concat( new string[]
+							string text2 = this.bThree( HashTracker.getValueForHash( a.hash ) );
+							if( this.c( text2 ) )
 							{
+								streamWriter.WriteLine( string.Concat( new string[]
+								{
 										"\t\t\tpublic static VLTOffsetData",
 										a.isArray() ? "[]" : "",
 										" ",
 										text2,
 										";"
-							} ) );
+								} ) );
+							}
 						}
-					}
 
-					streamWriter.WriteLine( "\t\t}" );
+						streamWriter.WriteLine( "\t\t}" );
 
-					foreach( UnknownDR dr in dq.dqb1 )
-					{
-						int num = 0;
-						string text3 = this.bThree( HashTracker.getValueForHash( dr.c1.hash ) );
-						if( this.c( text3 ) )
+						foreach( UnknownDR dr in dq.dqb1 )
 						{
-							streamWriter.WriteLine( string.Concat( new string[]
+							int num = 0;
+							string text3 = this.bThree( HashTracker.getValueForHash( dr.c1.hash ) );
+							if( this.c( text3 ) )
 							{
+								streamWriter.WriteLine( string.Concat( new string[]
+								{
 										"\t\tpublic class ",
 										text3,
 										" : ",
 										text,
 										"_base {"
-							} ) );
-							streamWriter.WriteLine( "\t\t\tstatic " + text3 + "() {" );
+								} ) );
+								streamWriter.WriteLine( "\t\t\tstatic " + text3 + "() {" );
 
-							foreach( VLTClass.aclz1 a2 in dq )
-							{
-								EABaseType bb = dr.bba1[num++];
-								if( !a2.c() || dr.booa1[num - 1] )
+								foreach( VLTClass.aclz1 a2 in dq )
 								{
-									string text4 = this.bThree( HashTracker.getValueForHash( a2.hash ) );
-									if( this.c( text4 ) )
+									EABaseType bb = dr.bba1[num++];
+									if( !a2.c() || dr.booa1[num - 1] )
 									{
-										streamWriter.Write( "\t\t\t\t" + text4 + " = " );
-										if( a2.isArray() )
+										string text4 = this.bThree( HashTracker.getValueForHash( a2.hash ) );
+										if( this.c( text4 ) )
 										{
-											EAArray m = bb as EAArray;
-											streamWriter.WriteLine( "new VLTOffsetData[] {" );
-											for( int i = 0; i < m.getMaxEntryCount(); ++i )
+											streamWriter.Write( "\t\t\t\t" + text4 + " = " );
+											if( a2.isArray() )
 											{
-												bb = m.genlist[i];
-												streamWriter.WriteLine( string.Concat( new string[]
+												EAArray m = bb as EAArray;
+												streamWriter.WriteLine( "new VLTOffsetData[] {" );
+												for( int i = 0; i < m.getMaxEntryCount(); ++i )
 												{
+													bb = m.genlist[i];
+													streamWriter.WriteLine( string.Concat( new string[]
+													{
 																"\t\t\t\t\tnew VLTOffsetData(VLTOffsetType.",
 																bb.boo1 ? "Vlt" : "Bin",
 																", ",
 																string.Format("0x{0:x}", bb.ui1),
 																")",
 																(i != (int)(m.getMaxEntryCount() - 1)) ? "," : ""
-												} ) );
+													} ) );
+												}
+												streamWriter.WriteLine( "\t\t\t\t};" );
 											}
-											streamWriter.WriteLine( "\t\t\t\t};" );
-										}
-										else
-										{
-											streamWriter.WriteLine( string.Concat( new string[]
+											else
 											{
+												streamWriter.WriteLine( string.Concat( new string[]
+												{
 															"new VLTOffsetData(VLTOffsetType.",
 															bb.boo1 ? "Vlt" : "Bin",
 															", ",
 															string.Format("0x{0:x}", bb.ui1),
 															");"
-											} ) );
+												} ) );
+											}
 										}
 									}
 								}
+
+								streamWriter.WriteLine( "\t\t\t}" );
+								streamWriter.WriteLine( "\t\t}" );
 							}
-
-							streamWriter.WriteLine( "\t\t\t}" );
-							streamWriter.WriteLine( "\t\t}" );
 						}
+
+						streamWriter.WriteLine( "\t}" );
 					}
-
-					streamWriter.WriteLine( "\t}" );
 				}
-			}
 
-			streamWriter.WriteLine( "}" );
-			streamWriter.Close();
+				streamWriter.WriteLine( "}" );
+			}
 		}
 
 		private void consoleCommandHandler( string A_0 )

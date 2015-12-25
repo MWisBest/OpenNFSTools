@@ -14,12 +14,13 @@ namespace VLTEdit.Table
 
 		public override void read( BinaryReader br )
 		{
-			this.i1 = br.ReadInt32();
-			this.i2 = br.ReadInt32();
-			this.i3 = br.ReadInt32();
+			// comments on sides referencing NFS:MW db.vlt
+			this.i1 = br.ReadInt32(); // offset: 0x48
+			this.i2 = br.ReadInt32(); // ...
+			this.i3 = br.ReadInt32(); // ...
 
 			// position is casted here because the main thing that references this needs it as an int anyway.
-			this.position = (int)br.BaseStream.Position;
+			this.position = (int)br.BaseStream.Position; // we're now at 0x54
 
 			if( !BuildConfig.CARBON )
 			{

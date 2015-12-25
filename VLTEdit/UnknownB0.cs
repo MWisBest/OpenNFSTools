@@ -67,9 +67,11 @@ namespace VLTEdit
 		public void a( string A_0 )
 		{
 			this.directory = ( new FileInfo( A_0 ) ).Directory.FullName;
-			FileStream fileStream = new FileStream( A_0, FileMode.Open, FileAccess.Read );
-			this.a( fileStream, null );
-			fileStream.Close();
+
+			using( FileStream fileStream = new FileStream( A_0, FileMode.Open, FileAccess.Read ) )
+			{
+				this.a( fileStream, null );
+			}
 		}
 
 		public void a( Stream A_0, Stream A_1 )

@@ -124,24 +124,24 @@ namespace VPak
 
 			FileInfo fileInfo = new FileInfo( fileName );
 			string binName = fileInfo.Name.Remove( fileInfo.Name.Length - fileInfo.Extension.Length, fileInfo.Extension.Length ) + ".bin";
-			fileStream2 = new FileStream( binName, FileMode.Create, FileAccess.Write );
 
-			fileStream2.Write( vpakHeader, 0, vpakHeader.Length );
-			fileStream2.Seek( 0L, SeekOrigin.End );
-
-			foreach( string binandvlt in fileNames )
+			using( fileStream2 = new FileStream( binName, FileMode.Create, FileAccess.Write ) )
 			{
-				for( int i = 0; i < 2; ++i )
+				fileStream2.Write( vpakHeader, 0, vpakHeader.Length );
+				fileStream2.Seek( 0L, SeekOrigin.End );
+
+				foreach( string binandvlt in fileNames )
 				{
-					fileStream3 = new FileStream( binandvlt + ( i == 0 ? ".bin" : ".vlt" ), FileMode.Open, FileAccess.Read );
-					binaryReader = new BinaryReader( fileStream3 );
-					byte[] data = binaryReader.ReadBytes( (int)fileStream3.Length );
-					fileStream2.Write( data, 0, data.Length );
-					fileStream2.Seek( 0L, SeekOrigin.End );
+					for( int i = 0; i < 2; ++i )
+					{
+						fileStream3 = new FileStream( binandvlt + ( i == 0 ? ".bin" : ".vlt" ), FileMode.Open, FileAccess.Read );
+						binaryReader = new BinaryReader( fileStream3 );
+						byte[] data = binaryReader.ReadBytes( (int)fileStream3.Length );
+						fileStream2.Write( data, 0, data.Length );
+						fileStream2.Seek( 0L, SeekOrigin.End );
+					}
 				}
 			}
-
-			fileStream2.Close();
 
 			Console.WriteLine( "\tOutput: " + binName );
 		}
@@ -202,14 +202,15 @@ namespace VPak
 					// reached end of stream, stop here.
 				}
 
-				fileStream2 = new FileStream( files[i].internalName + ".bin", FileMode.Create, FileAccess.Write );
-				fileStream2.Write( array3, 0, array3.Length );
-				while( extraZeros > 0 )
+				using( fileStream2 = new FileStream( files[i].internalName + ".bin", FileMode.Create, FileAccess.Write ) )
 				{
-					fileStream2.WriteByte( 0 );
-					--extraZeros;
+					fileStream2.Write( array3, 0, array3.Length );
+					while( extraZeros > 0 )
+					{
+						fileStream2.WriteByte( 0 );
+						--extraZeros;
+					}
 				}
-				fileStream2.Close();
 
 				fileStream.Seek( files[i].vltLocation, SeekOrigin.Begin );
 				byte[] array4 = binaryReader.ReadBytes( files[i].vltLength );
@@ -226,36 +227,36 @@ namespace VPak
 					// reached end of stream, stop here.
 				}
 
-				fileStream2 = new FileStream( files[i].internalName + ".vlt", FileMode.Create, FileAccess.Write );
-				fileStream2.Write( array4, 0, array4.Length );
-
-				while( extraZerosTwo > 0 )
+				using( fileStream2 = new FileStream( files[i].internalName + ".vlt", FileMode.Create, FileAccess.Write ) )
 				{
-					fileStream2.WriteByte( 0 );
-					--extraZerosTwo;
-				}
+					fileStream2.Write( array4, 0, array4.Length );
 
-				fileStream2.Close();
+					while( extraZerosTwo > 0 )
+					{
+						fileStream2.WriteByte( 0 );
+						--extraZerosTwo;
+					}
+				}
 			}
 
 			FileInfo fileInfo = new FileInfo( fileName );
 			string text2 = fileInfo.Name.Remove( fileInfo.Name.Length - fileInfo.Extension.Length, fileInfo.Extension.Length ) + ".vls";
-			StreamWriter streamWriter = new StreamWriter( text2 );
 
-			foreach( SubfileHeader sh in files )
+			using( StreamWriter streamWriter = new StreamWriter( text2 ) )
 			{
-				streamWriter.WriteLine( sh.internalName );
+				foreach( SubfileHeader sh in files )
+				{
+					streamWriter.WriteLine( sh.internalName );
+				}
 			}
-
-			streamWriter.Close();
 
 			// Store the VPAK header at the end of the .vls file!
 			fileStream.Seek( 0L, SeekOrigin.Begin );
 			byte[] vpakHeaderData = binaryReader.ReadBytes( files[0].binLocation );
-			fileStream2 = new FileStream( text2, FileMode.Append, FileAccess.Write );
-			fileStream2.Write( vpakHeaderData, 0, vpakHeaderData.Length );
-
-			fileStream2.Close();
+			using( fileStream2 = new FileStream( text2, FileMode.Append, FileAccess.Write ) )
+			{
+				fileStream2.Write( vpakHeaderData, 0, vpakHeaderData.Length );
+			}
 			fileStream.Close();
 		}
 

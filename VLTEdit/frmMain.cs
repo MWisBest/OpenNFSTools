@@ -785,9 +785,11 @@ namespace VLTEdit
 				{
 					this.writeToConsole( str );
 				}
-				return;
 			}
-			this.writeToConsole( "No matches found." );
+			else
+			{
+				this.writeToConsole( "No matches found." );
+			}
 		}
 
 		private void a( VLTClass A_0, string A_1 )
@@ -1261,6 +1263,10 @@ namespace VLTEdit
 						this.writeToConsole( "\thex <int>: returns the hexadecimal representation of the given decimal." );
 						this.writeToConsole( "\tcls, clear: clear the console." );
 						break;
+					case "debug":
+						frmDesigner destest = new frmDesigner();
+						destest.Show();
+						break;
 					case "":
 						break;
 					default:
@@ -1283,16 +1289,17 @@ namespace VLTEdit
 				if( selectedNode.Tag is UnknownDE )
 				{
 					Clipboard.SetDataObject( "Database" );
-					return;
 				}
-				if( selectedNode.Tag is VLTClass )
+				else if( selectedNode.Tag is VLTClass )
 				{
 					VLTClass dq = selectedNode.Tag as VLTClass;
 					Clipboard.SetDataObject( HashTracker.getValueForHash( dq.ui1 ) );
-					return;
 				}
-				UnknownDR dr = selectedNode.Tag as UnknownDR;
-				Clipboard.SetDataObject( HashTracker.getValueForHash( dr.c1.hash ) );
+				else
+				{
+					UnknownDR dr = selectedNode.Tag as UnknownDR;
+					Clipboard.SetDataObject( HashTracker.getValueForHash( dr.c1.hash ) );
+				}
 			}
 		}
 
@@ -1303,18 +1310,20 @@ namespace VLTEdit
 				TreeNode selectedNode = this.tv.SelectedNode;
 				if( selectedNode.Tag is UnknownDE )
 				{
+					// Right-clicked "Database", selected "Copy Node Path"
 					Clipboard.SetDataObject( "" );
-					return;
 				}
-				if( selectedNode.Tag is VLTClass )
+				else if( selectedNode.Tag is VLTClass )
 				{
 					VLTClass dq = selectedNode.Tag as VLTClass;
 					Clipboard.SetDataObject( HashTracker.getValueForHash( dq.ui1 ) );
-					return;
 				}
-				UnknownDR dr = selectedNode.Tag as UnknownDR;
-				VLTClass dq2 = dr.dq1;
-				Clipboard.SetDataObject( HashTracker.getValueForHash( dq2.ui1 ) + "/" + this.a( dr ) );
+				else
+				{
+					UnknownDR dr = selectedNode.Tag as UnknownDR;
+					VLTClass dq2 = dr.dq1;
+					Clipboard.SetDataObject( HashTracker.getValueForHash( dq2.ui1 ) + "/" + this.a( dr ) );
+				}
 			}
 		}
 
@@ -1434,9 +1443,8 @@ namespace VLTEdit
 
 				UnknownA8 a2 = dq.b01.a( VLTOtherValue.TABLE_END ) as UnknownA8;
 				this.classGrid.Update();
-				return;
 			}
-			if( tag is UnknownDR )
+			else if( tag is UnknownDR )
 			{
 				this.lblFieldType.Text = "";
 				this.lblFieldOffset.Text = "";
@@ -1523,10 +1531,12 @@ namespace VLTEdit
 				}
 				this.tvFields.EndUpdate();
 				UnknownA8 a4 = dr.b01.a( VLTOtherValue.TABLE_END ) as UnknownA8;
-				return;
 			}
-			this.classGrid.Visible = false;
-			this.pnlData.Visible = false;
+			else
+			{
+				this.classGrid.Visible = false;
+				this.pnlData.Visible = false;
+			}
 		}
 
 		private void tvFields_AfterSelect( object A_0, TreeViewEventArgs A_1 )
@@ -1588,12 +1598,14 @@ namespace VLTEdit
 				string text = ba.sa1[0];
 				this.lblFieldOffset.Text = string.Format( "Offset: {0}:0x{1:x}  ({2})", bb.boo1 ? "vlt" : "bin", bb.ui1, text );
 				this.dataGrid.Update();
-				return;
 			}
-			this.lblFieldType.Text = "";
-			this.lblFieldOffset.Text = "";
-			this.dataGrid.DataSource = null;
-			this.dataGrid.Update();
+			else
+			{
+				this.lblFieldType.Text = "";
+				this.lblFieldOffset.Text = "";
+				this.dataGrid.DataSource = null;
+				this.dataGrid.Update();
+			}
 		}
 
 		private void onLoad( object A_0, EventArgs A_1 )

@@ -170,7 +170,7 @@ namespace VLTEdit
 			this.tv.SelectedImageIndex = -1;
 			this.tv.Size = new Size( 200, 437 );
 			this.tv.TabIndex = 1;
-			this.tv.AfterSelect += new TreeViewEventHandler( this.b );
+			this.tv.AfterSelect += new TreeViewEventHandler( this.tv_AfterSelect );
 			this.af.MenuItems.AddRange( new MenuItem[]
 			{
 				this.mi6,
@@ -414,7 +414,7 @@ namespace VLTEdit
 			Application.Exit();
 		}
 
-		private bool a( string A_0, bool A_1 )
+		private bool loadFile( string fileName, bool fromConsole )
 		{
 			bool result = false;
 			if( this.av == null )
@@ -422,8 +422,8 @@ namespace VLTEdit
 				this.av = new UnknownDE();
 			}
 			UnknownB0 b = new UnknownB0();
-			this.writeToConsole( "Loading: " + A_0 );
-			b.a( A_0 );
+			this.writeToConsole( "Loading: " + fileName );
+			b.a( fileName );
 			if( this.bOne( b ) )
 			{
 				UnknownBA ba = b.a( VLTOtherValue.VLTMAGIC ) as UnknownBA;
@@ -432,9 +432,9 @@ namespace VLTEdit
 				this.miUnload.MenuItems.Add( menuItem );
 				result = true;
 			}
-			if( A_1 )
+			if( fromConsole )
 			{
-				this.bTwo();
+				this.tvRefresh();
 			}
 			return result;
 		}
@@ -458,7 +458,7 @@ namespace VLTEdit
 					}
 					this.au.Remove( b );
 					this.d();
-					this.bTwo();
+					this.tvRefresh();
 					break;
 				}
 			}
@@ -480,14 +480,14 @@ namespace VLTEdit
 				bool flag = false;
 				foreach( string a_ in openFileDialog.FileNames )
 				{
-					if( this.a( a_, false ) )
+					if( this.loadFile( a_, false ) )
 					{
 						flag = true;
 					}
 				}
 				if( flag )
 				{
-					this.bTwo();
+					this.tvRefresh();
 				}
 			}
 		}
@@ -526,7 +526,6 @@ namespace VLTEdit
 			for( int i = 0; i < dh.asa1.Length; ++i )
 			{
 				UnknownAS @as = dh.asa1[i];
-				// MW: Made more legible
 				switch( @as.b21 )
 				{
 					case EntryType.ROOT:
@@ -543,9 +542,6 @@ namespace VLTEdit
 						{
 							dq.dqb1.Trim();
 						}
-						break;
-					default:
-						System.Console.WriteLine( "Unknown 'VLTCommonValue'" );
 						break;
 				}
 			}
@@ -593,7 +589,7 @@ namespace VLTEdit
 		}
 
 		// TODO: Opt
-		private void bTwo()
+		private void tvRefresh()
 		{
 			bool flag = true;
 			this.classGrid.Visible = false;
@@ -652,7 +648,6 @@ namespace VLTEdit
 					treeNode3.Tag = dr;
 					text2 = string.Format( "{0:x},{1:x}", dq.ui1, dr.c1.hash );
 					dict[text2] = treeNode3;
-					//dict.Add( text2, treeNode3 );
 				}
 			}
 			this.tv.EndUpdate();
@@ -1030,7 +1025,7 @@ namespace VLTEdit
 							this.writeToConsole( "Non existant file: " + fileInfo.FullName );
 							break;
 						}
-						if( !this.a( fileInfo.FullName, true ) )
+						if( !this.loadFile( fileInfo.FullName, true ) )
 						{
 							this.writeToConsole( "Failed to load file: " + fileInfo.FullName );
 						}
@@ -1046,7 +1041,7 @@ namespace VLTEdit
 					case "reparse":
 						this.writeToConsole( "Reparsing all VLTs..." );
 						this.d();
-						this.bTwo();
+						this.tvRefresh();
 						break;
 					case "cls":
 					case "clear":
@@ -1266,6 +1261,7 @@ namespace VLTEdit
 					case "debug":
 						frmDesigner destest = new frmDesigner();
 						destest.Show();
+						this.WindowState = FormWindowState.Minimized;
 						break;
 					case "":
 						break;
@@ -1407,7 +1403,7 @@ namespace VLTEdit
 		}
 
 		// TODO: opt
-		private void b( object A_0, TreeViewEventArgs A_1 )
+		private void tv_AfterSelect( object A_0, TreeViewEventArgs A_1 )
 		{
 			object tag = A_1.Node.Tag;
 			if( tag is VLTClass )

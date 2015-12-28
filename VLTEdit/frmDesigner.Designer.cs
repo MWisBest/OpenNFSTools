@@ -34,7 +34,9 @@
 			this.spltBottom = new System.Windows.Forms.Splitter();
 			this.tv = new System.Windows.Forms.TreeView();
 			this.spltLeft = new System.Windows.Forms.Splitter();
+			this.classGrid = new System.Windows.Forms.DataGridView();
 			this.pnlBottom.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.classGrid)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// pnlBottom
@@ -87,6 +89,7 @@
 			this.tv.Name = "tv";
 			this.tv.Size = new System.Drawing.Size(200, 437);
 			this.tv.TabIndex = 1;
+			this.tv.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tv_AfterSelect);
 			// 
 			// spltLeft
 			// 
@@ -96,20 +99,32 @@
 			this.spltLeft.TabIndex = 3;
 			this.spltLeft.TabStop = false;
 			// 
+			// classGrid
+			// 
+			this.classGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.classGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.classGrid.Location = new System.Drawing.Point(204, 0);
+			this.classGrid.Name = "classGrid";
+			this.classGrid.Size = new System.Drawing.Size(648, 437);
+			this.classGrid.TabIndex = 2;
+			// 
 			// frmDesigner
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(852, 593);
+			this.Controls.Add(this.classGrid);
 			this.Controls.Add(this.spltLeft);
 			this.Controls.Add(this.tv);
 			this.Controls.Add(this.spltBottom);
 			this.Controls.Add(this.pnlBottom);
 			this.Name = "frmDesigner";
 			this.Text = "VLTEdit";
+			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmDesigner_FormClosed);
 			this.Load += new System.EventHandler(this.onLoad);
 			this.pnlBottom.ResumeLayout(false);
 			this.pnlBottom.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.classGrid)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -122,5 +137,6 @@
 		private System.Windows.Forms.Splitter spltBottom;
 		private System.Windows.Forms.TreeView tv;
 		private System.Windows.Forms.Splitter spltLeft;
+		private System.Windows.Forms.DataGridView classGrid;
 	}
 }

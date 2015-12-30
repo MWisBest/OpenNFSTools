@@ -101,12 +101,19 @@
 			// 
 			// classGrid
 			// 
+			this.classGrid.AllowUserToAddRows = false;
+			this.classGrid.AllowUserToDeleteRows = false;
 			this.classGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.classGrid.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.classGrid.Location = new System.Drawing.Point(204, 0);
 			this.classGrid.Name = "classGrid";
+			this.classGrid.ReadOnly = true;
+			this.classGrid.RowHeadersVisible = false;
+			this.classGrid.RowTemplate.Height = 18;
+			this.classGrid.RowTemplate.ReadOnly = true;
 			this.classGrid.Size = new System.Drawing.Size(648, 437);
 			this.classGrid.TabIndex = 2;
+			this.classGrid.Visible = false;
 			// 
 			// frmDesigner
 			// 

@@ -47,7 +47,7 @@ namespace VLTEdit
 		{
 			VLTClass dq = new VLTClass();
 			dq.a( A_0, A_1 );
-			this.genht2.Add( A_0.ui1, dq );
+			this.genht2.Add( A_0.hash, dq );
 		}
 
 		public IEnumerator<VLTClass> GetEnumerator()

@@ -177,7 +177,7 @@ namespace VLTEdit
 		}
 
 		public UnknownB0 b01;
-		public uint ui1;
+		public uint hash;
 		public ClassEntry c61;
 		public VLTClass.aclz1[] dqaa1;
 		public VLTClass.bie dqb1;
@@ -186,7 +186,7 @@ namespace VLTEdit
 		{
 			this.b01 = A_1;
 			this.c61 = A_0;
-			this.ui1 = A_0.ui1;
+			this.hash = A_0.hash;
 			UnknownA8 a81 = ( A_1.a( VLTOtherValue.TABLE_END ) as UnknownA8 );
 			int num = a81.genht1[A_0.position].i2;
 			A_1.ms1.Seek( num, SeekOrigin.Begin );
@@ -217,7 +217,7 @@ namespace VLTEdit
 
 		public int CompareTo( VLTClass A_0 )
 		{
-			return this.ui1.CompareTo( A_0.ui1 );
+			return this.hash.CompareTo( A_0.hash );
 		}
 
 		public IEnumerator GetEnumerator()

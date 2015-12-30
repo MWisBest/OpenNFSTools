@@ -605,7 +605,7 @@ namespace VLTEdit
 			treeNode.Tag = this.av;
 			foreach( VLTClass dq in this.av )
 			{
-				string text = HashTracker.getValueForHash( dq.ui1 );
+				string text = HashTracker.getValueForHash( dq.hash );
 				treeNode.TreeView.Sorted = true;
 				TreeNode treeNode2 = treeNode.Nodes.Add( text );
 				treeNode.TreeView.Sorted = false;
@@ -620,7 +620,7 @@ namespace VLTEdit
 					}
 					else
 					{
-						text2 = string.Format( "{0:x},{1:x}", dq.ui1, dr.c1.ui3 );
+						text2 = string.Format( "{0:x},{1:x}", dq.hash, dr.c1.ui3 );
 						treeNode3 = dict[text2];
 					}
 					if( treeNode3 == null )
@@ -646,7 +646,7 @@ namespace VLTEdit
 					} );
 					treeNode3 = treeNode3.Nodes.Add( text );
 					treeNode3.Tag = dr;
-					text2 = string.Format( "{0:x},{1:x}", dq.ui1, dr.c1.hash );
+					text2 = string.Format( "{0:x},{1:x}", dq.hash, dr.c1.hash );
 					dict[text2] = treeNode3;
 				}
 			}
@@ -692,9 +692,9 @@ namespace VLTEdit
 
 			foreach( VLTClass dq in this.av )
 			{
-				if( dq.ui1 == num )
+				if( dq.hash == num )
 				{
-					string text = A_0 + ": Found match for class: " + HashTracker.getValueForHash( dq.ui1 );
+					string text = A_0 + ": Found match for class: " + HashTracker.getValueForHash( dq.hash );
 					if( !A_1.Contains( text ) )
 					{
 						A_1.Add( text );
@@ -709,7 +709,7 @@ namespace VLTEdit
 						{
 									A_0,
 									": Found match for field: ",
-									HashTracker.getValueForHash(dq.ui1),
+									HashTracker.getValueForHash(dq.hash),
 									"/",
 									HashTracker.getValueForHash(a.hash)
 						} );
@@ -728,7 +728,7 @@ namespace VLTEdit
 						{
 									A_0,
 									": Found match for row: ",
-									HashTracker.getValueForHash(dq.ui1),
+									HashTracker.getValueForHash(dq.hash),
 									"/",
 									this.a(dr)
 						} );
@@ -789,7 +789,7 @@ namespace VLTEdit
 
 		private void a( VLTClass A_0, string A_1 )
 		{
-			this.writeToConsole( string.Format( "Dumping contents of class: {0}, field: {1}", HashTracker.getValueForHash( A_0.ui1 ), A_1 ) );
+			this.writeToConsole( string.Format( "Dumping contents of class: {0}, field: {1}", HashTracker.getValueForHash( A_0.hash ), A_1 ) );
 			foreach( UnknownDR dr in A_0.dqb1 )
 			{
 				if( dr.c1.ui3 == 0u )
@@ -896,7 +896,7 @@ namespace VLTEdit
 
 				foreach( VLTClass dq in this.av )
 				{
-					string text = this.bThree( HashTracker.getValueForHash( dq.ui1 ) );
+					string text = this.bThree( HashTracker.getValueForHash( dq.hash ) );
 					if( this.c( text ) )
 					{
 						streamWriter.WriteLine( "\tnamespace " + text + " {" );
@@ -1289,7 +1289,7 @@ namespace VLTEdit
 				else if( selectedNode.Tag is VLTClass )
 				{
 					VLTClass dq = selectedNode.Tag as VLTClass;
-					Clipboard.SetDataObject( HashTracker.getValueForHash( dq.ui1 ) );
+					Clipboard.SetDataObject( HashTracker.getValueForHash( dq.hash ) );
 				}
 				else
 				{
@@ -1312,13 +1312,13 @@ namespace VLTEdit
 				else if( selectedNode.Tag is VLTClass )
 				{
 					VLTClass dq = selectedNode.Tag as VLTClass;
-					Clipboard.SetDataObject( HashTracker.getValueForHash( dq.ui1 ) );
+					Clipboard.SetDataObject( HashTracker.getValueForHash( dq.hash ) );
 				}
 				else
 				{
 					UnknownDR dr = selectedNode.Tag as UnknownDR;
 					VLTClass dq2 = dr.dq1;
-					Clipboard.SetDataObject( HashTracker.getValueForHash( dq2.ui1 ) + "/" + this.a( dr ) );
+					Clipboard.SetDataObject( HashTracker.getValueForHash( dq2.hash ) + "/" + this.a( dr ) );
 				}
 			}
 		}

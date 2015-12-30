@@ -4,7 +4,7 @@ namespace VLTEdit.Table
 {
 	public class ClassEntry : BaseEntry
 	{
-		public uint ui1;
+		public uint hash;
 		private int i1;
 		public int i2;
 		public int position;
@@ -15,7 +15,7 @@ namespace VLTEdit.Table
 
 		public override void read( BinaryReader br )
 		{
-			this.ui1 = br.ReadUInt32();
+			this.hash = br.ReadUInt32();
 			this.i1 = br.ReadInt32();
 			this.i2 = br.ReadInt32();
 
@@ -34,7 +34,7 @@ namespace VLTEdit.Table
 
 		public override void write( BinaryWriter bw )
 		{
-			bw.Write( this.ui1 );
+			bw.Write( this.hash );
 			bw.Write( this.i1 );
 			bw.Write( this.i2 );
 			if( !BuildConfig.CARBON )

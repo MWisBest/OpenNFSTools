@@ -21,6 +21,8 @@ namespace VLTEdit
 		private List<UnknownB0> au = new List<UnknownB0>();
 		private UnknownDE av = null;
 
+		private DataSet classGridDataSet = new DataSet( "VLT" );
+
 		public frmDesigner()
 		{
 			InitializeComponent();
@@ -72,6 +74,8 @@ namespace VLTEdit
 			// Setup "Help" individual item properties.
 			this.miHelpText.Index = 0;
 			this.miHelpText.Text = "Sorry, no help here! :)";
+
+			this.classGrid.DataSource = this.classGridDataSet;
 		}
 
 		private void exit()
@@ -200,7 +204,7 @@ namespace VLTEdit
 
 			foreach( VLTClass dq in this.av )
 			{
-				string text = HashTracker.getValueForHash( dq.ui1 );
+				string text = HashTracker.getValueForHash( dq.hash );
 				treeNode.TreeView.Sorted = true;
 				TreeNode treeNode2 = treeNode.Nodes.Add( text );
 				treeNode.TreeView.Sorted = false;
@@ -215,7 +219,7 @@ namespace VLTEdit
 					}
 					else
 					{
-						text2 = string.Format( "{0:x},{1:x}", dq.ui1, dr.c1.ui3 );
+						text2 = string.Format( "{0:x},{1:x}", dq.hash, dr.c1.ui3 );
 						treeNode3 = dict[text2];
 					}
 					if( treeNode3 == null )
@@ -241,7 +245,7 @@ namespace VLTEdit
 					} );
 					treeNode3 = treeNode3.Nodes.Add( text );
 					treeNode3.Tag = dr;
-					text2 = string.Format( "{0:x},{1:x}", dq.ui1, dr.c1.hash );
+					text2 = string.Format( "{0:x},{1:x}", dq.hash, dr.c1.hash );
 					dict[text2] = treeNode3;
 				}
 			}
@@ -341,33 +345,34 @@ namespace VLTEdit
 				this.classGrid.Visible = true;
 				//this.pnlData.Visible = false;
 				VLTClass dq = tag as VLTClass;
-				DataSet dataSet = new DataSet( "VLT" );
-				DataTable dataTable = dataSet.Tables.Add( "Fields" );
-				dataTable.Columns.Add( "Name", typeof( string ) );
-				dataTable.Columns.Add( "Type", typeof( string ) );
-				dataTable.Columns.Add( "Length", typeof( ushort ) );
-				dataTable.Columns.Add( "Count", typeof( short ) );
 
-				foreach( VLTClass.aclz1 a in dq )
+				if( !this.classGridDataSet.Tables.Contains( dq.hash.ToString() ) )
 				{
-					DataRow dataRow = dataTable.NewRow();
-					dataRow[0] = HashTracker.getValueForHash( a.hash );
-					dataRow[1] = HashTracker.getValueForHash( a.ui2 );
-					dataRow[2] = a.len;
-					dataRow[3] = a.count;
-					dataTable.Rows.Add( dataRow );
+					DataTable dataTable = this.classGridDataSet.Tables.Add( dq.hash.ToString() );
+					dataTable.Columns.Add( "Name", typeof( string ) );
+					dataTable.Columns.Add( "Type", typeof( string ) );
+					dataTable.Columns.Add( "Length", typeof( ushort ) );
+					dataTable.Columns.Add( "Count", typeof( short ) );
+
+					foreach( VLTClass.aclz1 a in dq )
+					{
+						DataRow dataRow = dataTable.NewRow();
+						dataRow[0] = HashTracker.getValueForHash( a.hash );
+						dataRow[1] = HashTracker.getValueForHash( a.ui2 );
+						dataRow[2] = a.len;
+						dataRow[3] = a.count;
+						dataTable.Rows.Add( dataRow );
+					}
 				}
 
-				this.classGrid.DataSource = dataSet;
-				this.classGrid.DataMember = "Fields";
+				this.classGrid.DataMember = dq.hash.ToString();
+				//this.classGrid.Columns["Name"].Width = 80;
+				//this.classGrid.Columns["Type"].Width = 150;
+				//this.classGrid.Columns["Length"].Width = 60;
+				//this.classGrid.Columns["Count"].Width = 60;
 
-				// This gets rid of the extra row in the table that appears when viewing a root node (e.x. junkman, pvehicle)
-				CurrencyManager currencyManager = (CurrencyManager)this.BindingContext[dataSet, "Fields"];
-				( (DataView)currencyManager.List ).AllowNew = false;
-				( (DataView)currencyManager.List ).AllowEdit = false;
-				( (DataView)currencyManager.List ).AllowDelete = false;
-
-				UnknownA8 a2 = dq.b01.a( VLTOtherValue.TABLE_END ) as UnknownA8;
+				// TODO: what was this ever for?!
+				//UnknownA8 a2 = dq.b01.a( VLTOtherValue.TABLE_END ) as UnknownA8;
 				this.classGrid.Update();
 			}
 			else if( tag is UnknownDR && false ) // TODO: impl, remove false

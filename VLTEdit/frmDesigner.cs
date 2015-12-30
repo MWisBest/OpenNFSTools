@@ -192,6 +192,11 @@ namespace VLTEdit
 		{
 			bool flag = true;
 			this.classGrid.Visible = false;
+
+			// Clear out the class DataSet, just in case something in the cache changes somehow upon loading a file.
+			this.classGridDataSet = new DataSet( "VLT" );
+			this.classGrid.DataSource = this.classGridDataSet;
+
 			this.pnlData.Visible = false;
 			this.tv.Nodes.Clear();
 			if( this.au.Count == 0 )
@@ -200,15 +205,15 @@ namespace VLTEdit
 			}
 			this.tv.BeginUpdate();
 			Dictionary<string, TreeNode> dict = new Dictionary<string, TreeNode>();
-			TreeNode treeNode = this.tv.Nodes.Add( "Database" );
+
+			// Creating the TreeNode separately here and then adding it to the TreeView later is more efficient.
+			TreeNode treeNode = new TreeNode( "Database" );
 			treeNode.Tag = this.av;
 
 			foreach( VLTClass dq in this.av )
 			{
 				string text = HashTracker.getValueForHash( dq.hash );
-				treeNode.TreeView.Sorted = true;
 				TreeNode treeNode2 = treeNode.Nodes.Add( text );
-				treeNode.TreeView.Sorted = false;
 				treeNode2.Tag = dq;
 				foreach( UnknownDR dr in dq.dqb1 )
 				{
@@ -250,6 +255,12 @@ namespace VLTEdit
 					dict[text2] = treeNode3;
 				}
 			}
+
+			this.tv.Nodes.Add( treeNode );
+
+			// NOTE: Setting 'Sorted' must be used with care;
+			// If Sorted is set at the wrong place/time, memory allocations go crazy.
+			treeNode.TreeView.Sorted = true;
 
 			this.tv.EndUpdate();
 		}

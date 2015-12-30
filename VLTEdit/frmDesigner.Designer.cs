@@ -35,8 +35,18 @@
 			this.tv = new System.Windows.Forms.TreeView();
 			this.spltLeft = new System.Windows.Forms.Splitter();
 			this.classGrid = new System.Windows.Forms.DataGridView();
+			this.pnlData = new System.Windows.Forms.Panel();
+			this.tvFields = new System.Windows.Forms.TreeView();
+			this.spltFieldData = new System.Windows.Forms.Splitter();
+			this.pnlFieldInfo = new System.Windows.Forms.Panel();
+			this.dataGrid = new System.Windows.Forms.DataGridView();
+			this.lblFieldType = new System.Windows.Forms.Label();
+			this.lblFieldOffset = new System.Windows.Forms.Label();
 			this.pnlBottom.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.classGrid)).BeginInit();
+			this.pnlData.SuspendLayout();
+			this.pnlFieldInfo.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dataGrid)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// pnlBottom
@@ -103,6 +113,7 @@
 			// 
 			this.classGrid.AllowUserToAddRows = false;
 			this.classGrid.AllowUserToDeleteRows = false;
+			this.classGrid.AllowUserToResizeRows = false;
 			this.classGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.classGrid.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.classGrid.Location = new System.Drawing.Point(204, 0);
@@ -115,11 +126,89 @@
 			this.classGrid.TabIndex = 2;
 			this.classGrid.Visible = false;
 			// 
+			// pnlData
+			// 
+			this.pnlData.Controls.Add(this.dataGrid);
+			this.pnlData.Controls.Add(this.pnlFieldInfo);
+			this.pnlData.Controls.Add(this.spltFieldData);
+			this.pnlData.Controls.Add(this.tvFields);
+			this.pnlData.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.pnlData.Location = new System.Drawing.Point(204, 0);
+			this.pnlData.Name = "pnlData";
+			this.pnlData.Size = new System.Drawing.Size(648, 437);
+			this.pnlData.TabIndex = 3;
+			this.pnlData.Visible = false;
+			// 
+			// tvFields
+			// 
+			this.tvFields.Dock = System.Windows.Forms.DockStyle.Left;
+			this.tvFields.Location = new System.Drawing.Point(0, 0);
+			this.tvFields.Name = "tvFields";
+			this.tvFields.Size = new System.Drawing.Size(176, 437);
+			this.tvFields.TabIndex = 0;
+			this.tvFields.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvFields_AfterSelect);
+			// 
+			// spltFieldData
+			// 
+			this.spltFieldData.Location = new System.Drawing.Point(176, 0);
+			this.spltFieldData.Name = "spltFieldData";
+			this.spltFieldData.Size = new System.Drawing.Size(4, 437);
+			this.spltFieldData.TabIndex = 4;
+			this.spltFieldData.TabStop = false;
+			// 
+			// pnlFieldInfo
+			// 
+			this.pnlFieldInfo.Controls.Add(this.lblFieldOffset);
+			this.pnlFieldInfo.Controls.Add(this.lblFieldType);
+			this.pnlFieldInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.pnlFieldInfo.Location = new System.Drawing.Point(180, 389);
+			this.pnlFieldInfo.Name = "pnlFieldInfo";
+			this.pnlFieldInfo.Size = new System.Drawing.Size(468, 48);
+			this.pnlFieldInfo.TabIndex = 5;
+			// 
+			// dataGrid
+			// 
+			this.dataGrid.AllowUserToAddRows = false;
+			this.dataGrid.AllowUserToDeleteRows = false;
+			this.dataGrid.AllowUserToResizeRows = false;
+			this.dataGrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.dataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dataGrid.Location = new System.Drawing.Point(180, 0);
+			this.dataGrid.Name = "dataGrid";
+			this.dataGrid.ReadOnly = true;
+			this.dataGrid.RowHeadersVisible = false;
+			this.dataGrid.RowTemplate.Height = 18;
+			this.dataGrid.RowTemplate.ReadOnly = true;
+			this.dataGrid.Size = new System.Drawing.Size(468, 389);
+			this.dataGrid.TabIndex = 1;
+			// 
+			// lblFieldType
+			// 
+			this.lblFieldType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.lblFieldType.Location = new System.Drawing.Point(8, 8);
+			this.lblFieldType.Name = "lblFieldType";
+			this.lblFieldType.Size = new System.Drawing.Size(456, 16);
+			this.lblFieldType.TabIndex = 5;
+			this.lblFieldType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// lblFieldOffset
+			// 
+			this.lblFieldOffset.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.lblFieldOffset.Location = new System.Drawing.Point(8, 28);
+			this.lblFieldOffset.Name = "lblFieldOffset";
+			this.lblFieldOffset.Size = new System.Drawing.Size(456, 16);
+			this.lblFieldOffset.TabIndex = 6;
+			this.lblFieldOffset.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
 			// frmDesigner
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(852, 593);
+			this.Controls.Add(this.pnlData);
 			this.Controls.Add(this.classGrid);
 			this.Controls.Add(this.spltLeft);
 			this.Controls.Add(this.tv);
@@ -132,6 +221,9 @@
 			this.pnlBottom.ResumeLayout(false);
 			this.pnlBottom.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.classGrid)).EndInit();
+			this.pnlData.ResumeLayout(false);
+			this.pnlFieldInfo.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.dataGrid)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -145,5 +237,12 @@
 		private System.Windows.Forms.TreeView tv;
 		private System.Windows.Forms.Splitter spltLeft;
 		private System.Windows.Forms.DataGridView classGrid;
+		private System.Windows.Forms.Panel pnlData;
+		private System.Windows.Forms.TreeView tvFields;
+		private System.Windows.Forms.Splitter spltFieldData;
+		private System.Windows.Forms.Panel pnlFieldInfo;
+		private System.Windows.Forms.DataGridView dataGrid;
+		private System.Windows.Forms.Label lblFieldType;
+		private System.Windows.Forms.Label lblFieldOffset;
 	}
 }

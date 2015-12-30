@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Reflection;
 using System.Windows.Forms;
 using VLTEdit.Table;
 using VLTEdit.Types;
@@ -191,7 +192,7 @@ namespace VLTEdit
 		{
 			bool flag = true;
 			this.classGrid.Visible = false;
-			//this.pnlData.Visible = false;
+			this.pnlData.Visible = false;
 			this.tv.Nodes.Clear();
 			if( this.au.Count == 0 )
 			{
@@ -343,7 +344,7 @@ namespace VLTEdit
 			if( tag is VLTClass )
 			{
 				this.classGrid.Visible = true;
-				//this.pnlData.Visible = false;
+				this.pnlData.Visible = false;
 				VLTClass dq = tag as VLTClass;
 
 				if( !this.classGridDataSet.Tables.Contains( dq.hash.ToString() ) )
@@ -371,37 +372,35 @@ namespace VLTEdit
 				//this.classGrid.Columns["Length"].Width = 60;
 				//this.classGrid.Columns["Count"].Width = 60;
 
-				// TODO: what was this ever for?!
-				//UnknownA8 a2 = dq.b01.a( VLTOtherValue.TABLE_END ) as UnknownA8;
 				this.classGrid.Update();
 			}
-			else if( tag is UnknownDR && false ) // TODO: impl, remove false
+			else if( tag is UnknownDR ) // TODO
 			{
-				//this.lblFieldType.Text = "";
-				//this.lblFieldOffset.Text = "";
-				//this.dataGrid.DataSource = null;
-				//this.dataGrid.Update();
+				this.lblFieldType.Text = "";
+				this.lblFieldOffset.Text = "";
+				this.dataGrid.DataSource = null;
+				this.dataGrid.Update();
 				this.classGrid.Visible = false;
-				//this.pnlData.Visible = true;
+				this.pnlData.Visible = true;
 				string text = "";
 				string text2 = "";
 				TreeNode treeNode = null;
-				//if( this.tvFields.SelectedNode != null )
+				if( this.tvFields.SelectedNode != null )
 				{
-					//if( this.tvFields.SelectedNode.Parent != null && this.tvFields.SelectedNode.Parent.Tag == null )
+					if( this.tvFields.SelectedNode.Parent != null && this.tvFields.SelectedNode.Parent.Tag == null )
 					{
-						//text = this.tvFields.SelectedNode.Parent.Text;
-						//text2 = this.tvFields.SelectedNode.Text;
+						text = this.tvFields.SelectedNode.Parent.Text;
+						text2 = this.tvFields.SelectedNode.Text;
 					}
-					//else
+					else
 					{
-						//text = this.tvFields.SelectedNode.Text;
+						text = this.tvFields.SelectedNode.Text;
 					}
 				}
 				UnknownDR dr = tag as UnknownDR;
 				VLTClass dq2 = dr.dq1;
-				//this.tvFields.BeginUpdate();
-				//this.tvFields.Nodes.Clear();
+				this.tvFields.BeginUpdate();
+				this.tvFields.Nodes.Clear();
 				int num = 0;
 
 				foreach( VLTClass.aclz1 a3 in dq2 )
@@ -421,7 +420,7 @@ namespace VLTEdit
 									m.getCurrentEntryCount(),
 									"]"
 							} );
-							TreeNode treeNode2 = null;// this.tvFields.Nodes.Add( text3 );
+							TreeNode treeNode2 = this.tvFields.Nodes.Add( text3 );
 							treeNode2.Tag = bb;
 							for( int i = 0; i < m.getMaxEntryCount(); ++i )
 							{
@@ -439,7 +438,7 @@ namespace VLTEdit
 						}
 						else
 						{
-							TreeNode treeNode4 = null;// this.tvFields.Nodes.Add( HashTracker.getValueForHash( a3.hash ) );
+							TreeNode treeNode4 = this.tvFields.Nodes.Add( HashTracker.getValueForHash( a3.hash ) );
 							treeNode4.Tag = bb;
 							if( treeNode4.Text == text )
 							{
@@ -449,24 +448,23 @@ namespace VLTEdit
 					}
 				}
 
-				//if( this.tvFields.Nodes.Count > 0 )
+				if( this.tvFields.Nodes.Count > 0 )
 				{
 					if( treeNode == null )
 					{
-						//this.tvFields.SelectedNode = this.tvFields.Nodes[0];
+						this.tvFields.SelectedNode = this.tvFields.Nodes[0];
 					}
 					else
 					{
-						//this.tvFields.SelectedNode = treeNode;
+						this.tvFields.SelectedNode = treeNode;
 					}
 				}
-				//this.tvFields.EndUpdate();
-				UnknownA8 a4 = dr.b01.a( VLTOtherValue.TABLE_END ) as UnknownA8;
+				this.tvFields.EndUpdate();
 			}
 			else
 			{
 				this.classGrid.Visible = false;
-				//this.pnlData.Visible = false;
+				this.pnlData.Visible = false;
 			}
 		}
 
@@ -474,6 +472,69 @@ namespace VLTEdit
 		private void frmDesigner_FormClosed( object sender, FormClosedEventArgs e )
 		{
 			Application.Exit();
+		}
+
+		private void tvFields_AfterSelect( object sender, TreeViewEventArgs e )
+		{
+			object tag = e.Node.Tag;
+			if( tag is EABaseType && !( tag is EAArray ) )
+			{
+				EABaseType bb = tag as EABaseType;
+				//bb.l(); // MW: TODO: What is l() supposed to be?
+				DataSet dataSet = new DataSet( "DataItem" );
+				DataTable dataTable = dataSet.Tables.Add( "Values" );
+				dataTable.Columns.Add( "Name", typeof( string ) );
+				dataTable.Columns.Add( "Value", typeof( string ) );
+				Type type = bb.GetType();
+				FieldInfo[] fields = type.GetFields();
+				foreach( FieldInfo fieldInfo in fields )
+				{
+					object[] customAttributes = fieldInfo.GetCustomAttributes( typeof( DataValueAttribute ), false );
+					if( customAttributes != null && customAttributes.Length == 1 && customAttributes[0] is DataValueAttribute )
+					{
+						DataValueAttribute dataValueAttribute = customAttributes[0] as DataValueAttribute;
+						DataRow dataRow = dataTable.NewRow();
+						dataRow[0] = dataValueAttribute.Name;
+						object value = fieldInfo.GetValue( bb );
+						if( value == null )
+						{
+							dataRow[1] = "(null)";
+						}
+						else
+						{
+							if( dataValueAttribute.Hex )
+							{
+								dataRow[1] = string.Format( "0x{0:x}", value );
+							}
+							else
+							{
+								dataRow[1] = value.ToString();
+							}
+						}
+						dataTable.Rows.Add( dataRow );
+					}
+				}
+				this.dataGrid.DataSource = dataSet;
+				this.dataGrid.DataMember = "Values";
+
+				this.lblFieldType.Text = "Type: " + HashTracker.getValueForHash( bb.ui2 );
+				if( BuildConfig.DEBUG )
+				{
+					this.writeToConsole( "bb.GetType(): " + type.ToString() ); // Here, we're getting the proper type! Great!
+					this.writeToConsole( "bb.j(): " + string.Format( "0x{0:x}", bb.ui2 ) ); // Here, we're derping! OMG!
+				}
+				UnknownBA ba = bb.dr1.b01.a( VLTOtherValue.VLTMAGIC ) as UnknownBA;
+				string text = ba.sa1[0];
+				this.lblFieldOffset.Text = string.Format( "Offset: {0}:0x{1:x}  ({2})", bb.boo1 ? "vlt" : "bin", bb.ui1, text );
+				this.dataGrid.Update();
+			}
+			else
+			{
+				this.lblFieldType.Text = "";
+				this.lblFieldOffset.Text = "";
+				this.dataGrid.DataSource = null;
+				this.dataGrid.Update();
+			}
 		}
 	}
 }

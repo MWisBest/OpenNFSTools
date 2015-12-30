@@ -403,12 +403,6 @@ namespace VLTEdit
 			base.ResumeLayout( false );
 		}
 
-		[STAThread]
-		private static void Main()
-		{
-			Application.Run( new frmMain() );
-		}
-
 		private void exit()
 		{
 			Application.Exit();

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
+using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using VLTEdit.Table;
@@ -77,6 +79,12 @@ namespace VLTEdit
 			this.miHelpText.Text = "Sorry, no help here! :)";
 
 			this.classGrid.DataSource = this.classGridDataSet;
+		}
+
+		[STAThread]
+		private static void Main()
+		{
+			Application.Run( new frmDesigner() );
 		}
 
 		private void exit()
@@ -327,9 +335,273 @@ namespace VLTEdit
 			this.txtConsole.Refresh();
 		}
 
-		private void consoleCommandHandler( string A_0 )
+		private string a( UnknownDR A_0 )
+		{
+			VLTClass dq = A_0.dq1;
+			string text = HashTracker.getValueForHash( A_0.c1.hash );
+			if( A_0.c1.ui3 == 0u )
+			{
+				return text;
+			}
+			return this.a( dq.dqb1.a( A_0.c1.ui3 ) ) + "/" + text;
+		}
+
+		/**
+		 * Searches open files for the specified entry name/hash; stores results in the given List
+		 */
+		private void search( string A_0, ref List<string> A_1 )
+		{
+			uint num;
+			if( A_0.StartsWith( "0x" ) )
+			{
+				num = uint.Parse( A_0.Substring( 2 ), NumberStyles.AllowHexSpecifier | NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite );
+			}
+			else
+			{
+				num = HashUtil.getHash32( A_0 );
+			}
+
+			foreach( VLTClass dq in this.av )
+			{
+				if( dq.hash == num )
+				{
+					string text = A_0 + ": Found match for class: " + HashTracker.getValueForHash( dq.hash );
+					if( !A_1.Contains( text ) )
+					{
+						A_1.Add( text );
+					}
+				}
+
+				foreach( VLTClass.aclz1 a in dq )
+				{
+					if( a.hash == num )
+					{
+						string text = string.Concat( new string[]
+						{
+							A_0,
+							": Found match for field: ",
+							HashTracker.getValueForHash(dq.hash),
+							"/",
+							HashTracker.getValueForHash(a.hash)
+						} );
+						if( !A_1.Contains( text ) )
+						{
+							A_1.Add( text );
+						}
+					}
+				}
+
+				foreach( UnknownDR dr in dq.dqb1 )
+				{
+					if( dr.c1.hash == num )
+					{
+						string text = string.Concat( new string[]
+						{
+							A_0,
+							": Found match for row: ",
+							HashTracker.getValueForHash(dq.hash),
+							"/",
+							this.a(dr)
+						} );
+						if( !A_1.Contains( text ) )
+						{
+							A_1.Add( text );
+						}
+					}
+				}
+			}
+		}
+
+		/**
+		 * Searches open files for entries of the specified hash
+		 */
+		private void search( string A_0 )
+		{
+			List<string> strList = new List<string>();
+			this.search( A_0, ref strList ); // TODO: Check that files are open!
+			this.search( A_0.ToLower(), ref strList );
+			this.search( A_0.ToUpper(), ref strList );
+			bool flag = true;
+			string text = "";
+			foreach( char c in A_0.ToCharArray() )
+			{
+				if( c == '_' )
+				{
+					flag = true;
+				}
+				else
+				{
+					if( flag )
+					{
+						text += new string( c, 1 ).ToUpper();
+						flag = false;
+					}
+					else
+					{
+						text += c;
+					}
+				}
+			}
+			this.search( text, ref strList );
+			this.search( text.ToLower(), ref strList );
+			this.search( text.ToUpper(), ref strList );
+			if( strList.Count > 0 )
+			{
+				foreach( string str in strList )
+				{
+					this.writeToConsole( str );
+				}
+			}
+			else
+			{
+				this.writeToConsole( "No matches found." );
+			}
+		}
+
+		private void consoleCommandHandler( string cmd )
 		{
 			// TODO: impl
+			string[] array = cmd.Split( new char[] { ' ' }, 2 );
+			string text = array[0];
+			bool noArgs = true;
+			string text2 = null;
+			if( array.Length > 1 )
+			{
+				noArgs = false;
+				text2 = array[1];
+				text2.Split( new char[] { ' ' } );
+			}
+
+			try
+			{
+				switch( text )
+				{
+					case "quit":
+					case "exit":
+						this.exit();
+						break;
+					case "open":
+					case "load":
+						if( noArgs )
+						{
+							this.menuOpenClicked( null, null );
+							break;
+						}
+						FileInfo fileInfo = new FileInfo( text2 );
+						if( !fileInfo.Exists )
+						{
+							this.writeToConsole( "Non existant file: " + fileInfo.FullName );
+							break;
+						}
+						if( !this.loadFile( fileInfo.FullName, true ) )
+						{
+							this.writeToConsole( "Failed to load file: " + fileInfo.FullName );
+						}
+						break;
+					case "unload":
+						if( noArgs )
+						{
+							this.writeToConsole( "Error in command." );
+							break;
+						}
+						this.unloadFile( text2 );
+						break;
+					case "cls":
+					case "clear":
+						this.txtConsole.Text = "";
+						break;
+					case "hex":
+						if( noArgs )
+						{
+							this.writeToConsole( "Error in command." );
+							break;
+						}
+						this.writeToConsole( string.Format( "hex({0})=0x{1:x}", ulong.Parse( text2 ), ulong.Parse( text2 ) ) );
+						break;
+					case "hash":
+					case "hash32":
+						if( noArgs )
+						{
+							this.writeToConsole( "Error in command." );
+							break;
+						}
+						this.writeToConsole( string.Format( "hash({0})=0x{1:x}", text2, HashUtil.getHash32( text2 ) ) );
+						break;
+					case "hash64":
+						if( noArgs )
+						{
+							this.writeToConsole( "Error in command." );
+							break;
+						}
+						this.writeToConsole( string.Format( "hash64({0})=0x{1:x}", text2, HashUtil.getHash64( text2 ) ) );
+						break;
+					case "hs":
+					case "hsearch":
+						if( noArgs )
+						{
+							this.writeToConsole( "Error in command." );
+						}
+						else if( this.au.Count <= 0 ) // No loaded files
+						{
+							this.writeToConsole( "No files loaded to search!" );
+							break;
+						}
+						else
+						{
+							this.search( text2 );
+						}
+						if( text == "hs" )
+						{
+							this.txtConsoleInput.Text = "hs ";
+							this.txtConsoleInput.SelectionStart = this.txtConsoleInput.Text.Length;
+						}
+						break;
+					case "savehash":
+						if( noArgs )
+						{
+							this.writeToConsole( "Error in command." );
+							break;
+						}
+						FileInfo fileInfo2 = new FileInfo( text2 );
+						HashTracker.dumpUsedHashes( fileInfo2.FullName );
+						this.writeToConsole( "Saved used hashes list to: " + fileInfo2.FullName );
+						break;
+					case "loadhash":
+						if( File.Exists( text2 ) )
+						{
+							HashTracker.loadHashes( text2 );
+							break;
+						}
+						this.writeToConsole( "File does not exist." );
+						break;
+					case "reloadhashes":
+						HashTracker.init();
+						this.writeToConsole( "Hashes reloaded." );
+						break;
+					case "help":
+						this.writeToConsole( "Common commands:" );
+						this.writeToConsole( "\thash, hash64 <string>: returns the hash(64) of the given string." );
+						this.writeToConsole( "\ths, hsearch <string/0xHASH>: searches for VLT entries of the given string or hash." );
+						this.writeToConsole( "\thex <int>: returns the hexadecimal representation of the given decimal." );
+						this.writeToConsole( "\tcls, clear: clear the console." );
+						break;
+					case "debug":
+						frmMain maintest = new frmMain();
+						maintest.Show();
+						this.WindowState = FormWindowState.Minimized;
+						break;
+					case "":
+						break;
+					default:
+						this.writeToConsole( "Unknown command." );
+						break;
+				}
+			}
+			catch( Exception ex2 )
+			{
+				this.writeToConsole( "Exception: " + ex2.ToString() );
+				this.writeToConsole( "Error while executing: " + cmd );
+			}
 		}
 
 		private void txtConsoleInput_KeyPress( object sender, KeyPressEventArgs e )
@@ -368,12 +640,28 @@ namespace VLTEdit
 
 					foreach( VLTClass.aclz1 a in dq )
 					{
+						/*
+						object[] rowData =
+						{
+							HashTracker.getValueForHash( a.hash ),
+							HashTracker.getValueForHash( a.ui2 ),
+							a.len,
+							a.count
+						};
+						dataTable.Rows.Add( rowData );*/
+						dataTable.Rows.Add( new object[] {
+							HashTracker.getValueForHash( a.hash ),
+							HashTracker.getValueForHash( a.ui2 ),
+							a.len,
+							a.count
+						} );
+						/*
 						DataRow dataRow = dataTable.NewRow();
 						dataRow[0] = HashTracker.getValueForHash( a.hash );
 						dataRow[1] = HashTracker.getValueForHash( a.ui2 );
 						dataRow[2] = a.len;
 						dataRow[3] = a.count;
-						dataTable.Rows.Add( dataRow );
+						dataTable.Rows.Add( dataRow );*/
 					}
 				}
 

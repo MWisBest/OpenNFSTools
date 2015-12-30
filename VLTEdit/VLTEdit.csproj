@@ -52,7 +52,7 @@
     <RootNamespace>VLTEdit</RootNamespace>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>VLTEdit.frmMain</StartupObject>
+    <StartupObject>VLTEdit.frmDesigner</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System.Windows.Forms" />

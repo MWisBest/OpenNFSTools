@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace VLTEdit.Types
 {
-	public abstract class EABaseType : IBinReadWrite // OBF: bb.cs
+	public abstract class VLTBaseType : IBinReadWrite // OBF: bb.cs
 	{
 		public uint ui1; // address in file
 		public bool boo1; // true if in VLT file, false if in BIN file
@@ -13,10 +13,10 @@ namespace VLTEdit.Types
 		public int i1;
 		public UnknownDR dr1;
 
-		public static EABaseType a( Type A_0 )
+		public static VLTBaseType a( Type A_0 )
 		{
 			ConstructorInfo constructor = A_0.GetConstructor( Type.EmptyTypes );
-			return constructor.Invoke( null ) as EABaseType;
+			return constructor.Invoke( null ) as VLTBaseType;
 		}
 
 		public abstract void read( BinaryReader br );

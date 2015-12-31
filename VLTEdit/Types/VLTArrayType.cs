@@ -7,22 +7,22 @@ using System.Reflection;
 namespace VLTEdit.Types
 {
 	[DefaultMember( "Item" )]
-	public class EAArray : EABaseType, IEnumerable<EABaseType>, ITrimmable // OBF: m.cs
+	public class VLTArrayType : VLTBaseType, IEnumerable<VLTBaseType>, ITrimmable // OBF: m.cs
 	{
 		private short curEntries;
 		private short maxEntries;
 		private short length;
-		public List<EABaseType> genlist;
+		public List<VLTBaseType> genlist;
 		private int earrayi1;
 		private uint earrayui1;
 		private Type typ1;
 
-		public EAArray( VLTClass.aclz1 A_0, Type A_1 )
+		public VLTArrayType( VLTClass.aclz1 A_0, Type A_1 )
 		{
 			this.earrayi1 = A_0.a();
 			this.earrayui1 = A_0.ui2;
 			this.typ1 = A_1;
-			this.genlist = new List<EABaseType>();
+			this.genlist = new List<VLTBaseType>();
 		}
 
 		public override void read( BinaryReader br )
@@ -39,10 +39,10 @@ namespace VLTEdit.Types
 					Stream expr_69 = br.BaseStream;
 					expr_69.Position = expr_69.Position + ( this.earrayi1 - br.BaseStream.Position % this.earrayi1 );
 				}
-				EABaseType bb = constructor.Invoke( null ) as EABaseType;
-				if( bb is EARawType )
+				VLTBaseType bb = constructor.Invoke( null ) as VLTBaseType;
+				if( bb is VLTRawType )
 				{
-					( bb as EARawType ).len = this.length;
+					( bb as VLTRawType ).len = this.length;
 				}
 				bb.ui1 = (uint)br.BaseStream.Position;
 				bb.boo1 = false;
@@ -83,7 +83,7 @@ namespace VLTEdit.Types
 			}
 		}
 
-		public IEnumerator<EABaseType> GetEnumerator()
+		public IEnumerator<VLTBaseType> GetEnumerator()
 		{
 			return this.genlist.GetEnumerator();
 		}

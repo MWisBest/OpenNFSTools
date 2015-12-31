@@ -2,7 +2,7 @@ using System.IO;
 
 namespace VLTEdit.Types
 {
-	public class EAUInt8 : EABaseType
+	public class EAUInt8 : VLTBaseType
 	{
 		[DataValue( "Value" )]
 		public byte value;

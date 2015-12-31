@@ -19,11 +19,6 @@ namespace VLTEdit
 		private Dictionary<uint, aclzz> genht1;
 		public Dictionary<uint, VLTClass> genht2;
 
-		/*public VLTClass b( uint A_0 )
-		{
-			return this.genht2[A_0]; // NOTE: if frontend is loaded before db, NPE here...
-		}*/
-
 		public void am( RootEntry A_0, UnknownB0 A_1 )
 		{
 			UnknownA8 a = A_1.a( VLTOtherValue.TABLE_END ) as UnknownA8;

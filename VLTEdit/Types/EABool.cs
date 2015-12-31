@@ -2,7 +2,7 @@ using System.IO;
 
 namespace VLTEdit.Types
 {
-	public class EABool : EABaseType
+	public class EABool : VLTBaseType
 	{
 		[DataValue( "Value" )]
 		public bool value;

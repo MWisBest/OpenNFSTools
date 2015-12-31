@@ -83,19 +83,19 @@ namespace VLTEdit
 					Type type = TypeMap.instance.getTypeForKey( a2.ui2 );
 					if( type == null )
 					{
-						type = typeof( EARawType );
+						type = typeof( VLTRawType );
 					}
-					EABaseType bb;
+					VLTBaseType bb;
 					if( a2.isArray() )
 					{
-						bb = new EAArray( a2, type );
+						bb = new VLTArrayType( a2, type );
 					}
 					else
 					{
-						bb = EABaseType.a( type );
-						if( bb is EARawType )
+						bb = VLTBaseType.a( type );
+						if( bb is VLTRawType )
 						{
-							( bb as EARawType ).len = a2.len;
+							( bb as VLTRawType ).len = a2.len;
 						}
 					}
 					bb.ui1 = (uint)binaryReader3.BaseStream.Position;

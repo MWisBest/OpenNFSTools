@@ -817,9 +817,9 @@ namespace VLTEdit
 			}
 			string text = this.a( A_0 );
 			object obj = A_0.bba1[num];
-			if( obj is EAArray )
+			if( obj is VLTArrayType )
 			{
-				EAArray m = obj as EAArray;
+				VLTArrayType m = obj as VLTArrayType;
 				for( int i = 0; i < m.getMaxEntryCount(); ++i )
 				{
 					obj = m.genlist[i];
@@ -932,7 +932,7 @@ namespace VLTEdit
 
 								foreach( VLTClass.aclz1 a2 in dq )
 								{
-									EABaseType bb = dr.bba1[num++];
+									VLTBaseType bb = dr.bba1[num++];
 									if( !a2.c() || dr.booa1[num - 1] )
 									{
 										string text4 = this.bThree( HashTracker.getValueForHash( a2.hash ) );
@@ -941,7 +941,7 @@ namespace VLTEdit
 											streamWriter.Write( "\t\t\t\t" + text4 + " = " );
 											if( a2.isArray() )
 											{
-												EAArray m = bb as EAArray;
+												VLTArrayType m = bb as VLTArrayType;
 												streamWriter.WriteLine( "new VLTOffsetData[] {" );
 												for( int i = 0; i < m.getMaxEntryCount(); ++i )
 												{
@@ -1322,10 +1322,10 @@ namespace VLTEdit
 			if( this.tvFields.SelectedNode != null )
 			{
 				TreeNode selectedNode = this.tvFields.SelectedNode;
-				EABaseType bb = selectedNode.Tag as EABaseType;
+				VLTBaseType bb = selectedNode.Tag as VLTBaseType;
 				if( selectedNode.Parent != null )
 				{
-					EABaseType bb2 = selectedNode.Parent.Tag as EAArray;
+					VLTBaseType bb2 = selectedNode.Parent.Tag as VLTArrayType;
 					Clipboard.SetDataObject( string.Concat( new object[]
 					{
 						HashTracker.getValueForHash(bb2.ui3),
@@ -1344,9 +1344,9 @@ namespace VLTEdit
 			if( this.tvFields.SelectedNode != null )
 			{
 				TreeNode selectedNode = this.tvFields.SelectedNode;
-				if( selectedNode.Tag is EABaseType && !( selectedNode.Tag is EAArray ) )
+				if( selectedNode.Tag is VLTBaseType && !( selectedNode.Tag is VLTArrayType ) )
 				{
-					EABaseType bb = selectedNode.Tag as EABaseType;
+					VLTBaseType bb = selectedNode.Tag as VLTBaseType;
 					Clipboard.SetDataObject( string.Format( "0x{0}", bb.ui1 ) );
 				}
 			}
@@ -1357,9 +1357,9 @@ namespace VLTEdit
 			if( this.tvFields.SelectedNode != null )
 			{
 				TreeNode selectedNode = this.tvFields.SelectedNode;
-				if( selectedNode.Tag is EABaseType && !( selectedNode.Tag is EAArray ) )
+				if( selectedNode.Tag is VLTBaseType && !( selectedNode.Tag is VLTArrayType ) )
 				{
-					EABaseType bb = selectedNode.Tag as EABaseType;
+					VLTBaseType bb = selectedNode.Tag as VLTBaseType;
 					Clipboard.SetDataObject( string.Format( "{0}:0x{1}", bb.boo1 ? "vlt" : "bin", bb.ui1 ) );
 				}
 			}
@@ -1374,7 +1374,7 @@ namespace VLTEdit
 				{
 					treeNode = treeNode.Parent;
 				}
-				EABaseType bb = treeNode.Tag as EABaseType;
+				VLTBaseType bb = treeNode.Tag as VLTBaseType;
 				this.a( bb.dr1, bb.ui3 );
 			}
 		}
@@ -1465,12 +1465,12 @@ namespace VLTEdit
 
 				foreach( VLTClass.aclz1 a3 in dq2 )
 				{
-					EABaseType bb = dr.bba1[num++];
+					VLTBaseType bb = dr.bba1[num++];
 					if( !a3.c() || dr.booa1[num - 1] )
 					{
 						if( a3.isArray() )
 						{
-							EAArray m = bb as EAArray;
+							VLTArrayType m = bb as VLTArrayType;
 							string text3 = string.Concat( new object[]
 							{
 									HashTracker.getValueForHash(a3.hash),
@@ -1532,9 +1532,9 @@ namespace VLTEdit
 		private void tvFields_AfterSelect( object A_0, TreeViewEventArgs A_1 )
 		{
 			object tag = A_1.Node.Tag;
-			if( tag is EABaseType && !( tag is EAArray ) )
+			if( tag is VLTBaseType && !( tag is VLTArrayType ) )
 			{
-				EABaseType bb = tag as EABaseType;
+				VLTBaseType bb = tag as VLTBaseType;
 				//bb.l(); // MW: TODO: What is l() supposed to be?
 				DataSet dataSet = new DataSet( "DataItem" );
 				DataTable dataTable = dataSet.Tables.Add( "Values" );

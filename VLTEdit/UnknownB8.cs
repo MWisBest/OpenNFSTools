@@ -15,6 +15,7 @@ namespace VLTEdit
 			this.s1 = br.ReadInt16();
 			this.s2 = br.ReadInt16();
 			this.i2 = br.ReadInt32();
+			return;
 		}
 
 		public void write( BinaryWriter bw )

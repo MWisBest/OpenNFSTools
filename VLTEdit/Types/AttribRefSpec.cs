@@ -2,7 +2,7 @@ using System.IO;
 
 namespace VLTEdit.Types
 {
-	public class EARefSpec : EABaseType // OBF: dm.cs
+	public class AttribRefSpec : VLTBaseType // OBF: dm.cs
 	{
 		private uint refui1;
 		private uint refui2;

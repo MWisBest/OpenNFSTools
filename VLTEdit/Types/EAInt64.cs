@@ -2,7 +2,7 @@ using System.IO;
 
 namespace VLTEdit.Types
 {
-	public class EAInt64 : EABaseType
+	public class EAInt64 : VLTBaseType
 	{
 		[DataValue( "Value" )]
 		public long value;

@@ -3,7 +3,7 @@ using VLTEdit.Table;
 
 namespace VLTEdit
 {
-	public class UnknownAS : IBinReadWrite
+	public class UnknownAS : IBinReadWrite // NOTE: This seems like actual table entires read...
 	{
 		public uint ui1;
 		public EntryType b21;

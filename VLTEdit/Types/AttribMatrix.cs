@@ -2,7 +2,7 @@ using System.IO;
 
 namespace VLTEdit.Types
 {
-	public class EAMatrix : EABaseType
+	public class AttribMatrix : VLTBaseType
 	{
 		[DataValue( "M[1,1]" )]
 		public float m11;

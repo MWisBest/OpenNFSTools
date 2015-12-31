@@ -2,7 +2,7 @@ using System.IO;
 
 namespace VLTEdit.Types
 {
-	public class EATrafficPatternRecord : EABaseType
+	public class TrafficPatternRecord : VLTBaseType
 	{
 		private uint class_hash;
 		private uint row_hash;

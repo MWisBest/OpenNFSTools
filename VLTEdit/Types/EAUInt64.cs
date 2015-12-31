@@ -2,7 +2,7 @@ using System.IO;
 
 namespace VLTEdit.Types
 {
-	public class EAUInt64 : EABaseType
+	public class EAUInt64 : VLTBaseType
 	{
 		[DataValue( "Value" )]
 		public ulong value;

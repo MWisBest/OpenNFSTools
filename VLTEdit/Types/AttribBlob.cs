@@ -2,7 +2,7 @@ using System.IO;
 
 namespace VLTEdit.Types
 {
-	public class EABlob : EABaseType
+	public class AttribBlob : VLTBaseType
 	{
 		[DataValue( "Length", Hex = true )]
 		public uint length;

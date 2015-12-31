@@ -2,7 +2,7 @@ using System.IO;
 
 namespace VLTEdit.Types
 {
-	public class EAStringKey : EABaseType
+	public class AttribStringKey : VLTBaseType
 	{
 		[DataValue( "Hash64", Hex = true )]
 		public ulong hash64;

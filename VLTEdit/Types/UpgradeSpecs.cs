@@ -2,7 +2,7 @@ using System.IO;
 
 namespace VLTEdit.Types
 {
-	public class EAUpgradeSpecs : EABaseType
+	public class UpgradeSpecs : VLTBaseType
 	{
 		private uint upgrdui1;
 		private uint upgrdui2;

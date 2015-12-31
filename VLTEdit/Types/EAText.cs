@@ -2,7 +2,7 @@ using System.IO;
 
 namespace VLTEdit.Types
 {
-	public class EAText : EABaseType
+	public class EAText : VLTBaseType
 	{
 		[DataValue( "Offset", Hex = true )]
 		public uint offset;

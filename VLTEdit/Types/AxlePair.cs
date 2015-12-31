@@ -2,7 +2,7 @@ using System.IO;
 
 namespace VLTEdit.Types
 {
-	public class EAAxlePair : EABaseType
+	public class AxlePair : VLTBaseType
 	{
 		[DataValue( "Front" )]
 		public float front;

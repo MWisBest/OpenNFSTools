@@ -3,7 +3,7 @@ using System.Text;
 
 namespace VLTEdit.Types
 {
-	public class EARawType : EABaseType // OBF: ad.cs
+	public class VLTRawType : VLTBaseType // OBF: ad.cs
 	{
 		[DataValue( "Length", Hex = true )]
 		public int len;

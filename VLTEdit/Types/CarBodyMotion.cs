@@ -2,7 +2,7 @@ using System.IO;
 
 namespace VLTEdit.Types
 {
-	public class EACarBodyMotion : EABaseType
+	public class CarBodyMotion : VLTBaseType
 	{
 		[DataValue( "Value1" )]
 		public float value1;

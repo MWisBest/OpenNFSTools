@@ -22,15 +22,14 @@ namespace VLTEdit.Table
 			// position is casted here because the main thing that references this needs it as an int anyway.
 			this.position = (int)br.BaseStream.Position; // we're now at 0x54
 
-			if( !BuildConfig.CARBON )
-			{
-				br.ReadInt32(); // VLTConstants.MW_DEADBEEF
-			}
+			br.ReadInt32(); // VLTConstants.MW_DEADBEEF or VLTConstants.CARBON_SPACER
+
 			this.ia1 = new int[this.i3];
 			for( int i = 0; i < this.i3; ++i )
 			{
 				this.ia1[i] = br.ReadInt32();
 			}
+			return;
 		}
 
 		public override void write( BinaryWriter bw )
@@ -38,10 +37,7 @@ namespace VLTEdit.Table
 			bw.Write( this.i1 );
 			bw.Write( this.i2 );
 			bw.Write( this.i3 );
-			if( !BuildConfig.CARBON )
-			{
-				bw.Write( VLTConstants.MW_DEADBEEF );
-			}
+			bw.Write( ( !BuildConfig.CARBON ? VLTConstants.MW_DEADBEEF : VLTConstants.CARBON_SPACER ) );
 			for( int i = 0; i < this.i3; ++i )
 			{
 				bw.Write( this.ia1[i] );

@@ -1368,6 +1368,46 @@ CONTROLLER_CURVE
 TRAFFIC_TYPES
 
 
+## MW: Carbon!
+997s
+a3
+a4
+cobaltss
+corvette
+cts
+gti
+imprezawrx
+lancerevo8
+punto
+sl500
+tt
+
+240sx_top
+300c_top
+350z_top
+997tt_top
+brera_top
+camaro_top
+challenger71_top
+challengern_top
+charger06_top
+charger69_top
+cuda_top
+g35_top
+jaguarxk_top
+lancerevo9_top
+mazdaspeed3_top
+mustangshlbyo_top
+skyline_top
+sl65_top
+
+
+bushido
+rotor4
+scorpios
+tfk
+
+
 
 ##################################################################
 # MANUAL LIST (Guess List)

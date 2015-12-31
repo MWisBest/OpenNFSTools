@@ -2,7 +2,7 @@ using System.IO;
 
 namespace VLTEdit.Types
 {
-	public class EAUInt16 : EABaseType
+	public class EAUInt16 : VLTBaseType
 	{
 		[DataValue( "Value" )]
 		public ushort value;

@@ -2,7 +2,7 @@ using System.IO;
 
 namespace VLTEdit.Types
 {
-	public class EAFloat : EABaseType
+	public class EAFloat : VLTBaseType
 	{
 		[DataValue( "Value" )]
 		public float value;

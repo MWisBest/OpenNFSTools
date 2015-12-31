@@ -169,24 +169,31 @@ namespace VLTEdit
 			UnknownDH dh = A_0.a( VLTOtherValue.TABLE_START ) as UnknownDH;
 			for( int i = 0; i < dh.asa1.Length; ++i )
 			{
-				UnknownAS @as = dh.asa1[i];
-				switch( @as.b21 )
+				try
 				{
-					case EntryType.ROOT:
-						this.av.am( @as.di1.asRootEntry(), A_0 );
-						break;
-					case EntryType.CLASS:
-						this.av.a( @as.di1.asClassEntry(), A_0 );
-						break;
-					case EntryType.ROW:
-						RowEntry c = @as.di1.asRowEntry();
-						VLTClass dq = this.av.genht2[c.ui2];
-						dq.dqb1.a( c, A_0 );
-						if( i == dh.asa1.Length - 1 )
-						{
-							dq.dqb1.Trim();
-						}
-						break;
+					UnknownAS @as = dh.asa1[i];
+					switch( @as.b21 )
+					{
+						case EntryType.ROOT:
+							this.av.am( @as.di1.asRootEntry(), A_0 );
+							break;
+						case EntryType.CLASS:
+							this.av.a( @as.di1.asClassEntry(), A_0 );
+							break;
+						case EntryType.ROW:
+							RowEntry c = @as.di1.asRowEntry();
+							VLTClass dq = this.av.genht2[c.ui2];
+							dq.dqb1.a( c, A_0 );
+							if( i == dh.asa1.Length - 1 )
+							{
+								dq.dqb1.Trim();
+							}
+							break;
+					}
+				}
+				catch( Exception e )
+				{
+					Console.WriteLine( "Lol, fail!" );
 				}
 			}
 		}
@@ -225,23 +232,31 @@ namespace VLTEdit
 				treeNode2.Tag = dq;
 				foreach( UnknownDR dr in dq.dqb1 )
 				{
-					TreeNode treeNode3;
+					TreeNode treeNode3 = null;
 					string text2;
-					if( dr.c1.ui3 == 0u )
+					try
 					{
-						treeNode3 = treeNode2;
+						if( dr.c1.ui3 == 0u )
+						{
+							treeNode3 = treeNode2;
+						}
+						else
+						{
+							text2 = string.Format( "{0:x},{1:x}", dq.hash, dr.c1.ui3 );
+							treeNode3 = dict[text2];
+						}
 					}
-					else
+					catch( Exception e )
 					{
-						text2 = string.Format( "{0:x},{1:x}", dq.hash, dr.c1.ui3 );
-						treeNode3 = dict[text2];
+						Console.WriteLine( "Lol, double fail!" );
 					}
+
 					if( treeNode3 == null )
 					{
 						if( flag )
 						{
 							DialogResult dialogResult = MessageBox.Show( "Could not find parent data row. Did you forget to load a dependency?\nThe hierarchy will be flattened.", "Warning", MessageBoxButtons.OK ); // TODO: , 48);
-							if( dialogResult == DialogResult.Cancel )
+							if( dialogResult == DialogResult.OK )
 							{
 								flag = false;
 							}
@@ -704,12 +719,12 @@ namespace VLTEdit
 
 				foreach( VLTClass.aclz1 a3 in dq2 )
 				{
-					EABaseType bb = dr.bba1[num++];
+					VLTBaseType bb = dr.bba1[num++];
 					if( !a3.c() || dr.booa1[num - 1] )
 					{
 						if( a3.isArray() )
 						{
-							EAArray m = bb as EAArray;
+							VLTArrayType m = bb as VLTArrayType;
 							string text3 = string.Concat( new object[]
 							{
 									HashTracker.getValueForHash(a3.hash),
@@ -776,9 +791,9 @@ namespace VLTEdit
 		private void tvFields_AfterSelect( object sender, TreeViewEventArgs e )
 		{
 			object tag = e.Node.Tag;
-			if( tag is EABaseType && !( tag is EAArray ) )
+			if( tag is VLTBaseType && !( tag is VLTArrayType ) )
 			{
-				EABaseType bb = tag as EABaseType;
+				VLTBaseType bb = tag as VLTBaseType;
 				//bb.l(); // MW: TODO: What is l() supposed to be?
 				DataSet dataSet = new DataSet( "DataItem" );
 				DataTable dataTable = dataSet.Tables.Add( "Values" );

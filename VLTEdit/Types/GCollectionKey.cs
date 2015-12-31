@@ -2,7 +2,7 @@ using System.IO;
 
 namespace VLTEdit.Types
 {
-	public class EAGCollectionKey : EABaseType // OBF: al.cs
+	public class GCollectionKey : VLTBaseType // OBF: al.cs
 	{
 		[DataValue( "Hash", Hex = true )]
 		public uint hash;

@@ -2,6 +2,7 @@ using System.IO;
 
 namespace VLTEdit.Table
 {
+	// NOTE: This is for the actual entires in the database, NOT the table entries!
 	public abstract class BaseEntry : IBinReadWrite
 	{
 		public UnknownAS as1;

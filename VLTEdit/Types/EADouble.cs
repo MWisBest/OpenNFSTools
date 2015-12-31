@@ -2,7 +2,7 @@ using System.IO;
 
 namespace VLTEdit.Types
 {
-	public class EADouble : EABaseType
+	public class EADouble : VLTBaseType
 	{
 		[DataValue( "Value" )]
 		public double value;

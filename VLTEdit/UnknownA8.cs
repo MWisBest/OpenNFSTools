@@ -27,8 +27,9 @@ namespace VLTEdit
 			this.genb8list = new List<UnknownB8>();
 			this.genb8listTwo = new List<UnknownB8>();
 			this.genht1 = new Dictionary<int, UnknownB8>();
+			// NOTE: we never ever get both flag and flag2 as the same here
 			bool flag = false;
-			bool flag2 = false;
+			//bool flag2 = false;
 			UnknownB8 b;
 			while( true )
 			{
@@ -40,14 +41,14 @@ namespace VLTEdit
 					if( b.s2 == 1 )
 					{
 						flag = false;
-						flag2 = true;
+						//flag2 = true;
 					}
 					else
 					{
 						if( b.s2 == 0 )
 						{
 							flag = true;
-							flag2 = false;
+							//flag2 = false;
 						}
 					}
 				}
@@ -59,7 +60,7 @@ namespace VLTEdit
 						{
 							this.genht1[b.i1] = b;
 						}
-						if( flag2 )
+						else
 						{
 							this.genb8listTwo.Add( b );
 						}
@@ -74,7 +75,7 @@ namespace VLTEdit
 						{
 							this.genht1[b.i1] = b;
 						}
-						if( flag2 )
+						else
 						{
 							this.genb8listTwo.Add( b );
 						}

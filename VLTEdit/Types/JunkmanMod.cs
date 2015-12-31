@@ -2,7 +2,7 @@ using System.IO;
 
 namespace VLTEdit.Types
 {
-	public class EAJunkmanMod : EABaseType // OBF: at.cs
+	public class JunkmanMod : VLTBaseType // OBF: at.cs
 	{
 		private uint junkui1;
 		private uint junkui2;

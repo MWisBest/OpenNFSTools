@@ -352,13 +352,20 @@ namespace VLTEdit
 
 		private string a( UnknownDR A_0 )
 		{
-			VLTClass dq = A_0.dq1;
-			string text = HashTracker.getValueForHash( A_0.c1.hash );
-			if( A_0.c1.ui3 == 0u )
+			try
 			{
-				return text;
+				VLTClass dq = A_0.dq1;
+				string text = HashTracker.getValueForHash( A_0.c1.hash );
+				if( A_0.c1.ui3 == 0u )
+				{
+					return text;
+				}
+				return this.a( dq.dqb1.a( A_0.c1.ui3 ) ) + "/" + text;
 			}
-			return this.a( dq.dqb1.a( A_0.c1.ui3 ) ) + "/" + text;
+			catch
+			{
+				return "";
+			}
 		}
 
 		/**
@@ -436,6 +443,8 @@ namespace VLTEdit
 			this.search( A_0, ref strList ); // TODO: Check that files are open!
 			this.search( A_0.ToLower(), ref strList );
 			this.search( A_0.ToUpper(), ref strList );
+			/* This was previously meant for being able to use "_" for inverted case searches or something,
+			 * but we actually have hashes with "_" in them, so this is too problematic. Try "_default", for example...
 			bool flag = true;
 			string text = "";
 			foreach( char c in A_0.ToCharArray() )
@@ -460,6 +469,7 @@ namespace VLTEdit
 			this.search( text, ref strList );
 			this.search( text.ToLower(), ref strList );
 			this.search( text.ToUpper(), ref strList );
+			*/
 			if( strList.Count > 0 )
 			{
 				foreach( string str in strList )

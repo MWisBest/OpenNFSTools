@@ -167,33 +167,38 @@ namespace VLTEdit
 		private void aTwo( UnknownB0 A_0 )
 		{
 			UnknownDH dh = A_0.a( VLTOtherValue.TABLE_START ) as UnknownDH;
+			uint totalFails = 0;
 			for( int i = 0; i < dh.asa1.Length; ++i )
 			{
-				try
+				UnknownAS @as = dh.asa1[i];
+				switch( @as.b21 )
 				{
-					UnknownAS @as = dh.asa1[i];
-					switch( @as.b21 )
-					{
-						case EntryType.ROOT:
-							this.av.am( @as.di1.asRootEntry(), A_0 );
-							break;
-						case EntryType.CLASS:
-							this.av.a( @as.di1.asClassEntry(), A_0 );
-							break;
-						case EntryType.ROW:
-							RowEntry c = @as.di1.asRowEntry();
-							VLTClass dq = this.av.genht2[c.ui2];
+					case EntryType.ROOT:
+						this.av.am( @as.di1.asRootEntry(), A_0 );
+						break;
+					case EntryType.CLASS:
+						this.av.a( @as.di1.asClassEntry(), A_0 );
+						break;
+					case EntryType.ROW:
+						RowEntry c = @as.di1.asRowEntry();
+						VLTClass dq = this.av.genht2[c.ui2];
+						try
+						{
 							dq.dqb1.a( c, A_0 );
-							if( i == dh.asa1.Length - 1 )
-							{
-								dq.dqb1.Trim();
-							}
+						}
+						catch( KeyNotFoundException e )
+						{
+							++totalFails;
+							Console.WriteLine( "Lol, ROW fail! (x" + totalFails + ")" );
 							break;
-					}
-				}
-				catch( Exception e )
-				{
-					Console.WriteLine( "Lol, fail!" );
+						}
+						// TODO: 
+						// Only needed when trimming, which we aren't doing with this debugging stuff currently.
+						//if( i == dh.asa1.Length - 1 )
+						//{
+						//	dq.dqb1.Trim();
+						//}
+						break;
 				}
 			}
 		}
@@ -224,31 +229,36 @@ namespace VLTEdit
 			// Creating the TreeNode separately here and then adding it to the TreeView later is more efficient.
 			TreeNode treeNode = new TreeNode( "Database" );
 			treeNode.Tag = this.av;
+			uint totalFails = 0;
+			uint currentIter = 0;
 
 			foreach( VLTClass dq in this.av )
 			{
+				++currentIter;
 				string text = HashTracker.getValueForHash( dq.hash );
 				TreeNode treeNode2 = treeNode.Nodes.Add( text );
 				treeNode2.Tag = dq;
+
 				foreach( UnknownDR dr in dq.dqb1 )
 				{
 					TreeNode treeNode3 = null;
 					string text2;
-					try
+					if( dr.c1.ui3 == 0u )
 					{
-						if( dr.c1.ui3 == 0u )
+						treeNode3 = treeNode2;
+					}
+					else
+					{
+						text2 = string.Format( "{0:x},{1:x}", dq.hash, dr.c1.ui3 );
+						try
 						{
-							treeNode3 = treeNode2;
-						}
-						else
-						{
-							text2 = string.Format( "{0:x},{1:x}", dq.hash, dr.c1.ui3 );
 							treeNode3 = dict[text2];
 						}
-					}
-					catch( Exception e )
-					{
-						Console.WriteLine( "Lol, double fail!" );
+						catch( KeyNotFoundException e )
+						{
+							++totalFails;
+							Console.WriteLine( "Lol, TreeNode fail! (x" + currentIter + "," + totalFails + ")" );
+						}
 					}
 
 					if( treeNode3 == null )

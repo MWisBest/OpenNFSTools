@@ -167,7 +167,6 @@ namespace VLTEdit
 		private void aTwo( UnknownB0 A_0 )
 		{
 			UnknownDH dh = A_0.a( VLTOtherValue.TABLE_START ) as UnknownDH;
-			uint totalFails = 0;
 			for( int i = 0; i < dh.asa1.Length; ++i )
 			{
 				TableEntry @as = dh.asa1[i];
@@ -182,22 +181,7 @@ namespace VLTEdit
 					case EntryType.ROW:
 						RowRecord c = @as.di1.asRowEntry();
 						VLTClass dq = this.av.genht2[c.ui2];
-						//try
-						//{
-							dq.dqb1.a( c, A_0 );
-						//}
-					//	catch( KeyNotFoundException e )
-						//{
-						//	++totalFails;
-						//	Console.WriteLine( "Lol, ROW fail! (x" + totalFails + ")" );
-						//	break;
-						//}
-						// TODO: 
-						// Only needed when trimming, which we aren't doing with this debugging stuff currently.
-						//if( i == dh.asa1.Length - 1 )
-						//{
-						//	dq.dqb1.Trim();
-						//}
+						dq.dqb1.a( c, A_0 );
 						break;
 				}
 			}
@@ -229,12 +213,9 @@ namespace VLTEdit
 			// Creating the TreeNode separately here and then adding it to the TreeView later is more efficient.
 			TreeNode treeNode = new TreeNode( "Database" );
 			treeNode.Tag = this.av;
-			uint totalFails = 0;
-			uint currentIter = 0;
 
 			foreach( VLTClass dq in this.av )
 			{
-				++currentIter;
 				string text = HashTracker.getValueForHash( dq.hash );
 				TreeNode treeNode2 = treeNode.Nodes.Add( text );
 				treeNode2.Tag = dq;
@@ -251,15 +232,7 @@ namespace VLTEdit
 					{
 						// This failure seems to be caused by our underlying problem with the VLTClass RowEntry failure.
 						text2 = string.Format( "{0:x},{1:x}", dq.hash, dr.c1.ui3 );
-						try
-						{
-							treeNode3 = dict[text2];
-						}
-						catch( KeyNotFoundException e )
-						{
-							++totalFails;
-							Console.WriteLine( "Lol, TreeNode fail (" + text2 + ")! (x" + currentIter + "," + totalFails + ")" );
-						}
+						treeNode3 = dict[text2];
 					}
 
 					if( treeNode3 == null )

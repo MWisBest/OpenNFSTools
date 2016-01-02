@@ -82,6 +82,7 @@
     <Compile Include="BuildConfig.cs" />
     <Compile Include="ITrimmable.cs" />
     <Compile Include="Types\AirSupport.cs" />
+    <Compile Include="Types\AttribStringKeyCarbon.cs" />
     <Compile Include="Types\CopCountRecord.cs" />
     <Compile Include="Types\CarBodyMotion.cs" />
     <Compile Include="Types\TrafficPatternRecord.cs" />

@@ -61,7 +61,9 @@ namespace VLTEdit.Types
 				this.typeDictionary.Add( HashUtil.getHash32( "EA::Reflection::Text" ), typeof( EAText ) );
 
 				this.typeDictionary.Add( HashUtil.getHash32( "Attrib::RefSpec" ), typeof( AttribRefSpec ) );
-				this.typeDictionary.Add( HashUtil.getHash32( "Attrib::StringKey" ), typeof( AttribStringKey ) );
+				// Carbon axed the Hash64 for Attrib::StringKey.
+				// TODO: Refactor Types to allow all classes to know their actual length, to adjust for this stuff dynamically.
+				this.typeDictionary.Add( HashUtil.getHash32( "Attrib::StringKey" ), typeof( AttribStringKeyCarbon ) ); 
 				this.typeDictionary.Add( HashUtil.getHash32( "Attrib::Types::Matrix" ), typeof( AttribMatrix ) );
 				this.typeDictionary.Add( HashUtil.getHash32( "Attrib::Types::Vector2" ), typeof( AttribVector2 ) );
 				this.typeDictionary.Add( HashUtil.getHash32( "Attrib::Types::Vector3" ), typeof( AttribVector3 ) );

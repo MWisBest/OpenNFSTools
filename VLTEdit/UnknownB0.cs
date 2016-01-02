@@ -20,7 +20,7 @@ namespace VLTEdit
 
 			UnknownE e = new UnknownE();
 			e.read( A_0 );
-			if( e.c() )
+			if( !e.isBlank() )
 			{
 				VLTOtherValue ce = e.ce1;
 				UnknownC0 c;
@@ -45,7 +45,7 @@ namespace VLTEdit
 
 				c.e1 = e;
 				c.read( A_0 );
-				e.b( A_0.BaseStream );
+				e.seekToNextBlock( A_0.BaseStream );
 				return c;
 			}
 
@@ -118,10 +118,10 @@ namespace VLTEdit
 			a_ = new BinaryReader( this.ms1 );
 			this.ms1.Seek( 0L, SeekOrigin.Begin );
 			c = this.a( a_ );
-			c.e1.a( this.ms1 );
+			c.e1.seekToDataStart( this.ms1 );
 			if( c.e1.ce1 == VLTOtherValue.BINMAGIC )
 			{
-				long num = this.ms1.Position + c.e1.a();
+				long num = this.ms1.Position + c.e1.dataSize();
 				while( this.ms1.Position < num )
 				{
 					string text2 = UnknownAP.a( a_ );

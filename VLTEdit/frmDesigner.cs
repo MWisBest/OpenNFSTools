@@ -170,8 +170,8 @@ namespace VLTEdit
 			uint totalFails = 0;
 			for( int i = 0; i < dh.asa1.Length; ++i )
 			{
-				UnknownAS @as = dh.asa1[i];
-				switch( @as.b21 )
+				TableEntry @as = dh.asa1[i];
+				switch( @as.entryType )
 				{
 					case EntryType.ROOT:
 						this.av.am( @as.di1.asRootEntry(), A_0 );
@@ -180,7 +180,7 @@ namespace VLTEdit
 						this.av.a( @as.di1.asClassEntry(), A_0 );
 						break;
 					case EntryType.ROW:
-						RowEntry c = @as.di1.asRowEntry();
+						RowRecord c = @as.di1.asRowEntry();
 						VLTClass dq = this.av.genht2[c.ui2];
 						//try
 						//{
@@ -258,7 +258,7 @@ namespace VLTEdit
 						catch( KeyNotFoundException e )
 						{
 							++totalFails;
-							Console.WriteLine( "Lol, TreeNode fail! (x" + currentIter + "," + totalFails + ")" );
+							Console.WriteLine( "Lol, TreeNode fail (" + text2 + ")! (x" + currentIter + "," + totalFails + ")" );
 						}
 					}
 

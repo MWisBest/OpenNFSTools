@@ -12,6 +12,8 @@ namespace VLTEdit
 		e = 0x4461744Eu, // 4E 74 61 44 // 0x00000040 in db.vlt
 
 		TABLE_START = 0x4578704Eu, // 4E 70 78 45
-		TABLE_END = 0x5074724Eu // 4E 72 74 50
+		TABLE_END = 0x5074724Eu, // 4E 72 74 50
+
+		CARBON_VLT_HEAD = 0x56657273u // 73 72 65 56 // is this a problem?
 	}
 }

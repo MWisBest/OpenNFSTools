@@ -519,8 +519,8 @@ namespace VLTEdit
 			UnknownDH dh = A_0.a( VLTOtherValue.TABLE_START ) as UnknownDH;
 			for( int i = 0; i < dh.asa1.Length; ++i )
 			{
-				UnknownAS @as = dh.asa1[i];
-				switch( @as.b21 )
+				TableEntry @as = dh.asa1[i];
+				switch( @as.entryType )
 				{
 					case EntryType.ROOT:
 						this.av.am( @as.di1.asRootEntry(), A_0 );
@@ -529,7 +529,7 @@ namespace VLTEdit
 						this.av.a( @as.di1.asClassEntry(), A_0 );
 						break;
 					case EntryType.ROW:
-						RowEntry c = @as.di1.asRowEntry();
+						RowRecord c = @as.di1.asRowEntry();
 						VLTClass dq = this.av.genht2[c.ui2];
 						dq.dqb1.a( c, A_0 );
 						if( i == dh.asa1.Length - 1 )
@@ -560,16 +560,16 @@ namespace VLTEdit
 				{
 					this.writeToConsole( "Items in " + text );
 					UnknownDH dh = b.a( VLTOtherValue.TABLE_START ) as UnknownDH;
-					foreach( UnknownAS @as in dh )
+					foreach( TableEntry @as in dh )
 					{
-						EntryType b2 = @as.b21;
-						switch( @as.b21 )
+						EntryType b2 = @as.entryType;
+						switch( @as.entryType )
 						{
 							case EntryType.CLASS:
-								this.writeToConsole( "- Class: " + HashTracker.getValueForHash( @as.ui1 ) );
+								this.writeToConsole( "- Class: " + HashTracker.getValueForHash( @as.hash ) );
 								break;
 							case EntryType.ROW:
-								RowEntry c = @as.di1.asRowEntry();
+								RowRecord c = @as.di1.asRowEntry();
 								this.writeToConsole( "- Row: " + HashTracker.getValueForHash( c.ui2 ) + "/" + this.a( this.av.genht2[c.ui2].dqb1.a( c.hash ) ) );
 								break;
 							case EntryType.ROOT:

@@ -8,7 +8,7 @@ namespace VLTEdit
 
 		public override void read( BinaryReader br )
 		{
-			this.ba1 = br.ReadBytes( this.e1.a() );
+			this.ba1 = br.ReadBytes( this.e1.dataSize() );
 		}
 
 		public override void write( BinaryWriter bw )

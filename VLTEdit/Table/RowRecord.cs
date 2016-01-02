@@ -4,7 +4,7 @@ using System.Reflection;
 namespace VLTEdit.Table
 {
 	[DefaultMember( "Item" )]
-	public class RowEntry : BaseEntry
+	public class RowRecord : BaseRecord
 	{
 		public class aclz : IBinReadWrite // Should be OK for Carbon?
 		{
@@ -51,7 +51,7 @@ namespace VLTEdit.Table
 		private uint spacer;
 		private uint[] uia1;
 		private uint[] extraHashes;
-		public RowEntry.aclz[] caa1;
+		public RowRecord.aclz[] caa1;
 
 		public override void read( BinaryReader br )
 		{
@@ -89,10 +89,10 @@ namespace VLTEdit.Table
 				}
 			}
 
-			this.caa1 = new RowEntry.aclz[this.i1];
+			this.caa1 = new RowRecord.aclz[this.i1];
 			for( int j = 0; j < this.i1; ++j )
 			{
-				this.caa1[j] = new RowEntry.aclz();
+				this.caa1[j] = new RowRecord.aclz();
 				this.caa1[j].read( br );
 			}
 		}

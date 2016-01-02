@@ -10,7 +10,7 @@ namespace VLTEdit
 	public class UnknownDR : IEnumerable // OBF: dr.cs
 	{
 		public UnknownB0 b01;
-		public RowEntry c1;
+		public RowRecord c1;
 		public VLTBaseType[] bba1;
 		public bool[] booa1;
 		public VLTClass dq1;

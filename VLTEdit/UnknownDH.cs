@@ -7,15 +7,15 @@ namespace VLTEdit
 	[DefaultMember( "Item" )]
 	public class UnknownDH : UnknownC0, IEnumerable
 	{
-		public UnknownAS[] asa1;
+		public TableEntry[] asa1;
 
 		public override void read( BinaryReader br )
 		{
 			int num = br.ReadInt32();
-			this.asa1 = new UnknownAS[num];
+			this.asa1 = new TableEntry[num];
 			for( int i = 0; i < num; ++i )
 			{
-				this.asa1[i] = new UnknownAS();
+				this.asa1[i] = new TableEntry();
 				this.asa1[i].read( br );
 			}
 		}
@@ -23,7 +23,7 @@ namespace VLTEdit
 		public override void write( BinaryWriter bw )
 		{
 			bw.Write( this.asa1.Length );
-			foreach( UnknownAS asa in this.asa1 )
+			foreach( TableEntry asa in this.asa1 )
 			{
 				asa.write( bw );
 			}

@@ -4,7 +4,7 @@ using System.Reflection;
 namespace VLTEdit.Table
 {
 	[DefaultMember( "Item" )]
-	public class RootEntry : BaseEntry
+	public class RootRecord : BaseRecord
 	{
 		private int i1;
 		private int i2;

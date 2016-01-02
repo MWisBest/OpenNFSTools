@@ -97,7 +97,7 @@
     <Compile Include="UnknownAP.cs" />
     <Compile Include="Types\EAUInt8.cs" />
     <Compile Include="Types\EAText.cs" />
-    <Compile Include="UnknownAS.cs" />
+    <Compile Include="TableEntry.cs" />
     <Compile Include="Types\JunkmanMod.cs" />
     <Compile Include="UnknownB0.cs" />
     <Compile Include="Types\EABool.cs" />
@@ -112,11 +112,11 @@
     <Compile Include="Types\EAUInt64.cs" />
     <Compile Include="HashTracker.cs" />
     <Compile Include="Types\EADouble.cs" />
-    <Compile Include="Table\RowEntry.cs" />
+    <Compile Include="Table\RowRecord.cs" />
     <Compile Include="UnknownC0.cs" />
     <Compile Include="Types\AttribVector2.cs" />
     <Compile Include="Types\AttribStringKey.cs" />
-    <Compile Include="Table\ClassEntry.cs" />
+    <Compile Include="Table\ClassRecord.cs" />
     <Compile Include="Types\AttribBlob.cs" />
     <Compile Include="VLTConstants.cs" />
     <Compile Include="VLTOtherValue.cs" />
@@ -125,7 +125,7 @@
     <Compile Include="Types\EAInt8.cs" />
     <Compile Include="UnknownDE.cs" />
     <Compile Include="UnknownDH.cs" />
-    <Compile Include="Table\BaseEntry.cs" />
+    <Compile Include="Table\BaseRecord.cs" />
     <Compile Include="Types\EAInt16.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
@@ -139,7 +139,7 @@
     <Compile Include="Types\VLTArrayType.cs" />
     <Compile Include="HashUtil.cs" />
     <Compile Include="Types\DataValueAttribute.cs" />
-    <Compile Include="Table\RootEntry.cs" />
+    <Compile Include="Table\RootRecord.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="frmDesigner.resx">

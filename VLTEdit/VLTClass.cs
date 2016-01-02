@@ -39,7 +39,7 @@ namespace VLTEdit
 			}
 
 			// This is where our problems with Carbon and up appear to stem from.
-			public void a( RowEntry A_0, UnknownB0 A_1 )
+			public void a( RowRecord A_0, UnknownB0 A_1 )
 			{
 				BinaryReader binaryReader = new BinaryReader( A_1.ms1 );
 				BinaryReader binaryReader2 = new BinaryReader( A_1.ms2 );
@@ -91,7 +91,7 @@ namespace VLTEdit
 									{
 										++b8Fails;
 										Console.WriteLine( "VLTClass.a(): b   fail (num" + numFails + ",b" + b8Fails + ")" );
-										return;
+										continue;
 									}
 									binaryReader3 = binaryReader;
 									binaryReader3.BaseStream.Seek( b.i2, SeekOrigin.Begin );
@@ -201,11 +201,11 @@ namespace VLTEdit
 
 		public UnknownB0 b01;
 		public uint hash;
-		public ClassEntry c61;
+		public ClassRecord c61;
 		public VLTClass.aclz1[] dqaa1;
 		public VLTClass.bie dqb1;
 
-		public void a( ClassEntry A_0, UnknownB0 A_1 )
+		public void a( ClassRecord A_0, UnknownB0 A_1 )
 		{
 			this.b01 = A_1;
 			this.c61 = A_0;

@@ -2,7 +2,7 @@ using System.IO;
 
 namespace VLTEdit.Table
 {
-	public class ClassEntry : BaseEntry
+	public class ClassRecord : BaseRecord
 	{
 		public uint hash;
 		private int i1;

@@ -5,40 +5,41 @@ namespace VLTEdit
 	public class UnknownE : IBinReadWrite
 	{
 		public VLTOtherValue ce1;
-		private int i1;
+		private int blockLen; // from VLTOtherValue to next one?
 		private long position;
 
-		public int a()
+		public int dataSize()
 		{
-			return this.i1 - 8;
+			return this.blockLen - 8;
 		}
 
-		public bool c()
+		public bool isBlank()
 		{
-			return this.i1 >= 8;
+			return this.blockLen < 8; // only time this is true is at the end of a file as far as I know.
 		}
 
-		public void a( Stream A_0 )
+		public void seekToDataStart( Stream A_0 )
 		{
 			A_0.Seek( this.position + 8L, SeekOrigin.Begin );
 		}
 
-		public void b( Stream A_0 )
+		public void seekToNextBlock( Stream A_0 )
 		{
-			A_0.Seek( this.position + this.i1, SeekOrigin.Begin );
+			A_0.Seek( this.position + this.blockLen, SeekOrigin.Begin );
 		}
 
 		public void read( BinaryReader br )
 		{
 			this.position = br.BaseStream.Position;
 			this.ce1 = (VLTOtherValue)br.ReadInt32();
-			this.i1 = br.ReadInt32();
+			this.blockLen = br.ReadInt32();
+			return;
 		}
 
 		public void write( BinaryWriter bw )
 		{
 			bw.Write( (uint)this.ce1 );
-			bw.Write( this.i1 );
+			bw.Write( this.blockLen );
 		}
 	}
 }

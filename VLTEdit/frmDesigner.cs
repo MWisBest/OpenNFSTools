@@ -182,16 +182,16 @@ namespace VLTEdit
 					case EntryType.ROW:
 						RowEntry c = @as.di1.asRowEntry();
 						VLTClass dq = this.av.genht2[c.ui2];
-						try
-						{
+						//try
+						//{
 							dq.dqb1.a( c, A_0 );
-						}
-						catch( KeyNotFoundException e )
-						{
-							++totalFails;
-							Console.WriteLine( "Lol, ROW fail! (x" + totalFails + ")" );
-							break;
-						}
+						//}
+					//	catch( KeyNotFoundException e )
+						//{
+						//	++totalFails;
+						//	Console.WriteLine( "Lol, ROW fail! (x" + totalFails + ")" );
+						//	break;
+						//}
 						// TODO: 
 						// Only needed when trimming, which we aren't doing with this debugging stuff currently.
 						//if( i == dh.asa1.Length - 1 )
@@ -249,6 +249,7 @@ namespace VLTEdit
 					}
 					else
 					{
+						// This failure seems to be caused by our underlying problem with the VLTClass RowEntry failure.
 						text2 = string.Format( "{0:x},{1:x}", dq.hash, dr.c1.ui3 );
 						try
 						{

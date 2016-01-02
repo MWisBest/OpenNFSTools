@@ -17,6 +17,8 @@ namespace VLTEdit
 		{
 			private VLTClass vltClass;
 			private List<UnknownDR> drList;
+			public static uint numFails = 0;
+			public static uint b8Fails = 0;
 
 			public bie( VLTClass vltClass )
 			{
@@ -36,13 +38,24 @@ namespace VLTEdit
 				return null;
 			}
 
+			// This is where our problems with Carbon and up appear to stem from.
 			public void a( RowEntry A_0, UnknownB0 A_1 )
 			{
 				BinaryReader binaryReader = new BinaryReader( A_1.ms1 );
 				BinaryReader binaryReader2 = new BinaryReader( A_1.ms2 );
 				UnknownDR dr = new UnknownDR( this.vltClass.c61.i2 );
 				UnknownA8 a = A_1.a( VLTOtherValue.TABLE_END ) as UnknownA8;
-				int num = a.genht1[A_0.position].i2;
+				int num;
+				try
+				{
+					num = a.genht1[A_0.position].i2;
+				}
+				catch( KeyNotFoundException e )
+				{
+					++numFails;
+					Console.WriteLine( "VLTClass.a(): num fail (num" + numFails + ",b" + b8Fails + ")" );
+					return;
+				}
 				dr.b01 = A_1;
 				dr.dq1 = this.vltClass;
 				dr.c1 = A_0;
@@ -69,7 +82,17 @@ namespace VLTEdit
 								}
 								else
 								{
-									UnknownB8 b = a.genht1[A_0.caa1[j].position];
+									UnknownB8 b;
+									try
+									{
+										b = a.genht1[A_0.caa1[j].position];
+									}
+									catch( KeyNotFoundException e )
+									{
+										++b8Fails;
+										Console.WriteLine( "VLTClass.a(): b   fail (num" + numFails + ",b" + b8Fails + ")" );
+										return;
+									}
 									binaryReader3 = binaryReader;
 									binaryReader3.BaseStream.Seek( b.i2, SeekOrigin.Begin );
 								}

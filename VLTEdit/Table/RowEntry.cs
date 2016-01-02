@@ -10,6 +10,7 @@ namespace VLTEdit.Table
 		{
 			public uint ui1;
 			public int position;
+			private uint spacer;
 			private short sh1;
 			private short sh2;
 
@@ -24,7 +25,7 @@ namespace VLTEdit.Table
 
 				// position is casted here because the main thing that references this needs it as an int anyway.
 				this.position = (int)br.BaseStream.Position;
-				br.ReadInt32();
+				this.spacer = br.ReadUInt32();
 				this.sh1 = br.ReadInt16();
 				this.sh2 = br.ReadInt16();
 			}
@@ -32,7 +33,7 @@ namespace VLTEdit.Table
 			public void write( BinaryWriter bw )
 			{
 				bw.Write( this.ui1 );
-				bw.Write( VLTConstants.MW_DEADBEEF ); // TODO: WTH is this.
+				bw.Write( this.spacer );
 				bw.Write( this.sh1 );
 				bw.Write( this.sh2 );
 			}
@@ -40,14 +41,16 @@ namespace VLTEdit.Table
 
 		public uint hash;
 		public uint ui2;
-		public uint ui3;
+		public uint ui3; // This is a hash of some sort as well.
 		public int i1; // NFS:C --> Removed?
 		private int i2;
 		private int i3;
 		private ushort i4;
 		private ushort carbonsomething;
 		public int position;
+		private uint spacer;
 		private uint[] uia1;
+		private uint[] extraHashes;
 		public RowEntry.aclz[] caa1;
 
 		public override void read( BinaryReader br )
@@ -64,7 +67,7 @@ namespace VLTEdit.Table
 			// position is casted here because the only place that references this needs it as an int anyway.
 			this.position = (int)br.BaseStream.Position;
 
-			br.ReadInt32(); // VLTConstants.MW_DEADBEEF or VLTConstants.CARBON_SPACER
+			this.spacer = br.ReadUInt32(); // VLTConstants.MW_DEADBEEF or VLTConstants.CARBON_SPACER
 
 			this.uia1 = new uint[this.i4]; // NOTE: Prone to overflow in NFS:C if something is even *slightly* off.
 			for( int i = 0; i < this.i4; ++i )
@@ -73,12 +76,16 @@ namespace VLTEdit.Table
 				this.uia1[i] = br.ReadUInt32();
 			}
 
-			// ??? Seems to be what NFS-VltEd is doing here ???
-			if( BuildConfig.CARBON )
+
+			if( this.carbonsomething > 0 )
 			{
+				this.extraHashes = new uint[this.carbonsomething];
+
+				// Where the hell are these hashes coming from? What are they for?!
+
 				for( ushort num = 0; num < this.carbonsomething; ++num )
 				{
-					br.ReadInt32();
+					this.extraHashes[num] = br.ReadUInt32();
 				}
 			}
 
@@ -100,7 +107,7 @@ namespace VLTEdit.Table
 			bw.Write( this.i3 );
 			bw.Write( this.i4 );
 			bw.Write( this.carbonsomething );
-			bw.Write( ( !BuildConfig.CARBON ? VLTConstants.MW_DEADBEEF : VLTConstants.CARBON_SPACER ) );
+			bw.Write( this.spacer );
 			for( int i = 0; i < this.i4; ++i )
 			{
 				bw.Write( this.uia1[i] );

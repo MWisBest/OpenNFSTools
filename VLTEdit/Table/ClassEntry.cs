@@ -8,6 +8,7 @@ namespace VLTEdit.Table
 		private int i1;
 		public int i2;
 		public int position;
+		private uint spacer;
 		private int i4;
 		private int i5;
 		public int i6;
@@ -22,7 +23,7 @@ namespace VLTEdit.Table
 			// position is casted here because the main thing that references this needs it as an int anyway.
 			this.position = (int)br.BaseStream.Position;
 
-			br.ReadInt32(); // VLTConstants.MW_DEADBEEF or VLTConstants.CARBON_SPACER
+			this.spacer = br.ReadUInt32(); // VLTConstants.MW_DEADBEEF or VLTConstants.CARBON_SPACER
 
 			this.i4 = br.ReadInt32();
 			this.i5 = br.ReadInt32();
@@ -35,7 +36,7 @@ namespace VLTEdit.Table
 			bw.Write( this.hash );
 			bw.Write( this.i1 );
 			bw.Write( this.i2 );
-			bw.Write( ( !BuildConfig.CARBON ? VLTConstants.MW_DEADBEEF : VLTConstants.CARBON_SPACER ) );
+			bw.Write( this.spacer );
 			bw.Write( this.i4 );
 			bw.Write( this.i5 );
 			bw.Write( this.i6 );

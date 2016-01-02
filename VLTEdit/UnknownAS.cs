@@ -27,15 +27,15 @@ namespace VLTEdit
 		{
 			this.ui1 = br.ReadUInt32();
 			this.b21 = (EntryType)br.ReadUInt32();
-			if( !BuildConfig.CARBON )
+			this.i1 = br.ReadInt32();
+			if( this.i1 != 0 )
 			{
-				this.i1 = br.ReadInt32(); // Removed in NFS:C
+				this.i2 = this.i1;
 			}
 			else
 			{
-				this.i1 = 0; // Set to something at least though.
+				this.i2 = br.ReadInt32();
 			}
-			this.i2 = br.ReadInt32();
 			this.i3 = br.ReadInt32();
 		}
 
@@ -43,7 +43,7 @@ namespace VLTEdit
 		{
 			bw.Write( this.ui1 );
 			bw.Write( (uint)this.b21 );
-			if( !BuildConfig.CARBON )
+			if( this.i1 == 0 )
 			{
 				bw.Write( this.i1 ); // Removed in NFS:C
 			}

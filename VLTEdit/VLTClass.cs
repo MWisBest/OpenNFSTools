@@ -50,10 +50,13 @@ namespace VLTEdit
 				{
 					num = a.genht1[A_0.position].i2;
 				}
-				catch( KeyNotFoundException e )
+				catch//( KeyNotFoundException e )
 				{
-					++numFails;
-					Console.WriteLine( "VLTClass.a(): num fail (num" + numFails + ",b" + b8Fails + ")" );
+					if( BuildConfig.DEBUG )
+					{
+						++numFails;
+						Console.WriteLine( "VLTClass.a(): num fail (num" + numFails + ",b" + b8Fails + ")" );
+					}
 					return;
 				}
 				dr.b01 = A_1;
@@ -87,10 +90,13 @@ namespace VLTEdit
 									{
 										b = a.genht1[A_0.caa1[j].position];
 									}
-									catch( KeyNotFoundException e )
+									catch//( KeyNotFoundException e )
 									{
-										++b8Fails;
-										Console.WriteLine( "VLTClass.a(): b   fail (num" + numFails + ",b" + b8Fails + ")" );
+										if( BuildConfig.DEBUG )
+										{
+											++b8Fails;
+											Console.WriteLine( "VLTClass.a(): b   fail (num" + numFails + ",b" + b8Fails + ")" );
+										}
 										continue;
 									}
 									binaryReader3 = binaryReader;

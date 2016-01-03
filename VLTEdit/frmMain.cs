@@ -144,14 +144,14 @@ namespace VLTEdit
 			this.miFile.Text = "&File";
 			this.miOpen.Index = 0;
 			this.miOpen.Text = "&Open";
-			this.miOpen.Click += new EventHandler( this.menuOpenClicked );
+			//this.miOpen.Click += new EventHandler( this.menuOpenClicked );
 			this.miUnload.Index = 1;
 			this.miUnload.Text = "&Unload";
 			this.mi8.Index = 2;
 			this.mi8.Text = "-";
 			this.miExit.Index = 3;
 			this.miExit.Text = "E&xit";
-			this.miExit.Click += new EventHandler( this.menuExitClicked );
+			//this.miExit.Click += new EventHandler( this.menuExitClicked );
 			this.miHelp.Index = 1;
 			this.miHelp.MenuItems.AddRange( new MenuItem[]
 			{
@@ -181,7 +181,7 @@ namespace VLTEdit
 			this.mi6.Click += new EventHandler( this.j );
 			this.mi7.Index = 1;
 			this.mi7.Text = "Copy Node Path";
-			this.mi7.Click += new EventHandler( this.i );
+			//this.mi7.Click += new EventHandler( this.i );
 			this.classGrid.CaptionBackColor = SystemColors.Control;
 			this.classGrid.CaptionVisible = false;
 			this.classGrid.DataMember = "";
@@ -343,7 +343,7 @@ namespace VLTEdit
 			this.ar.Text = "-";
 			this.ao.Index = 4;
 			this.ao.Text = "Dump Field";
-			this.ao.Click += new EventHandler( this.e );
+			//this.ao.Click += new EventHandler( this.e );
 			this.splitter1.Location = new Point( 200, 0 );
 			this.splitter1.Name = "splitter1";
 			this.splitter1.Size = new Size( 4, 437 );
@@ -403,144 +403,6 @@ namespace VLTEdit
 			base.ResumeLayout( false );
 		}
 
-		private void exit()
-		{
-			Application.Exit();
-		}
-
-		private bool loadFile( string fileName, bool fromConsole )
-		{
-			bool result = false;
-			if( this.av == null )
-			{
-				this.av = new UnknownDE();
-			}
-			UnknownB0 b = new UnknownB0();
-			this.writeToConsole( "Loading: " + fileName );
-			b.a( fileName );
-			if( this.bOne( b ) )
-			{
-				UnknownBA ba = b.a( VLTOtherValue.VLTMAGIC ) as UnknownBA;
-				string text = ba.sa1[0];
-				MenuItem menuItem = new MenuItem( text, new EventHandler( this.bFour ) );
-				this.miUnload.MenuItems.Add( menuItem );
-				result = true;
-			}
-			if( fromConsole )
-			{
-				this.tvRefresh();
-			}
-			return result;
-		}
-
-		private void unloadFile( string A_0 )
-		{
-			foreach( UnknownB0 b in this.au )
-			{
-				UnknownBA ba = b.a( VLTOtherValue.VLTMAGIC ) as UnknownBA;
-				string text = ba.sa1[0];
-				if( text == A_0 )
-				{
-					this.writeToConsole( "Unloading: " + text );
-					foreach( MenuItem menuItem in this.miUnload.MenuItems )
-					{
-						if( menuItem.Text == A_0 )
-						{
-							this.miUnload.MenuItems.Remove( menuItem );
-							break;
-						}
-					}
-					this.au.Remove( b );
-					this.d();
-					this.tvRefresh();
-					break;
-				}
-			}
-		}
-
-		private void showOpenFileDialog()
-		{
-			OpenFileDialog openFileDialog = new OpenFileDialog();
-			openFileDialog.AddExtension = true;
-			openFileDialog.CheckFileExists = true;
-			openFileDialog.CheckPathExists = true;
-			openFileDialog.DefaultExt = "vlt";
-			openFileDialog.ShowReadOnly = false;
-			openFileDialog.Title = "Open VLT";
-			openFileDialog.Filter = "VLT Files (*.vlt)|*.vlt";
-			openFileDialog.Multiselect = true;
-			if( openFileDialog.ShowDialog() == DialogResult.OK )
-			{
-				bool flag = false;
-				foreach( string a_ in openFileDialog.FileNames )
-				{
-					if( this.loadFile( a_, false ) )
-					{
-						flag = true;
-					}
-				}
-				if( flag )
-				{
-					this.tvRefresh();
-				}
-			}
-		}
-
-		private void d()
-		{
-			this.av = new UnknownDE();
-			foreach( UnknownB0 b in this.au )
-			{
-				this.aTwo( b );
-			}
-		}
-
-		// TODO: opt
-		private bool bOne( UnknownB0 A_0 )
-		{
-			UnknownBA ba = A_0.a( VLTOtherValue.VLTMAGIC ) as UnknownBA;
-			uint num = ba.uia1[0];
-			foreach( UnknownB0 b in this.au )
-			{
-				UnknownBA ba2 = b.a( VLTOtherValue.VLTMAGIC ) as UnknownBA;
-				if( ba2.uia1[0] == num )
-				{
-					MessageBox.Show( "This VLT data file has already been loaded.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand );
-					return false;
-				}
-			}
-			this.aTwo( A_0 );
-			this.au.Add( A_0 );
-			return true;
-		}
-
-		private void aTwo( UnknownB0 A_0 )
-		{
-			UnknownDH dh = A_0.a( VLTOtherValue.TABLE_START ) as UnknownDH;
-			for( int i = 0; i < dh.asa1.Length; ++i )
-			{
-				TableEntry @as = dh.asa1[i];
-				switch( @as.entryType )
-				{
-					case EntryType.ROOT:
-						this.av.am( @as.di1.asRootEntry(), A_0 );
-						break;
-					case EntryType.CLASS:
-						this.av.a( @as.di1.asClassEntry(), A_0 );
-						break;
-					case EntryType.ROW:
-						RowRecord c = @as.di1.asRowEntry();
-						VLTClass dq = this.av.genht2[c.ui2];
-						dq.dqb1.a( c, A_0 );
-						if( i == dh.asa1.Length - 1 )
-						{
-							dq.dqb1.Trim();
-						}
-						break;
-				}
-			}
-		}
-
 		private void listLoadedFiles()
 		{
 			foreach( UnknownB0 b in this.au )
@@ -550,6 +412,7 @@ namespace VLTEdit
 			}
 		}
 
+		/*
 		private void f( string A_0 )
 		{
 			foreach( UnknownB0 b in this.au )
@@ -580,72 +443,7 @@ namespace VLTEdit
 					break;
 				}
 			}
-		}
-
-		// TODO: Opt
-		private void tvRefresh()
-		{
-			bool flag = true;
-			this.classGrid.Visible = false;
-			this.pnlData.Visible = false;
-			this.tv.Nodes.Clear();
-			if( this.au.Count == 0 )
-			{
-				return;
-			}
-			this.tv.BeginUpdate();
-			Dictionary<string, TreeNode> dict = new Dictionary<string, TreeNode>();
-			TreeNode treeNode = this.tv.Nodes.Add( "Database" );
-			treeNode.Tag = this.av;
-			foreach( VLTClass dq in this.av )
-			{
-				string text = HashTracker.getValueForHash( dq.hash );
-				treeNode.TreeView.Sorted = true;
-				TreeNode treeNode2 = treeNode.Nodes.Add( text );
-				treeNode.TreeView.Sorted = false;
-				treeNode2.Tag = dq;
-				foreach( UnknownDR dr in dq.dqb1 )
-				{
-					TreeNode treeNode3;
-					string text2;
-					if( dr.c1.ui3 == 0u )
-					{
-						treeNode3 = treeNode2;
-					}
-					else
-					{
-						text2 = string.Format( "{0:x},{1:x}", dq.hash, dr.c1.ui3 );
-						treeNode3 = dict[text2];
-					}
-					if( treeNode3 == null )
-					{
-						if( flag )
-						{
-							DialogResult dialogResult = MessageBox.Show( "Could not find parent data row. Did you forget to load a dependency?\nThe hierarchy will be flattened.", "Warning", MessageBoxButtons.OK ); // TODO: , 48);
-							if( dialogResult == DialogResult.Cancel )
-							{
-								flag = false;
-							}
-						}
-						treeNode3 = treeNode2;
-					}
-					text = string.Concat( new object[]
-					{
-								HashTracker.getValueForHash(dr.c1.hash),
-								" [",
-								dq.c61.i6,
-								"+",
-								dr.c1.i1,
-								"]"
-					} );
-					treeNode3 = treeNode3.Nodes.Add( text );
-					treeNode3.Tag = dr;
-					text2 = string.Format( "{0:x},{1:x}", dq.hash, dr.c1.hash );
-					dict[text2] = treeNode3;
-				}
-			}
-			this.tv.EndUpdate();
-		}
+		}*/
 
 		public void writeToConsole( string A_0 )
 		{
@@ -658,129 +456,7 @@ namespace VLTEdit
 			this.txtConsole.Refresh();
 		}
 
-		private string a( UnknownDR A_0 )
-		{
-			VLTClass dq = A_0.dq1;
-			string text = HashTracker.getValueForHash( A_0.c1.hash );
-			if( A_0.c1.ui3 == 0u )
-			{
-				return text;
-			}
-			return this.a( dq.dqb1.a( A_0.c1.ui3 ) ) + "/" + text;
-		}
-
-		/**
-		 * Searches open files for the specified entry name/hash; stores results in the given List
-		 */
-		private void search( string A_0, ref List<string> A_1 )
-		{
-			uint num;
-			if( A_0.StartsWith( "0x" ) )
-			{
-				num = uint.Parse( A_0.Substring( 2 ), NumberStyles.AllowHexSpecifier | NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite );
-			}
-			else
-			{
-				num = HashUtil.getHash32( A_0 );
-			}
-
-			foreach( VLTClass dq in this.av )
-			{
-				if( dq.hash == num )
-				{
-					string text = A_0 + ": Found match for class: " + HashTracker.getValueForHash( dq.hash );
-					if( !A_1.Contains( text ) )
-					{
-						A_1.Add( text );
-					}
-				}
-
-				foreach( VLTClass.aclz1 a in dq )
-				{
-					if( a.hash == num )
-					{
-						string text = string.Concat( new string[]
-						{
-									A_0,
-									": Found match for field: ",
-									HashTracker.getValueForHash(dq.hash),
-									"/",
-									HashTracker.getValueForHash(a.hash)
-						} );
-						if( !A_1.Contains( text ) )
-						{
-							A_1.Add( text );
-						}
-					}
-				}
-
-				foreach( UnknownDR dr in dq.dqb1 )
-				{
-					if( dr.c1.hash == num )
-					{
-						string text = string.Concat( new string[]
-						{
-									A_0,
-									": Found match for row: ",
-									HashTracker.getValueForHash(dq.hash),
-									"/",
-									this.a(dr)
-						} );
-						if( !A_1.Contains( text ) )
-						{
-							A_1.Add( text );
-						}
-					}
-				}
-			}
-		}
-
-		/**
-		 * Searches open files for entries of the specified hash
-		 */
-		private void search( string A_0 )
-		{
-			List<string> strList = new List<string>();
-			this.search( A_0, ref strList ); // TODO: Check that files are open!
-			this.search( A_0.ToLower(), ref strList );
-			this.search( A_0.ToUpper(), ref strList );
-			bool flag = true;
-			string text = "";
-			foreach( char c in A_0.ToCharArray() )
-			{
-				if( c == '_' )
-				{
-					flag = true;
-				}
-				else
-				{
-					if( flag )
-					{
-						text += new string( c, 1 ).ToUpper();
-						flag = false;
-					}
-					else
-					{
-						text += c;
-					}
-				}
-			}
-			this.search( text, ref strList );
-			this.search( text.ToLower(), ref strList );
-			this.search( text.ToUpper(), ref strList );
-			if( strList.Count > 0 )
-			{
-				foreach( string str in strList )
-				{
-					this.writeToConsole( str );
-				}
-			}
-			else
-			{
-				this.writeToConsole( "No matches found." );
-			}
-		}
-
+		/*
 		private void a( VLTClass A_0, string A_1 )
 		{
 			this.writeToConsole( string.Format( "Dumping contents of class: {0}, field: {1}", HashTracker.getValueForHash( A_0.hash ), A_1 ) );
@@ -792,7 +468,9 @@ namespace VLTEdit
 				}
 			}
 		}
+		*/
 
+		/*
 		private void a( UnknownDR A_0, string A_1 )
 		{
 			uint a_;
@@ -806,7 +484,9 @@ namespace VLTEdit
 			}
 			this.a( A_0, a_ );
 		}
+		*/
 
+		/*
 		private void a( UnknownDR A_0, uint A_1 )
 		{
 			VLTClass dq = A_0.dq1;
@@ -856,6 +536,7 @@ namespace VLTEdit
 				}
 			}
 		}
+		*/
 
 		private bool c( string A_0 )
 		{
@@ -949,7 +630,7 @@ namespace VLTEdit
 													streamWriter.WriteLine( string.Concat( new string[]
 													{
 																"\t\t\t\t\tnew VLTOffsetData(VLTOffsetType.",
-																bb.boo1 ? "Vlt" : "Bin",
+																bb.isVltOffset ? "Vlt" : "Bin",
 																", ",
 																string.Format("0x{0:x}", bb.ui1),
 																")",
@@ -963,7 +644,7 @@ namespace VLTEdit
 												streamWriter.WriteLine( string.Concat( new string[]
 												{
 															"new VLTOffsetData(VLTOffsetType.",
-															bb.boo1 ? "Vlt" : "Bin",
+															bb.isVltOffset ? "Vlt" : "Bin",
 															", ",
 															string.Format("0x{0:x}", bb.ui1),
 															");"
@@ -1002,53 +683,6 @@ namespace VLTEdit
 			{
 				switch( text )
 				{
-					case "quit":
-					case "exit":
-						this.exit();
-						break;
-					case "open":
-					case "load":
-						if( noArgs )
-						{
-							this.showOpenFileDialog();
-							break;
-						}
-						FileInfo fileInfo = new FileInfo( text2 );
-						if( !fileInfo.Exists )
-						{
-							this.writeToConsole( "Non existant file: " + fileInfo.FullName );
-							break;
-						}
-						if( !this.loadFile( fileInfo.FullName, true ) )
-						{
-							this.writeToConsole( "Failed to load file: " + fileInfo.FullName );
-						}
-						break;
-					case "unload":
-						if( noArgs )
-						{
-							this.writeToConsole( "Error in command." );
-							break;
-						}
-						this.unloadFile( text2 );
-						break;
-					case "reparse":
-						this.writeToConsole( "Reparsing all VLTs..." );
-						this.d();
-						this.tvRefresh();
-						break;
-					case "cls":
-					case "clear":
-						this.txtConsole.Text = "";
-						break;
-					case "hex":
-						if( noArgs )
-						{
-							this.writeToConsole( "Error in command." );
-							break;
-						}
-						this.writeToConsole( string.Format( "hex({0})=0x{1:x}", ulong.Parse( text2 ), ulong.Parse( text2 ) ) );
-						break;
 					case "bf":
 					case "bf32":
 					case "bruteforce":
@@ -1086,54 +720,6 @@ namespace VLTEdit
 						bruteforceThreads[text2].Abort();
 						bruteforceThreads.Remove( text2 );
 						this.writeToConsole( "Killed thread." );
-						break;
-					case "hash":
-					case "hash32":
-						if( noArgs )
-						{
-							this.writeToConsole( "Error in command." );
-							break;
-						}
-						this.writeToConsole( string.Format( "hash({0})=0x{1:x}", text2, HashUtil.getHash32( text2 ) ) );
-						break;
-					case "hash64":
-						if( noArgs )
-						{
-							this.writeToConsole( "Error in command." );
-							break;
-						}
-						this.writeToConsole( string.Format( "hash64({0})=0x{1:x}", text2, HashUtil.getHash64( text2 ) ) );
-						break;
-					case "hs":
-					case "hsearch":
-						if( noArgs )
-						{
-							this.writeToConsole( "Error in command." );
-						}
-						else if( this.au.Count <= 0 ) // No loaded files
-						{
-							this.writeToConsole( "No files loaded to search!" );
-							break;
-						}
-						else
-						{
-							this.search( text2 );
-						}
-						if( text == "hs" )
-						{
-							this.txtConsoleInput.Text = "hs ";
-							this.txtConsoleInput.SelectionStart = this.txtConsoleInput.Text.Length;
-						}
-						break;
-					case "savehash":
-						if( noArgs )
-						{
-							this.writeToConsole( "Error in command." );
-							break;
-						}
-						FileInfo fileInfo2 = new FileInfo( text2 );
-						HashTracker.dumpUsedHashes( fileInfo2.FullName );
-						this.writeToConsole( "Saved used hashes list to: " + fileInfo2.FullName );
 						break;
 					case "pwd":
 						if( !noArgs )
@@ -1189,21 +775,10 @@ namespace VLTEdit
 							this.writeToConsole( "    " + fileInfo4.Name );
 						}
 						break;
-					case "loadhash":
-						if( File.Exists( text2 ) )
-						{
-							HashTracker.loadHashes( text2 );
-							break;
-						}
-						this.writeToConsole( "File does not exist." );
-						break;
-					case "reloadhashes":
-						HashTracker.init();
-						this.writeToConsole( "Hashes reloaded." );
-						break;
 					case "loadedfiles":
 						this.listLoadedFiles();
 						break;
+						/*
 					case "listitems":
 						if( noArgs )
 						{
@@ -1211,7 +786,8 @@ namespace VLTEdit
 							break;
 						}
 						this.f( text2 );
-						break;
+						break;*/
+						/*
 					case "dump":
 						if( noArgs )
 						{
@@ -1241,26 +817,9 @@ namespace VLTEdit
 						{
 							this.writeToConsole( ex.Message );
 						}
-						break;
+						break;*/
 					case "classdump":
 						this.classdump();
-						break;
-					case "help": // MW: Add help command
-						this.writeToConsole( "Common commands:" );
-						this.writeToConsole( "\thash, hash64 <string>: returns the hash(64) of the given string." );
-						this.writeToConsole( "\ths, hsearch <string/0xHASH>: searches for VLT entries of the given string or hash." );
-						this.writeToConsole( "\thex <int>: returns the hexadecimal representation of the given decimal." );
-						this.writeToConsole( "\tcls, clear: clear the console." );
-						break;
-					case "debug":
-						frmDesigner destest = new frmDesigner();
-						destest.Show();
-						this.WindowState = FormWindowState.Minimized;
-						break;
-					case "":
-						break;
-					default:
-						this.writeToConsole( "Unknown command." );
 						break;
 				}
 			}
@@ -1293,6 +852,7 @@ namespace VLTEdit
 			}
 		}
 
+		/*
 		private void i( object A_0, EventArgs A_1 )
 		{
 			if( this.tv.SelectedNode != null )
@@ -1316,6 +876,7 @@ namespace VLTEdit
 				}
 			}
 		}
+		*/
 
 		private void h( object A_0, EventArgs A_1 )
 		{
@@ -1360,11 +921,12 @@ namespace VLTEdit
 				if( selectedNode.Tag is VLTBaseType && !( selectedNode.Tag is VLTArrayType ) )
 				{
 					VLTBaseType bb = selectedNode.Tag as VLTBaseType;
-					Clipboard.SetDataObject( string.Format( "{0}:0x{1}", bb.boo1 ? "vlt" : "bin", bb.ui1 ) );
+					Clipboard.SetDataObject( string.Format( "{0}:0x{1}", bb.isVltOffset ? "vlt" : "bin", bb.ui1 ) );
 				}
 			}
 		}
 
+		/*
 		private void e( object A_0, EventArgs A_1 )
 		{
 			if( this.tvFields.SelectedNode != null )
@@ -1378,23 +940,7 @@ namespace VLTEdit
 				this.a( bb.dr1, bb.ui3 );
 			}
 		}
-
-		private void menuExitClicked( object A_0, EventArgs A_1 )
-		{
-			this.exit();
-		}
-
-		private void menuOpenClicked( object A_0, EventArgs A_1 )
-		{
-			this.showOpenFileDialog();
-		}
-
-		// TODO: opt
-		private void bFour( object A_0, EventArgs A_1 )
-		{
-			MenuItem menuItem = A_0 as MenuItem;
-			this.unloadFile( menuItem.Text );
-		}
+		*/
 
 		// TODO: opt
 		private void tv_AfterSelect( object A_0, TreeViewEventArgs A_1 )
@@ -1586,7 +1132,7 @@ namespace VLTEdit
 				}
 				UnknownBA ba = bb.dr1.b01.a( VLTOtherValue.VLTMAGIC ) as UnknownBA;
 				string text = ba.sa1[0];
-				this.lblFieldOffset.Text = string.Format( "Offset: {0}:0x{1:x}  ({2})", bb.boo1 ? "vlt" : "bin", bb.ui1, text );
+				this.lblFieldOffset.Text = string.Format( "Offset: {0}:0x{1:x}  ({2})", bb.isVltOffset ? "vlt" : "bin", bb.ui1, text );
 				this.dataGrid.Update();
 			}
 			else

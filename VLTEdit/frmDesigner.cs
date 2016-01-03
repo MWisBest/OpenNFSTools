@@ -515,6 +515,11 @@ namespace VLTEdit
 						}
 						this.unloadFile( text2 );
 						break;
+					case "reparse":
+						this.writeToConsole( "Reparsing all VLTs..." );
+						this.d();
+						this.tvRefresh();
+						break;
 					case "cls":
 					case "clear":
 						this.txtConsole.Text = "";
@@ -833,7 +838,7 @@ namespace VLTEdit
 				}
 				UnknownBA ba = bb.dr1.b01.a( VLTOtherValue.VLTMAGIC ) as UnknownBA;
 				string text = ba.sa1[0];
-				this.lblFieldOffset.Text = string.Format( "Offset: {0}:0x{1:x}  ({2})", bb.boo1 ? "vlt" : "bin", bb.ui1, text );
+				this.lblFieldOffset.Text = string.Format( "Offset: {0}:0x{1:x}  ({2})", bb.isVltOffset ? "vlt" : "bin", bb.ui1, text );
 				this.dataGrid.Update();
 			}
 			else

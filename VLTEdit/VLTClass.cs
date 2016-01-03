@@ -43,15 +43,19 @@ namespace VLTEdit
 			{
 				BinaryReader binaryReader = new BinaryReader( A_1.ms1 );
 				BinaryReader binaryReader2 = new BinaryReader( A_1.ms2 );
-				UnknownDR dr = new UnknownDR( this.vltClass.c61.i2 );
+				UnknownDR dr = new UnknownDR( this.vltClass.classRecord.i2 );
 				UnknownA8 a = A_1.a( VLTOtherValue.TABLE_END ) as UnknownA8;
+
 				int num;
-				try
+				if( a.genht1.ContainsKey( A_0.position ) )
 				{
 					num = a.genht1[A_0.position].i2;
 				}
-				catch//( KeyNotFoundException e )
+				else
 				{
+					// NOTE: THIS IS A BUG, IT SHOULD NOT HAPPEN.
+					//       The ONLY reason I'm checking ContainsKey instead of using exception handling,
+					//       is because exception handling causes huge slowdowns in Visual Studio debugging.
 					if( BuildConfig.DEBUG )
 					{
 						++numFails;
@@ -59,12 +63,13 @@ namespace VLTEdit
 					}
 					return;
 				}
+
 				dr.b01 = A_1;
 				dr.dq1 = this.vltClass;
 				dr.c1 = A_0;
-				for( int i = 0; i < this.vltClass.c61.i2; ++i )
+				for( int i = 0; i < this.vltClass.classRecord.i2; ++i )
 				{
-					VLTClass.aclz1 a2 = this.vltClass.dqaa1[i];
+					VLTClass.aclz1 a2 = this.vltClass.fields[i];
 					BinaryReader binaryReader3;
 					if( !a2.c() )
 					{
@@ -76,7 +81,7 @@ namespace VLTEdit
 						binaryReader3 = null;
 						for( int j = 0; j < A_0.i1; ++j )
 						{
-							if( A_0.caa1[j].ui1 == a2.hash )
+							if( A_0.caa1[j].hash == a2.hash )
 							{
 								if( A_0.caa1[j].a() )
 								{
@@ -85,22 +90,34 @@ namespace VLTEdit
 								}
 								else
 								{
-									UnknownB8 b;
-									try
+									UnknownB8 b = null;
+									if( a.genht1.ContainsKey( A_0.caa1[j].position ) )
 									{
 										b = a.genht1[A_0.caa1[j].position];
 									}
-									catch//( KeyNotFoundException e )
+									else
 									{
+										// NOTE: THIS IS A BUG, IT SHOULD NOT HAPPEN.
+										//       The ONLY reason I'm checking ContainsKey instead of using exception handling,
+										//       is because exception handling causes huge slowdowns in Visual Studio debugging.
 										if( BuildConfig.DEBUG )
 										{
 											++b8Fails;
 											Console.WriteLine( "VLTClass.a(): b   fail (num" + numFails + ",b" + b8Fails + ")" );
 										}
-										continue;
+										//continue;
 									}
-									binaryReader3 = binaryReader;
-									binaryReader3.BaseStream.Seek( b.i2, SeekOrigin.Begin );
+									if( b != null )
+									{
+										binaryReader3 = binaryReader;
+										binaryReader3.BaseStream.Seek( b.i2, SeekOrigin.Begin );
+									}
+									else
+									{
+										// lolwtf, doing this can actually help Carbon+ rows that don't load! Unreal!
+										//binaryReader3 = binaryReader2;
+										//binaryReader3.BaseStream.Seek( A_0.caa1[j].position, SeekOrigin.Begin );
+									}
 								}
 							}
 						}
@@ -207,27 +224,27 @@ namespace VLTEdit
 		}
 
 		public UnknownB0 b01;
-		public uint hash;
-		public ClassRecord c61;
-		public VLTClass.aclz1[] dqaa1;
+		public uint classHash;
+		public ClassRecord classRecord;
+		public VLTClass.aclz1[] fields;
 		public VLTClass.bie dqb1;
 
 		public void a( ClassRecord A_0, UnknownB0 A_1 )
 		{
 			this.b01 = A_1;
-			this.c61 = A_0;
-			this.hash = A_0.hash;
+			this.classRecord = A_0;
+			this.classHash = A_0.hash;
 			UnknownA8 a81 = ( A_1.a( VLTOtherValue.TABLE_END ) as UnknownA8 );
 			int num = a81.genht1[A_0.position].i2;
 			A_1.ms1.Seek( num, SeekOrigin.Begin );
 			BinaryReader br = new BinaryReader( A_1.ms1 );
-			this.dqaa1 = new VLTClass.aclz1[this.c61.i2];
-			for( int i = 0; i < this.c61.i2; ++i )
+			this.fields = new VLTClass.aclz1[this.classRecord.i2];
+			for( int i = 0; i < this.classRecord.i2; ++i )
 			{
 				VLTClass.aclz1 a = new VLTClass.aclz1();
 				a.read( br );
 				HashTracker.getValueForHash( a.hash );
-				this.dqaa1[i] = a;
+				this.fields[i] = a;
 			}
 			this.dqb1 = new VLTClass.bie( this );
 		}
@@ -235,9 +252,9 @@ namespace VLTEdit
 		public int a( uint A_0 )
 		{
 			// TODO: Threading?
-			for( int i = 0; i < this.dqaa1.Length; ++i )
+			for( int i = 0; i < this.fields.Length; ++i )
 			{
-				if( this.dqaa1[i].hash == A_0 )
+				if( this.fields[i].hash == A_0 )
 				{
 					return i;
 				}
@@ -247,12 +264,12 @@ namespace VLTEdit
 
 		public int CompareTo( VLTClass A_0 )
 		{
-			return this.hash.CompareTo( A_0.hash );
+			return this.classHash.CompareTo( A_0.classHash );
 		}
 
 		public IEnumerator GetEnumerator()
 		{
-			return this.dqaa1.GetEnumerator();
+			return this.fields.GetEnumerator();
 		}
 	}
 }

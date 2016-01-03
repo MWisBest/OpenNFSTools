@@ -216,7 +216,7 @@ namespace VLTEdit
 
 			foreach( VLTClass dq in this.av )
 			{
-				string text = HashTracker.getValueForHash( dq.hash );
+				string text = HashTracker.getValueForHash( dq.classHash );
 				TreeNode treeNode2 = treeNode.Nodes.Add( text );
 				treeNode2.Tag = dq;
 
@@ -231,7 +231,7 @@ namespace VLTEdit
 					else
 					{
 						// This failure seems to be caused by our underlying problem with the VLTClass RowEntry failure.
-						text2 = string.Format( "{0:x},{1:x}", dq.hash, dr.c1.ui3 );
+						text2 = string.Format( "{0:x},{1:x}", dq.classHash, dr.c1.ui3 );
 						treeNode3 = dict[text2];
 					}
 
@@ -251,14 +251,14 @@ namespace VLTEdit
 					{
 						HashTracker.getValueForHash(dr.c1.hash),
 						" [",
-						dq.c61.i6,
+						dq.classRecord.i6,
 						"+",
 						dr.c1.i1,
 						"]"
 					} );
 					treeNode3 = treeNode3.Nodes.Add( text );
 					treeNode3.Tag = dr;
-					text2 = string.Format( "{0:x},{1:x}", dq.hash, dr.c1.hash );
+					text2 = string.Format( "{0:x},{1:x}", dq.classHash, dr.c1.hash );
 					dict[text2] = treeNode3;
 				}
 			}
@@ -369,9 +369,9 @@ namespace VLTEdit
 
 			foreach( VLTClass dq in this.av )
 			{
-				if( dq.hash == num )
+				if( dq.classHash == num )
 				{
-					string text = A_0 + ": Found match for class: " + HashTracker.getValueForHash( dq.hash );
+					string text = A_0 + ": Found match for class: " + HashTracker.getValueForHash( dq.classHash );
 					if( !A_1.Contains( text ) )
 					{
 						A_1.Add( text );
@@ -386,7 +386,7 @@ namespace VLTEdit
 						{
 							A_0,
 							": Found match for field: ",
-							HashTracker.getValueForHash(dq.hash),
+							HashTracker.getValueForHash(dq.classHash),
 							"/",
 							HashTracker.getValueForHash(a.hash)
 						} );
@@ -405,7 +405,7 @@ namespace VLTEdit
 						{
 							A_0,
 							": Found match for row: ",
-							HashTracker.getValueForHash(dq.hash),
+							HashTracker.getValueForHash(dq.classHash),
 							"/",
 							this.a(dr)
 						} );
@@ -644,9 +644,9 @@ namespace VLTEdit
 				this.pnlData.Visible = false;
 				VLTClass dq = tag as VLTClass;
 
-				if( !this.classGridDataSet.Tables.Contains( dq.hash.ToString() ) )
+				if( !this.classGridDataSet.Tables.Contains( dq.classHash.ToString() ) )
 				{
-					DataTable dataTable = this.classGridDataSet.Tables.Add( dq.hash.ToString() );
+					DataTable dataTable = this.classGridDataSet.Tables.Add( dq.classHash.ToString() );
 					dataTable.Columns.Add( "Name", typeof( string ) );
 					dataTable.Columns.Add( "Type", typeof( string ) );
 					dataTable.Columns.Add( "Length", typeof( ushort ) );
@@ -679,7 +679,7 @@ namespace VLTEdit
 					}
 				}
 
-				this.classGrid.DataMember = dq.hash.ToString();
+				this.classGrid.DataMember = dq.classHash.ToString();
 				//this.classGrid.Columns["Name"].Width = 80;
 				//this.classGrid.Columns["Type"].Width = 150;
 				//this.classGrid.Columns["Length"].Width = 60;
@@ -831,11 +831,12 @@ namespace VLTEdit
 				this.dataGrid.DataMember = "Values";
 
 				this.lblFieldType.Text = "Type: " + HashTracker.getValueForHash( bb.ui2 );
+				/*
 				if( BuildConfig.DEBUG )
 				{
 					this.writeToConsole( "bb.GetType(): " + type.ToString() ); // Here, we're getting the proper type! Great!
 					this.writeToConsole( "bb.j(): " + string.Format( "0x{0:x}", bb.ui2 ) ); // Here, we're derping! OMG!
-				}
+				}*/
 				UnknownBA ba = bb.dr1.b01.a( VLTOtherValue.VLTMAGIC ) as UnknownBA;
 				string text = ba.sa1[0];
 				this.lblFieldOffset.Text = string.Format( "Offset: {0}:0x{1:x}  ({2})", bb.isVltOffset ? "vlt" : "bin", bb.ui1, text );

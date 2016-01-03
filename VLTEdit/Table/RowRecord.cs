@@ -8,7 +8,7 @@ namespace VLTEdit.Table
 	{
 		public class aclz : IBinReadWrite // Should be OK for Carbon?
 		{
-			public uint ui1;
+			public uint hash;
 			public int position;
 			private uint spacer;
 			private short sh1;
@@ -21,7 +21,7 @@ namespace VLTEdit.Table
 
 			public void read( BinaryReader br )
 			{
-				this.ui1 = br.ReadUInt32();
+				this.hash = br.ReadUInt32();
 
 				// position is casted here because the main thing that references this needs it as an int anyway.
 				this.position = (int)br.BaseStream.Position;
@@ -32,7 +32,7 @@ namespace VLTEdit.Table
 
 			public void write( BinaryWriter bw )
 			{
-				bw.Write( this.ui1 );
+				bw.Write( this.hash );
 				bw.Write( this.spacer );
 				bw.Write( this.sh1 );
 				bw.Write( this.sh2 );
@@ -76,12 +76,12 @@ namespace VLTEdit.Table
 				this.uia1[i] = br.ReadUInt32();
 			}
 
-
 			if( this.carbonsomething > 0 )
 			{
 				this.extraHashes = new uint[this.carbonsomething];
 
 				// Where the hell are these hashes coming from? What are they for?!
+				// TODO: This is DEFINITELY a major issue.
 
 				for( ushort num = 0; num < this.carbonsomething; ++num )
 				{

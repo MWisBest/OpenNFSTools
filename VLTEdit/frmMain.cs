@@ -571,7 +571,7 @@ namespace VLTEdit
 
 				foreach( VLTClass dq in this.av )
 				{
-					string text = this.bThree( HashTracker.getValueForHash( dq.hash ) );
+					string text = this.bThree( HashTracker.getValueForHash( dq.classHash ) );
 					if( this.c( text ) )
 					{
 						streamWriter.WriteLine( "\tnamespace " + text + " {" );
@@ -842,7 +842,7 @@ namespace VLTEdit
 				else if( selectedNode.Tag is VLTClass )
 				{
 					VLTClass dq = selectedNode.Tag as VLTClass;
-					Clipboard.SetDataObject( HashTracker.getValueForHash( dq.hash ) );
+					Clipboard.SetDataObject( HashTracker.getValueForHash( dq.classHash ) );
 				}
 				else
 				{

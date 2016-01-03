@@ -122,13 +122,14 @@ namespace VLTEdit
 					else
 					{
 						bb = VLTBaseType.a( type );
+						bb.size = a2.len;
 						if( bb is VLTRawType )
 						{
 							( bb as VLTRawType ).len = a2.len;
 						}
 					}
 					bb.ui1 = (uint)binaryReader3.BaseStream.Position;
-					bb.boo1 = ( binaryReader3 == binaryReader2 );
+					bb.isVltOffset = ( binaryReader3 == binaryReader2 );
 					bb.ui2 = a2.ui2;
 					bb.ui3 = a2.hash;
 					bb.dr1 = dr;

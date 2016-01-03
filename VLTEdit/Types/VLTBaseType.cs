@@ -7,11 +7,12 @@ namespace VLTEdit.Types
 	public abstract class VLTBaseType : IBinReadWrite // OBF: bb.cs
 	{
 		public uint ui1; // address in file
-		public bool boo1; // true if in VLT file, false if in BIN file
+		public bool isVltOffset; // true if in VLT file, false if in BIN file
 		public uint ui2;
 		public uint ui3;
 		public int i1;
 		public UnknownDR dr1;
+		public int size;
 
 		public static VLTBaseType a( Type A_0 )
 		{

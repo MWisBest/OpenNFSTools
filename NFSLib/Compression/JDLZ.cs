@@ -2,6 +2,19 @@
 
 namespace NFSLib.Compression
 {
+	/// <summary>
+	/// JDLZ compression is used in various BlackBox NFS games, starting somewhere around Underground and continuing to World.
+	/// Like other formats used, it has a little 16 byte header, followed by the actual data.
+	/// 0x0 - 0x3 = 'JDLZ'
+	/// 0x4       = 0x02
+	/// 0x5       = 0x10
+	/// 0x6 - 0x7 = 0x0000
+	/// 0x8 - 0xB = (uncompressed data length; little-endian)
+	/// 0xC - 0xF = (compressed data length, including header; little-endian)
+	///
+	/// JDLZ is very lightweight; it's read totally sequentially and is fairly simple,
+	/// however this obviously comes at a tradeoff of how effectively it compresses data.
+	/// </summary>
 	public static class JDLZ
 	{
 		public static byte[] decompress( byte[] input )
@@ -69,6 +82,8 @@ namespace NFSLib.Compression
 
 		// TODO
 		// arushan's jdlzdll.dll (shipped with 'bintex') has a very different looking JDLZ compressor.
+		// It might be something more rudimentary, which produces output compatible
+		// with the decompression algorithm, but doesn't compress quite as well.
 		public static byte[] compress_arushan( byte[] input )
 		{
 			byte[] output = new byte[input.Length];

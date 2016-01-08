@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
 using System.Text;
 
 namespace VLTEdit
@@ -95,99 +92,6 @@ namespace VLTEdit
 			// micro-optimization: avoids ref overhead and skips 1 assignment by having a separate function for this.
 			return mix32_final( a, b, c );
 		}
-
-
-		public static void bruteforce32( object hashobj )
-		{
-			string hashstring = hashobj as string;
-			uint hash = 0;
-			bool lowercase = true;
-
-			if( hashstring.StartsWith( "U" ) )
-			{
-				lowercase = false;
-				hashstring = hashstring.Substring( 1 );
-			}
-
-			if( hashstring.StartsWith( "0x" ) )
-			{
-				hash = uint.Parse( hashstring.Substring( 2 ), NumberStyles.AllowHexSpecifier | NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite );
-			}
-			else
-			{
-				hash = uint.Parse( hashstring );
-			}
-
-			Bruteforce bf = new Bruteforce();
-			bf.charset = ( lowercase ? Bruteforce.charset_lower : Bruteforce.charset_upper );
-
-			// Keep an instance of the form,
-			// otherwise if the window loses focus when our thread is running and we try to spit out a result it won't work.
-			frmMain formInstance = ( (frmMain)( System.Windows.Forms.Form.ActiveForm ) );
-
-			formInstance.writeToConsole( "Trying to crack hash: " + hash );
-			foreach( string combo in bf )
-			{
-				if( getHash32( combo ) == hash )
-				{
-					formInstance.writeToConsole( hash.ToString() + " could be: " + combo );
-				}
-			}
-			formInstance.writeToConsole( "Exhausted cracking: " + hash );
-		}
-
-
-		public class Bruteforce : IEnumerable<string>
-		{
-			private StringBuilder sb = new StringBuilder();
-			//public string charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz";
-			//public const string stringset = "abcdefghijklmnopqrstuvwxyz";
-			public static readonly char[] charset_lower =
-				{ '_', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
-			public static readonly char[] charset_upper =
-				{ '_', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
-			public char[] charset;
-			// NOTICE: IMPORTANT: !!!: MAKE SURE THIS MATCHES THE LENGTH OF CHARSET ABOVE!!
-			public const ulong len = 27;
-
-			// NOTICE: IMPORTANT: !!!: max is the highest value where ( 2 ** 64 - 1 ) - ( len ** max ) is a positive number!
-			public const uint max = 13;
-			public const uint min = 1;
-
-			public IEnumerator<string> GetEnumerator()
-			{
-				for( uint x = min; x <= max; ++x )
-				{
-					ulong total = (ulong)Math.Pow( len, x );
-					ulong counter = 0;
-					sb = new StringBuilder( (int)x );
-					while( counter < total )
-					{
-						string a = factoradic( counter, x );
-						yield return a;
-						++counter;
-					}
-				}
-			}
-
-			private string factoradic( ulong l, uint power )
-			{
-				sb.Length = 0;
-				while( power > 0 )
-				{
-                    sb.Append( charset[l % len] );
-					l /= len;
-					--power;
-				}
-				return sb.ToString();
-			}
-
-			IEnumerator IEnumerable.GetEnumerator()
-			{
-				return this.GetEnumerator();
-			}
-		}
-
 
 		private static void mix64( ref ulong a, ref ulong b, ref ulong c )
 		{

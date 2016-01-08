@@ -5,55 +5,58 @@ namespace NFSLib.Crypto
 {
 	public static class JenkinsHash
 	{
-		public static uint getHash32( string toHash, uint magic = 0xABCDEF00u )
+		public static uint getHash32( byte[] data, uint magic = 0xABCDEF00u )
 		{
-			int num = 0, i = toHash.Length;
+			int num = 0, i = data.Length;
 			uint a = 0x9E3779B9u, b = 0x9E3779B9u, c = magic;
+
 			while( i >= 12 )
 			{
-				a += ( toHash[num]     + ( (uint)toHash[1 + num] << 8 ) + ( (uint)toHash[ 2 + num] << 16 ) + ( (uint)toHash[ 3 + num] << 24 ) );
-				b += ( toHash[4 + num] + ( (uint)toHash[5 + num] << 8 ) + ( (uint)toHash[ 6 + num] << 16 ) + ( (uint)toHash[ 7 + num] << 24 ) );
-				c += ( toHash[8 + num] + ( (uint)toHash[9 + num] << 8 ) + ( (uint)toHash[10 + num] << 16 ) + ( (uint)toHash[11 + num] << 24 ) );
+				a += BitConverter.ToUInt32( data, num );
+				b += BitConverter.ToUInt32( data, num + 4 );
+				c += BitConverter.ToUInt32( data, num + 8 );
 				mix32( ref a, ref b, ref c );
 				num += 12;
 				i -= 12;
 			}
-			c += (uint)toHash.Length;
+
+			c += (uint)data.Length;
+
 			switch( i )
 			{
 				// NOTE: C# doesn't allow fallthroughs, so as a workaround we use goto's instead.
 				case 11:
-					c += (uint)toHash[10 + num] << 24;
+					c += (uint)data[10 + num] << 24;
 					goto case 10;
 				case 10:
-					c += (uint)toHash[9 + num] << 16;
+					c += (uint)data[9 + num] << 16;
 					goto case 9;
 				case 9:
-					c += (uint)toHash[8 + num] << 8;
+					c += (uint)data[8 + num] << 8;
 					goto case 8;
 				case 8:
-					b += (uint)toHash[7 + num] << 24;
+					b += (uint)data[7 + num] << 24;
 					goto case 7;
 				case 7:
-					b += (uint)toHash[6 + num] << 16;
+					b += (uint)data[6 + num] << 16;
 					goto case 6;
 				case 6:
-					b += (uint)toHash[5 + num] << 8;
+					b += (uint)data[5 + num] << 8;
 					goto case 5;
 				case 5:
-					b += toHash[4 + num];
+					b += data[4 + num];
 					goto case 4;
 				case 4:
-					a += (uint)toHash[3 + num] << 24;
+					a += (uint)data[3 + num] << 24;
 					goto case 3;
 				case 3:
-					a += (uint)toHash[2 + num] << 16;
+					a += (uint)data[2 + num] << 16;
 					goto case 2;
 				case 2:
-					a += (uint)toHash[1 + num] << 8;
+					a += (uint)data[1 + num] << 8;
 					goto case 1;
 				case 1:
-					a += toHash[num];
+					a += data[num];
 					break;
 				default:
 					break;
@@ -63,93 +66,94 @@ namespace NFSLib.Crypto
 			return mix32_final( a, b, c );
 		}
 
-		public static ulong getHash64( string toHash, ulong magic = 0x11223344ABCDEF00uL )
+		public static ulong getHash64( byte[] data, ulong magic = 0x11223344ABCDEF00uL )
 		{
-			int num = 0;
-			int i = toHash.Length;
+			int num = 0, i = data.Length;
 			ulong a = 0x9E3779B97F4A7C13uL, b = 0x9E3779B97F4A7C13uL, c = magic;
-			byte[] bytes = Encoding.ASCII.GetBytes( toHash );
+
 			while( i >= 24 )
 			{
-				a += BitConverter.ToUInt64( bytes, num );
-				b += BitConverter.ToUInt64( bytes, num + 8 );
-				c += BitConverter.ToUInt64( bytes, num + 16 );
+				a += BitConverter.ToUInt64( data, num );
+				b += BitConverter.ToUInt64( data, num + 8 );
+				c += BitConverter.ToUInt64( data, num + 16 );
 				mix64( ref a, ref b, ref c );
 				num += 24;
 				i -= 24;
 			}
-			c += (ulong)toHash.Length;
+
+			c += (ulong)data.Length;
+
 			switch( i )
 			{
 				// NOTE: C# doesn't allow fallthroughs, so as a workaround we use goto's instead.
 				case 23:
-					c += (ulong)toHash[22] << 56;
+					c += (ulong)data[22] << 56;
 					goto case 22;
 				case 22:
-					c += (ulong)toHash[21] << 48;
+					c += (ulong)data[21] << 48;
 					goto case 21;
 				case 21:
-					c += (ulong)toHash[20] << 40;
+					c += (ulong)data[20] << 40;
 					goto case 20;
 				case 20:
-					c += (ulong)toHash[19] << 32;
+					c += (ulong)data[19] << 32;
 					goto case 19;
 				case 19:
-					c += (ulong)toHash[18] << 24;
+					c += (ulong)data[18] << 24;
 					goto case 18;
 				case 18:
-					c += (ulong)toHash[17] << 16;
+					c += (ulong)data[17] << 16;
 					goto case 17;
 				case 17:
-					c += (ulong)toHash[16] << 8;
+					c += (ulong)data[16] << 8;
 					goto case 16;
 				case 16:
-					b += (ulong)toHash[15] << 56;
+					b += (ulong)data[15] << 56;
 					goto case 15;
 				case 15:
-					b += (ulong)toHash[14] << 48;
+					b += (ulong)data[14] << 48;
 					goto case 14;
 				case 14:
-					b += (ulong)toHash[13] << 40;
+					b += (ulong)data[13] << 40;
 					goto case 13;
 				case 13:
-					b += (ulong)toHash[12] << 32;
+					b += (ulong)data[12] << 32;
 					goto case 12;
 				case 12:
-					b += (ulong)toHash[11] << 24;
+					b += (ulong)data[11] << 24;
 					goto case 11;
 				case 11:
-					b += (ulong)toHash[10] << 16;
+					b += (ulong)data[10] << 16;
 					goto case 10;
 				case 10:
-					b += (ulong)toHash[9] << 8;
+					b += (ulong)data[9] << 8;
 					goto case 9;
 				case 9:
-					b += toHash[8];
+					b += data[8];
 					goto case 8;
 				case 8:
-					a += (ulong)toHash[7] << 56;
+					a += (ulong)data[7] << 56;
 					goto case 7;
 				case 7:
-					a += (ulong)toHash[6] << 48;
+					a += (ulong)data[6] << 48;
 					goto case 6;
 				case 6:
-					a += (ulong)toHash[5] << 40;
+					a += (ulong)data[5] << 40;
 					goto case 5;
 				case 5:
-					a += (ulong)toHash[4] << 32;
+					a += (ulong)data[4] << 32;
 					goto case 4;
 				case 4:
-					a += (ulong)toHash[3] << 24;
+					a += (ulong)data[3] << 24;
 					goto case 3;
 				case 3:
-					a += (ulong)toHash[2] << 16;
+					a += (ulong)data[2] << 16;
 					goto case 2;
 				case 2:
-					a += (ulong)toHash[1] << 8;
+					a += (ulong)data[1] << 8;
 					goto case 1;
 				case 1:
-					a += toHash[0];
+					a += data[0];
 					break;
 				default:
 					break;
@@ -157,6 +161,16 @@ namespace NFSLib.Crypto
 
 			// micro-optimization: avoids ref overhead and skips 1 assignment by having a separate function for this.
 			return mix64_final( a, b, c );
+		}
+
+		public static uint getHash32( string data, uint magic = 0xABCDEF00u )
+		{
+			return JenkinsHash.getHash32( Encoding.ASCII.GetBytes( data ), magic );
+		}
+
+		public static ulong getHash64( string data, ulong magic = 0x11223344ABCDEF00uL )
+		{
+			return JenkinsHash.getHash64( Encoding.ASCII.GetBytes( data ), magic );
 		}
 
 		private static void mix32( ref uint a, ref uint b, ref uint c )

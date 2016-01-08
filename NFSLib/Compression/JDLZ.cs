@@ -187,7 +187,9 @@ namespace NFSLib.Compression
 		{
 			byte[] output = new byte[input.Length];
 			int v6 = input.Length;
-			ushort v23 = 0xFF00, v24 = 0xFF00;
+			int v10, v27;
+			int v11;
+			int v23 = 0xFF00, v24 = 0xFF00;
 			int v26;
 
 			// Construct header.
@@ -216,15 +218,75 @@ namespace NFSLib.Compression
 				}
 
 				// oh god this is ugly. Probably the ugliest part of the NFS version's decompile.
-				// The NFS version is much longer than arushan's, but the flow is much easier to follow;
-				// I presume the goto's in arushan's are compiler optimizations.
-				// Basically there's two choices:
-				// 1. Figure out what the hell this thing is doing.
-				// 2. Find a way to rewrite arushan's without the goto's, due to them not being allowed in some languages (such as C#).
-				// I suspect #2 would be easier, it's likely doable by breaking the code into functions using ref's.
 				//v9 = *((_DWORD *)v5 + (-0x1A1 * (*(_BYTE *)v8 ^ (unsigned __int16)(0x10 * (*(_BYTE *)(v8 + 1) ^ (unsigned __int16)(0x10 * *(_BYTE *)(v8 + 2))))) & 0x1FFF));
-			}
 
+				v10 = 0x0002;
+				// ...
+				v27 = 0x0002;
+				// ...
+				while( v10 < 0x1002 ) // && v9
+				{
+					v11 = 0;
+					if( v26 > 0x0003 )
+					{
+						// ...
+						v10 = v27;
+						// ...
+					}
+					if( v11 < v26 )
+					{
+						// ...
+						v10 = v27;
+					}
+					if( v11 > v10 && ( v11 <= 34 || /* v25 - *(_DWORD *)v9 < 16 || */ v10 <= 34 )  )
+					{
+						v10 = v11;
+						v27 = v11;
+						// ...
+					}
+					// ...
+				}
+
+				if( v10 > 2 )
+				{
+					v23 >>= 1;
+					// ...
+				}
+				else
+				{
+					// ...
+					v23 = ( v23 >> 1 ) & 0x7F7F;
+					// ...
+				}
+
+				if( v23 < 0x100 )
+				{
+					// ...
+					v23 = 0xFF00;
+					// ...
+				}
+				if( v24 < 0x100 )
+				{
+					// ...
+					v24 = 0xFF00;
+					// ...
+				}
+				// ...
+
+				// this break is temporary, just shuts up Visual Studio about "unreachable code" right now.
+				break;
+			}
+			// ...
+			while( ( v23 & 0xFF00 ) > 0 )
+			{
+				v23 >>= 1;
+			}
+			// ...
+			while( ( v24 & 0xFF00 ) > 0 )
+			{
+				v24 >>= 1;
+			}
+			// ...
 
 			return output;
 		}

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
+using NFSLib.Crypto;
 
 namespace VLTEdit
 {
@@ -88,7 +89,7 @@ namespace VLTEdit
 						}
 						else
 						{
-							num = HashUtil.getHash32( text );
+							num = JenkinsHash.getHash32( text );
 							if( !HashTracker.knownActualHashes.ContainsKey( num ) )
 							{
 								HashTracker.knownActualHashes[num] = text;
@@ -101,7 +102,7 @@ namespace VLTEdit
 
 		public static void b( string A_0 )
 		{
-			uint num = HashUtil.getHash32( A_0 );
+			uint num = JenkinsHash.getHash32( A_0 );
 			if( !HashTracker.ht3.ContainsKey( num ) )
 			{
 				HashTracker.ht3[num] = A_0;

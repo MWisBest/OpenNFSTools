@@ -5,6 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
+using NFSLib.Crypto;
 using VLTEdit.Table;
 using VLTEdit.Types;
 
@@ -364,7 +365,7 @@ namespace VLTEdit
 			}
 			else
 			{
-				num = HashUtil.getHash32( A_0 );
+				num = JenkinsHash.getHash32( A_0 );
 			}
 
 			foreach( VLTClass dq in this.av )
@@ -539,7 +540,7 @@ namespace VLTEdit
 							this.writeToConsole( "Error in command." );
 							break;
 						}
-						this.writeToConsole( string.Format( "hash({0})=0x{1:x}", text2, HashUtil.getHash32( text2 ) ) );
+						this.writeToConsole( string.Format( "hash({0})=0x{1:x}", text2, JenkinsHash.getHash32( text2 ) ) );
 						break;
 					case "hash64":
 						if( noArgs )
@@ -547,7 +548,7 @@ namespace VLTEdit
 							this.writeToConsole( "Error in command." );
 							break;
 						}
-						this.writeToConsole( string.Format( "hash64({0})=0x{1:x}", text2, HashUtil.getHash64( text2 ) ) );
+						this.writeToConsole( string.Format( "hash64({0})=0x{1:x}", text2, JenkinsHash.getHash64( text2 ) ) );
 						break;
 					case "hs":
 					case "hsearch":

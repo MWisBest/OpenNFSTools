@@ -138,7 +138,6 @@
     <Compile Include="UnknownE.cs" />
     <Compile Include="Types\EAInt64.cs" />
     <Compile Include="Types\VLTArrayType.cs" />
-    <Compile Include="HashUtil.cs" />
     <Compile Include="Types\DataValueAttribute.cs" />
     <Compile Include="Table\RootRecord.cs" />
   </ItemGroup>
@@ -174,6 +173,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NFSLib\NFSLib.csproj">
+      <Project>{ccaf842a-8ba0-4551-95d2-8cabcfea9777}</Project>
+      <Name>NFSLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using NFSLib.Crypto;
 using VLTEdit.Table;
 
 namespace VLTEdit
@@ -31,7 +32,7 @@ namespace VLTEdit
 				UnknownDE.aclzz a2 = new UnknownDE.aclzz();
 				a2.s1 = UnknownAP.a( a_ );
 				a2.i1 = A_0.ia1[i];
-				a2.ui1 = HashUtil.getHash32( a2.s1 );
+				a2.ui1 = JenkinsHash.getHash32( a2.s1 );
 				this.genht1.Add( a2.ui1, a2 );
 				HashTracker.b( a2.s1 );
 			}

@@ -3,8 +3,24 @@ using System.Text;
 
 namespace NFSLib.Crypto
 {
+	/// <summary>
+	/// This is an implementation of Bob Jenkin's original hash function.
+	/// Its intended use is for table lookups, and NFS games using VLT databases do exactly that.
+	/// It's very fast, and produces 32-bit (or optionally 64-bit) hashes.
+	///
+	/// THIS IS NOT A CRYPTOGRAPHIC HASH. Collisions are simple to make on purpose.
+	/// When used *as intended*, /accidental/ collisions are fairly rare.
+	///
+	/// More details can be found on his website: http://burtleburtle.net/bob/hash/evahash.html
+	/// </summary>
 	public static class JenkinsHash
 	{
+		/// <summary>
+		/// 32-bit Jenkins hash implementation.
+		/// </summary>
+		/// <param name="data">bytes to hash</param>
+		/// <param name="magic">variable internal state init (default 0xABCDEF00u for NFS)</param>
+		/// <returns>32-bit Jenkins hash</returns>
 		public static uint getHash32( byte[] data, uint magic = 0xABCDEF00u )
 		{
 			int num = 0, i = data.Length;
@@ -66,6 +82,12 @@ namespace NFSLib.Crypto
 			return mix32_final( a, b, c );
 		}
 
+		/// <summary>
+		/// 64-bit Jenkins hash implementation.
+		/// </summary>
+		/// <param name="data">bytes to hash</param>
+		/// <param name="magic">variable internal state init (default 0x11223344ABCDEF00uL for NFS)</param>
+		/// <returns>64-bit Jenkins hash</returns>
 		public static ulong getHash64( byte[] data, ulong magic = 0x11223344ABCDEF00uL )
 		{
 			int num = 0, i = data.Length;
@@ -163,11 +185,23 @@ namespace NFSLib.Crypto
 			return mix64_final( a, b, c );
 		}
 
+		/// <summary>
+		/// Helper function for hashing strings (using 32-bit Jenkins hash implementation).
+		/// </summary>
+		/// <param name="data">string to hash</param>
+		/// <param name="magic">variable internal state init (default 0xABCDEF00u for NFS)</param>
+		/// <returns>32-bit Jenkins hash</returns>
 		public static uint getHash32( string data, uint magic = 0xABCDEF00u )
 		{
 			return JenkinsHash.getHash32( Encoding.ASCII.GetBytes( data ), magic );
 		}
 
+		/// <summary>
+		/// Helper function for hashing strings (using 64-bit Jenkins hash implementation).
+		/// </summary>
+		/// <param name="data">string to hash</param>
+		/// <param name="magic">variable internal state init (default 0x11223344ABCDEF00uL for NFS)</param>
+		/// <returns>64-bit Jenkins hash</returns>
 		public static ulong getHash64( string data, ulong magic = 0x11223344ABCDEF00uL )
 		{
 			return JenkinsHash.getHash64( Encoding.ASCII.GetBytes( data ), magic );

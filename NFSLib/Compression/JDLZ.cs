@@ -35,15 +35,11 @@ namespace NFSLib.Compression
 			{
 				if( flags1 == 1 )
 				{
-					flags1 = input[inPos] | 0x100;
-					// Yes, *Pos pre-increments like the following could be written as post-increments above them
-					// instead (e.g. input[inPos++]), this code is just meant to be as portable as possible.
-					++inPos;
+					flags1 = input[inPos++] | 0x100;
 				}
 				if( flags2 == 1 )
 				{
-					flags2 = input[inPos] | 0x100;
-					++inPos;
+					flags2 = input[inPos++] | 0x100;
 				}
 
 				if( ( flags1 & 1 ) > 0 )
@@ -77,9 +73,7 @@ namespace NFSLib.Compression
 				{
 					if( outPos < output.Length )
 					{
-						output[outPos] = input[inPos];
-						++outPos;
-						++inPos;
+						output[outPos++] = input[inPos++];
 					}
 				}
 				flags1 >>= 1;

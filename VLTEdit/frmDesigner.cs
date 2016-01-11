@@ -319,9 +319,13 @@ namespace VLTEdit
 			this.writeToConsole( "Copyright (C) 2015, Kyle \"MWisBest\" Repinski" );
 			if( BuildConfig.DEBUG )
 			{
-				//this.writeTestInfo();
+				this.writeTestInfo();
 			}
 			this.txtConsoleInput.Focus();
+		}
+
+		public void writeTestInfo()
+		{
 		}
 
 		public void writeToConsole( string A_0 )

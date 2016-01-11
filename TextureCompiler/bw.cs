@@ -13,12 +13,12 @@ public class bw
 		d = 64
 	}
 
-	public enum enumC // obf: "c"
+	public enum TextureFormat // obf: "c"
 	{
-		b = 827611204,
-		c = 861165636,
-		d = 21,
-		e = 41
+		DXT1 = 827611204,
+		DXT3 = 861165636,
+		ARGB = 21,
+		P8 = 41 // ?
 	}
 
 	public class exceptionB : Exception // obf: "b"
@@ -42,7 +42,7 @@ public class bw
 
 	public bw.enumA g; // obf: "g"
 
-	public bw.enumC h; // obf: "h"
+	public bw.TextureFormat h; // obf: "h"
 
 	public int intI; // obf: "i"
 
@@ -96,7 +96,7 @@ public class bw
 		A_0.Seek( 44L, SeekOrigin.Current );
 		this.intF = binaryReader.ReadInt32();
 		this.g = (bw.enumA)binaryReader.ReadInt32();
-		this.h = (bw.enumC)binaryReader.ReadInt32();
+		this.h = (bw.TextureFormat)binaryReader.ReadInt32();
 		this.intI = binaryReader.ReadInt32();
 		this.intJ = binaryReader.ReadInt32();
 		this.intK = binaryReader.ReadInt32();
@@ -129,13 +129,13 @@ public class bw
 		if( ( this.g & bw.enumA.b ) != (bw.enumA)0 )
 		{
 			byte[] array = this.byteArrayArrayS[0];
-			if( this.h == bw.enumC.b )
+			if( this.h == bw.TextureFormat.DXT1 )
 			{
 				array = this.a( array, this.intB, this.intA );
 			}
 			else
 			{
-				if( this.h != bw.enumC.c )
+				if( this.h != bw.TextureFormat.DXT3 )
 				{
 					return null;
 				}

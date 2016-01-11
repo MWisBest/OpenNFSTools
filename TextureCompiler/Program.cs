@@ -79,12 +79,12 @@ internal class Program
 			bw bw = new bw();
 			string a_ = dv.a( "texture", i, "file" );
 			bw.a( a_ );
-			if( ( bw.g & bw.enumA.b ) == (bw.enumA)0 || ( bw.h != bw.enumC.b && bw.h != bw.enumC.c ) )
+			if( ( bw.g & bw.enumA.b ) == (bw.enumA)0 || ( bw.h != bw.TextureFormat.DXT1 && bw.h != bw.TextureFormat.DXT3 ) )
 			{
 				throw new Exception( "Currently only DXT1 and DXT3 textures are supported." );
 			}
 			bool flag = false;
-			if( bw.h == bw.enumC.c )
+			if( bw.h == bw.TextureFormat.DXT3 )
 			{
 				flag = true;
 			}

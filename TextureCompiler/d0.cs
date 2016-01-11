@@ -91,13 +91,13 @@ internal class d0
 			bg bg = new bg();
 			if( text2 == null )
 			{
-				bg.d = dv.a( "texture", i, "name" );
+				bg.stringD = dv.a( "texture", i, "name" );
 			}
 			else
 			{
-				bg.d = text2 + "_" + dv.a( "texture", i, "name" );
+				bg.stringD = text2 + "_" + dv.a( "texture", i, "name" );
 			}
-			bg.e = d0.a( bg.d );
+			bg.uintE = d0.a( bg.stringD );
 			string text3 = dv.a( "texture", i, "usage" );
 			if( text3 != null )
 			{
@@ -105,56 +105,56 @@ internal class d0
 			}
 			if( text3 == "type1" )
 			{
-				bg.f = 461498288;
+				bg.intF = 461498288;
 			}
 			else if( text3 == "type2" )
 			{
-				bg.f = 497469606;
+				bg.intF = 497469606;
 			}
 			else
 			{
-				bg.f = 1741775;
+				bg.intF = 1741775;
 			}
 			bool flag2 = dv.a( "texture", i, "flaga" ) == "1";
-			bg.h = num2;
-			bg.j = (uint)bw.intC;
-			bg.i = bg.h + bg.j;
-			bg.k = 0u;
-			bg.l = bw.intC;
-			bg.m = (ushort)bw.intB;
-			bg.n = (ushort)bw.intA;
-			bg.o = 2228224;
-			bg.o += (int)Math.Log( (double)bg.n, 2.0 ) << 8;
-			bg.o += (int)Math.Log( (double)bg.m, 2.0 );
-			bg.p = 65536;
-			bg.q = ( flag ? 1280 : 0 );
-			bg.r = ( flag ? ( 66049 - ( flag2 ? 1 : 0 ) ) : ( 16777216 + ( flag2 ? 33554432 : 0 ) ) );
-			bg.s = 256;
-			bg.t = 0;
-			bg.u = 16777216;
-			bg.v = 256;
-			bg.z = ( flag ? 1 : 0 );
-			bg.aa = 5;
-			bg.ab = 6;
-			bg.ac = (int)bw.h;
+			bg.uintH = num2;
+			bg.uintJ = (uint)bw.intC;
+			bg.uintI = bg.uintH + bg.uintJ;
+			bg.uintK = 0u;
+			bg.intL = bw.intC;
+			bg.ushortM = (ushort)bw.intB;
+			bg.ushortN = (ushort)bw.intA;
+			bg.intO = 2228224;
+			bg.intO += (int)Math.Log( (double)bg.ushortN, 2.0 ) << 8;
+			bg.intO += (int)Math.Log( (double)bg.ushortM, 2.0 );
+			bg.intP = 65536;
+			bg.intQ = ( flag ? 1280 : 0 );
+			bg.intR = ( flag ? ( 66049 - ( flag2 ? 1 : 0 ) ) : ( 16777216 + ( flag2 ? 33554432 : 0 ) ) );
+			bg.intS = 256;
+			bg.intT = 0;
+			bg.intU = 16777216;
+			bg.intV = 256;
+			bg.intZ = ( flag ? 1 : 0 );
+			bg.intAA = 5;
+			bg.intAB = 6;
+			bg.intAC = (int)bw.h;
 			MemoryStream memoryStream = new MemoryStream( bw.intC + 156 + 16 );
 			BinaryWriter binaryWriter = new BinaryWriter( memoryStream );
 			binaryWriter.Write( 1465336146 );
 			binaryWriter.Write( 4097 );
 			binaryWriter.Write( bw.intC + 156 );
 			binaryWriter.Write( bw.intC + 156 + 16 );
-			binaryWriter.Write( bw.s[0] );
+			binaryWriter.Write( bw.byteArrayArrayS[0] );
 			bg.a( binaryWriter );
 			byte[] buffer = memoryStream.GetBuffer();
 			memoryStream.Close();
 			arrayList.Add( new d0.subclassA
 			{
-				uintA = bg.e,
+				uintA = bg.uintE,
 				uintD = (uint)( buffer.Length - 16 ),
 				uintC = (uint)buffer.Length,
 				byteArrayE = buffer
 			} );
-			num2 += bg.j + bg.k;
+			num2 += bg.uintJ + bg.uintK;
 		}
 		arrayList.Sort();
 		int num3 = 220 + arrayList.Count * 32;
@@ -188,12 +188,12 @@ internal class d0
 		co.a( new cx( 48 ) );
 		cd cd = new cd( a9.e );
 		u u = new u();
-		u.c = dv.a( "tpk", "pipelinepath" );
-		if( u.c == null )
+		u.stringC = dv.a( "tpk", "pipelinepath" );
+		if( u.stringC == null )
 		{
-			u.c = "";
+			u.stringC = "";
 		}
-		u.uintD = d0.a( u.c );
+		u.uintD = d0.a( u.stringC );
 		u.stringB = dv.a( "tpk", "identifier" );
 		if( u.stringB == null )
 		{
@@ -213,11 +213,11 @@ internal class d0
 		{
 			d0.subclassA a2 = arrayList[k] as d0.subclassA;
 			cg.subclassA a3 = new cg.subclassA();
-			a3.e = 256;
-			a3.a = a2.uintA;
-			a3.c = a2.uintC;
-			a3.d = a2.uintD;
-			a3.b = a2.uintB;
+			a3.intE = 256;
+			a3.uintA = a2.uintA;
+			a3.uintC = a2.uintC;
+			a3.uintD = a2.uintD;
+			a3.uintB = a2.uintB;
 			cg.a( a2.uintA, a3 );
 		}
 		cd.a( cg );
@@ -226,7 +226,7 @@ internal class d0
 		cd cd2 = new cd( a9.k );
 		cd2.a( new c2
 		{
-			c = 1,
+			intC = 1,
 			uintD = u.uintD
 		} );
 		cd2.a( new cx( 80 ) );

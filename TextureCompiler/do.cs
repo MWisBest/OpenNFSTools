@@ -36,7 +36,7 @@ public class @do : d1, IEnumerable
 
 	public override void a( BinaryReader A_0 )
 	{
-		int num = (int)( this.jB.b / 8u );
+		int num = (int)( this.jB.uintB / 8u );
 		this.uintArrayA = new uint[num];
 		this.intArrayB = new int[num];
 		for( int i = 0; i < num; i++ )

@@ -6,13 +6,13 @@ public class c2 : d1
 
 	public int intB; // obf: "b"
 
-	public int c;
+	public int intC; // obf: "c"
 
 	public uint uintD; // obf: "d"
 
-	public int e;
+	public int intE; // obf: "e"
 
-	public int f;
+	public int intF; // obf: "f"
 
 	public c2() : base( a9.l )
 	{
@@ -22,19 +22,19 @@ public class c2 : d1
 	{
 		this.intA = A_0.ReadInt32();
 		this.intB = A_0.ReadInt32();
-		this.c = A_0.ReadInt32();
+		this.intC = A_0.ReadInt32();
 		this.uintD = A_0.ReadUInt32();
-		this.e = A_0.ReadInt32();
-		this.f = A_0.ReadInt32();
+		this.intE = A_0.ReadInt32();
+		this.intF = A_0.ReadInt32();
 	}
 
 	protected override void a( BinaryWriter A_0 )
 	{
 		A_0.Write( this.intA );
 		A_0.Write( this.intB );
-		A_0.Write( this.c );
+		A_0.Write( this.intC );
 		A_0.Write( this.uintD );
-		A_0.Write( this.e );
-		A_0.Write( this.f );
+		A_0.Write( this.intE );
+		A_0.Write( this.intF );
 	}
 }

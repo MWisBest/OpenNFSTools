@@ -11,14 +11,14 @@ public class cx : d1
 	public cx( int length ) : base( a9.n )
 	{
 		this.byteArrayA = new byte[length];
-		this.jB.b = (uint)length;
+		this.jB.uintB = (uint)length;
 	}
 
 	public override void a( BinaryReader A_0 )
 	{
-		if( this.jB.b > 0u )
+		if( this.jB.uintB > 0u )
 		{
-			this.byteArrayA = A_0.ReadBytes( (int)this.jB.b );
+			this.byteArrayA = A_0.ReadBytes( (int)this.jB.uintB );
 			return;
 		}
 		this.byteArrayA = null;
@@ -26,7 +26,7 @@ public class cx : d1
 
 	protected override void a( BinaryWriter A_0 )
 	{
-		if( this.jB.b > 0u )
+		if( this.jB.uintB > 0u )
 		{
 			A_0.Write( this.byteArrayA );
 		}

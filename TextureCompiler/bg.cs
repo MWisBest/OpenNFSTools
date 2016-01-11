@@ -5,65 +5,65 @@ public class bg
 {
 	private int intA; // obf: "a"
 
-	private int b;
+	private int intB; // obf: "b"
 
-	private int c;
+	private int intC; // obf: "c"
 
-	public string d;
+	public string stringD; // obf: "d"
 
-	public uint e;
+	public uint uintE; // obf: "e"
 
-	public int f;
+	public int intF; // obf: "f"
 
-	private int g;
+	private int intG; // obf: "g"
 
-	public uint h;
+	public uint uintH; // obf: "h"
 
-	public uint i;
+	public uint uintI; // obf: "i"
 
-	public uint j;
+	public uint uintJ; // obf: "j"
 
-	public uint k;
+	public uint uintK; // obf: "k"
 
-	public int l;
+	public int intL; // obf: "l"
 
-	public ushort m;
+	public ushort ushortM; // obf: "m"
 
-	public ushort n;
+	public ushort ushortN; // obf: "n"
 
-	public int o;
+	public int intO; // obf: "o"
 
-	public int p;
+	public int intP; // obf: "p"
 
-	public int q;
+	public int intQ; // obf: "q"
 
-	public int r;
+	public int intR; // obf: "r"
 
-	public int s;
+	public int intS; // obf: "s"
 
-	public int t;
+	public int intT; // obf: "t"
 
-	public int u;
+	public int intU; // obf: "u"
 
-	public int v;
+	public int intV; // obf: "v"
 
-	private byte[] w;
+	private byte[] byteArrayW; // obf: "w"
 
-	private int x;
+	private int intX; // obf: "x"
 
-	private int y;
+	private int intY; // obf: "y"
 
-	public int z;
+	public int intZ; // obf: "z"
 
-	public int aa;
+	public int intAA; // obf: "aa"
 
-	public int ab;
+	public int intAB; // obf: "ab"
 
-	public int ac;
+	public int intAC; // obf: "ac"
 
-	private int ad;
+	private int intAD; // obf: "ad"
 
-	private int ae;
+	private int intAE; // obf: "ae"
 
 	protected static string a( BinaryReader A_0, int A_1 )
 	{
@@ -86,74 +86,74 @@ public class bg
 	public void a( BinaryReader A_0 )
 	{
 		this.intA = A_0.ReadInt32();
-		this.b = A_0.ReadInt32();
-		this.c = A_0.ReadInt32();
-		this.d = bg.a( A_0, 24 );
-		this.e = A_0.ReadUInt32();
-		this.f = A_0.ReadInt32();
-		this.g = A_0.ReadInt32();
-		this.h = A_0.ReadUInt32();
-		this.i = A_0.ReadUInt32();
-		this.j = A_0.ReadUInt32();
-		this.k = A_0.ReadUInt32();
-		this.l = A_0.ReadInt32();
-		this.m = A_0.ReadUInt16();
-		this.n = A_0.ReadUInt16();
-		this.o = A_0.ReadInt32();
-		this.p = A_0.ReadInt32();
-		this.q = A_0.ReadInt32();
-		this.r = A_0.ReadInt32();
-		this.s = A_0.ReadInt32();
-		this.t = A_0.ReadInt32();
-		this.u = A_0.ReadInt32();
-		this.v = A_0.ReadInt32();
-		this.w = A_0.ReadBytes( 20 );
-		this.x = A_0.ReadInt32();
-		this.y = A_0.ReadInt32();
-		this.z = A_0.ReadInt32();
-		this.aa = A_0.ReadInt32();
-		this.ab = A_0.ReadInt32();
-		this.ac = A_0.ReadInt32();
-		this.ad = A_0.ReadInt32();
-		this.ae = A_0.ReadInt32();
+		this.intB = A_0.ReadInt32();
+		this.intC = A_0.ReadInt32();
+		this.stringD = bg.a( A_0, 24 );
+		this.uintE = A_0.ReadUInt32();
+		this.intF = A_0.ReadInt32();
+		this.intG = A_0.ReadInt32();
+		this.uintH = A_0.ReadUInt32();
+		this.uintI = A_0.ReadUInt32();
+		this.uintJ = A_0.ReadUInt32();
+		this.uintK = A_0.ReadUInt32();
+		this.intL = A_0.ReadInt32();
+		this.ushortM = A_0.ReadUInt16();
+		this.ushortN = A_0.ReadUInt16();
+		this.intO = A_0.ReadInt32();
+		this.intP = A_0.ReadInt32();
+		this.intQ = A_0.ReadInt32();
+		this.intR = A_0.ReadInt32();
+		this.intS = A_0.ReadInt32();
+		this.intT = A_0.ReadInt32();
+		this.intU = A_0.ReadInt32();
+		this.intV = A_0.ReadInt32();
+		this.byteArrayW = A_0.ReadBytes( 20 );
+		this.intX = A_0.ReadInt32();
+		this.intY = A_0.ReadInt32();
+		this.intZ = A_0.ReadInt32();
+		this.intAA = A_0.ReadInt32();
+		this.intAB = A_0.ReadInt32();
+		this.intAC = A_0.ReadInt32();
+		this.intAD = A_0.ReadInt32();
+		this.intAE = A_0.ReadInt32();
 	}
 
 	public void a( BinaryWriter A_0 )
 	{
-		if( this.w == null )
+		if( this.byteArrayW == null )
 		{
-			this.w = new byte[20];
+			this.byteArrayW = new byte[20];
 		}
 		A_0.Write( this.intA );
-		A_0.Write( this.b );
-		A_0.Write( this.c );
-		bg.a( A_0, this.d, 24 );
-		A_0.Write( this.e );
-		A_0.Write( this.f );
-		A_0.Write( this.g );
-		A_0.Write( this.h );
-		A_0.Write( this.i );
-		A_0.Write( this.j );
-		A_0.Write( this.k );
-		A_0.Write( this.l );
-		A_0.Write( this.m );
-		A_0.Write( this.n );
-		A_0.Write( this.o );
-		A_0.Write( this.p );
-		A_0.Write( this.q );
-		A_0.Write( this.r );
-		A_0.Write( this.s );
-		A_0.Write( this.t );
-		A_0.Write( this.u );
-		A_0.Write( this.v );
-		A_0.Write( this.w );
-		A_0.Write( this.x );
-		A_0.Write( this.y );
-		A_0.Write( this.z );
-		A_0.Write( this.aa );
-		A_0.Write( this.ab );
-		A_0.Write( this.ac );
-		A_0.Write( this.ad );
-		A_0.Write( this.ae );
+		A_0.Write( this.intB );
+		A_0.Write( this.intC );
+		bg.a( A_0, this.stringD, 24 );
+		A_0.Write( this.uintE );
+		A_0.Write( this.intF );
+		A_0.Write( this.intG );
+		A_0.Write( this.uintH );
+		A_0.Write( this.uintI );
+		A_0.Write( this.uintJ );
+		A_0.Write( this.uintK );
+		A_0.Write( this.intL );
+		A_0.Write( this.ushortM );
+		A_0.Write( this.ushortN );
+		A_0.Write( this.intO );
+		A_0.Write( this.intP );
+		A_0.Write( this.intQ );
+		A_0.Write( this.intR );
+		A_0.Write( this.intS );
+		A_0.Write( this.intT );
+		A_0.Write( this.intU );
+		A_0.Write( this.intV );
+		A_0.Write( this.byteArrayW );
+		A_0.Write( this.intX );
+		A_0.Write( this.intY );
+		A_0.Write( this.intZ );
+		A_0.Write( this.intAA );
+		A_0.Write( this.intAB );
+		A_0.Write( this.intAC );
+		A_0.Write( this.intAD );
+		A_0.Write( this.intAE );
 	}
 }

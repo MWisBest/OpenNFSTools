@@ -49,7 +49,7 @@ public class co : cd
 	{
 		A_0.BaseStream.Seek( 0L, 0 );
 		this.jB = default( j );
-		this.jB.b = (uint)A_0.BaseStream.Length;
+		this.jB.uintB = (uint)A_0.BaseStream.Length;
 		base.a( A_0 );
 	}
 

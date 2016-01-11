@@ -34,37 +34,37 @@ public class bw
 
 	public int intC; // obf: "c"
 
-	public int d;
+	public int intD; // obf: "d"
 
-	public int e;
+	public int intE; // obf: "e"
 
-	public int f;
+	public int intF; // obf: "f"
 
-	public bw.enumA g;
+	public bw.enumA g; // obf: "g"
 
-	public bw.enumC h;
+	public bw.enumC h; // obf: "h"
 
-	public int i;
+	public int intI; // obf: "i"
 
-	public int j;
+	public int intJ; // obf: "j"
 
-	public int k;
+	public int intK; // obf: "k"
 
-	public int l;
+	public int intL; // obf: "l"
 
-	public int m;
+	public int intM; // obf: "m"
 
-	public int n;
+	public int intN; // obf: "n"
 
-	public int o;
+	public int intO; // obf: "o"
 
-	public int p;
+	public int intP; // obf: "p"
 
-	public int q;
+	public int intQ; // obf: "q"
 
-	public byte[] r;
+	public byte[] byteArrayR; // obf: "r"
 
-	public byte[][] s;
+	public byte[][] byteArrayArrayS; // obf: "s"
 
 	public void a( string A_0 )
 	{
@@ -91,35 +91,35 @@ public class bw
 		this.intA = binaryReader.ReadInt32();
 		this.intB = binaryReader.ReadInt32();
 		this.intC = binaryReader.ReadInt32();
-		this.d = binaryReader.ReadInt32();
-		this.e = binaryReader.ReadInt32();
+		this.intD = binaryReader.ReadInt32();
+		this.intE = binaryReader.ReadInt32();
 		A_0.Seek( 44L, (SeekOrigin)1 );
-		this.f = binaryReader.ReadInt32();
+		this.intF = binaryReader.ReadInt32();
 		this.g = (bw.enumA)binaryReader.ReadInt32();
 		this.h = (bw.enumC)binaryReader.ReadInt32();
-		this.i = binaryReader.ReadInt32();
-		this.j = binaryReader.ReadInt32();
-		this.k = binaryReader.ReadInt32();
-		this.l = binaryReader.ReadInt32();
-		this.m = binaryReader.ReadInt32();
-		this.n = binaryReader.ReadInt32();
-		this.o = binaryReader.ReadInt32();
-		this.p = binaryReader.ReadInt32();
-		this.q = binaryReader.ReadInt32();
+		this.intI = binaryReader.ReadInt32();
+		this.intJ = binaryReader.ReadInt32();
+		this.intK = binaryReader.ReadInt32();
+		this.intL = binaryReader.ReadInt32();
+		this.intM = binaryReader.ReadInt32();
+		this.intN = binaryReader.ReadInt32();
+		this.intO = binaryReader.ReadInt32();
+		this.intP = binaryReader.ReadInt32();
+		this.intQ = binaryReader.ReadInt32();
 		binaryReader.ReadInt32();
 		if( ( this.g & bw.enumA.c ) != (bw.enumA)0 )
 		{
-			this.r = binaryReader.ReadBytes( ( 1 << this.i ) * 4 );
+			this.byteArrayR = binaryReader.ReadBytes( ( 1 << this.intI ) * 4 );
 		}
-		if( this.e == 0 )
+		if( this.intE == 0 )
 		{
-			this.e = 1;
+			this.intE = 1;
 		}
-		this.s = new byte[this.e][];
+		this.byteArrayArrayS = new byte[this.intE][];
 		int num = this.intC;
-		for( int i = 0; i < this.e; i++ )
+		for( int i = 0; i < this.intE; i++ )
 		{
-			this.s[i] = binaryReader.ReadBytes( num );
+			this.byteArrayArrayS[i] = binaryReader.ReadBytes( num );
 			num /= 2;
 		}
 	}
@@ -128,7 +128,7 @@ public class bw
 	{
 		if( ( this.g & bw.enumA.b ) != (bw.enumA)0 )
 		{
-			byte[] array = this.s[0];
+			byte[] array = this.byteArrayArrayS[0];
 			if( this.h == bw.enumC.b )
 			{
 				array = this.a( array, this.intB, this.intA );

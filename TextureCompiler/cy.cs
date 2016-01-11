@@ -13,7 +13,7 @@ public class cy : d1
 
 	public void a( byte[] A_0 )
 	{
-		this.jB.b = (uint)A_0.Length;
+		this.jB.uintB = (uint)A_0.Length;
 		this.byteArrayA = A_0;
 	}
 
@@ -45,9 +45,9 @@ public class cy : d1
 	public override void a( BinaryReader A_0 )
 	{
 		this.longB = A_0.BaseStream.Position;
-		if( this.jB.b > 0u )
+		if( this.jB.uintB > 0u )
 		{
-			this.byteArrayA = A_0.ReadBytes( (int)this.jB.b );
+			this.byteArrayA = A_0.ReadBytes( (int)this.jB.uintB );
 			return;
 		}
 		this.byteArrayA = null;
@@ -56,7 +56,7 @@ public class cy : d1
 	protected override void a( BinaryWriter A_0 )
 	{
 		this.longB = A_0.BaseStream.Position;
-		if( this.jB.b > 0u )
+		if( this.jB.uintB > 0u )
 		{
 			A_0.Write( this.byteArrayA );
 		}

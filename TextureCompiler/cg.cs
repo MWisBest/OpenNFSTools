@@ -8,17 +8,17 @@ public class cg : d1, IEnumerable
 {
 	public class subclassA // obf: "a"
 	{
-		public uint a;
+		public uint uintA; // obf: "a"
 
-		public uint b;
+		public uint uintB; // obf: "b"
 
-		public uint c;
+		public uint uintC; // obf: "c"
 
-		public uint d;
+		public uint uintD; // obf: "d"
 
-		public int e;
+		public int intE; // obf: "e"
 
-		public int f;
+		public int intF; // obf: "f"
 	}
 
 	private Hashtable htA; // obf: "a"
@@ -40,17 +40,17 @@ public class cg : d1, IEnumerable
 
 	public override void a( BinaryReader A_0 )
 	{
-		int num = (int)( this.jB.b / 24u );
+		int num = (int)( this.jB.uintB / 24u );
 		for( int i = 0; i < num; i++ )
 		{
 			cg.subclassA a = new cg.subclassA();
-			a.a = A_0.ReadUInt32();
-			a.b = A_0.ReadUInt32();
-			a.c = A_0.ReadUInt32();
-			a.d = A_0.ReadUInt32();
-			a.e = A_0.ReadInt32();
-			a.f = A_0.ReadInt32();
-			this.htA[a.a] = a;
+			a.uintA = A_0.ReadUInt32();
+			a.uintB = A_0.ReadUInt32();
+			a.uintC = A_0.ReadUInt32();
+			a.uintD = A_0.ReadUInt32();
+			a.intE = A_0.ReadInt32();
+			a.intF = A_0.ReadInt32();
+			this.htA[a.uintA] = a;
 		}
 	}
 
@@ -63,7 +63,7 @@ public class cg : d1, IEnumerable
 			while( enumerator.MoveNext() )
 			{
 				DictionaryEntry dictionaryEntry = (DictionaryEntry)enumerator.Current;
-				arrayList.Add( ( dictionaryEntry.Value as cg.subclassA ).a );
+				arrayList.Add( ( dictionaryEntry.Value as cg.subclassA ).uintA );
 			}
 		}
 		finally
@@ -82,12 +82,12 @@ public class cg : d1, IEnumerable
 			{
 				uint num = (uint)enumerator2.Current;
 				cg.subclassA a = this.htA[num] as cg.subclassA;
-				A_0.Write( a.a );
-				A_0.Write( a.b );
-				A_0.Write( a.c );
-				A_0.Write( a.d );
-				A_0.Write( a.e );
-				A_0.Write( a.f );
+				A_0.Write( a.uintA );
+				A_0.Write( a.uintB );
+				A_0.Write( a.uintC );
+				A_0.Write( a.uintD );
+				A_0.Write( a.intE );
+				A_0.Write( a.intF );
 			}
 		}
 		finally

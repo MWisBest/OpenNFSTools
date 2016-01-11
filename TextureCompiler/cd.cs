@@ -108,7 +108,7 @@ public class cd : d1, IEnumerable
 	{
 		this.arrayListA = new ArrayList();
 		long position = A_0.BaseStream.Position;
-		while( A_0.BaseStream.Position - position < (long)( (ulong)this.jB.b ) )
+		while( A_0.BaseStream.Position - position < (long)( (ulong)this.jB.uintB ) )
 		{
 			j a_ = default( j );
 			a_.a( A_0 );
@@ -158,7 +158,7 @@ public class cd : d1, IEnumerable
 			d.a( a_ );
 			d.a( A_0 );
 			this.arrayListA.Add( d );
-			A_0.BaseStream.Seek( position2 + (long)( (ulong)a_.b ), 0 );
+			A_0.BaseStream.Seek( position2 + (long)( (ulong)a_.uintB ), 0 );
 		}
 	}
 

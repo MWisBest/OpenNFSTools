@@ -136,13 +136,13 @@ public class bw
 			{
 				array = this.a( array, this.intB, this.intA );
 			}
+			else if( this.h == bw.TextureFormat.DXT3 )
+			{
+				array = this.b( array, this.intB, this.intA );
+			}
 			else
 			{
-				if( this.h != bw.TextureFormat.DXT3 )
-				{
-					return null;
-				}
-				array = this.b( array, this.intB, this.intA );
+				return null;
 			}
 			Bitmap bitmap = new Bitmap( this.intB, this.intA, PixelFormat.Format32bppArgb );
 			Rectangle rectangle = new Rectangle( 0, 0, bitmap.Width, bitmap.Height );

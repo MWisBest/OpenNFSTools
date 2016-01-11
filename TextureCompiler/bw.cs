@@ -68,7 +68,7 @@ public class bw
 
 	public void a( string A_0 )
 	{
-		FileStream fileStream = new FileStream( A_0, (FileMode)3, (FileAccess)1 );
+		FileStream fileStream = new FileStream( A_0, FileMode.Open, FileAccess.Read );
 		try
 		{
 			this.a( fileStream );

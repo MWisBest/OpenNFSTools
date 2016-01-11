@@ -13,7 +13,7 @@ public class co : cd
 	{
 		try
 		{
-			FileStream fileStream = new FileStream( A_0, (FileMode)3, (FileAccess)1 );
+			FileStream fileStream = new FileStream( A_0, FileMode.Open, FileAccess.Read );
 			this.stringA = A_0;
 			BinaryReader a_ = new BinaryReader( fileStream );
 			this.a( a_ );
@@ -34,7 +34,7 @@ public class co : cd
 	{
 		try
 		{
-			FileStream fileStream = new FileStream( A_0, (FileMode)2, (FileAccess)2 );
+			FileStream fileStream = new FileStream( A_0, FileMode.Create, FileAccess.Write );
 			BinaryWriter a_ = new BinaryWriter( fileStream );
 			this.b( a_ );
 			fileStream.Close();

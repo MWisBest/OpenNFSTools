@@ -47,7 +47,7 @@ public class co : cd
 
 	protected new void a( BinaryReader A_0 )
 	{
-		A_0.BaseStream.Seek( 0L, 0 );
+		A_0.BaseStream.Seek( 0L, SeekOrigin.Begin );
 		this.jB = default( j );
 		this.jB.uintB = (uint)A_0.BaseStream.Length;
 		base.a( A_0 );

@@ -236,7 +236,7 @@ internal class d0
 		for( int l = 0; l < arrayList.Count; l++ )
 		{
 			d0.subclassA a4 = arrayList[l] as d0.subclassA;
-			binaryWriter2.Seek( (int)( a4.uintB - (uint)num5 + 120u ), 0 );
+			binaryWriter2.Seek( (int)( a4.uintB - (uint)num5 + 120u ), SeekOrigin.Begin );
 			binaryWriter2.Write( a4.byteArrayE );
 		}
 		cy.a( memoryStream2.GetBuffer() );

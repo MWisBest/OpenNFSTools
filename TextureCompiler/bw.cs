@@ -87,13 +87,13 @@ public class bw
 		{
 			throw new bw.exceptionB( "Not a valid DDS file." );
 		}
-		A_0.Seek( 8L, (SeekOrigin)1 );
+		A_0.Seek( 8L, SeekOrigin.Current );
 		this.intA = binaryReader.ReadInt32();
 		this.intB = binaryReader.ReadInt32();
 		this.intC = binaryReader.ReadInt32();
 		this.intD = binaryReader.ReadInt32();
 		this.intE = binaryReader.ReadInt32();
-		A_0.Seek( 44L, (SeekOrigin)1 );
+		A_0.Seek( 44L, SeekOrigin.Current );
 		this.intF = binaryReader.ReadInt32();
 		this.g = (bw.enumA)binaryReader.ReadInt32();
 		this.h = (bw.enumC)binaryReader.ReadInt32();

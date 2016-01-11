@@ -158,7 +158,7 @@ public class cd : d1, IEnumerable
 			d.a( a_ );
 			d.a( A_0 );
 			this.arrayListA.Add( d );
-			A_0.BaseStream.Seek( position2 + (long)( (ulong)a_.uintB ), 0 );
+			A_0.BaseStream.Seek( position2 + (long)( (ulong)a_.uintB ), SeekOrigin.Begin );
 		}
 	}
 

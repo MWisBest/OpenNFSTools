@@ -36,9 +36,9 @@ public abstract class d1
 		long position = A_0.BaseStream.Position;
 		this.a( A_0 );
 		uint num = (uint)( A_0.BaseStream.Position - position );
-		A_0.BaseStream.Seek( position - 4L, 0 );
+		A_0.BaseStream.Seek( position - 4L, SeekOrigin.Begin );
 		A_0.Write( num );
-		A_0.Seek( (int)num, (SeekOrigin)1 );
+		A_0.Seek( (int)num, SeekOrigin.Current );
 	}
 
 	protected static string a( BinaryReader A_0, int A_1 )

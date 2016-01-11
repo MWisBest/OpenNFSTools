@@ -59,7 +59,7 @@ public class bg
 
 	public int intAB; // obf: "ab"
 
-	public int intAC; // obf: "ac"
+	public uint uintAC; // obf: "ac"
 
 	private int intAD; // obf: "ad"
 
@@ -113,7 +113,7 @@ public class bg
 		this.intZ = A_0.ReadInt32();
 		this.intAA = A_0.ReadInt32();
 		this.intAB = A_0.ReadInt32();
-		this.intAC = A_0.ReadInt32();
+		this.uintAC = A_0.ReadUInt32();
 		this.intAD = A_0.ReadInt32();
 		this.intAE = A_0.ReadInt32();
 	}
@@ -152,7 +152,7 @@ public class bg
 		A_0.Write( this.intZ );
 		A_0.Write( this.intAA );
 		A_0.Write( this.intAB );
-		A_0.Write( this.intAC );
+		A_0.Write( this.uintAC );
 		A_0.Write( this.intAD );
 		A_0.Write( this.intAE );
 	}

@@ -13,12 +13,15 @@ public class bw
 		d = 64
 	}
 
-	public enum TextureFormat // obf: "c"
+	public enum TextureFormat : uint // obf: "c"
 	{
-		DXT1 = 827611204,
-		DXT3 = 861165636,
-		ARGB = 21,
-		P8 = 41 // ?
+		DXT1 = 0x31545844u, // 'DXT1' (le)
+		DXT2 = 0x32545844u, // 'DXT2' (le)
+		DXT3 = 0x33545844u, // 'DXT3' (le)
+		DXT4 = 0x34545844u, // 'DXT4' (le)
+		DXT5 = 0x35545844u, // 'DXT5' (le)
+		ARGB = 0x15u,
+		P8 = 0x29u // ?
 	}
 
 	public class exceptionB : Exception // obf: "b"
@@ -83,7 +86,7 @@ public class bw
 	public void a( Stream A_0 )
 	{
 		BinaryReader binaryReader = new BinaryReader( A_0 );
-		if( binaryReader.ReadInt32() != 542327876 )
+		if( binaryReader.ReadUInt32() != 0x20534444u )
 		{
 			throw new bw.exceptionB( "Not a valid DDS file." );
 		}
@@ -96,7 +99,7 @@ public class bw
 		A_0.Seek( 44L, SeekOrigin.Current );
 		this.intF = binaryReader.ReadInt32();
 		this.g = (bw.enumA)binaryReader.ReadInt32();
-		this.h = (bw.TextureFormat)binaryReader.ReadInt32();
+		this.h = (bw.TextureFormat)binaryReader.ReadUInt32();
 		this.intI = binaryReader.ReadInt32();
 		this.intJ = binaryReader.ReadInt32();
 		this.intK = binaryReader.ReadInt32();

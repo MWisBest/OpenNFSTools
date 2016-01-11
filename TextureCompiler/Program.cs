@@ -136,7 +136,7 @@ internal class Program
 			bg.intZ = ( flag ? 1 : 0 );
 			bg.intAA = 5;
 			bg.intAB = 6;
-			bg.intAC = (int)bw.h;
+			bg.uintAC = (uint)bw.h;
 			MemoryStream memoryStream = new MemoryStream( bw.intC + 156 + 16 );
 			BinaryWriter binaryWriter = new BinaryWriter( memoryStream );
 			binaryWriter.Write( 1465336146 );

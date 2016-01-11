@@ -141,9 +141,9 @@ public class bw
 				}
 				array = this.b( array, this.intB, this.intA );
 			}
-			Bitmap bitmap = new Bitmap( this.intB, this.intA, (PixelFormat)2498570 );
+			Bitmap bitmap = new Bitmap( this.intB, this.intA, PixelFormat.Format32bppArgb );
 			Rectangle rectangle = new Rectangle( 0, 0, bitmap.Width, bitmap.Height );
-			BitmapData bitmapData = bitmap.LockBits( rectangle, (ImageLockMode)3, bitmap.PixelFormat );
+			BitmapData bitmapData = bitmap.LockBits( rectangle, ImageLockMode.ReadWrite, bitmap.PixelFormat );
 			Marshal.Copy( array, 0, bitmapData.Scan0, this.intB * this.intA * 4 );
 			bitmap.UnlockBits( bitmapData );
 			return bitmap;

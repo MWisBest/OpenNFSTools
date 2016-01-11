@@ -50,7 +50,7 @@
     <Compile Include="co.cs" />
     <Compile Include="cx.cs" />
     <Compile Include="cy.cs" />
-    <Compile Include="d0.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="d1.cs" />
     <Compile Include="do.cs" />
     <Compile Include="dv.cs" />

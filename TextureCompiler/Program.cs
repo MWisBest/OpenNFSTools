@@ -63,7 +63,7 @@ internal class Program
 			return 1;
 		}
 		string text = args[0];
-		dv dv = new dv();
+		DefinitionParser dv = new DefinitionParser();
 		dv.a( text, new string[]
 		{
 			"texture"

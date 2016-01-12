@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Text;
 
 [DefaultMember( "Item" )]
-internal class dv
+internal class DefinitionParser
 {
 	private Hashtable htA; // obf: "a"
 

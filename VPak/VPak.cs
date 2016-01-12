@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using NFSTools.VLTEdit;
+using NFSTools.NFSLib.Common;
 
 namespace NFSTools.VPak
 {

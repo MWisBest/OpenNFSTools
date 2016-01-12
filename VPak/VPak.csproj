@@ -42,8 +42,13 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IBinReadWrite.cs" />
     <Compile Include="VPak.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NFSLib\NFSLib.csproj">
+      <Project>{ccaf842a-8ba0-4551-95d2-8cabcfea9777}</Project>
+      <Name>NFSLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

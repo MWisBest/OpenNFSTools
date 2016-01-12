@@ -1,4 +1,5 @@
 using System.IO;
+using NFSTools.NFSLib.Common;
 
 namespace NFSTools.VLTEdit.Table
 {

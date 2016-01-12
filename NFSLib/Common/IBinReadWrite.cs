@@ -1,6 +1,6 @@
-using System.IO;
+﻿using System.IO;
 
-namespace NFSTools.VLTEdit
+namespace NFSTools.NFSLib.Common
 {
 	public interface IBinReadWrite
 	{

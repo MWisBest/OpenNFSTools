@@ -109,7 +109,6 @@
     <Compile Include="UnknownBA.cs" />
     <Compile Include="Types\VLTBaseType.cs" />
     <Compile Include="Types\AttribVector3.cs" />
-    <Compile Include="IBinReadWrite.cs" />
     <Compile Include="Types\EAUInt64.cs" />
     <Compile Include="HashTracker.cs" />
     <Compile Include="Types\EADouble.cs" />

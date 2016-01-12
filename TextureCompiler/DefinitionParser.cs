@@ -1,4 +1,4 @@
-using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -6,123 +6,117 @@ using System.Text;
 [DefaultMember( "Item" )]
 internal class DefinitionParser
 {
-	private Hashtable htA; // obf: "a"
+	//private Hashtable htA; // obf: "a"
+	private Dictionary<string, object> dictB;
 
 	private object a( string A_0 )
 	{
-		if( this.htA.ContainsKey( A_0 ) )
+		if( this.dictB.ContainsKey( A_0 ) )
 		{
-			return this.htA[A_0];
+			return this.dictB[A_0];
 		}
 		return null;
 	}
 
 	public string a( string A_0, string A_1 )
 	{
-		Hashtable hashtable = this.a( A_0.ToLower() ) as Hashtable;
-		if( hashtable == null )
+		Dictionary<string, string> stringDict = this.a( A_0.ToLower() ) as Dictionary<string, string>;
+		if( stringDict == null || !stringDict.ContainsKey( A_1.ToLower() ) )
 		{
 			return null;
 		}
-		return hashtable[A_1.ToLower()] as string;
+		return stringDict[A_1.ToLower()];
 	}
 
 	public string a( string A_0, int A_1, string A_2 )
 	{
-		ArrayList arrayList = this.a( A_0.ToLower() ) as ArrayList;
-		if( arrayList == null )
+		List<Dictionary<string, string>> listDictLol = this.a( A_0.ToLower() ) as List<Dictionary<string, string>>;
+		if( listDictLol == null )
 		{
 			return null;
 		}
-		Hashtable hashtable = arrayList[A_1] as Hashtable;
-		if( hashtable == null )
+		Dictionary<string, string> stringDict = listDictLol[A_1];
+		if( stringDict == null || !stringDict.ContainsKey( A_2.ToLower() ) )
 		{
 			return null;
 		}
-		return hashtable[A_2.ToLower()] as string;
+		return stringDict[A_2.ToLower()];
 	}
 
 	public int b( string A_0 )
 	{
-		ArrayList arrayList = this.a( A_0 ) as ArrayList;
-		if( arrayList == null )
+		List<Dictionary<string, string>> listDictLol = this.a( A_0 ) as List<Dictionary<string, string>>;
+		if( listDictLol == null )
 		{
 			return -1;
 		}
-		return arrayList.Count;
+		return listDictLol.Count;
 	}
 
 	public void a( string A_0, string[] A_1 )
 	{
-		ArrayList arrayList = new ArrayList( A_1 );
-		StreamReader streamReader = new StreamReader( A_0, Encoding.Default, true );
-		Hashtable hashtable = null;
-		this.htA = new Hashtable();
-		while( true )
+		using( StreamReader streamReader = new StreamReader( A_0, Encoding.Default, true ) )
 		{
-			string text = streamReader.ReadLine();
-			if( text == null )
+			List<string> stringList = new List<string>( A_1 );
+			Dictionary<string, string> stringDict = null;
+			this.dictB = new Dictionary<string, object>();
+			string text = null;
+			while( ( text = streamReader.ReadLine() ) != null )
 			{
-				break;
-			}
-			text = text.Trim();
-			if( !text.StartsWith( "#" ) && !text.StartsWith( ";" ) && !( text == "" ) )
-			{
-				if( text.StartsWith( "[" ) && text.EndsWith( "]" ) )
+				text = text.Trim();
+				if( !text.StartsWith( "#" ) && !text.StartsWith( ";" ) && !( text == "" ) )
 				{
-					string text2;
-					if( text != "[]" )
+					if( text.StartsWith( "[" ) && text.EndsWith( "]" ) )
 					{
-						text2 = text.Substring( 1, text.Length - 2 ).ToLower();
-					}
-					else
-					{
-						text2 = "";
-					}
-					if( this.htA.ContainsKey( text2 ) )
-					{
-						if( arrayList.Contains( text2 ) )
+						string text2 = "";
+						if( text != "[]" )
 						{
-							hashtable = new Hashtable();
-							ArrayList arrayList2 = this.a( text2 ) as ArrayList;
-							arrayList2.Add( hashtable );
+							text2 = text.Substring( 1, text.Length - 2 ).ToLower();
+						}
+						if( this.dictB.ContainsKey( text2 ) )
+						{
+							if( stringList.Contains( text2 ) )
+							{
+								stringDict = new Dictionary<string, string>();
+								List<Dictionary<string, string>> listDictLol = this.a( text2 ) as List<Dictionary<string, string>>;
+								listDictLol.Add( stringDict );
+							}
+							else
+							{
+								stringDict = ( this.a( text2 ) as Dictionary<string, string> );
+							}
 						}
 						else
 						{
-							hashtable = ( this.a( text2 ) as Hashtable );
+							stringDict = new Dictionary<string, string>();
+							if( stringList.Contains( text2 ) )
+							{
+								List<Dictionary<string, string>> listDictLol2 = new List<Dictionary<string, string>>();
+								listDictLol2.Add( stringDict );
+								this.dictB.Add( text2, listDictLol2 );
+							}
+							else
+							{
+								this.dictB.Add( text2, stringDict );
+							}
 						}
 					}
-					else
+					else if( text.IndexOf( "=" ) > -1 )
 					{
-						hashtable = new Hashtable();
-						if( arrayList.Contains( text2 ) )
+						string[] array = text.Split( new char[]
 						{
-							ArrayList arrayList3 = new ArrayList();
-							arrayList3.Add( hashtable );
-							this.htA.Add( text2, arrayList3 );
-						}
-						else
+							'='
+						}, 2 );
+						string text3 = array[0].Trim();
+						string text4 = "";
+						if( array.Length > 1 )
 						{
-							this.htA.Add( text2, hashtable );
+							text4 = array[1].Trim();
 						}
+						stringDict.Add( text3.ToLower(), text4 );
 					}
-				}
-				else if( text.IndexOf( "=" ) > -1 )
-				{
-					string[] array = text.Split( new char[]
-					{
-						'='
-					}, 2 );
-					string text3 = array[0].Trim();
-					string text4 = "";
-					if( array.Length > 1 )
-					{
-						text4 = array[1].Trim();
-					}
-					hashtable.Add( text3.ToLower(), text4 );
 				}
 			}
 		}
-		streamReader.Close();
 	}
 }

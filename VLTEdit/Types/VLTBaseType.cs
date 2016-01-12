@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Reflection;
 
-namespace VLTEdit.Types
+namespace NFSTools.VLTEdit.Types
 {
 	public abstract class VLTBaseType : IBinReadWrite // OBF: bb.cs
 	{

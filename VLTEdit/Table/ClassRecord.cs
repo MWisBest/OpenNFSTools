@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace VLTEdit.Table
+namespace NFSTools.VLTEdit.Table
 {
 	public class ClassRecord : BaseRecord
 	{

@@ -1,4 +1,4 @@
-namespace VLTEdit.Table
+namespace NFSTools.VLTEdit.Table
 {
 	/**
 	 * These seem to represent some sort of values found in the VLT files.

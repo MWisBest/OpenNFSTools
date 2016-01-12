@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace VLTEdit
+namespace NFSTools.VLTEdit
 {
 	public class UnknownB0 : ITrimmable
 	{

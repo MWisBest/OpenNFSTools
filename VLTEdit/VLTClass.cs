@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using VLTEdit.Table;
-using VLTEdit.Types;
+using NFSTools.VLTEdit.Table;
+using NFSTools.VLTEdit.Types;
 
 // TODO Collections.Generic IComparable IEnumerable etc
-namespace VLTEdit
+namespace NFSTools.VLTEdit
 {
 	[DefaultMember( "Item" )]
 	public class VLTClass : IComparable<VLTClass>, IEnumerable // OBF: dq.cs

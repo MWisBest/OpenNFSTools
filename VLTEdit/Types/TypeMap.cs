@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using NFSLib.Crypto;
+using NFSTools.NFSLib.Crypto;
 
-namespace VLTEdit.Types
+namespace NFSTools.VLTEdit.Types
 {
 	public class TypeMap
 	{

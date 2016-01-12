@@ -1,7 +1,7 @@
 using System.IO;
 using System.Text;
 
-namespace VLTEdit.Types
+namespace NFSTools.VLTEdit.Types
 {
 	public class VLTRawType : VLTBaseType // OBF: ad.cs
 	{

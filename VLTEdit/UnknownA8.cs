@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
-namespace VLTEdit
+namespace NFSTools.VLTEdit
 {
 	[DefaultMember( "Item" )]
 	public class UnknownA8 : UnknownC0, ITrimmable

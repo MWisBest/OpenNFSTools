@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace NFSLib.Crypto
+namespace NFSTools.NFSLib.Crypto
 {
 	/// <summary>
 	/// This is an implementation of Bob Jenkin's original hash function.

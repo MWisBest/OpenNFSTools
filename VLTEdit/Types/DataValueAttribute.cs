@@ -1,6 +1,6 @@
 using System;
 
-namespace VLTEdit.Types
+namespace NFSTools.VLTEdit.Types
 {
 	public class DataValueAttribute : Attribute
 	{

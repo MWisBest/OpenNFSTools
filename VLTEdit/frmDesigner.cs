@@ -5,11 +5,11 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
-using NFSLib.Crypto;
-using VLTEdit.Table;
-using VLTEdit.Types;
+using NFSTools.NFSLib.Crypto;
+using NFSTools.VLTEdit.Table;
+using NFSTools.VLTEdit.Types;
 
-namespace VLTEdit
+namespace NFSTools.VLTEdit
 {
 	public partial class frmDesigner : Form
 	{

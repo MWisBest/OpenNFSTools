@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
-namespace VLTEdit.Types
+namespace NFSTools.VLTEdit.Types
 {
 	[DefaultMember( "Item" )]
 	public class VLTArrayType : VLTBaseType, IEnumerable<VLTBaseType>, ITrimmable // OBF: m.cs

@@ -7,9 +7,9 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
-using VLTEdit.Types;
+using NFSTools.VLTEdit.Types;
 
-namespace VLTEdit
+namespace NFSTools.VLTEdit
 {
 	public class frmMain : Form
 	{

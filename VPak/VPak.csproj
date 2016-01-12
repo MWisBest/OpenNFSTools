@@ -33,10 +33,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>VPak.VPak</StartupObject>
+    <StartupObject>NFSTools.VPak.VPak</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <RootNamespace>VPak</RootNamespace>
+    <RootNamespace>NFSTools.VPak</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <None Include="app.config" />

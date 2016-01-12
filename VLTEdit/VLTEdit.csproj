@@ -49,10 +49,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <RootNamespace>VLTEdit</RootNamespace>
+    <RootNamespace>NFSTools.VLTEdit</RootNamespace>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>VLTEdit.frmDesigner</StartupObject>
+    <StartupObject>NFSTools.VLTEdit.frmDesigner</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System.Windows.Forms" />

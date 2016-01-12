@@ -1,7 +1,7 @@
 using System.IO;
 using System.Reflection;
 
-namespace VLTEdit.Table
+namespace NFSTools.VLTEdit.Table
 {
 	[DefaultMember( "Item" )]
 	public class RowRecord : BaseRecord

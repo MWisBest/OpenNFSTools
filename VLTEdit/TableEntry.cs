@@ -1,7 +1,7 @@
 using System.IO;
-using VLTEdit.Table;
+using NFSTools.VLTEdit.Table;
 
-namespace VLTEdit
+namespace NFSTools.VLTEdit
 {
 	public class TableEntry : IBinReadWrite // NOTE: This seems like actual table entires read...
 	{

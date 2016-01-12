@@ -1,7 +1,7 @@
 using System.IO;
 using System.Text;
 
-namespace VLTEdit
+namespace NFSTools.VLTEdit
 {
 	public class UnknownAP
 	{

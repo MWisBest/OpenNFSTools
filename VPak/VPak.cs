@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using VLTEdit;
+using NFSTools.VLTEdit;
 
-namespace VPak
+namespace NFSTools.VPak
 {
 	public class VPak
 	{

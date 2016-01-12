@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace VLTEdit
+namespace NFSTools.VLTEdit
 {
 	public class UnknownB8 : IBinReadWrite
 	{

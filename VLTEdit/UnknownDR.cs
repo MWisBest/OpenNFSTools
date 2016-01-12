@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Reflection;
-using VLTEdit.Table;
-using VLTEdit.Types;
+using NFSTools.VLTEdit.Table;
+using NFSTools.VLTEdit.Types;
 
-namespace VLTEdit
+namespace NFSTools.VLTEdit
 {
 	// VLTRoot?!
 	[DefaultMember( "Item" )]

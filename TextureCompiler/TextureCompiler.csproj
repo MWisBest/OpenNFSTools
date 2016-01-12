@@ -32,10 +32,10 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>Program</StartupObject>
+    <StartupObject>NFSTools.TextureCompiler.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <RootNamespace>TextureCompiler</RootNamespace>
+    <RootNamespace>NFSTools.TextureCompiler</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System.Windows.Forms" />
@@ -44,9 +44,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="a9.cs" />
-    <Compile Include="ag.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="bf.cs" />
     <Compile Include="bg.cs" />
     <Compile Include="bw.cs" />
@@ -63,9 +60,6 @@
     <Compile Include="j.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="u.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="ag.resources" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

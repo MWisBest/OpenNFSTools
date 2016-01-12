@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
-using NFSLib.Crypto;
+using NFSTools.NFSLib.Crypto;
 
-namespace VLTEdit
+namespace NFSTools.VLTEdit
 {
 	public class HashTracker // OBF: bq.cs
 	{

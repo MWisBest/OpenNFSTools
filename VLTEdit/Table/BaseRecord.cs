@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace VLTEdit.Table
+namespace NFSTools.VLTEdit.Table
 {
 	// NOTE: This is for the actual entires in the database, NOT the table entries!
 	public abstract class BaseRecord : IBinReadWrite

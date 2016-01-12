@@ -1,4 +1,4 @@
-namespace VLTEdit
+namespace NFSTools.VLTEdit
 {
 	public static class BuildConfig
 	{

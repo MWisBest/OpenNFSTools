@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace VLTEdit.Types
+namespace NFSTools.VLTEdit.Types
 {
 	public class GCollectionKey : VLTBaseType // OBF: al.cs
 	{

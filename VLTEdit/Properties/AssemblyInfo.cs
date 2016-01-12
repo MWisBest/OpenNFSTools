@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
-using static VLTEdit.BuildConfig;
+using static NFSTools.VLTEdit.BuildConfig;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information

@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -59,46 +58,23 @@ public class cg : d1, IEnumerable<KeyValuePair<uint, cg.subclassA>>
 	protected override void a( BinaryWriter A_0 )
 	{
 		List<uint> uintList = new List<uint>( this.dictB.Count );
-		IEnumerator<KeyValuePair<uint, cg.subclassA>> enumerator = this.dictB.GetEnumerator();
-		try
+
+		foreach( cg.subclassA a in this.dictB.Values )
 		{
-			while( enumerator.MoveNext() )
-			{
-				KeyValuePair<uint, cg.subclassA> kvPair = enumerator.Current;
-				uintList.Add( kvPair.Value.uintA );
-			}
+			uintList.Add( a.uintA );
 		}
-		finally
-		{
-			IDisposable disposable = enumerator as IDisposable;
-			if( disposable != null )
-			{
-				disposable.Dispose();
-			}
-		}
+
 		uintList.Sort();
-		IEnumerator<uint> enumerator2 = uintList.GetEnumerator();
-		try
+
+		foreach( uint num in uintList )
 		{
-			while( enumerator2.MoveNext() )
-			{
-				uint num = enumerator2.Current;
-				cg.subclassA a = this.dictB[num];
-				A_0.Write( a.uintA );
-				A_0.Write( a.uintB );
-				A_0.Write( a.uintC );
-				A_0.Write( a.uintD );
-				A_0.Write( a.intE );
-				A_0.Write( a.intF );
-			}
-		}
-		finally
-		{
-			IDisposable disposable = enumerator2 as IDisposable;
-			if( disposable != null )
-			{
-				disposable.Dispose();
-			}
+			cg.subclassA a = this.dictB[num];
+			A_0.Write( a.uintA );
+			A_0.Write( a.uintB );
+			A_0.Write( a.uintC );
+			A_0.Write( a.uintD );
+			A_0.Write( a.intE );
+			A_0.Write( a.intF );
 		}
 	}
 
@@ -111,11 +87,4 @@ public class cg : d1, IEnumerable<KeyValuePair<uint, cg.subclassA>>
 	{
 		return this.GetEnumerator();
 	}
-
-	/*
-	public IEnumerator GetEnumerator() // obf: "a()"
-	{
-		return this.dictB.GetEnumerator();
-	}
-	*/
 }

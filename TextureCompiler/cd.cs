@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -23,36 +22,24 @@ public class cd : d1, IEnumerable<d1>
 
 	public d1 a( a9 A_0 )
 	{
-		IEnumerator<d1> enumerator = this.listB.GetEnumerator();
-		try
+		foreach( d1 d in this.listB )
 		{
-			while( enumerator.MoveNext() )
+			if( d is cd )
 			{
-				d1 d = enumerator.Current;
-				if( d is cd )
+				d1 d2 = ( d as cd ).a( A_0 );
+				if( d2 != null )
 				{
-					d1 d2 = ( d as cd ).a( A_0 );
-					if( d2 != null )
-					{
-						d1 result = d2;
-						return result;
-					}
-				}
-				else if( d.d().a9A == A_0 )
-				{
-					d1 result = d;
+					d1 result = d2;
 					return result;
 				}
 			}
-		}
-		finally
-		{
-			IDisposable disposable = enumerator as IDisposable;
-			if( disposable != null )
+			else if( d.d().a9A == A_0 )
 			{
-				disposable.Dispose();
+				d1 result = d;
+				return result;
 			}
 		}
+
 		return null;
 	}
 
@@ -68,26 +55,14 @@ public class cd : d1, IEnumerable<d1>
 
 	public d1 b( a9 A_0 )
 	{
-		IEnumerator<d1> enumerator = this.listB.GetEnumerator();
-		try
+		foreach( d1 d in this.listB )
 		{
-			while( enumerator.MoveNext() )
+			if( d.d().a9A == A_0 )
 			{
-				d1 d = enumerator.Current;
-				if( d.d().a9A == A_0 )
-				{
-					return d;
-				}
+				return d;
 			}
 		}
-		finally
-		{
-			IDisposable disposable = enumerator as IDisposable;
-			if( disposable != null )
-			{
-				disposable.Dispose();
-			}
-		}
+
 		return null;
 	}
 
@@ -161,22 +136,9 @@ public class cd : d1, IEnumerable<d1>
 
 	protected override void a( BinaryWriter A_0 )
 	{
-		IEnumerator<d1> enumerator = this.listB.GetEnumerator();
-		try
+		foreach( d1 d in this.listB )
 		{
-			while( enumerator.MoveNext() )
-			{
-				d1 d = enumerator.Current;
-				d.b( A_0 );
-			}
-		}
-		finally
-		{
-			IDisposable disposable = enumerator as IDisposable;
-			if( disposable != null )
-			{
-				disposable.Dispose();
-			}
+			d.b( A_0 );
 		}
 	}
 

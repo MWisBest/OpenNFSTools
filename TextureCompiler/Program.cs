@@ -73,6 +73,7 @@ internal class Program
 		List<Program.subclassA> subclassList = new List<Program.subclassA>();
 		int num = dv.b( "texture" );
 		uint num2 = 0u;
+
 		for( int i = 0; i < num; i++ )
 		{
 			bw bw = new bw();
@@ -155,33 +156,24 @@ internal class Program
 			} );
 			num2 += bg.uintJ + bg.uintK;
 		}
+
 		subclassList.Sort();
+
 		int num3 = 220 + subclassList.Count * 32;
 		int num4 = 128 - ( num3 + 8 ) % 128;
 		int num5 = num3 + 8 + num4 + 256;
 		uint num6 = (uint)num5;
-		IEnumerator<Program.subclassA> enumerator = subclassList.GetEnumerator();
-		try
+
+		foreach( Program.subclassA a in subclassList )
 		{
-			while( enumerator.MoveNext() )
+			a.uintB = num6;
+			num6 += a.uintC;
+			if( num6 % 64u != 0u )
 			{
-				Program.subclassA a = enumerator.Current;
-				a.uintB = num6;
-				num6 += a.uintC;
-				if( num6 % 64u != 0u )
-				{
-					num6 += 64u - num6 % 64u;
-				}
+				num6 += 64u - num6 % 64u;
 			}
 		}
-		finally
-		{
-			IDisposable disposable = enumerator as IDisposable;
-			if( disposable != null )
-			{
-				disposable.Dispose();
-			}
-		}
+
 		uint num7 = num6;
 		co co = new co();
 		co.a( new cx( 48 ) );
@@ -202,15 +194,17 @@ internal class Program
 		cd.a( u );
 		@do @do = new @do();
 		@do.a( subclassList.Count );
+
 		for( int j = 0; j < subclassList.Count; j++ )
 		{
-			@do.a( j, ( subclassList[j] as Program.subclassA ).uintA );
+			@do.a( j, subclassList[j].uintA );
 		}
+
 		cd.a( @do );
 		cg cg = new cg();
-		for( int k = 0; k < subclassList.Count; k++ )
+
+		foreach( Program.subclassA a2 in subclassList )
 		{
-			Program.subclassA a2 = subclassList[k];
 			cg.subclassA a3 = new cg.subclassA();
 			a3.intE = 256;
 			a3.uintA = a2.uintA;
@@ -219,6 +213,7 @@ internal class Program
 			a3.uintB = a2.uintB;
 			cg.a( a2.uintA, a3 );
 		}
+
 		cd.a( cg );
 		co.a( cd );
 		co.a( new cx( num4 ) );
@@ -232,12 +227,13 @@ internal class Program
 		cy cy = new cy();
 		MemoryStream memoryStream2 = new MemoryStream( (int)( num7 - (uint)num5 + 120u ) );
 		BinaryWriter binaryWriter2 = new BinaryWriter( memoryStream2 );
-		for( int l = 0; l < subclassList.Count; l++ )
+
+		foreach( Program.subclassA a4 in subclassList )
 		{
-			Program.subclassA a4 = subclassList[l];
 			binaryWriter2.Seek( (int)( a4.uintB - (uint)num5 + 120u ), SeekOrigin.Begin );
 			binaryWriter2.Write( a4.byteArrayE );
 		}
+
 		cy.a( memoryStream2.GetBuffer() );
 		memoryStream2.Close();
 		cd2.a( cy );

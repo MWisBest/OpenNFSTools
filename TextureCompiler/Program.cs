@@ -1,11 +1,11 @@
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
 internal class Program
 {
-	private class subclassA : IComparable // obf: "a"
+	private class subclassA : IComparable<Program.subclassA> // obf: "a"
 	{
 		public uint uintA; // obf: "a"
 
@@ -17,10 +17,9 @@ internal class Program
 
 		public byte[] byteArrayE; // obf: "e"
 
-		public int CompareTo( object obj ) // obf: "a(object A_0)"
+		public int CompareTo( subclassA other )
 		{
-			Program.subclassA a = obj as Program.subclassA;
-			return this.uintA.CompareTo( a.uintA );
+			return this.uintA.CompareTo( other.uintA );
 		}
 	}
 
@@ -71,7 +70,7 @@ internal class Program
 		FileInfo fileInfo = new FileInfo( text );
 		Directory.SetCurrentDirectory( fileInfo.DirectoryName );
 		string text2 = dv.a( "tpk", "xname" );
-		ArrayList arrayList = new ArrayList();
+		List<Program.subclassA> subclassList = new List<Program.subclassA>();
 		int num = dv.b( "texture" );
 		uint num2 = 0u;
 		for( int i = 0; i < num; i++ )
@@ -147,7 +146,7 @@ internal class Program
 			bg.a( binaryWriter );
 			byte[] buffer = memoryStream.GetBuffer();
 			memoryStream.Close();
-			arrayList.Add( new Program.subclassA
+			subclassList.Add( new Program.subclassA
 			{
 				uintA = bg.uintE,
 				uintD = (uint)( buffer.Length - 16 ),
@@ -156,17 +155,17 @@ internal class Program
 			} );
 			num2 += bg.uintJ + bg.uintK;
 		}
-		arrayList.Sort();
-		int num3 = 220 + arrayList.Count * 32;
+		subclassList.Sort();
+		int num3 = 220 + subclassList.Count * 32;
 		int num4 = 128 - ( num3 + 8 ) % 128;
 		int num5 = num3 + 8 + num4 + 256;
 		uint num6 = (uint)num5;
-		IEnumerator enumerator = arrayList.GetEnumerator();
+		IEnumerator<Program.subclassA> enumerator = subclassList.GetEnumerator();
 		try
 		{
 			while( enumerator.MoveNext() )
 			{
-				Program.subclassA a = (Program.subclassA)enumerator.Current;
+				Program.subclassA a = enumerator.Current;
 				a.uintB = num6;
 				num6 += a.uintC;
 				if( num6 % 64u != 0u )
@@ -202,16 +201,16 @@ internal class Program
 		u.intA = 5;
 		cd.a( u );
 		@do @do = new @do();
-		@do.a( arrayList.Count );
-		for( int j = 0; j < arrayList.Count; j++ )
+		@do.a( subclassList.Count );
+		for( int j = 0; j < subclassList.Count; j++ )
 		{
-			@do.a( j, ( arrayList[j] as Program.subclassA ).uintA );
+			@do.a( j, ( subclassList[j] as Program.subclassA ).uintA );
 		}
 		cd.a( @do );
 		cg cg = new cg();
-		for( int k = 0; k < arrayList.Count; k++ )
+		for( int k = 0; k < subclassList.Count; k++ )
 		{
-			Program.subclassA a2 = arrayList[k] as Program.subclassA;
+			Program.subclassA a2 = subclassList[k];
 			cg.subclassA a3 = new cg.subclassA();
 			a3.intE = 256;
 			a3.uintA = a2.uintA;
@@ -233,9 +232,9 @@ internal class Program
 		cy cy = new cy();
 		MemoryStream memoryStream2 = new MemoryStream( (int)( num7 - (uint)num5 + 120u ) );
 		BinaryWriter binaryWriter2 = new BinaryWriter( memoryStream2 );
-		for( int l = 0; l < arrayList.Count; l++ )
+		for( int l = 0; l < subclassList.Count; l++ )
 		{
-			Program.subclassA a4 = arrayList[l] as Program.subclassA;
+			Program.subclassA a4 = subclassList[l];
 			binaryWriter2.Seek( (int)( a4.uintB - (uint)num5 + 120u ), SeekOrigin.Begin );
 			binaryWriter2.Write( a4.byteArrayE );
 		}

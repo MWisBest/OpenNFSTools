@@ -1,32 +1,34 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
 [DefaultMember( "Item" )]
-public class cd : d1, IEnumerable
+public class cd : d1, IEnumerable<d1>
 {
-	protected ArrayList arrayListA; // obf: "a"
+	//protected ArrayList arrayListA; // obf: "a"
+	protected List<d1> listB;
 
 	public cd()
 	{
-		this.arrayListA = new ArrayList();
+		this.listB = new List<d1>();
 	}
 
 	public cd( a9 id )
 	{
 		this.jB.a9A = id;
-		this.arrayListA = new ArrayList();
+		this.listB = new List<d1>();
 	}
 
 	public d1 a( a9 A_0 )
 	{
-		IEnumerator enumerator = this.arrayListA.GetEnumerator();
+		IEnumerator<d1> enumerator = this.listB.GetEnumerator();
 		try
 		{
 			while( enumerator.MoveNext() )
 			{
-				d1 d = (d1)enumerator.Current;
+				d1 d = enumerator.Current;
 				if( d is cd )
 				{
 					d1 d2 = ( d as cd ).a( A_0 );
@@ -56,22 +58,22 @@ public class cd : d1, IEnumerable
 
 	public d1 a( int A_0 )
 	{
-		return this.arrayListA[A_0] as d1;
+		return this.listB[A_0];
 	}
 
 	public void a( int A_0, d1 A_1 )
 	{
-		this.arrayListA[A_0] = A_1;
+		this.listB[A_0] = A_1;
 	}
 
 	public d1 b( a9 A_0 )
 	{
-		IEnumerator enumerator = this.arrayListA.GetEnumerator();
+		IEnumerator<d1> enumerator = this.listB.GetEnumerator();
 		try
 		{
 			while( enumerator.MoveNext() )
 			{
-				d1 d = (d1)enumerator.Current;
+				d1 d = enumerator.Current;
 				if( d.d().a9A == A_0 )
 				{
 					return d;
@@ -91,22 +93,17 @@ public class cd : d1, IEnumerable
 
 	public int b()
 	{
-		return this.arrayListA.Count;
-	}
-
-	public IEnumerator GetEnumerator() // obf: "c()"
-	{
-		return this.arrayListA.GetEnumerator();
+		return this.listB.Count;
 	}
 
 	public void a( d1 A_0 )
 	{
-		this.arrayListA.Add( A_0 );
+		this.listB.Add( A_0 );
 	}
 
 	public override void a( BinaryReader A_0 )
 	{
-		this.arrayListA = new ArrayList();
+		this.listB = new List<d1>();
 		long position = A_0.BaseStream.Position;
 		while( A_0.BaseStream.Position - position < (long)( (ulong)this.jB.uintB ) )
 		{
@@ -157,19 +154,19 @@ public class cd : d1, IEnumerable
 			}
 			d.a( a_ );
 			d.a( A_0 );
-			this.arrayListA.Add( d );
+			this.listB.Add( d );
 			A_0.BaseStream.Seek( position2 + (long)( (ulong)a_.uintB ), SeekOrigin.Begin );
 		}
 	}
 
 	protected override void a( BinaryWriter A_0 )
 	{
-		IEnumerator enumerator = this.arrayListA.GetEnumerator();
+		IEnumerator<d1> enumerator = this.listB.GetEnumerator();
 		try
 		{
 			while( enumerator.MoveNext() )
 			{
-				d1 d = (d1)enumerator.Current;
+				d1 d = enumerator.Current;
 				d.b( A_0 );
 			}
 		}
@@ -181,5 +178,15 @@ public class cd : d1, IEnumerable
 				disposable.Dispose();
 			}
 		}
+	}
+
+	public IEnumerator<d1> GetEnumerator()
+	{
+		return this.listB.GetEnumerator();
+	}
+
+	IEnumerator IEnumerable.GetEnumerator()
+	{
+		return this.GetEnumerator();
 	}
 }

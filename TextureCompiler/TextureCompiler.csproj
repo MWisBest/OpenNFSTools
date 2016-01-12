@@ -5,8 +5,8 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <OutputType>Exe</OutputType>
-    <AssemblyName>mwtc</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <AssemblyName>TextureCompiler</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <WarningLevel>4</WarningLevel>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -31,6 +31,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>TextureCompiler</RootNamespace>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Drawing" />
@@ -53,7 +59,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="d1.cs" />
     <Compile Include="do.cs" />
-    <Compile Include="dv.cs" />
+    <Compile Include="DefinitionParser.cs" />
     <Compile Include="j.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="u.cs" />

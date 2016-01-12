@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
 [DefaultMember( "Item" )]
-public class cg : d1, IEnumerable
+public class cg : d1, IEnumerable<KeyValuePair<uint, cg.subclassA>>
 {
 	public class subclassA // obf: "a"
 	{
@@ -21,21 +22,22 @@ public class cg : d1, IEnumerable
 		public int intF; // obf: "f"
 	}
 
-	private Hashtable htA; // obf: "a"
+	//private Hashtable htA; // obf: "a"
+	private Dictionary<uint, cg.subclassA> dictB;
 
 	public cg() : base( a9.h )
 	{
-		this.htA = new Hashtable();
+		this.dictB = new Dictionary<uint, cg.subclassA>();
 	}
 
 	public cg.subclassA a( uint A_0 )
 	{
-		return (cg.subclassA)this.htA[A_0];
+		return this.dictB[A_0];
 	}
 
 	public void a( uint A_0, cg.subclassA A_1 )
 	{
-		this.htA[A_0] = A_1;
+		this.dictB[A_0] = A_1;
 	}
 
 	public override void a( BinaryReader A_0 )
@@ -50,20 +52,20 @@ public class cg : d1, IEnumerable
 			a.uintD = A_0.ReadUInt32();
 			a.intE = A_0.ReadInt32();
 			a.intF = A_0.ReadInt32();
-			this.htA[a.uintA] = a;
+			this.dictB[a.uintA] = a;
 		}
 	}
 
 	protected override void a( BinaryWriter A_0 )
 	{
-		ArrayList arrayList = new ArrayList( this.htA.Count );
-		IDictionaryEnumerator enumerator = this.htA.GetEnumerator();
+		List<uint> uintList = new List<uint>( this.dictB.Count );
+		IEnumerator<KeyValuePair<uint, cg.subclassA>> enumerator = this.dictB.GetEnumerator();
 		try
 		{
 			while( enumerator.MoveNext() )
 			{
-				DictionaryEntry dictionaryEntry = (DictionaryEntry)enumerator.Current;
-				arrayList.Add( ( dictionaryEntry.Value as cg.subclassA ).uintA );
+				KeyValuePair<uint, cg.subclassA> kvPair = enumerator.Current;
+				uintList.Add( kvPair.Value.uintA );
 			}
 		}
 		finally
@@ -74,14 +76,14 @@ public class cg : d1, IEnumerable
 				disposable.Dispose();
 			}
 		}
-		arrayList.Sort();
-		IEnumerator enumerator2 = arrayList.GetEnumerator();
+		uintList.Sort();
+		IEnumerator<uint> enumerator2 = uintList.GetEnumerator();
 		try
 		{
 			while( enumerator2.MoveNext() )
 			{
-				uint num = (uint)enumerator2.Current;
-				cg.subclassA a = this.htA[num] as cg.subclassA;
+				uint num = enumerator2.Current;
+				cg.subclassA a = this.dictB[num];
 				A_0.Write( a.uintA );
 				A_0.Write( a.uintB );
 				A_0.Write( a.uintC );
@@ -100,8 +102,20 @@ public class cg : d1, IEnumerable
 		}
 	}
 
+	public IEnumerator<KeyValuePair<uint, subclassA>> GetEnumerator()
+	{
+		return this.dictB.GetEnumerator();
+	}
+
+	IEnumerator IEnumerable.GetEnumerator()
+	{
+		return this.GetEnumerator();
+	}
+
+	/*
 	public IEnumerator GetEnumerator() // obf: "a()"
 	{
-		return this.htA.GetEnumerator();
+		return this.dictB.GetEnumerator();
 	}
+	*/
 }

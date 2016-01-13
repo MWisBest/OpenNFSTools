@@ -316,7 +316,7 @@ namespace NFSTools.VLTEdit
 		{
 			this.writeToConsole( "VLTEdit " + Application.ProductVersion );
 			this.writeToConsole( "Copyright (C) 2005-2006, Arushan" );
-			this.writeToConsole( "Copyright (C) 2015, Kyle \"MWisBest\" Repinski" );
+			this.writeToConsole( "Copyright (C) 2015-2016, Kyle \"MWisBest\" Repinski" );
 			if( BuildConfig.DEBUG )
 			{
 				this.writeTestInfo();

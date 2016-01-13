@@ -44,9 +44,11 @@
     <Prefer32Bit>false</Prefer32Bit>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <DefineConstants>DEBUG</DefineConstants>
+    <OutputPath>..\bin\Debug\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <Prefer32Bit>false</Prefer32Bit>
+    <OutputPath>..\bin\Release\</OutputPath>
   </PropertyGroup>
   <PropertyGroup>
     <RootNamespace>NFSTools.VLTEdit</RootNamespace>
@@ -174,10 +176,13 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NFSLib\NFSLib.csproj">
+    <ProjectReference Include="..\LibNFS\LibNFS.csproj">
       <Project>{ccaf842a-8ba0-4551-95d2-8cabcfea9777}</Project>
-      <Name>NFSLib</Name>
+      <Name>LibNFS</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy $(SolutionDir)res\hashes.txt $(TargetDir)</PostBuildEvent>
+  </PropertyGroup>
 </Project>

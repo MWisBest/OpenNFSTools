@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace NFSTools.NFSLib.Common
+namespace NFSTools.LibNFS.Common
 {
 	public interface IBinReadWrite
 	{

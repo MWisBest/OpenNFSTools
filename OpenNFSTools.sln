@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VPak", "VPak\VPak.csproj", 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "brutejenkins", "Tools\brutejenkins\brutejenkins.vcxproj", "{C943D81D-8DDC-4071-BDCF-7DFD222366A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFSLib", "NFSLib\NFSLib.csproj", "{CCAF842A-8BA0-4551-95D2-8CABCFEA9777}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibNFS", "LibNFS\LibNFS.csproj", "{CCAF842A-8BA0-4551-95D2-8CABCFEA9777}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextureCompiler", "TextureCompiler\TextureCompiler.csproj", "{A4DF6138-FC15-4768-8EE8-FEBD6868F2DB}"
 EndProject

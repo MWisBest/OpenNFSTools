@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace NFSTools.NFSLib.Compression
+namespace NFSTools.LibNFS.Compression
 {
 	/// <summary>
 	/// JDLZ compression is used in various BlackBox NFS games, starting somewhere around Underground and continuing to World.

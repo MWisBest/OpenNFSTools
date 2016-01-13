@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 using System.Reflection;
-using NFSTools.NFSLib.Common;
+using NFSTools.LibNFS.Common;
 
 namespace NFSTools.VLTEdit.Types
 {

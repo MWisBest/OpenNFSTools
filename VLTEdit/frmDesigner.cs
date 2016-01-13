@@ -5,7 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
-using NFSTools.NFSLib.Crypto;
+using NFSTools.LibNFS.Crypto;
 using NFSTools.VLTEdit.Table;
 using NFSTools.VLTEdit.Types;
 

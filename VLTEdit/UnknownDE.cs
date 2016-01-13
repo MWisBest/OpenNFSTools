@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using NFSTools.NFSLib.Crypto;
+using NFSTools.LibNFS.Crypto;
 using NFSTools.VLTEdit.Table;
 
 namespace NFSTools.VLTEdit

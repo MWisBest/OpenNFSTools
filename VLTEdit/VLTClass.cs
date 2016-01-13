@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using NFSTools.NFSLib.Common;
+using NFSTools.LibNFS.Common;
 using NFSTools.VLTEdit.Table;
 using NFSTools.VLTEdit.Types;
 

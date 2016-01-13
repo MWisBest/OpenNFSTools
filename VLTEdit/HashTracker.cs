@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
-using NFSTools.NFSLib.Crypto;
+using NFSTools.LibNFS.Crypto;
 
 namespace NFSTools.VLTEdit
 {

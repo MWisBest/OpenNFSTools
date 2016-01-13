@@ -1,4 +1,4 @@
-﻿namespace NFSTools.NFSLib.Crypto
+﻿namespace NFSTools.LibNFS.Crypto
 {
 	/// <summary>
 	/// A 32-bit CRC is used for, at the very least, checksums in some savegames.

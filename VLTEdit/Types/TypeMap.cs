@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using NFSTools.NFSLib.Crypto;
+using NFSTools.LibNFS.Crypto;
 
 namespace NFSTools.VLTEdit.Types
 {

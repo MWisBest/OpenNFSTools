@@ -94,39 +94,29 @@ namespace NFSTools.TextureCompiler
 				}
 				else
 				{
-					a9 a = a_.a9A;
-					if( a != a9.n )
+					switch( a_.a9A )
 					{
-						switch( a )
-						{
-							case a9.f:
-								d = new u();
-								break;
-							case a9.g:
-								d = new @do();
-								break;
-							case a9.h:
-								d = new cg();
-								break;
-							default:
-								switch( a )
-								{
-									case a9.l:
-										d = new c2();
-										break;
-									case a9.m:
-										d = new cy();
-										break;
-									default:
-										d = new bf();
-										break;
-								}
-								break;
-						}
-					}
-					else
-					{
-						d = new cx();
+						case a9.f:
+							d = new u();
+							break;
+						case a9.g:
+							d = new @do();
+							break;
+						case a9.h:
+							d = new cg();
+							break;
+						case a9.l:
+							d = new c2();
+							break;
+						case a9.m:
+							d = new cy();
+							break;
+						case a9.n:
+							d = new cx();
+							break;
+						default:
+							d = new bf();
+							break;
 					}
 				}
 				d.a( a_ );

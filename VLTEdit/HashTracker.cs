@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -62,37 +63,114 @@ namespace NFSTools.VLTEdit
 
 		public static void loadHashes( string fileName )
 		{
+			const string expressionPrefix = "EXPR\t";
 			using( StreamReader streamReader = new StreamReader( fileName ) )
 			{
 				string text;
 				while( ( text = streamReader.ReadLine() ) != null )
 				{
 					text = text.Trim();
-					if( text != "" && !text.StartsWith( "#" ) )
+					if( text != "" && text[0] != '#' )
 					{
-						string[] array = text.Split( new char[] { '\t' } );
-						uint num;
-						if( array.Length > 1 )
+						if( text.StartsWith( expressionPrefix ) )
 						{
-							if( array[1].StartsWith( "0x" ) )
+							// Basically, the idea with expressions is that there's plenty of hashes which have e.g. a common prefix or postfix.
+							// By using some simple syntax to indicate that we can drastically reduce space wasted in the hashes file.
+							text = text.Substring( expressionPrefix.Length );
+							bool isStringExpr = ( text.IndexOf( '{' ) != -1 && ( text.LastIndexOf( '}' ) > text.IndexOf( '{' ) ) );
+							bool isNumberExpr = ( text.IndexOf( '[' ) != -1 && ( text.LastIndexOf( ']' ) > text.IndexOf( '[' ) ) );
+
+							if( isStringExpr && isNumberExpr )
 							{
-								num = uint.Parse( array[1].Substring( 2 ), NumberStyles.AllowHexSpecifier | NumberStyles.AllowTrailingWhite | NumberStyles.AllowLeadingWhite );
+								throw new NotImplementedException( "String and Number in 1 expression not yet supported." );
 							}
-							else
+							else if( !isStringExpr && !isNumberExpr )
 							{
-								num = uint.Parse( array[1], NumberStyles.AllowHexSpecifier | NumberStyles.AllowTrailingWhite | NumberStyles.AllowLeadingWhite );
+								throw new FormatException( "Why do you have an expression that's not an expression?!" );
 							}
-							if( !HashTracker.hashGuesses.ContainsKey( num ) )
+							else if( ( text.IndexOf( '{' ) != text.LastIndexOf( '{' ) ) ||
+								     ( text.IndexOf( '}' ) != text.LastIndexOf( '}' ) ) ||
+								     ( text.IndexOf( '[' ) != text.LastIndexOf( '[' ) ) ||
+								     ( text.IndexOf( ']' ) != text.LastIndexOf( ']' ) ) )
 							{
-								HashTracker.hashGuesses[num] = array[2];
+								throw new NotImplementedException( "Only one expression at a time please!" );
+							}
+
+							if( isStringExpr )
+							{
+								string prefix = text.Split( '{' )[0];
+								string postfix = text.Split( '}' )[1];
+								string middle = text.Substring( text.IndexOf( '{' ) + 1, ( text.IndexOf( '}' ) - text.IndexOf( '{' ) - 1 ) );
+								string[] entries = middle.Split( ',' );
+
+								foreach( string entry in entries )
+								{
+									uint hash = JenkinsHash.getHash32( prefix + entry + postfix );
+									if( !HashTracker.knownActualHashes.ContainsKey( hash ) )
+									{
+										HashTracker.knownActualHashes[hash] = prefix + entry + postfix;
+									}
+								}
+							}
+							else// if( isNumberExpr )
+							{
+								string prefix = text.Split( '[' )[0];
+								string postfix = text.Split( ']' )[1];
+								string middle = text.Substring( text.IndexOf( '[' ) + 1, ( text.IndexOf( ']' ) - text.IndexOf( '[' ) - 1 ) );
+
+								// string.Split with a string is convoluted, so make it work with a character instead lol
+								middle = middle.Replace( "..", "," );
+								string[] entries = middle.Split( ',' );
+
+								if( entries.Length != 2 )
+								{
+									throw new FormatException( "Invalid number entry format!" );
+								}
+
+								uint min, max;
+
+								if( !uint.TryParse( entries[0], out min ) || !uint.TryParse( entries[1], out max ) )
+								{
+									throw new FormatException( "Failed to parse numbers!" );
+								}
+
+								if( max < min )
+								{
+									uint temp = max;
+									max = min;
+									min = temp;
+								}
+
+								for( uint i = min; i <= max; ++i )
+								{
+									uint hash = JenkinsHash.getHash32( prefix + i + postfix );
+									if( !HashTracker.knownActualHashes.ContainsKey( hash ) )
+									{
+										HashTracker.knownActualHashes[hash] = prefix + i + postfix;
+									}
+								}
 							}
 						}
 						else
 						{
-							num = JenkinsHash.getHash32( text );
-							if( !HashTracker.knownActualHashes.ContainsKey( num ) )
+							uint hash;
+							string[] array = text.Split( new char[] { '\t' } );
+							if( array.Length > 1 ) // basically, if this is a guess.
 							{
-								HashTracker.knownActualHashes[num] = text;
+								int sub = ( array[1].StartsWith( "0x" ) ? 2 : 0 );
+								hash = uint.Parse( array[1].Substring( sub ), NumberStyles.AllowHexSpecifier | NumberStyles.AllowTrailingWhite | NumberStyles.AllowLeadingWhite );
+								if( !HashTracker.hashGuesses.ContainsKey( hash ) )
+								{
+									HashTracker.hashGuesses[hash] = array[2];
+								}
+							}
+							else
+							{
+								hash = JenkinsHash.getHash32( text );
+								if( !HashTracker.knownActualHashes.ContainsKey( hash ) )
+								{
+									HashTracker.knownActualHashes[hash] = text;
+								}
 							}
 						}
 					}
@@ -102,13 +180,13 @@ namespace NFSTools.VLTEdit
 
 		public static void b( string A_0 )
 		{
-			uint num = JenkinsHash.getHash32( A_0 );
-			if( !HashTracker.ht3.ContainsKey( num ) )
+			uint hash = JenkinsHash.getHash32( A_0 );
+			if( !HashTracker.ht3.ContainsKey( hash ) )
 			{
-				HashTracker.ht3[num] = A_0;
-				if( HashTracker.knownActualHashes.ContainsKey( num ) )
+				HashTracker.ht3[hash] = A_0;
+				if( HashTracker.knownActualHashes.ContainsKey( hash ) )
 				{
-					HashTracker.knownActualHashes.Remove( num );
+					HashTracker.knownActualHashes.Remove( hash );
 				}
 			}
 		}

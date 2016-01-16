@@ -42,21 +42,21 @@ namespace NFSTools.LibNFS.Compression
 					flags2 = input[inPos++] | 0x100;
 				}
 
-				if( ( flags1 & 1 ) > 0 )
+				if( ( flags1 & 1 ) == 1 )
 				{
-					if( ( flags2 & 1 ) > 0 )
+					if( ( flags2 & 1 ) == 1 ) // 3 to 4098(?) iterations, backtracks 1 to 16(?) bytes
 					{
-						// length max is 4098 (0x1002), assuming input[inPos] and input[inPos + 1] are both 0xFF
-						length = ( input[inPos + 1] | ( ( input[inPos] & 0xF0 ) << 4 ) ) + 0x03;
-						// t max is 16 (0x10), assuming input[inPos] is 0xFF
-						t = ( input[inPos] & 0x0F ) + 0x01;
+						// length max is 4098(?) (0x1002), assuming input[inPos] and input[inPos + 1] are both 0xFF
+						length = ( input[inPos + 1] | ( ( input[inPos] & 0xF0 ) << 4 ) ) + 3;
+						// t max is 16(?) (0x10), assuming input[inPos] is 0xFF
+						t = ( input[inPos] & 0x0F ) + 1;
 					}
-					else
+					else // 3(?) to 34(?) iterations, backtracks 17(?) to 2064(?) bytes
 					{
-						// t max is 2064 (0x810), assuming input[inPos] and input[inPos + 1] are both 0xFF
-						t = ( input[inPos + 1] | ( ( input[inPos] & 0xE0 ) << 3 ) ) + 0x11;
-						// length max is 34 (0x22), assuming input[inPos] is 0xFF
-						length = ( input[inPos] & 0x1F ) + 0x03;
+						// t max is 2064(?) (0x810), assuming input[inPos] and input[inPos + 1] are both 0xFF
+						t = ( input[inPos + 1] | ( ( input[inPos] & 0xE0 ) << 3 ) ) + 17;
+						// length max is 34(?) (0x22), assuming input[inPos] is 0xFF
+						length = ( input[inPos] & 0x1F ) + 3;
 					}
 
 					inPos += 2;
@@ -179,12 +179,20 @@ namespace NFSTools.LibNFS.Compression
 		// What a joke! No wonder they all packed their binaries and didn't release source code... their stuff is garbage!
 		public static byte[] compress_nfs( byte[] input )
 		{
-			byte[] output = new byte[input.Length];
+			byte[] output = new byte[input.Length + 0x1000];
+			int a2 = input.Length; // remaining data?!
 			int v6 = input.Length;
 			int v10, v27;
 			int v11;
+			int v16; // some other variable for remaining data?!
+			int v19;
+			bool v20; // done processing data?!
 			int v23 = 0xFF00, v24 = 0xFF00;
+			int v25 = 0;
 			int v26;
+			int v32 = 0;
+			int v33 = 0;
+			int v34 = input.Length; // i just don't even.
 
 			// Construct header.
 			output[0] = 0x4A; // 'J'
@@ -205,33 +213,36 @@ namespace NFSTools.LibNFS.Compression
 
 			while( true )
 			{
-				v26 = 0x1002;
-				if( v6 < 0x1002 )
+				v26 = 4098;
+				if( v6 < 4098 )
 				{
 					v26 = v6;
 				}
 
 				// oh god this is ugly. Probably the ugliest part of the NFS version's decompile.
+				// This may be some sort of hash thing?
 				//v9 = *((_DWORD *)v5 + (-0x1A1 * (*(_BYTE *)v8 ^ (unsigned __int16)(0x10 * (*(_BYTE *)(v8 + 1) ^ (unsigned __int16)(0x10 * *(_BYTE *)(v8 + 2))))) & 0x1FFF));
 
-				v10 = 0x0002;
+				v10 = 2;
 				// ...
-				v27 = 0x0002;
+				v27 = 2;
 				// ...
-				while( v10 < 0x1002 ) // && v9
+				while( v10 < 4098 ) // && v9
 				{
 					v11 = 0;
-					if( v26 > 0x0003 )
+					if( v26 > 3 )
 					{
 						// ...
 						v10 = v27;
 						// ...
 					}
+
 					if( v11 < v26 )
 					{
 						// ...
 						v10 = v27;
 					}
+
 					if( v11 > v10 && ( v11 <= 34 || /* v25 - *(_DWORD *)v9 < 16 || */ v10 <= 34 )  )
 					{
 						v10 = v11;
@@ -245,12 +256,24 @@ namespace NFSTools.LibNFS.Compression
 				{
 					v23 >>= 1;
 					// ...
+					a2 -= v10;
+
+					while( v10 > 0 )
+					{
+						// ...
+						--v10;
+						++v25;
+					}
+
+					v16 = a2;
 				}
 				else
 				{
 					// ...
+					v16 = a2 - 1;
 					v23 = ( v23 >> 1 ) & 0x7F7F;
-					// ...
+					++v25;
+					--a2;
 				}
 
 				if( v23 < 0x100 )
@@ -265,10 +288,27 @@ namespace NFSTools.LibNFS.Compression
 					v24 = 0xFF00;
 					// ...
 				}
+
+				// TODO: THIS MAKES NO SENSE!
+				++v32;
+				if( (v32 & 0x1FFF) != 0 ) // ? !( v32 & 0x1FFF )
+				{
+					v19 = 10 * v16 / v34;
+					if( 10 - v19 != v33 )
+					{
+						v33 = 10 - v19;
+					}
+				}
+
+				v20 = v16 < 0;
 				// ...
 
-				// this break is temporary, just shuts up Visual Studio about "unreachable code" right now.
-				break;
+				if( v20 )
+				{
+					break;
+				}
+
+				v6 = a2;
 			}
 			// ...
 			while( ( v23 & 0xFF00 ) > 0 )

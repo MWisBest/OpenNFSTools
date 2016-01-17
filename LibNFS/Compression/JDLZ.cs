@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace NFSTools.LibNFS.Compression
 {
@@ -82,105 +83,18 @@ namespace NFSTools.LibNFS.Compression
 		}
 
 		// TODO
-		// arushan's jdlzdll.dll (shipped with 'bintex') has a very different looking JDLZ compressor.
-		// It might be something more rudimentary, which produces output compatible
-		// with the decompression algorithm, but doesn't compress quite as well.
-		public static byte[] compress_arushan( byte[] input )
-		{
-			byte[] output = new byte[input.Length];
-			int v4 = 0;
-			int v6 = 0;
-			int v14 = input.Length;
-			int v16 = 0;
-
-			// Construct header.
-			output[0] = 0x4A; // 'J'
-			output[1] = 0x44; // 'D'
-			output[2] = 0x4C; // 'L'
-			output[3] = 0x5A; // 'Z'
-			output[4] = 0x02;
-			output[5] = 0x10;
-			output[6] = 0x00;
-			output[7] = 0x00;
-			output[8] = (byte)( input.Length & 0xFF );
-			output[9] = (byte)( input.Length >> 8 & 0xFF );
-			output[10] = (byte)( input.Length >> 16 & 0xFF );
-			output[11] = (byte)( input.Length >> 24 & 0xFF );
-
-			// NOTE: 12-15 is output length
-			// output array will need to be recreated at its final size.
-
-			output[16] = 0x00;
-			output[17] = 0x00;
-
-		// NOTE: This label should actually be inside the while loop directly below this,
-		// but it also will work here.
-		LABEL_15:
-			if( v14 < 0 )
-			{
-				goto OUT;
-			}
-
-			while( v6 < 4096 && v4 > 0 ) // && *(_BYTE *)(v4 + v8) == *(_BYTE *)(v8 + v4 - 1)
-			{
-				++v4;
-				v16 = v4;
-				//++v13;
-				--v14;
-				++v6;
-				if( v14 < 0 )
-				{
-					goto OUT;
-				}
-			}
-		// NOTE: This label should actually be inside the if, but it also will work here.
-		LABEL_14:
-			if( v6 <= 0 )
-			{
-				// ...
-				--v14;
-				// ...
-				v16 = v4;
-				// ...
-				goto LABEL_15;
-			}
-			if( v6 <= 2 )
-			{
-				if( v6 <= 0 )
-				{
-					v6 = 0;
-					goto LABEL_14;
-				}
-				while( true )
-				{
-					// ...
-					--v6;
-					if( v6 == 0 ) // "!v6"
-						break;
-					// ...
-				}
-			}
-			else
-			{
-				// ...
-				v4 = v16;
-			}
-			// ...
-			v6 = 0;
-			goto LABEL_14;
-
-		OUT:
-			// set length here, reduce output size to final size
-			return output;
-		}
-
-		// TODO
 		// All the other tools I've found literally copy and pasted the game's assembly code for the JDLZ compressor.
 		// What a joke! No wonder they all packed their binaries and didn't release source code... their stuff is garbage!
 		public static byte[] compress_nfs( byte[] input )
 		{
+			const int HASH_LOG = 13;
+			const int HASH_SIZE = ( 1 << HASH_LOG ); // 0x2000
+			const int HASH_MASK = ( HASH_SIZE - 1 ); // 0x1FFF
+
 			byte[] output = new byte[input.Length + 0x1000];
 			int a2 = input.Length; // remaining data?!
+			//uint[] v5 = new uint[0x2000];
+			byte[] v5 = new byte[HASH_SIZE * sizeof( uint )]; // Hash table. I'm not sure why it's * 4, but that's what they malloc'd. maybe it's uint directly?
 			int v6 = input.Length;
 			int v10, v27;
 			int v11;
@@ -219,9 +133,17 @@ namespace NFSTools.LibNFS.Compression
 					v26 = v6;
 				}
 
-				// oh god this is ugly. Probably the ugliest part of the NFS version's decompile.
-				// This may be some sort of hash thing?
-				//v9 = *((_DWORD *)v5 + (-0x1A1 * (*(_BYTE *)v8 ^ (unsigned __int16)(0x10 * (*(_BYTE *)(v8 + 1) ^ (unsigned __int16)(0x10 * *(_BYTE *)(v8 + 2))))) & 0x1FFF));
+				// oh god this is ugly. Probably the ugliest part of the NFS version's decompile. But we shall not be deterred.
+				//v9 = *((_DWORD *)v5 + (-417 * (*(_BYTE *)v8 ^ (unsigned __int16)(16 * (*(_BYTE *)(v8 + 1) ^ (unsigned __int16)(16 * *(_BYTE *)(v8 + 2))))) & 0x1FFF));
+				// This is definitely the hash thing.
+				// - v5 is a pointer to the hash table, v8 is a pointer to the current spot in the uncompressed data (input)
+				// - hash index is calculated and then added to hash table's pointer to get that particular index in the table
+				// - Although the index calculation starts off with the "-417", the "& 0x1FFF" at the end chops off any negative issue when all is said and done.
+				int inputIndex = 0; // TODO: Keep track of where we are in the input.
+				int hashindex;
+				hashindex = -417; // NOTE: I think this could be rewritten as "7775" (HASH_SIZE - 417) if necessary
+				hashindex *= ( input[inputIndex + 0] ^ ( input[inputIndex + 1] << 4 ^ ( input[inputIndex + 2] << 4 ) ) );
+				hashindex &= HASH_MASK; // 0x1FFF
 
 				v10 = 2;
 				// ...

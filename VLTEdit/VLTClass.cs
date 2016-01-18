@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
 using NFSTools.LibNFS.Common;
 using NFSTools.VLTEdit.Table;
 using NFSTools.VLTEdit.Types;
@@ -10,10 +9,8 @@ using NFSTools.VLTEdit.Types;
 // TODO Collections.Generic IComparable IEnumerable etc
 namespace NFSTools.VLTEdit
 {
-	[DefaultMember( "Item" )]
 	public class VLTClass : IComparable<VLTClass>, IEnumerable // OBF: dq.cs
 	{
-		[DefaultMember( "Item" )]
 		public class bie : IEnumerable<UnknownDR>, ITrimmable // OBF: b
 		{
 			private VLTClass vltClass;
@@ -116,8 +113,8 @@ namespace NFSTools.VLTEdit
 									else
 									{
 										// lolwtf, doing this can actually help Carbon+ rows that don't load! Unreal!
-										//binaryReader3 = binaryReader2;
-										//binaryReader3.BaseStream.Seek( A_0.caa1[j].position, SeekOrigin.Begin );
+										binaryReader3 = binaryReader2;
+										binaryReader3.BaseStream.Seek( A_0.caa1[j].position, SeekOrigin.Begin );
 									}
 								}
 							}

@@ -1,10 +1,8 @@
 using System.IO;
-using System.Reflection;
 using NFSTools.LibNFS.Common;
 
 namespace NFSTools.VLTEdit.Table
 {
-	[DefaultMember( "Item" )]
 	public class RowRecord : BaseRecord
 	{
 		public class aclz : IBinReadWrite // Should be OK for Carbon?

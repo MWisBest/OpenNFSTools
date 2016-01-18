@@ -1,11 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
 
 namespace NFSTools.TextureCompiler
 {
-	[DefaultMember( "Item" )]
 	public class cd : d1, IEnumerable<d1>
 	{
 		//protected ArrayList arrayListA; // obf: "a"

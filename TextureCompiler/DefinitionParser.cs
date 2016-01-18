@@ -1,11 +1,9 @@
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
 using System.Text;
 
 namespace NFSTools.TextureCompiler
 {
-	[DefaultMember( "Item" )]
 	internal class DefinitionParser
 	{
 		//private Hashtable htA; // obf: "a"

@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
 
 namespace NFSTools.VLTEdit
 {
-	[DefaultMember( "Item" )]
 	public class UnknownA8 : UnknownC0, ITrimmable
 	{
 		private List<UnknownB8> genb8list;

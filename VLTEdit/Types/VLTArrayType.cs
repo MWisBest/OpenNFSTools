@@ -6,7 +6,6 @@ using System.Reflection;
 
 namespace NFSTools.VLTEdit.Types
 {
-	[DefaultMember( "Item" )]
 	public class VLTArrayType : VLTBaseType, IEnumerable<VLTBaseType>, ITrimmable // OBF: m.cs
 	{
 		private short curEntries;

@@ -1,9 +1,7 @@
 using System.IO;
-using System.Reflection;
 
 namespace NFSTools.VLTEdit.Table
 {
-	[DefaultMember( "Item" )]
 	public class RootRecord : BaseRecord
 	{
 		private int i1;

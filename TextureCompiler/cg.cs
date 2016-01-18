@@ -1,11 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
 
 namespace NFSTools.TextureCompiler
 {
-	[DefaultMember( "Item" )]
 	public class cg : d1, IEnumerable<KeyValuePair<uint, cg.subclassA>>
 	{
 		public class subclassA // obf: "a"

@@ -1,10 +1,8 @@
 using System.Collections;
 using System.IO;
-using System.Reflection;
 
 namespace NFSTools.TextureCompiler
 {
-	[DefaultMember( "Item" )]
 	public class @do : d1, IEnumerable
 	{
 		private uint[] uintArrayA; // obf: "a"

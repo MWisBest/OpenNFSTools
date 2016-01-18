@@ -1,13 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
 using NFSTools.LibNFS.Crypto;
 using NFSTools.VLTEdit.Table;
 
 namespace NFSTools.VLTEdit
 {
-	[DefaultMember( "Item" )]
 	public class UnknownDE : IEnumerable<VLTClass>
 	{
 		public class aclzz

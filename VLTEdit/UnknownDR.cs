@@ -1,12 +1,10 @@
 using System.Collections;
-using System.Reflection;
 using NFSTools.VLTEdit.Table;
 using NFSTools.VLTEdit.Types;
 
 namespace NFSTools.VLTEdit
 {
 	// VLTRoot?!
-	[DefaultMember( "Item" )]
 	public class UnknownDR : IEnumerable // OBF: dr.cs
 	{
 		public UnknownB0 b01;

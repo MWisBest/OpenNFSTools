@@ -1,10 +1,8 @@
 using System.Collections;
 using System.IO;
-using System.Reflection;
 
 namespace NFSTools.VLTEdit
 {
-	[DefaultMember( "Item" )]
 	public class UnknownDH : UnknownC0, IEnumerable
 	{
 		public TableEntry[] asa1;

@@ -44,6 +44,7 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VPak.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -51,6 +52,9 @@
       <Project>{ccaf842a-8ba0-4551-95d2-8cabcfea9777}</Project>
       <Name>LibNFS</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

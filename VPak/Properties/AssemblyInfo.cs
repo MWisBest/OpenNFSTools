@@ -5,11 +5,11 @@ using static NFSTools.LibNFS.Common.BuildInfo;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle( "VLTEdit" )]
+[assembly: AssemblyTitle( "VPak" )]
 [assembly: AssemblyDescription( "" )]
 [assembly: AssemblyConfiguration( "" )]
 [assembly: AssemblyCompany( "" )]
-[assembly: AssemblyProduct( "NFSTools.VLTEdit.Properties" )]
+[assembly: AssemblyProduct( "NFSTools.VPak.Properties" )]
 [assembly: AssemblyCopyright( "Copyright © 2015-2016" )]
 [assembly: AssemblyTrademark( "" )]
 [assembly: AssemblyCulture( "" )]
@@ -20,7 +20,7 @@ using static NFSTools.LibNFS.Common.BuildInfo;
 [assembly: ComVisible( false )]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid( "0ea88dfb-b0db-4b4e-bd29-96d792c8ed5c" )]
+[assembly: Guid( "5fe6ad0a-d63b-4d4f-ac38-19e2ce85c399" )]
 
 // Version information for an assembly consists of the following four values:
 //

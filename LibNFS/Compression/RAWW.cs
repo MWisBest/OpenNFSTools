@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace NFSTools.LibNFS.Compression
 {
@@ -19,6 +20,16 @@ namespace NFSTools.LibNFS.Compression
 	{
 		public static byte[] decompress( byte[] input )
 		{
+			// Sanity checking...
+			if( input == null )
+			{
+				throw new ArgumentNullException( "Input cannot be null!" );
+			}
+			else if( input.Length < 16 || input[0] != 'R' || input[1] != 'A' || input[2] != 'W' || input[3] != 'W' || input[4] != 0x01 )
+			{
+				throw new InvalidDataException( "Input header is not RAWW!" );
+			}
+
 			// TODO: Should we go with the stated length, or with input.Length - 16?
 			byte[] output = new byte[BitConverter.ToInt32( input, 8 )];
 
@@ -29,6 +40,12 @@ namespace NFSTools.LibNFS.Compression
 
 		public static byte[] compress( byte[] input )
 		{
+			// Sanity checking...
+			if( input == null )
+			{
+				throw new ArgumentNullException( "Input cannot be null!" );
+			}
+
 			byte[] output = new byte[input.Length + 16];
 			int outPos = 0;
 

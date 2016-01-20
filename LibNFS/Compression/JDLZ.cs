@@ -20,14 +20,19 @@ namespace NFSTools.LibNFS.Compression
 	{
 		public static byte[] decompress( byte[] input )
 		{
+			// Sanity checking...
+			if( input == null )
+			{
+				throw new ArgumentNullException( "Input cannot be null!" );
+			}
+			else if( input.Length < 16 || input[0] != 'J' || input[1] != 'D' || input[2] != 'L' || input[3] != 'Z' || input[4] != 0x02 )
+			{
+				throw new InvalidDataException( "Input header is not JDLZ!" );
+			}
+
 			int flags1 = 1, flags2 = 1;
 			int t, length;
 			int inPos = 16, outPos = 0;
-
-			if( input[0] != 'J' || input[1] != 'D' || input[2] != 'L' || input[3] != 'Z' || input[4] != 0x02 )
-			{
-				throw new InvalidDataException( "Input not JDLZ!" );
-			}
 
 			// TODO: Can we always trust the header's stated length?
 			byte[] output = new byte[BitConverter.ToInt32( input, 8 )];
@@ -90,9 +95,10 @@ namespace NFSTools.LibNFS.Compression
 		/// <returns>JDLZ-compressed bytes, w/ 16 byte header</returns>
 		public static byte[] compress( byte[] input )
 		{
+			// Sanity checking...
 			if( input == null )
 			{
-				return null;
+				throw new ArgumentNullException( "Input cannot be null!" );
 			}
 
 			const int HeaderSize = 16;

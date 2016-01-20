@@ -23,7 +23,7 @@ namespace NFSTools.LibNFS.Compression
 			// Sanity checking...
 			if( input == null )
 			{
-				throw new ArgumentNullException( "Input cannot be null!" );
+				throw new ArgumentNullException( "input" );
 			}
 			else if( input.Length < 16 || input[0] != 'J' || input[1] != 'D' || input[2] != 'L' || input[3] != 'Z' || input[4] != 0x02 )
 			{
@@ -98,7 +98,7 @@ namespace NFSTools.LibNFS.Compression
 			// Sanity checking...
 			if( input == null )
 			{
-				throw new ArgumentNullException( "Input cannot be null!" );
+				throw new ArgumentNullException( "input" );
 			}
 
 			const int HeaderSize = 16;

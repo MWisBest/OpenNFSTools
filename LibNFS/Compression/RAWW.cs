@@ -23,7 +23,7 @@ namespace NFSTools.LibNFS.Compression
 			// Sanity checking...
 			if( input == null )
 			{
-				throw new ArgumentNullException( "Input cannot be null!" );
+				throw new ArgumentNullException( "input" );
 			}
 			else if( input.Length < 16 || input[0] != 'R' || input[1] != 'A' || input[2] != 'W' || input[3] != 'W' || input[4] != 0x01 )
 			{
@@ -43,7 +43,7 @@ namespace NFSTools.LibNFS.Compression
 			// Sanity checking...
 			if( input == null )
 			{
-				throw new ArgumentNullException( "Input cannot be null!" );
+				throw new ArgumentNullException( "input" );
 			}
 
 			byte[] output = new byte[input.Length + 16];

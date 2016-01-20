@@ -30,7 +30,7 @@ namespace NFSTools.LibNFS.Compression
 			}
 
 			// TODO: Can we always trust the header's stated length?
-			byte[] output = new byte[( input[11] << 24 ) + ( input[10] << 16 ) + ( input[9] << 8 ) + input[8]];
+			byte[] output = new byte[BitConverter.ToInt32( input, 8 )];
 
 			while( ( inPos < input.Length ) && ( outPos < output.Length ) )
 			{
@@ -260,7 +260,7 @@ namespace NFSTools.LibNFS.Compression
 		// TODO
 		// All the other tools I've found literally copy and pasted the game's assembly code for the JDLZ compressor.
 		// What a joke! No wonder they all packed their binaries and didn't release source code... their stuff is garbage!
-		public static byte[] compress_nfs( byte[] input )
+		private static byte[] compress_nfs( byte[] input )
 		{
 			const int HASH_LOG = 13;
 			const int HASH_SIZE = ( 1 << HASH_LOG ); // 0x2000

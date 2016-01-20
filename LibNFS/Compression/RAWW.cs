@@ -20,7 +20,7 @@ namespace NFSTools.LibNFS.Compression
 		public static byte[] decompress( byte[] input )
 		{
 			// TODO: Should we go with the stated length, or with input.Length - 16?
-			byte[] output = new byte[( input[11] << 24 ) + ( input[10] << 16 ) + ( input[9] << 8 ) + input[8]];
+			byte[] output = new byte[BitConverter.ToInt32( input, 8 )];
 
 			Array.ConstrainedCopy( input, 16, output, 0, output.Length );
 

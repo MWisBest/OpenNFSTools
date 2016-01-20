@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="Common\BuildInfo.cs" />
     <Compile Include="Common\IBinReadWrite.cs" />
+    <Compile Include="Compression\CompressUtils.cs" />
+    <Compile Include="Compression\CompressType.cs" />
     <Compile Include="Compression\JDLZ.cs" />
     <Compile Include="Compression\RAWW.cs" />
     <Compile Include="Crypto\CRC32NFS.cs" />

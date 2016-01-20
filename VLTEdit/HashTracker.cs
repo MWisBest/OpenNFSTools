@@ -27,7 +27,7 @@ namespace NFSTools.VLTEdit
 		{
 			HashTracker.knownActualHashes = new Dictionary<uint, string>();
 			HashTracker.hashGuesses = new Dictionary<uint, string>();
-			string hashFile = ( new FileInfo( Application.ExecutablePath ) ).Directory.FullName + "\\hashes.txt";
+			string hashFile = Path.Combine( ( new FileInfo( Application.ExecutablePath ) ).Directory.FullName, "hashes.txt" );
 			if( File.Exists( hashFile ) )
 			{
 				HashTracker.loadHashes( hashFile );

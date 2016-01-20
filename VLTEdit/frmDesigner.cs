@@ -332,7 +332,7 @@ namespace NFSTools.VLTEdit
 		{
 			if( this.txtConsole.Text != "" )
 			{
-				this.txtConsole.AppendText( "\r\n" );
+				this.txtConsole.AppendText( Environment.NewLine );
 			}
 			this.txtConsole.AppendText( A_0 );
 			this.txtConsole.SelectionStart = this.txtConsole.Text.Length;

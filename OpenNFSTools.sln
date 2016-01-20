@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibNFS", "LibNFS\LibNFS.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextureCompiler", "TextureCompiler\TextureCompiler.csproj", "{A4DF6138-FC15-4768-8EE8-FEBD6868F2DB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestingArea", "TestingArea\TestingArea.csproj", "{9355823D-6846-4988-AE98-C3331F5C3344}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,17 @@ Global
 		{A4DF6138-FC15-4768-8EE8-FEBD6868F2DB}.Release|x64.Build.0 = Release|Any CPU
 		{A4DF6138-FC15-4768-8EE8-FEBD6868F2DB}.Release|x86.ActiveCfg = Release|Any CPU
 		{A4DF6138-FC15-4768-8EE8-FEBD6868F2DB}.Release|x86.Build.0 = Release|Any CPU
+		{9355823D-6846-4988-AE98-C3331F5C3344}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9355823D-6846-4988-AE98-C3331F5C3344}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9355823D-6846-4988-AE98-C3331F5C3344}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9355823D-6846-4988-AE98-C3331F5C3344}.Debug|x64.Build.0 = Debug|Any CPU
+		{9355823D-6846-4988-AE98-C3331F5C3344}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9355823D-6846-4988-AE98-C3331F5C3344}.Debug|x86.Build.0 = Debug|Any CPU
+		{9355823D-6846-4988-AE98-C3331F5C3344}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9355823D-6846-4988-AE98-C3331F5C3344}.Release|x64.ActiveCfg = Release|Any CPU
+		{9355823D-6846-4988-AE98-C3331F5C3344}.Release|x64.Build.0 = Release|Any CPU
+		{9355823D-6846-4988-AE98-C3331F5C3344}.Release|x86.ActiveCfg = Release|Any CPU
+		{9355823D-6846-4988-AE98-C3331F5C3344}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

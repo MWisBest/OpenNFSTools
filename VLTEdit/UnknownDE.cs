@@ -32,7 +32,7 @@ namespace NFSTools.VLTEdit
 				a2.i1 = A_0.ia1[i];
 				a2.ui1 = JenkinsHash.getHash32( a2.s1 );
 				this.genht1.Add( a2.ui1, a2 );
-				HashTracker.b( a2.s1 );
+				HashTracker.addHashFromVLTDB( a2.s1 );
 			}
 			this.genht2 = new Dictionary<uint, VLTClass>();
 		}

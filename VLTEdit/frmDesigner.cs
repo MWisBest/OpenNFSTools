@@ -13,6 +13,8 @@ namespace NFSTools.VLTEdit
 {
 	public partial class frmDesigner : Form
 	{
+		public static frmDesigner instance;
+
 		private MenuItem miFile;
 		private MenuItem miHelp;
 
@@ -80,6 +82,8 @@ namespace NFSTools.VLTEdit
 			this.miHelpText.Text = "Sorry, no help here! :)";
 
 			this.classGrid.DataSource = this.classGridDataSet;
+
+			instance = this;
 		}
 
 		[STAThread]

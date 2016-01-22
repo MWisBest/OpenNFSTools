@@ -127,7 +127,7 @@ namespace NFSTools.VLTEdit
 					string text2 = UnknownAP.a( a_ );
 					if( text2 != "" )
 					{
-						HashTracker.b( text2 );
+						HashTracker.addHashFromVLTDB( text2 );
 					}
 				}
 			}

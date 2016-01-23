@@ -44,10 +44,10 @@ namespace NFSTools.VLTEdit.Types
 					( bb as VLTRawType ).len = this.length;
 				}
 				bb.ui1 = (uint)br.BaseStream.Position;
-				bb.isVltOffset = false;
-				bb.ui2 = this.earrayui1; // TODO: What are we REALLY setting this to? this.ui1 is our hash... or is it not supposed to be?
+				bb.isVltOffset = false; // TODO: is this really always false?
+				bb.typeHash = this.earrayui1; // TODO: What are we REALLY setting this to? this.ui1 is our hash... or is it not supposed to be?
 				bb.dr1 = base.dr1;
-				bb.i1 = i;
+				bb.arrayIndex = i;
 				bb.read( br );
 				this.genlist.Add( bb );
 			}

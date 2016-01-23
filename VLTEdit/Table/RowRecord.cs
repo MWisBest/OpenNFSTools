@@ -11,11 +11,12 @@ namespace NFSTools.VLTEdit.Table
 			public int position;
 			private uint spacer;
 			private short sh1;
-			private short sh2;
+			private byte flag1;
+			private byte flag2;
 
 			public bool a()
 			{
-				return ( this.sh2 & 32 ) != 0;
+				return ( this.flag1 & 32 ) != 0 || ( this.flag1 & 64 ) != 0;
 			}
 
 			public void read( BinaryReader br )
@@ -26,7 +27,8 @@ namespace NFSTools.VLTEdit.Table
 				this.position = (int)br.BaseStream.Position;
 				this.spacer = br.ReadUInt32();
 				this.sh1 = br.ReadInt16();
-				this.sh2 = br.ReadInt16();
+				this.flag1 = br.ReadByte();
+				this.flag2 = br.ReadByte(); // Always 0 in NFS:MW
 			}
 
 			public void write( BinaryWriter bw )
@@ -34,7 +36,8 @@ namespace NFSTools.VLTEdit.Table
 				bw.Write( this.hash );
 				bw.Write( this.spacer );
 				bw.Write( this.sh1 );
-				bw.Write( this.sh2 );
+				bw.Write( this.flag1 );
+				bw.Write( this.flag2 );
 			}
 		}
 

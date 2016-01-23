@@ -848,7 +848,7 @@ namespace NFSTools.VLTEdit
 					{
 						HashTracker.getValueForHash(bb2.ui3),
 						"[",
-						bb.i1,
+						bb.arrayIndex,
 						"]"
 					} ) );
 					return;
@@ -1081,11 +1081,11 @@ namespace NFSTools.VLTEdit
 				( (DataView)currencyManager.List ).AllowEdit = false;
 				( (DataView)currencyManager.List ).AllowDelete = false;
 
-				this.lblFieldType.Text = "Type: " + HashTracker.getValueForHash( bb.ui2 );
+				this.lblFieldType.Text = "Type: " + HashTracker.getValueForHash( bb.typeHash );
 				if( BuildConfig.DEBUG )
 				{
 					this.writeToConsole( "bb.GetType(): " + type.ToString() ); // Here, we're getting the proper type! Great!
-					this.writeToConsole( "bb.j(): " + string.Format( "0x{0:x}", bb.ui2 ) ); // Here, we're derping! OMG!
+					this.writeToConsole( "bb.j(): " + string.Format( "0x{0:x}", bb.typeHash ) ); // Here, we're derping! OMG!
 				}
 				UnknownBA ba = bb.dr1.b01.a( VLTOtherValue.VLTMAGIC ) as UnknownBA;
 				string text = ba.sa1[0];

@@ -9,9 +9,9 @@ namespace NFSTools.VLTEdit.Types
 	{
 		public uint ui1; // address in file
 		public bool isVltOffset; // true if in VLT file, false if in BIN file
-		public uint ui2;
+		public uint typeHash;
 		public uint ui3;
-		public int i1;
+		public int arrayIndex;
 		public UnknownDR dr1;
 		public int size;
 

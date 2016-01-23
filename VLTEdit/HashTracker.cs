@@ -11,22 +11,22 @@ namespace NFSTools.VLTEdit
 	{
 		// MW: Change from Hashtable to Dictionary<uint, string>
 		// NOTE: This is initialized oddly, but I think it's because of how it keeps track of used hashes?
-		private static Dictionary<uint, string> knownActualHashes;
-		private static Dictionary<uint, string> hashGuesses;
+		private static Dictionary<uint, string> hashesFromTextFile;
+		private static Dictionary<uint, string> guessesFromTextFile;
 		private static Dictionary<uint, string> hashesFromVLTFile;
-		private static Dictionary<uint, string> usedHashes;
+		private static Dictionary<uint, string> hashesInUse;
 
 		static HashTracker()
 		{
 			HashTracker.hashesFromVLTFile = new Dictionary<uint, string>();
-			HashTracker.usedHashes = new Dictionary<uint, string>();
+			HashTracker.hashesInUse = new Dictionary<uint, string>();
 			HashTracker.init();
 		}
 
 		public static void init()
 		{
-			HashTracker.knownActualHashes = new Dictionary<uint, string>();
-			HashTracker.hashGuesses = new Dictionary<uint, string>();
+			HashTracker.hashesFromTextFile = new Dictionary<uint, string>();
+			HashTracker.guessesFromTextFile = new Dictionary<uint, string>();
 			string hashFile = Path.Combine( ( new FileInfo( Application.ExecutablePath ) ).Directory.FullName, "hashes.txt" );
 			if( File.Exists( hashFile ) )
 			{
@@ -40,21 +40,21 @@ namespace NFSTools.VLTEdit
 			{
 				return HashTracker.hashesFromVLTFile[hash];
 			}
-			else if( HashTracker.knownActualHashes.ContainsKey( hash ) )
+			else if( HashTracker.hashesFromTextFile.ContainsKey( hash ) )
 			{
-				string text = HashTracker.knownActualHashes[hash];
-				if( !HashTracker.usedHashes.ContainsKey( hash ) && !HashTracker.hashesFromVLTFile.ContainsKey( hash ) )
+				string text = HashTracker.hashesFromTextFile[hash];
+				if( !HashTracker.hashesInUse.ContainsKey( hash ) && !HashTracker.hashesFromVLTFile.ContainsKey( hash ) )
 				{
-					HashTracker.usedHashes[hash] = text;
+					HashTracker.hashesInUse[hash] = text;
 				}
 				return text;
 			}
-			else if( HashTracker.hashGuesses.ContainsKey( hash ) )
+			else if( HashTracker.guessesFromTextFile.ContainsKey( hash ) )
 			{
-				string text2 = HashTracker.hashGuesses[hash];
-				if( !HashTracker.usedHashes.ContainsKey( hash ) && !HashTracker.hashesFromVLTFile.ContainsKey( hash ) )
+				string text2 = HashTracker.guessesFromTextFile[hash];
+				if( !HashTracker.hashesInUse.ContainsKey( hash ) && !HashTracker.hashesFromVLTFile.ContainsKey( hash ) )
 				{
-					HashTracker.usedHashes[hash] = text2;
+					HashTracker.hashesInUse[hash] = text2;
 				}
 				return text2;
 			}
@@ -106,9 +106,9 @@ namespace NFSTools.VLTEdit
 								foreach( string entry in entries )
 								{
 									uint hash = JenkinsHash.getHash32( prefix + entry + postfix );
-									if( !HashTracker.knownActualHashes.ContainsKey( hash ) )
+									if( !HashTracker.hashesFromTextFile.ContainsKey( hash ) )
 									{
-										HashTracker.knownActualHashes[hash] = prefix + entry + postfix;
+										HashTracker.hashesFromTextFile[hash] = prefix + entry + postfix;
 									}
 								}
 							}
@@ -144,9 +144,9 @@ namespace NFSTools.VLTEdit
 								for( uint i = min; i <= max; ++i )
 								{
 									uint hash = JenkinsHash.getHash32( prefix + i + postfix );
-									if( !HashTracker.knownActualHashes.ContainsKey( hash ) )
+									if( !HashTracker.hashesFromTextFile.ContainsKey( hash ) )
 									{
-										HashTracker.knownActualHashes[hash] = prefix + i + postfix;
+										HashTracker.hashesFromTextFile[hash] = prefix + i + postfix;
 									}
 								}
 							}
@@ -159,25 +159,25 @@ namespace NFSTools.VLTEdit
 							{
 								int sub = ( array[1].StartsWith( "0x" ) ? 2 : 0 );
 								hash = uint.Parse( array[1].Substring( sub ), NumberStyles.AllowHexSpecifier | NumberStyles.AllowTrailingWhite | NumberStyles.AllowLeadingWhite );
-								if( HashTracker.knownActualHashes.ContainsKey( hash ) )
+								if( HashTracker.hashesFromTextFile.ContainsKey( hash ) )
 								{
-									frmDesigner.instance.writeToConsole( "NOTICE: Hash guess '" + array[2] + "' is already resolved as '" + HashTracker.knownActualHashes[hash] + "'" );
+									frmDesigner.instance.writeToConsole( "NOTICE: Hash guess '" + array[2] + "' is already resolved as '" + HashTracker.hashesFromTextFile[hash] + "'" );
 								}
 								else if( HashTracker.hashesFromVLTFile.ContainsKey( hash ) )
 								{
 									frmDesigner.instance.writeToConsole( "NOTICE: Hash guess '" + array[2] + "' is already resolved as '" + HashTracker.hashesFromVLTFile[hash] + "'" );
 								}
-								if( !HashTracker.hashGuesses.ContainsKey( hash ) )
+								if( !HashTracker.guessesFromTextFile.ContainsKey( hash ) )
 								{
-									HashTracker.hashGuesses[hash] = array[2];
+									HashTracker.guessesFromTextFile[hash] = array[2];
 								}
 							}
 							else
 							{
 								hash = JenkinsHash.getHash32( text );
-								if( !HashTracker.knownActualHashes.ContainsKey( hash ) )
+								if( !HashTracker.hashesFromTextFile.ContainsKey( hash ) )
 								{
-									HashTracker.knownActualHashes[hash] = text;
+									HashTracker.hashesFromTextFile[hash] = text;
 								}
 								else
 								{
@@ -196,9 +196,9 @@ namespace NFSTools.VLTEdit
 			if( !HashTracker.hashesFromVLTFile.ContainsKey( hash ) )
 			{
 				HashTracker.hashesFromVLTFile[hash] = A_0;
-				if( HashTracker.knownActualHashes.ContainsKey( hash ) )
+				if( HashTracker.hashesFromTextFile.ContainsKey( hash ) )
 				{
-					HashTracker.knownActualHashes.Remove( hash );
+					HashTracker.hashesFromTextFile.Remove( hash );
 				}
 			}
 		}
@@ -207,24 +207,24 @@ namespace NFSTools.VLTEdit
 		{
 			using( StreamWriter streamWriter = new StreamWriter( filename ) )
 			{
-				uint[] array = new uint[HashTracker.usedHashes.Count];
-				HashTracker.usedHashes.Keys.CopyTo( array, 0 );
+				uint[] array = new uint[HashTracker.hashesInUse.Count];
+				HashTracker.hashesInUse.Keys.CopyTo( array, 0 );
 				uint[] array2 = array;
 				for( int i = 0; i < array2.Length; ++i )
 				{
 					uint num = array2[i];
-					if( HashTracker.hashGuesses.ContainsKey( num ) )
+					if( HashTracker.guessesFromTextFile.ContainsKey( num ) )
 					{
-						streamWriter.WriteLine( string.Format( "dump\t{0:x}\t{1}", num, HashTracker.usedHashes[num].ToString() ) );
+						streamWriter.WriteLine( string.Format( "dump\t{0:x}\t{1}", num, HashTracker.hashesInUse[num].ToString() ) );
 					}
 				}
 				array2 = array;
 				for( int i = 0; i < array2.Length; ++i )
 				{
 					uint num2 = array2[i];
-					if( !HashTracker.hashGuesses.ContainsKey( num2 ) )
+					if( !HashTracker.guessesFromTextFile.ContainsKey( num2 ) )
 					{
-						streamWriter.WriteLine( HashTracker.usedHashes[num2].ToString() );
+						streamWriter.WriteLine( HashTracker.hashesInUse[num2].ToString() );
 					}
 				}
 			}

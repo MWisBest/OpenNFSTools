@@ -88,34 +88,8 @@ namespace NFSTools.VLTEdit
 								}
 								else
 								{
-									UnknownB8 b = null;
-									if( a.genht1.ContainsKey( A_0.caa1[j].position ) )
-									{
-										b = a.genht1[A_0.caa1[j].position];
-									}
-									else
-									{
-										// NOTE: THIS IS A BUG, IT SHOULD NOT HAPPEN.
-										//       The ONLY reason I'm checking ContainsKey instead of using exception handling,
-										//       is because exception handling causes huge slowdowns in Visual Studio debugging.
-										if( BuildConfig.DEBUG )
-										{
-											++b8Fails;
-											Console.WriteLine( "VLTClass.a(): b   fail (num" + numFails + ",b" + b8Fails + ")" );
-										}
-										//continue;
-									}
-									if( b != null )
-									{
-										binaryReader3 = binaryReader;
-										binaryReader3.BaseStream.Seek( b.i2, SeekOrigin.Begin );
-									}
-									else
-									{
-										// lolwtf, doing this can actually help Carbon+ rows that don't load! Unreal!
-										binaryReader3 = binaryReader2;
-										binaryReader3.BaseStream.Seek( A_0.caa1[j].position, SeekOrigin.Begin );
-									}
+									binaryReader3 = binaryReader;
+									binaryReader3.BaseStream.Seek( a.genht1[A_0.caa1[j].position].i2, SeekOrigin.Begin );
 								}
 							}
 						}
@@ -145,7 +119,7 @@ namespace NFSTools.VLTEdit
 					}
 					bb.ui1 = (uint)binaryReader3.BaseStream.Position;
 					bb.isVltOffset = ( binaryReader3 == binaryReader2 );
-					bb.ui2 = a2.ui2;
+					bb.typeHash = a2.ui2;
 					bb.ui3 = a2.hash;
 					bb.dr1 = dr;
 					bb.read( binaryReader3 );

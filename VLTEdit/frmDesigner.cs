@@ -839,7 +839,7 @@ namespace NFSTools.VLTEdit
 				this.dataGrid.DataSource = dataSet;
 				this.dataGrid.DataMember = "Values";
 
-				this.lblFieldType.Text = "Type: " + HashTracker.getValueForHash( bb.ui2 );
+				this.lblFieldType.Text = "Type: " + HashTracker.getValueForHash( bb.typeHash );
 				/*
 				if( BuildConfig.DEBUG )
 				{

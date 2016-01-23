@@ -11,7 +11,7 @@ namespace NFSTools.LibNFS.Compression
 			// Sanity checking...
 			if( input == null )
 			{
-				throw new ArgumentNullException( "input" );
+				throw new ArgumentNullException( nameof( input ) );
 			}
 
 			byte[] output = null;
@@ -43,11 +43,11 @@ namespace NFSTools.LibNFS.Compression
 			// Sanity checking...
 			if( input == null )
 			{
-				throw new ArgumentNullException( "input" );
+				throw new ArgumentNullException( nameof( input ) );
 			}
 			if( allowedTypes == CompressType.NULL )
 			{
-				throw new ArgumentException( "Allowed compression type cannot be NULL!", "allowedTypes" );
+				throw new ArgumentException( "Allowed compression type cannot be NULL!", nameof( allowedTypes ) );
 			}
 
 			Dictionary<CompressType, byte[]> mapping = new Dictionary<CompressType, byte[]>();

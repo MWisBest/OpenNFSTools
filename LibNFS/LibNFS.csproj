@@ -49,6 +49,7 @@
     <Compile Include="Compression\RAWW.cs" />
     <Compile Include="Crypto\CRC32NFS.cs" />
     <Compile Include="Crypto\JenkinsHash.cs" />
+    <Compile Include="Misc\GameFinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

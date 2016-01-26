@@ -18,6 +18,8 @@ namespace NFSTools.LibNFS.Compression
 	/// </summary>
 	public static class JDLZ
 	{
+		const int HEADER_SIZE = 16;
+
 		public static byte[] decompress( byte[] input )
 		{
 			// Sanity checking...
@@ -25,14 +27,14 @@ namespace NFSTools.LibNFS.Compression
 			{
 				throw new ArgumentNullException( nameof( input ) );
 			}
-			else if( input.Length < 16 || input[0] != 'J' || input[1] != 'D' || input[2] != 'L' || input[3] != 'Z' || input[4] != 0x02 )
+			else if( input.Length < HEADER_SIZE || input[0] != 'J' || input[1] != 'D' || input[2] != 'L' || input[3] != 'Z' || input[4] != 0x02 )
 			{
 				throw new InvalidDataException( "Input header is not JDLZ!" );
 			}
 
 			int flags1 = 1, flags2 = 1;
 			int t, length;
-			int inPos = 16, outPos = 0;
+			int inPos = HEADER_SIZE, outPos = 0;
 
 			// TODO: Can we always trust the header's stated length?
 			byte[] output = new byte[BitConverter.ToInt32( input, 8 )];
@@ -92,9 +94,10 @@ namespace NFSTools.LibNFS.Compression
 		/// Its compression ratios are within a few percent of the NFS games' JDLZ compressor. Awesome!!
 		/// </summary>
 		/// <param name="input">bytes to compress with JDLZ</param>
-		/// <param name="hashSize">speed/ratio tunable. use powers of 2, results vary per file.</param>
+		/// <param name="hashSize">speed/ratio tunable; use powers of 2. results vary per file.</param>
+		/// <param name="maxSearchDepth">speed/ratio tunable. results vary per file.</param>
 		/// <returns>JDLZ-compressed bytes, w/ 16 byte header</returns>
-		public static byte[] compress( byte[] input, int hashSize = 0x2000 )
+		public static byte[] compress( byte[] input, int hashSize = 0x2000, int maxSearchDepth = 16 )
 		{
 			// Sanity checking...
 			if( input == null )
@@ -102,12 +105,10 @@ namespace NFSTools.LibNFS.Compression
 				throw new ArgumentNullException( nameof( input ) );
 			}
 
-			const int HeaderSize = 16;
 			const int MinMatchLength = 3;
-			const int MaxSearchDepth = 16;
 
 			int inputBytes = input.Length;
-			byte[] output = new byte[inputBytes + ( ( inputBytes + 7 ) / 8 ) + HeaderSize + 1];
+			byte[] output = new byte[inputBytes + ( ( inputBytes + 7 ) / 8 ) + HEADER_SIZE + 1];
 			int[] hashPos = new int[hashSize];
 			int[] hashChain = new int[inputBytes];
 
@@ -152,7 +153,7 @@ namespace NFSTools.LibNFS.Compression
 					hashChain[inPos] = matchPos;
 					int prevMatchPos = inPos;
 
-					for( int i = 0; i < MaxSearchDepth; i++ )
+					for( int i = 0; i < maxSearchDepth; i++ )
 					{
 						int matchDist = inPos - matchPos;
 

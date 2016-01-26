@@ -92,8 +92,9 @@ namespace NFSTools.LibNFS.Compression
 		/// Its compression ratios are within a few percent of the NFS games' JDLZ compressor. Awesome!!
 		/// </summary>
 		/// <param name="input">bytes to compress with JDLZ</param>
+		/// <param name="hashSize">speed/ratio tunable. use powers of 2, results vary per file.</param>
 		/// <returns>JDLZ-compressed bytes, w/ 16 byte header</returns>
-		public static byte[] compress( byte[] input )
+		public static byte[] compress( byte[] input, int hashSize = 0x2000 )
 		{
 			// Sanity checking...
 			if( input == null )
@@ -107,7 +108,7 @@ namespace NFSTools.LibNFS.Compression
 
 			int inputBytes = input.Length;
 			byte[] output = new byte[inputBytes + ( ( inputBytes + 7 ) / 8 ) + HeaderSize + 1];
-			int[] hashPos = new int[0x2000];
+			int[] hashPos = new int[hashSize];
 			int[] hashChain = new int[inputBytes];
 
 			int outPos = 0;
@@ -145,7 +146,7 @@ namespace NFSTools.LibNFS.Compression
 
 				if( inputBytes >= MinMatchLength )
 				{
-					int hash = ( -0x1A1 * ( input[inPos] ^ ( ( input[inPos + 1] ^ ( input[inPos + 2] << 4 ) ) << 4 ) ) ) & 0x1FFF;
+					int hash = ( -0x1A1 * ( input[inPos] ^ ( ( input[inPos + 1] ^ ( input[inPos + 2] << 4 ) ) << 4 ) ) ) & (hashSize - 1);
 					int matchPos = hashPos[hash];
 					hashPos[hash] = inPos;
 					hashChain[inPos] = matchPos;

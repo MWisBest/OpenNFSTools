@@ -63,14 +63,14 @@ namespace NFSTools.VLTEdit
 			// Setup "File" individual item properties.
 			this.miOpen.Index = 0;
 			this.miOpen.Text = "&Open";
-			this.miOpen.Click += new EventHandler( this.menuOpenClicked );
+			this.miOpen.Click += new EventHandler( this.openFile );
 			this.miUnload.Index = 1;
 			this.miUnload.Text = "&Unload";
 			this.miDivider.Index = 2;
 			this.miDivider.Text = "-";
 			this.miExit.Index = 3;
 			this.miExit.Text = "E&xit";
-			this.miExit.Click += new EventHandler( this.menuExitClicked );
+			this.miExit.Click += new EventHandler( this.exit );
 
 			// Setup "Help" properties.
 			this.miHelp.Index = 1;
@@ -89,15 +89,17 @@ namespace NFSTools.VLTEdit
 		[STAThread]
 		private static void Main()
 		{
+			Application.EnableVisualStyles();
+			Application.SetCompatibleTextRenderingDefault( false );
 			Application.Run( new frmDesigner() );
 		}
 
-		private void exit()
+		private void exit( object A_0 = null, EventArgs A_1 = null )
 		{
 			Application.Exit();
 		}
 
-		private void menuOpenClicked( object A_0, EventArgs A_1 )
+		private void openFile( object A_0 = null, EventArgs A_1 = null )
 		{
 			OpenFileDialog openFileDialog = new OpenFileDialog();
 			openFileDialog.AddExtension = true;
@@ -237,7 +239,10 @@ namespace NFSTools.VLTEdit
 					{
 						// This failure seems to be caused by our underlying problem with the VLTClass RowEntry failure.
 						text2 = string.Format( "{0:x},{1:x}", dq.classHash, dr.c1.ui3 );
-						treeNode3 = dict[text2];
+						if( dict.ContainsKey( text2 ) )
+						{
+							treeNode3 = dict[text2];
+						}
 					}
 
 					if( treeNode3 == null )
@@ -309,11 +314,6 @@ namespace NFSTools.VLTEdit
 			{
 				this.aTwo( b );
 			}
-		}
-
-		private void menuExitClicked( object A_0, EventArgs A_1 )
-		{
-			this.exit();
 		}
 
 		private void onLoad( object sender, EventArgs e )
@@ -502,7 +502,7 @@ namespace NFSTools.VLTEdit
 					case "load":
 						if( noArgs )
 						{
-							this.menuOpenClicked( null, null );
+							this.openFile();
 							break;
 						}
 						FileInfo fileInfo = new FileInfo( text2 );

@@ -95,6 +95,7 @@
 			// tv
 			// 
 			this.tv.Dock = System.Windows.Forms.DockStyle.Left;
+			this.tv.HideSelection = false;
 			this.tv.Location = new System.Drawing.Point(0, 0);
 			this.tv.Name = "tv";
 			this.tv.Size = new System.Drawing.Size(200, 437);
@@ -197,6 +198,7 @@
 			// tvFields
 			// 
 			this.tvFields.Dock = System.Windows.Forms.DockStyle.Left;
+			this.tvFields.HideSelection = false;
 			this.tvFields.Location = new System.Drawing.Point(0, 0);
 			this.tvFields.Name = "tvFields";
 			this.tvFields.Size = new System.Drawing.Size(176, 437);

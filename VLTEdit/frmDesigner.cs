@@ -217,14 +217,10 @@ namespace NFSTools.VLTEdit
 			this.tv.BeginUpdate();
 			Dictionary<string, TreeNode> dict = new Dictionary<string, TreeNode>();
 
-			// Creating the TreeNode separately here and then adding it to the TreeView later is more efficient.
-			TreeNode treeNode = new TreeNode( "Database" );
-			treeNode.Tag = this.av;
-
 			foreach( VLTClass dq in this.av )
 			{
 				string text = HashTracker.getValueForHash( dq.classHash );
-				TreeNode treeNode2 = treeNode.Nodes.Add( text );
+				TreeNode treeNode2 = this.tv.Nodes.Add( text );
 				treeNode2.Tag = dq;
 
 				foreach( UnknownDR dr in dq.dqb1 )
@@ -273,12 +269,7 @@ namespace NFSTools.VLTEdit
 				}
 			}
 
-			this.tv.Nodes.Add( treeNode );
-
-			// NOTE: Setting 'Sorted' must be used with care;
-			// If Sorted is set at the wrong place/time, memory allocations go crazy.
-			treeNode.TreeView.Sorted = true;
-
+			this.tv.Sort();
 			this.tv.EndUpdate();
 		}
 

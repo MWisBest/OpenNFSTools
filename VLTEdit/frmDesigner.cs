@@ -101,21 +101,21 @@ namespace NFSTools.VLTEdit
 
 		private void openFile( object A_0 = null, EventArgs A_1 = null )
 		{
-			OpenFileDialog openFileDialog = new OpenFileDialog();
-			openFileDialog.AddExtension = true;
-			openFileDialog.CheckFileExists = true;
-			openFileDialog.CheckPathExists = true;
-			openFileDialog.DefaultExt = "vlt";
-			openFileDialog.ShowReadOnly = false;
-			openFileDialog.Title = "Open VLT";
-			openFileDialog.Filter = "VLT Files (*.vlt)|*.vlt";
-			openFileDialog.Multiselect = true;
-			if( openFileDialog.ShowDialog() == DialogResult.OK )
+			OpenFileDialog ofd = new OpenFileDialog();
+			ofd.AddExtension = true;
+			ofd.CheckFileExists = true;
+			ofd.CheckPathExists = true;
+			ofd.DefaultExt = "vlt";
+			ofd.ShowReadOnly = false;
+			ofd.Title = "Open VLT";
+			ofd.Filter = "VLT Files (*.vlt)|*.vlt";
+			ofd.Multiselect = true;
+			if( ofd.ShowDialog() == DialogResult.OK )
 			{
 				bool flag = false;
-				foreach( string filename in openFileDialog.FileNames )
+				foreach( string filename in ofd.FileNames )
 				{
-					if( this.loadFile( filename, false ) )
+					if( this.loadFile( filename ) )
 					{
 						flag = true;
 					}
@@ -127,7 +127,7 @@ namespace NFSTools.VLTEdit
 			}
 		}
 
-		private bool loadFile( string fileName, bool fromConsole )
+		private bool loadFile( string fileName, bool fromConsole = false )
 		{
 			bool result = false;
 			if( this.av == null )
@@ -141,7 +141,12 @@ namespace NFSTools.VLTEdit
 			{
 				UnknownBA ba = b.a( VLTOtherValue.VLTMAGIC ) as UnknownBA;
 				string text = ba.sa1[0];
+
 				MenuItem menuItem = new MenuItem( text, new EventHandler( this.bFour ) );
+
+				// Setting the Name property allows us to use the convenient Key-based methods on the MenuItems collection.
+				menuItem.Name = text;
+
 				this.miUnload.MenuItems.Add( menuItem );
 				result = true;
 			}
@@ -196,7 +201,8 @@ namespace NFSTools.VLTEdit
 
 		private void bFour( object A_0, EventArgs A_1 )
 		{
-			this.unloadFile( ( A_0 as MenuItem ).Text );
+			string[] file = { ( A_0 as MenuItem ).Text };
+			this.unloadFiles( new List<string>( file ) );
 		}
 
 		private void tvRefresh()
@@ -273,28 +279,50 @@ namespace NFSTools.VLTEdit
 			this.tv.EndUpdate();
 		}
 
-		private void unloadFile( string A_0 )
+		private void unloadFiles( List<string> fileNames = null )
 		{
-			foreach( UnknownB0 b in this.au )
+			bool changesMade = false;
+
+			for( int i = this.au.Count - 1; i >= 0; --i )
 			{
-				UnknownBA ba = b.a( VLTOtherValue.VLTMAGIC ) as UnknownBA;
-				string text = ba.sa1[0];
-				if( text == A_0 )
+				string text = ( this.au[i].a( VLTOtherValue.VLTMAGIC ) as UnknownBA ).sa1[0];
+
+				bool remove = false;
+				if( fileNames == null )
 				{
-					this.writeToConsole( "Unloading: " + text );
-					foreach( MenuItem menuItem in this.miUnload.MenuItems )
+					remove = true;
+				}
+				else if( fileNames.Contains( text ) )
+				{
+					remove = true;
+					fileNames.Remove( text );
+				}
+
+				if( remove )
+				{
+					if( this.miUnload.MenuItems.IndexOfKey( text ) != this.miUnload.MenuItems.Count - 1 )
 					{
-						if( menuItem.Text == A_0 )
-						{
-							this.miUnload.MenuItems.Remove( menuItem );
-							break;
-						}
+						this.writeToConsole( "ERROR: Cannot unload \"" + text + "\"; it may be a parent file! Unload last file first." );
 					}
-					this.au.Remove( b );
-					this.d();
-					this.tvRefresh();
+					else
+					{
+						this.writeToConsole( "Unloading: " + text );
+						this.miUnload.MenuItems.RemoveByKey( text );
+						this.au.RemoveAt( i );
+						changesMade = true;
+					}
+				}
+
+				if( fileNames != null && fileNames.Count == 0 )
+				{
 					break;
 				}
+			}
+
+			if( changesMade )
+			{
+				this.d();
+				this.tvRefresh();
 			}
 		}
 
@@ -513,7 +541,16 @@ namespace NFSTools.VLTEdit
 							this.writeToConsole( "Error in command." );
 							break;
 						}
-						this.unloadFile( text2 );
+						string[] filesToUnload = { text2 };
+						this.unloadFiles( new List<string>( filesToUnload ) );
+						break;
+					case "unloadall":
+						if( !noArgs )
+						{
+							this.writeToConsole( "Error in command." );
+							break;
+						}
+						this.unloadFiles();
 						break;
 					case "reparse":
 						this.writeToConsole( "Reparsing all VLTs..." );

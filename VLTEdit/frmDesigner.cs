@@ -287,18 +287,18 @@ namespace NFSTools.VLTEdit
 			{
 				string text = ( this.au[i].a( VLTOtherValue.VLTMAGIC ) as UnknownBA ).sa1[0];
 
-				bool remove = false;
+				bool unloadThisFile = false;
 				if( fileNames == null )
 				{
-					remove = true;
+					unloadThisFile = true;
 				}
 				else if( fileNames.Contains( text ) )
 				{
-					remove = true;
+					unloadThisFile = true;
 					fileNames.Remove( text );
 				}
 
-				if( remove )
+				if( unloadThisFile )
 				{
 					if( this.miUnload.MenuItems.IndexOfKey( text ) != this.miUnload.MenuItems.Count - 1 )
 					{

@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextureCompiler", "TextureC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestingArea", "TestingArea\TestingArea.csproj", "{9355823D-6846-4988-AE98-C3331F5C3344}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VLTEdit", "VLTEdit\VLTEdit.csproj", "{AED18AAC-A421-48D4-8429-79C3FF9FC919}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -82,6 +84,18 @@ Global
 		{9355823D-6846-4988-AE98-C3331F5C3344}.Release|x64.Build.0 = Release|Any CPU
 		{9355823D-6846-4988-AE98-C3331F5C3344}.Release|x86.ActiveCfg = Release|Any CPU
 		{9355823D-6846-4988-AE98-C3331F5C3344}.Release|x86.Build.0 = Release|Any CPU
+		{AED18AAC-A421-48D4-8429-79C3FF9FC919}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AED18AAC-A421-48D4-8429-79C3FF9FC919}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AED18AAC-A421-48D4-8429-79C3FF9FC919}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AED18AAC-A421-48D4-8429-79C3FF9FC919}.Debug|x64.Build.0 = Debug|Any CPU
+		{AED18AAC-A421-48D4-8429-79C3FF9FC919}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AED18AAC-A421-48D4-8429-79C3FF9FC919}.Debug|x86.Build.0 = Debug|Any CPU
+		{AED18AAC-A421-48D4-8429-79C3FF9FC919}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AED18AAC-A421-48D4-8429-79C3FF9FC919}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AED18AAC-A421-48D4-8429-79C3FF9FC919}.Release|x64.ActiveCfg = Release|Any CPU
+		{AED18AAC-A421-48D4-8429-79C3FF9FC919}.Release|x64.Build.0 = Release|Any CPU
+		{AED18AAC-A421-48D4-8429-79C3FF9FC919}.Release|x86.ActiveCfg = Release|Any CPU
+		{AED18AAC-A421-48D4-8429-79C3FF9FC919}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

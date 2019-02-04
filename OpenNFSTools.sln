@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VLTEdit", "VLTEdit\VLTEdit.csproj", "{799E1511-D553-4370-842D-16907958B274}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VLTEdit-Legacy", "VLTEdit-Legacy\VLTEdit-Legacy.csproj", "{799E1511-D553-4370-842D-16907958B274}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VPak", "VPak\VPak.csproj", "{FA4798AA-A8F9-4AFD-A029-D34CC229CD61}"
 EndProject
@@ -85,5 +85,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9D01580D-EA66-4673-B4F7-1BC9DE724CCE}
 	EndGlobalSection
 EndGlobal

@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 
-namespace vltedit
+namespace NFSTools.VLTEdit
 {
 	public class MainForm : System.Windows.Forms.Form
 	{

@@ -4,7 +4,7 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 
-namespace vltedit
+namespace NFSTools.VLTEdit
 {
 
 	public class VLTTypeResolver

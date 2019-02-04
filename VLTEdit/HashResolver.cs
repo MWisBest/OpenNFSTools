@@ -3,7 +3,7 @@ using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 
-namespace vltedit
+namespace NFSTools.VLTEdit
 {
 	public class HashResolver
 	{

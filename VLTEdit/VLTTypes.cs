@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace vltedit.VLTDataItems
+namespace NFSTools.VLTEdit.VLTDataItems
 {
 
 

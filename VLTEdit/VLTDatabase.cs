@@ -4,56 +4,10 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 
+using NFSTools.VLTEdit.VLTTypes;
+
 namespace NFSTools.VLTEdit
 {
-
-	public class VLTTypeResolver
-	{
-		private Hashtable _typeTable;
-		public static VLTTypeResolver Resolver = new VLTTypeResolver();
-		public VLTTypeResolver()
-		{
-			this._typeTable = new Hashtable();
-			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::Double" ), typeof( VLTTypes.EADouble ) );
-			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::Float" ), typeof( VLTTypes.EAFloat ) );
-			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::UInt64" ), typeof( VLTTypes.EAUInt64 ) );
-			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::UInt32" ), typeof( VLTTypes.EAUInt32 ) );
-			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::UInt16" ), typeof( VLTTypes.EAUInt16 ) );
-			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::UInt8" ), typeof( VLTTypes.EAUInt8 ) );
-			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::Int64" ), typeof( VLTTypes.EAInt64 ) );
-			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::Int32" ), typeof( VLTTypes.EAInt32 ) );
-			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::Int16" ), typeof( VLTTypes.EAInt16 ) );
-			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::Int8" ), typeof( VLTTypes.EAInt8 ) );
-			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::Bool" ), typeof( VLTTypes.EABool ) );
-			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::Text" ), typeof( VLTTypes.EAText ) );
-
-			this._typeTable.Add( VLTHasher.Hash( "Attrib::Types::Matrix" ), typeof( VLTTypes.AttribMatrix ) );
-			this._typeTable.Add( VLTHasher.Hash( "Attrib::Types::Vector4" ), typeof( VLTTypes.AttribVector4 ) );
-			this._typeTable.Add( VLTHasher.Hash( "Attrib::Types::Vector3" ), typeof( VLTTypes.AttribVector3 ) );
-			this._typeTable.Add( VLTHasher.Hash( "Attrib::Types::Vector2" ), typeof( VLTTypes.AttribVector2 ) );
-			this._typeTable.Add( VLTHasher.Hash( "Attrib::StringKey" ), typeof( VLTTypes.AttribStringKey ) );
-			this._typeTable.Add( VLTHasher.Hash( "Attrib::RefSpec" ), typeof( VLTTypes.AttribRefSpec ) );
-			this._typeTable.Add( VLTHasher.Hash( "Attrib::Blob" ), typeof( VLTTypes.AttribBlob ) );
-
-			this._typeTable.Add( VLTHasher.Hash( "UpgradeSpecs" ), typeof( VLTTypes.UpgradeSpecs ) );
-			this._typeTable.Add( VLTHasher.Hash( "JunkmanMod" ), typeof( VLTTypes.JunkmanMod ) );
-			this._typeTable.Add( VLTHasher.Hash( "AxlePair" ), typeof( VLTTypes.AxlePair ) );
-			this._typeTable.Add( VLTHasher.Hash( "CarBodyMotion" ), typeof( VLTTypes.CarBodyMotion ) );
-			this._typeTable.Add( VLTHasher.Hash( "GCollectionKey" ), typeof( VLTTypes.GCollectionKey ) );
-
-
-		}
-		public Type Resolve( uint hash )
-		{
-			if( this._typeTable.ContainsKey( hash ) )
-			{
-				return this._typeTable[hash] as Type;
-			}
-
-			return null;
-		}
-	}
-
 	public class DataValueAttribute : Attribute
 	{
 		private string _name;
@@ -88,7 +42,6 @@ namespace NFSTools.VLTEdit
 
 	public class VLTHasher
 	{
-
 		public static ulong Hash64( string k )
 		{
 			return Hash64( k, 0x11223344ABCDEF00 );

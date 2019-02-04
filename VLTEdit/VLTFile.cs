@@ -8,36 +8,39 @@ namespace vltedit
 {
 	public interface IFileAccess
 	{
-		void Read(BinaryReader br);
-		void Write(BinaryWriter bw);
+		void Read( BinaryReader br );
+		void Write( BinaryWriter bw );
 	}
 
 	public interface IAddressable
 	{
-		long Address { get; set; }
+		long Address
+		{
+			get; set;
+		}
 	}
 
 	public class NullTerminatedString
 	{
-		public static string Read(BinaryReader br)
+		public static string Read( BinaryReader br )
 		{
 			StringBuilder sb = new StringBuilder();
 			byte b;
 			do
 			{
 				b = br.ReadByte();
-				if (b != 0)
+				if( b != 0 )
 				{
-					sb.Append((char)b);
+					sb.Append( (char)b );
 				}
-			} while (b != 0);
+			} while( b != 0 );
 			return sb.ToString();
 		}
-		public static void Write(BinaryWriter bw, string value)
+		public static void Write( BinaryWriter bw, string value )
 		{
-			byte[] str = Encoding.ASCII.GetBytes(value);
-			bw.Write(str);
-			bw.Write((byte)0);
+			byte[] str = Encoding.ASCII.GetBytes( value );
+			bw.Write( str );
+			bw.Write( (byte)0 );
 		}
 	}
 
@@ -60,50 +63,71 @@ namespace vltedit
 
 		public VLTChunkId ChunkId
 		{
-			get { return _chunkId; }
-			set { _chunkId = value; }
+			get
+			{
+				return this._chunkId;
+			}
+			set
+			{
+				this._chunkId = value;
+			}
 		}
 
 		public int Length
 		{
-			get { return _length; }
-			set { _length = value; }
+			get
+			{
+				return this._length;
+			}
+			set
+			{
+				this._length = value;
+			}
 		}
-		
+
 		public int DataLength
 		{
-			get { return _length - 0x8; }
-			set { _length = value + 0x8; }
+			get
+			{
+				return this._length - 0x8;
+			}
+			set
+			{
+				this._length = value + 0x8;
+			}
 		}
 
 		public bool IsValid
 		{
-			get { return _length >= 0x8; }
+			get
+			{
+				return this._length >= 0x8;
+			}
 		}
 
-		public void GotoStart(Stream stream) 
+		public void GotoStart( Stream stream )
 		{
-			stream.Seek(_offset + 0x8, SeekOrigin.Begin);
+			stream.Seek( this._offset + 0x8, SeekOrigin.Begin );
 		}
 
-		public void SkipChunk(Stream stream)
+		public void SkipChunk( Stream stream )
 		{
-			stream.Seek(_offset + _length, SeekOrigin.Begin);
+			stream.Seek( this._offset + this._length, SeekOrigin.Begin );
 		}
 
 		#region IFileAccess Members
 
-		public void Read(BinaryReader br)
+		public void Read( BinaryReader br )
 		{
-			_offset = br.BaseStream.Position;
-			_chunkId = (VLTChunkId)br.ReadInt32();
-			_length = br.ReadInt32();
+			this._offset = br.BaseStream.Position;
+			this._chunkId = (VLTChunkId)br.ReadInt32();
+			this._length = br.ReadInt32();
 		}
 
-		public void Write(BinaryWriter bw)
+		public void Write( BinaryWriter bw )
 		{
-			bw.Write((int)_chunkId);
-			bw.Write(_length);
+			bw.Write( (int)this._chunkId );
+			bw.Write( this._length );
 		}
 
 		#endregion
@@ -114,12 +138,18 @@ namespace vltedit
 		protected VLTChunk _chunk;
 		public VLTChunk Chunk
 		{
-			get { return _chunk; }
-			set { _chunk = value; }
+			get
+			{
+				return this._chunk;
+			}
+			set
+			{
+				this._chunk = value;
+			}
 		}
 
-		public abstract void Read(BinaryReader br);
-		public abstract void Write(BinaryWriter bw);
+		public abstract void Read( BinaryReader br );
+		public abstract void Write( BinaryWriter bw );
 	}
 
 	public class VLTDependency : VLTBase
@@ -131,51 +161,61 @@ namespace vltedit
 		uint[] _hashes;
 		string[] _names;
 
-		public uint GetHash(int index)
+		public uint GetHash( int index )
 		{
-			return _hashes[index];
+			return this._hashes[index];
 		}
 
-		public string GetName(int index)
+		public string GetName( int index )
 		{
-			return _names[index];
+			return this._names[index];
 		}
 
-		public override void Read(BinaryReader br)
+		public override void Read( BinaryReader br )
 		{
 			int[] offsets;
 			long position;
 
-			_count = br.ReadInt32();
-			_hashes = new uint[_count];
-			_names = new string[_count];
-			offsets = new int[_count];
-			for(int i=0; i<_count; i++)
-				_hashes[i] = br.ReadUInt32();
-			for(int i=0; i<_count; i++)
+			this._count = br.ReadInt32();
+			this._hashes = new uint[this._count];
+			this._names = new string[this._count];
+			offsets = new int[this._count];
+			for( int i = 0; i < this._count; i++ )
+			{
+				this._hashes[i] = br.ReadUInt32();
+			}
+
+			for( int i = 0; i < this._count; i++ )
+			{
 				offsets[i] = br.ReadInt32();
+			}
 
 			position = br.BaseStream.Position;
-			for(int i=0; i<_count; i++)
+			for( int i = 0; i < this._count; i++ )
 			{
-				br.BaseStream.Seek(position+offsets[i], SeekOrigin.Begin);
-				_names[i] = NullTerminatedString.Read(br);
+				br.BaseStream.Seek( position + offsets[i], SeekOrigin.Begin );
+				this._names[i] = NullTerminatedString.Read( br );
 			}
 		}
 
-		public override void Write(BinaryWriter bw)
+		public override void Write( BinaryWriter bw )
 		{
 			int length = 0;
-			bw.Write(_count);
-			for(int i=0; i<_count; i++)
-				bw.Write(_hashes[i]);
-			for(int i=0; i<_count; i++)
+			bw.Write( this._count );
+			for( int i = 0; i < this._count; i++ )
 			{
-				bw.Write(length);
-				length += _names[i].Length + 1;
+				bw.Write( this._hashes[i] );
 			}
-			for(int i=0; i<_count; i++)
-				NullTerminatedString.Write(bw, _names[i]);
+
+			for( int i = 0; i < this._count; i++ )
+			{
+				bw.Write( length );
+				length += this._names[i].Length + 1;
+			}
+			for( int i = 0; i < this._count; i++ )
+			{
+				NullTerminatedString.Write( bw, this._names[i] );
+			}
 		}
 
 	}
@@ -186,23 +226,29 @@ namespace vltedit
 
 		public byte[] Data
 		{
-			get { return _data; }
-			set { _data = value; }
+			get
+			{
+				return this._data;
+			}
+			set
+			{
+				this._data = value;
+			}
 		}
 
 		public Stream GetStream()
 		{
-			return new MemoryStream(_data);
+			return new MemoryStream( this._data );
 		}
 
-		public override void Read(BinaryReader br)
+		public override void Read( BinaryReader br )
 		{
-			_data = br.ReadBytes(_chunk.DataLength);
+			this._data = br.ReadBytes( this._chunk.DataLength );
 		}
 
-		public override void Write(BinaryWriter bw)
+		public override void Write( BinaryWriter bw )
 		{
-			bw.Write(_data);
+			bw.Write( this._data );
 		}
 	}
 	public abstract class VLTDataBlock : IAddressable, IFileAccess
@@ -210,24 +256,36 @@ namespace vltedit
 		protected VLTExpressionBlock _expression;
 		protected long _address;
 
-		public abstract void Read(BinaryReader br);
-		public abstract void Write(BinaryWriter bw);
+		public abstract void Read( BinaryReader br );
+		public abstract void Write( BinaryWriter bw );
 
 		public long Address
 		{
-			get { return _address; }
-			set { _address = value; }
+			get
+			{
+				return this._address;
+			}
+			set
+			{
+				this._address = value;
+			}
 		}
 
 		public VLTExpressionBlock Expression
 		{
-			get { return _expression; }
-			set { _expression = value; }
+			get
+			{
+				return this._expression;
+			}
+			set
+			{
+				this._expression = value;
+			}
 		}
 
-		public static VLTDataBlock CreateOfType(VLTExpressionType type)
+		public static VLTDataBlock CreateOfType( VLTExpressionType type )
 		{
-			switch (type)
+			switch( type )
 			{
 				case VLTExpressionType.DatabaseLoadData:
 					return new VLTDataDatabaseLoad();
@@ -260,27 +318,48 @@ namespace vltedit
 		int _pointer;
 		int[] _sizes;
 
-		public int this [int index]
+		public int this[int index]
 		{
-			get { return _sizes[index]; }
-			set { _sizes[index] = value; }
+			get
+			{
+				return this._sizes[index];
+			}
+			set
+			{
+				this._sizes[index] = value;
+			}
 		}
 
-		public int Count 
+		public int Count
 		{
-			get { return _count; }
+			get
+			{
+				return this._count;
+			}
 		}
 
 		public int Num1
 		{
-			get { return _num1; }
-			set { _num1 = value; }
+			get
+			{
+				return this._num1;
+			}
+			set
+			{
+				this._num1 = value;
+			}
 		}
 
 		public int Num2
 		{
-			get { return _num2; }
-			set { _num2 = value; }
+			get
+			{
+				return this._num2;
+			}
+			set
+			{
+				this._num2 = value;
+			}
 		}
 
 		/// <summary>
@@ -288,32 +367,35 @@ namespace vltedit
 		/// </summary>
 		public int Pointer
 		{
-			get { return _pointer; }
-		}
-
-		public override void Read(BinaryReader br)
-		{
-			_num1 = br.ReadInt32();
-			_num2 = br.ReadInt32();
-			_count = br.ReadInt32();
-			_pointer = (int)br.BaseStream.Position;
-			br.ReadInt32();
-			_sizes = new int[_count];
-			for(int i=0; i<_count; i++)
+			get
 			{
-				_sizes[i] = br.ReadInt32();
+				return this._pointer;
 			}
 		}
 
-		public override void Write(BinaryWriter bw)
+		public override void Read( BinaryReader br )
 		{
-			bw.Write(_num1);
-			bw.Write(_num2);
-			bw.Write(_count);
-			bw.Write(0xEFFECADD);
-			for(int i=0; i<_count; i++)
+			this._num1 = br.ReadInt32();
+			this._num2 = br.ReadInt32();
+			this._count = br.ReadInt32();
+			this._pointer = (int)br.BaseStream.Position;
+			br.ReadInt32();
+			this._sizes = new int[this._count];
+			for( int i = 0; i < this._count; i++ )
 			{
-				bw.Write(_sizes[i]);
+				this._sizes[i] = br.ReadInt32();
+			}
+		}
+
+		public override void Write( BinaryWriter bw )
+		{
+			bw.Write( this._num1 );
+			bw.Write( this._num2 );
+			bw.Write( this._count );
+			bw.Write( 0xEFFECADD );
+			for( int i = 0; i < this._count; i++ )
+			{
+				bw.Write( this._sizes[i] );
 			}
 		}
 	}
@@ -325,62 +407,92 @@ namespace vltedit
 
 		public uint NameHash
 		{
-			get { return _nameHash; }
+			get
+			{
+				return this._nameHash;
+			}
 		}
 
 		public int CollectionCount
 		{
-			get { return _collectionCount; }
-			set { _collectionCount = value; }
+			get
+			{
+				return this._collectionCount;
+			}
+			set
+			{
+				this._collectionCount = value;
+			}
 		}
 
 		public int Num2
 		{
-			get { return _num2; }
-			set { _num2 = value; }
+			get
+			{
+				return this._num2;
+			}
+			set
+			{
+				this._num2 = value;
+			}
 		}
 
 		public int TotalFieldsCount
 		{
-			get { return _totalFieldsCount; }
-			set { _totalFieldsCount = value; }
+			get
+			{
+				return this._totalFieldsCount;
+			}
+			set
+			{
+				this._totalFieldsCount = value;
+			}
 		}
 
 		public int RequiredFieldsCount
 		{
-			get { return _requiredFieldsCount; }
-			set { _requiredFieldsCount = value; }
+			get
+			{
+				return this._requiredFieldsCount;
+			}
+			set
+			{
+				this._requiredFieldsCount = value;
+			}
 		}
 
 		public int Pointer
 		{
-			get { return _pointer; }
+			get
+			{
+				return this._pointer;
+			}
 		}
 
-		public override void Read(BinaryReader br)
+		public override void Read( BinaryReader br )
 		{
-			_nameHash = br.ReadUInt32();
-			_collectionCount = br.ReadInt32();
-			_totalFieldsCount = br.ReadInt32();
+			this._nameHash = br.ReadUInt32();
+			this._collectionCount = br.ReadInt32();
+			this._totalFieldsCount = br.ReadInt32();
 
-			_pointer = (int)br.BaseStream.Position;
+			this._pointer = (int)br.BaseStream.Position;
 			br.ReadInt32();
-			_num2 = br.ReadInt32();
-			_zero1 = br.ReadInt32();
-			_requiredFieldsCount = br.ReadInt32();
-			_zero2 = br.ReadInt32();
+			this._num2 = br.ReadInt32();
+			this._zero1 = br.ReadInt32();
+			this._requiredFieldsCount = br.ReadInt32();
+			this._zero2 = br.ReadInt32();
 		}
 
-		public override void Write(BinaryWriter bw)
+		public override void Write( BinaryWriter bw )
 		{
-			bw.Write(_nameHash);
-			bw.Write(_collectionCount);
-			bw.Write(_totalFieldsCount);
-			bw.Write(0xEFFECADD);
-			bw.Write(_num2);
-			bw.Write(_zero1);
-			bw.Write(_requiredFieldsCount);
-			bw.Write(_zero2);
+			bw.Write( this._nameHash );
+			bw.Write( this._collectionCount );
+			bw.Write( this._totalFieldsCount );
+			bw.Write( 0xEFFECADD );
+			bw.Write( this._num2 );
+			bw.Write( this._zero1 );
+			bw.Write( this._requiredFieldsCount );
+			bw.Write( this._zero2 );
 		}
 	}
 	public class VLTDataCollectionLoad : VLTDataBlock
@@ -394,47 +506,62 @@ namespace vltedit
 
 			public uint NameHash
 			{
-				get { return _nameHash; }
+				get
+				{
+					return this._nameHash;
+				}
 			}
 
 			public int Pointer
 			{
-				get { return _pointer; }
+				get
+				{
+					return this._pointer;
+				}
 			}
 
 			public short Flags1
 			{
-				get { return _flags1; }
+				get
+				{
+					return this._flags1;
+				}
 			}
 
 			public short Flags2
 			{
-				get { return _flags2; }
+				get
+				{
+					return this._flags2;
+				}
 			}
 
 			public bool IsDataEmbedded
 			{
-				get { return (_flags2 & 0x20) != 0; }
+				get
+				{
+					return ( this._flags2 & 0x20 ) != 0;
+				}
 			}
 
 			#region IFileAccess Members
 
-			public void Read(BinaryReader br)
+			public void Read( BinaryReader br )
 			{
-				_nameHash = br.ReadUInt32();
-				_pointer = (int)br.BaseStream.Position;
+				this._nameHash = br.ReadUInt32();
+				this._pointer = (int)br.BaseStream.Position;
 				br.ReadInt32();
-				_flags1 = br.ReadInt16();
-				_flags2 = br.ReadInt16();
+				this._flags1 = br.ReadInt16();
+				this._flags2 = br.ReadInt16();
 			}
 
-			public void Write(BinaryWriter bw)
+			public void Write( BinaryWriter bw )
 			{
-				bw.Write(_nameHash);
-				bw.Write(0xEFFECADD);	// beware, sometimes this is a ptr, sometimes this is data
+				bw.Write( this._nameHash );
+				bw.Write( 0xEFFECADD ); // beware, sometimes this is a ptr, sometimes this is data
 										// recommend writing collload block before writing data
-				bw.Write(_flags1);
-				bw.Write(_flags2);
+				bw.Write( this._flags1 );
+				bw.Write( this._flags2 );
 			}
 
 			#endregion
@@ -451,32 +578,50 @@ namespace vltedit
 
 		public uint NameHash
 		{
-			get { return _nameHash; }
+			get
+			{
+				return this._nameHash;
+			}
 		}
 
 		public uint ClassNameHash
 		{
-			get { return _classNameHash; }
+			get
+			{
+				return this._classNameHash;
+			}
 		}
 
 		public uint ParentHash
 		{
-			get { return _parentHash; }
+			get
+			{
+				return this._parentHash;
+			}
 		}
 
 		public int Count
 		{
-			get { return _countTypes; }
+			get
+			{
+				return this._countTypes;
+			}
 		}
 
 		public int CountOptional
 		{
-			get { return _countOpt1; }
+			get
+			{
+				return this._countOpt1;
+			}
 		}
 
 		public int Pointer
 		{
-			get { return _pointer; }
+			get
+			{
+				return this._pointer;
+			}
 		}
 
 		/*
@@ -488,81 +633,88 @@ namespace vltedit
 
 		public OptionalData this[int index]
 		{
-			get { return _optionalData[index]; }
+			get
+			{
+				return this._optionalData[index];
+			}
 		}
 
 		public int Num1
 		{
-			get { return _num1; }
+			get
+			{
+				return this._num1;
+			}
 		}
 
-		public override void Read(BinaryReader br)
+		public override void Read( BinaryReader br )
 		{
-			_nameHash = br.ReadUInt32();
-			_classNameHash = br.ReadUInt32();
-			_parentHash = br.ReadUInt32();
-			_countOpt1 = br.ReadInt32();
-			_num1 = br.ReadInt32();			// not always 0, 0xc in one case
-			_countOpt2 = br.ReadInt32();
+			this._nameHash = br.ReadUInt32();
+			this._classNameHash = br.ReadUInt32();
+			this._parentHash = br.ReadUInt32();
+			this._countOpt1 = br.ReadInt32();
+			this._num1 = br.ReadInt32();            // not always 0, 0xc in one case
+			this._countOpt2 = br.ReadInt32();
 
-			Debug.Assert(_countOpt1 == _countOpt2, "CountOpt1 not equal to CountOpt2");
+			Debug.Assert( this._countOpt1 == this._countOpt2, "CountOpt1 not equal to CountOpt2" );
 
 #if CARBON
-			_countTypes = br.ReadInt16();
-			_countTypesTotal = br.ReadInt16();
+			this._countTypes = br.ReadInt16();
+			this._countTypesTotal = br.ReadInt16();
 #else
 			_countTypes = br.ReadInt32();
 #endif
 
-			_pointer = (int)br.BaseStream.Position;
+			this._pointer = (int)br.BaseStream.Position;
 			br.ReadInt32();
-			_typeHashes = new uint[_countTypes];
-			for(int i=0; i<_countTypes; i++)
+			this._typeHashes = new uint[this._countTypes];
+			for( int i = 0; i < this._countTypes; i++ )
 			{
-				_typeHashes[i] = br.ReadUInt32();
+				this._typeHashes[i] = br.ReadUInt32();
 			}
 #if CARBON
-			for(int i=_countTypes; i<_countTypesTotal; i++) 
+			for( int i = this._countTypes; i < this._countTypesTotal; i++ )
 			{
 				br.ReadInt32();
 			}
 #endif
-			_optionalData = new OptionalData[_countOpt1];
-			for(int i=0; i<_countOpt1; i++)
+			this._optionalData = new OptionalData[this._countOpt1];
+			for( int i = 0; i < this._countOpt1; i++ )
 			{
-				_optionalData[i] = new OptionalData();
-				_optionalData[i].Read(br);
+				this._optionalData[i] = new OptionalData();
+				this._optionalData[i].Read( br );
 			}
 		}
 
-		public override void Write(BinaryWriter bw)
+		public override void Write( BinaryWriter bw )
 		{
-			bw.Write(_nameHash);
-			bw.Write(_classNameHash);
-			bw.Write(_parentHash);
-			bw.Write(_countOpt1);
-			bw.Write(_num1);
-			bw.Write(_countOpt2);
+			bw.Write( this._nameHash );
+			bw.Write( this._classNameHash );
+			bw.Write( this._parentHash );
+			bw.Write( this._countOpt1 );
+			bw.Write( this._num1 );
+			bw.Write( this._countOpt2 );
 #if CARBON
-			bw.Write((short)_countTypes);
-			bw.Write(_countTypesTotal);
+			bw.Write( (short)this._countTypes );
+			bw.Write( this._countTypesTotal );
 #else
 			bw.Write(_countTypes);
 #endif
-			bw.Write(0xEFFECADD);
-			for(int i=0; i<_countTypes; i++)
+			bw.Write( 0xEFFECADD );
+			for( int i = 0; i < this._countTypes; i++ )
 			{
-				bw.Write(_typeHashes[i]);
+				bw.Write( this._typeHashes[i] );
 			}
 #if CARBON
-			for(int i=_countTypes; i<_countTypesTotal; i++) {
-				bw.Write((int)0);
+			for( int i = this._countTypes; i < this._countTypesTotal; i++ )
+			{
+				bw.Write( (int)0 );
 			}
 #endif
-			for(int i=0; i<_countOpt1; i++)
+			for( int i = 0; i < this._countOpt1; i++ )
 			{
-				_optionalData[i].Write(bw);
-			}		
+				this._optionalData[i].Write( bw );
+			}
 		}
 	}
 	public enum VLTExpressionType : uint
@@ -584,78 +736,108 @@ namespace vltedit
 
 		public uint Id
 		{
-			get { return _id; }
-			set { _id = value; }
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				this._id = value;
+			}
 		}
 
 		public VLTExpressionType ExpressionType
 		{
-			get { return _expressionType; }
-			set { _expressionType = value; }
+			get
+			{
+				return this._expressionType;
+			}
+			set
+			{
+				this._expressionType = value;
+			}
 		}
 
 		public int Length
 		{
-			get { return _length; }
-			set { _length = value; }
+			get
+			{
+				return this._length;
+			}
+			set
+			{
+				this._length = value;
+			}
 		}
 
 		public int Offset
 		{
-			get { return _offset; }
-			set { _offset = value; }
+			get
+			{
+				return this._offset;
+			}
+			set
+			{
+				this._offset = value;
+			}
 		}
 
 		public VLTDataBlock Data
 		{
-			get { return _data; }
-			set { _data = value; }
+			get
+			{
+				return this._data;
+			}
+			set
+			{
+				this._data = value;
+			}
 		}
 
-		public void ReadData(BinaryReader br)
+		public void ReadData( BinaryReader br )
 		{
-			br.BaseStream.Seek(_offset, SeekOrigin.Begin);
-			_data = VLTDataBlock.CreateOfType(ExpressionType);
-			_data.Address = _offset;
-			_data.Expression = this;
-			_data.Read(br);
+			br.BaseStream.Seek( this._offset, SeekOrigin.Begin );
+			this._data = VLTDataBlock.CreateOfType( this.ExpressionType );
+			this._data.Address = this._offset;
+			this._data.Expression = this;
+			this._data.Read( br );
 		}
 
-		public void WriteData(BinaryWriter bw)
+		public void WriteData( BinaryWriter bw )
 		{
-			bw.BaseStream.Seek(_offset, SeekOrigin.Begin);
-			_data.Write(bw);
+			bw.BaseStream.Seek( this._offset, SeekOrigin.Begin );
+			this._data.Write( bw );
 		}
 
 		#region IFileAccess Members
 
-		public void Read(BinaryReader br)
+		public void Read( BinaryReader br )
 		{
-			_id = br.ReadUInt32();
-			_expressionType = (VLTExpressionType)br.ReadUInt32();
+			this._id = br.ReadUInt32();
+			this._expressionType = (VLTExpressionType)br.ReadUInt32();
 #if !CARBON
 			_zero = br.ReadInt32();
 #endif
-			_length = br.ReadInt32();
-			_offset = br.ReadInt32();
+			this._length = br.ReadInt32();
+			this._offset = br.ReadInt32();
 
 #if CARBON
-			if (_expressionType == VLTExpressionType.ClassLoadData)
+			if( this._expressionType == VLTExpressionType.ClassLoadData )
 			{
-				Debug.Assert(_length == 0x20, "sizeof(ClassLoadDataExpression) not 0x20");
+				Debug.Assert( this._length == 0x20, "sizeof(ClassLoadDataExpression) not 0x20" );
 			}
 #endif
 		}
 
-		public void Write(BinaryWriter bw)
+		public void Write( BinaryWriter bw )
 		{
-			bw.Write(_id);
-			bw.Write((uint)_expressionType);
+			bw.Write( this._id );
+			bw.Write( (uint)this._expressionType );
 #if !CARBON
 			bw.Write(_zero);
 #endif
-			bw.Write(_length);
-			bw.Write(_offset);
+			bw.Write( this._length );
+			bw.Write( this._offset );
 		}
 
 		#endregion
@@ -666,37 +848,48 @@ namespace vltedit
 
 		public VLTExpressionBlock this[int index]
 		{
-			get { return _blocks[index]; }
-			set { _blocks[index] = value; }
+			get
+			{
+				return this._blocks[index];
+			}
+			set
+			{
+				this._blocks[index] = value;
+			}
 		}
 
 		public int Count
 		{
-			get { return _blocks.Length; }
-		}
-
-		public override void Read(BinaryReader br)
-		{
-			int count = br.ReadInt32();
-			_blocks = new VLTExpressionBlock[count];
-			for(int i=0; i<count; i++)
+			get
 			{
-				_blocks[i] = new VLTExpressionBlock();
-				_blocks[i].Read(br);
+				return this._blocks.Length;
 			}
 		}
 
-		public override void Write(BinaryWriter bw)
+		public override void Read( BinaryReader br )
 		{
-			bw.Write((int)_blocks.Length);
-            for(int i=0; i<_blocks.Length; i++)
-				_blocks[i].Write(bw);
+			int count = br.ReadInt32();
+			this._blocks = new VLTExpressionBlock[count];
+			for( int i = 0; i < count; i++ )
+			{
+				this._blocks[i] = new VLTExpressionBlock();
+				this._blocks[i].Read( br );
+			}
+		}
+
+		public override void Write( BinaryWriter bw )
+		{
+			bw.Write( (int)this._blocks.Length );
+			for( int i = 0; i < this._blocks.Length; i++ )
+			{
+				this._blocks[i].Write( bw );
+			}
 		}
 		#region IEnumerable Members
 
 		public IEnumerator GetEnumerator()
 		{
-			return _blocks.GetEnumerator();
+			return this._blocks.GetEnumerator();
 		}
 
 		#endregion
@@ -717,44 +910,68 @@ namespace vltedit
 
 		public int OffsetSource
 		{
-			get { return _offsetSource; }
-			set { _offsetSource = value; }
+			get
+			{
+				return this._offsetSource;
+			}
+			set
+			{
+				this._offsetSource = value;
+			}
 		}
 
 		public BlockType Type
 		{
-			get { return (BlockType)_blockType; }
-			set { _blockType = (short)value; }
+			get
+			{
+				return (BlockType)this._blockType;
+			}
+			set
+			{
+				this._blockType = (short)value;
+			}
 		}
-		
+
 		public short Identifier
 		{
-			get { return _identifier; }
-			set { _identifier = value; }
+			get
+			{
+				return this._identifier;
+			}
+			set
+			{
+				this._identifier = value;
+			}
 		}
 
 		public int OffsetDest
 		{
-			get { return _offsetDest; }
-			set { _offsetDest = value; }
+			get
+			{
+				return this._offsetDest;
+			}
+			set
+			{
+				this._offsetDest = value;
+			}
 		}
 
 		#region IFileAccess Members
 
-		public void Read(BinaryReader br)
+		public void Read( BinaryReader br )
 		{
-			_offsetSource = br.ReadInt32();
-			_blockType = br.ReadInt16();
-			_identifier = br.ReadInt16();
-			_offsetDest = br.ReadInt32();
+			this._offsetSource = br.ReadInt32();
+			this._blockType = br.ReadInt16();
+			this._identifier = br.ReadInt16();
+			this._offsetDest = br.ReadInt32();
 		}
 
-		public void Write(BinaryWriter bw)
+		public void Write( BinaryWriter bw )
 		{
-			bw.Write(_offsetSource);
-			bw.Write(_blockType);
-			bw.Write(_identifier);
-			bw.Write(_offsetDest);
+			bw.Write( this._offsetSource );
+			bw.Write( this._blockType );
+			bw.Write( this._identifier );
+			bw.Write( this._offsetDest );
 		}
 
 		#endregion
@@ -762,22 +979,22 @@ namespace vltedit
 		public override string ToString()
 		{
 			StringBuilder sb = new StringBuilder();
-			switch((BlockType)_blockType)
+			switch( (BlockType)this._blockType )
 			{
 				case BlockType.Done:
-					sb.Append("Done");
+					sb.Append( "Done" );
 					break;
 				case BlockType.RuntimeLink:
-					sb.Append("RunL");
+					sb.Append( "RunL" );
 					break;
 				case BlockType.Load:
-					sb.Append("Load");
+					sb.Append( "Load" );
 					break;
 				case BlockType.Switch:
-					sb.Append("SwiS");
+					sb.Append( "SwiS" );
 					break;
 			}
-			sb.AppendFormat("\tId={0}\tFrom={1:x}\tTo:{2:x}", _identifier, _offsetSource, _offsetDest);
+			sb.AppendFormat( "\tId={0}\tFrom={1:x}\tTo:{2:x}", this._identifier, this._offsetSource, this._offsetDest );
 			return sb.ToString();
 		}
 
@@ -791,80 +1008,98 @@ namespace vltedit
 
 		public VLTPointerBlock this[int offset]
 		{
-			get { return _vltBlocks[offset] as VLTPointerBlock; }
-			set { _vltBlocks[offset] = value; }
-		}
-
-		public void ResolveRawPointers(Stream stream)
-		{
-			BinaryWriter bw = new BinaryWriter(stream);
-			foreach(VLTPointerBlock bk in _rawBlocks)
+			get
 			{
-				bw.BaseStream.Seek(bk.OffsetSource, SeekOrigin.Begin);
-				bw.Write(bk.OffsetDest);
+				return this._vltBlocks[offset] as VLTPointerBlock;
+			}
+			set
+			{
+				this._vltBlocks[offset] = value;
 			}
 		}
 
-		public override void Read(BinaryReader br)
+		public void ResolveRawPointers( Stream stream )
 		{
-			_allBlocks = new ArrayList();
-			_vltBlocks = new Hashtable();
-			_rawBlocks = new ArrayList();
+			BinaryWriter bw = new BinaryWriter( stream );
+			foreach( VLTPointerBlock bk in this._rawBlocks )
+			{
+				bw.BaseStream.Seek( bk.OffsetSource, SeekOrigin.Begin );
+				bw.Write( bk.OffsetDest );
+			}
+		}
+
+		public override void Read( BinaryReader br )
+		{
+			this._allBlocks = new ArrayList();
+			this._vltBlocks = new Hashtable();
+			this._rawBlocks = new ArrayList();
 			bool loadVlt = false;
 			bool loadRaw = false;
-			while(true)
+			while( true )
 			{
 				VLTPointerBlock bk = new VLTPointerBlock();
-				bk.Read(br);
-				if (bk.Type != VLTPointerBlock.BlockType.Load)
+				bk.Read( br );
+				if( bk.Type != VLTPointerBlock.BlockType.Load )
 				{
-					Debug.Write(string.Format("{0:x}\t", br.BaseStream.Position-0xC));
-					Debug.WriteLine(bk.ToString());					
+					Debug.Write( string.Format( "{0:x}\t", br.BaseStream.Position - 0xC ) );
+					Debug.WriteLine( bk.ToString() );
 				}
-				_allBlocks.Add(bk);
-				if (bk.Type == VLTPointerBlock.BlockType.Switch && (bk.Identifier == 0 || bk.Identifier == 1))
+				this._allBlocks.Add( bk );
+				if( bk.Type == VLTPointerBlock.BlockType.Switch && ( bk.Identifier == 0 || bk.Identifier == 1 ) )
 				{
-					if (bk.Identifier == 1)
+					if( bk.Identifier == 1 )
 					{
 						loadVlt = false;
 						loadRaw = true;
-					} 
-					else if (bk.Identifier == 0) 
+					}
+					else if( bk.Identifier == 0 )
 					{
 						loadVlt = true;
 						loadRaw = false;
 					}
-				} 
-				else if (bk.Type == VLTPointerBlock.BlockType.RuntimeLink)
+				}
+				else if( bk.Type == VLTPointerBlock.BlockType.RuntimeLink )
 				{
 					// Linked at runtime.
-					if (loadVlt)
-						_vltBlocks[bk.OffsetSource] = bk;
-					if (loadRaw)
-						_rawBlocks.Add(bk);
+					if( loadVlt )
+					{
+						this._vltBlocks[bk.OffsetSource] = bk;
+					}
+
+					if( loadRaw )
+					{
+						this._rawBlocks.Add( bk );
+					}
 				}
-				else if (bk.Type == VLTPointerBlock.BlockType.Load && bk.Identifier == 1)
+				else if( bk.Type == VLTPointerBlock.BlockType.Load && bk.Identifier == 1 )
 				{
-					if (loadVlt)
-						_vltBlocks[bk.OffsetSource] = bk;
-					if (loadRaw)
-						_rawBlocks.Add(bk);
-				} 
-				else if (bk.Type == VLTPointerBlock.BlockType.Done)
+					if( loadVlt )
+					{
+						this._vltBlocks[bk.OffsetSource] = bk;
+					}
+
+					if( loadRaw )
+					{
+						this._rawBlocks.Add( bk );
+					}
+				}
+				else if( bk.Type == VLTPointerBlock.BlockType.Done )
 				{
 					break;
 				}
 				else
 				{
-					throw new Exception("Unknown ptr type.");
+					throw new Exception( "Unknown ptr type." );
 				}
 			}
 		}
 
-		public override void Write(BinaryWriter bw)
+		public override void Write( BinaryWriter bw )
 		{
-			foreach(VLTPointerBlock bk in _allBlocks)
-				bk.Write(bw);
+			foreach( VLTPointerBlock bk in this._allBlocks )
+			{
+				bk.Write( bw );
+			}
 		}
 	}
 
@@ -876,33 +1111,38 @@ namespace vltedit
 		MemoryStream _binRaw;
 		MemoryStream _binVlt;
 
-		private void WriteChunk(BinaryWriter bw, VLTBase vltbase)
+		private void WriteChunk( BinaryWriter bw, VLTBase vltbase )
 		{
 			long position = bw.BaseStream.Position;
-			bw.BaseStream.Seek(8, SeekOrigin.Current);
-			vltbase.Write(bw);
+			bw.BaseStream.Seek( 8, SeekOrigin.Current );
+			vltbase.Write( bw );
 			long endPosition = bw.BaseStream.Position;
-			if ((endPosition % 0x10) != 0)
-				endPosition += 0x10 - (endPosition % 0x10);
-			vltbase.Chunk.Length = (int)(endPosition - position);
-			bw.BaseStream.Seek(position, SeekOrigin.Begin);
-			vltbase.Chunk.Write(bw);
-            bw.BaseStream.Seek(endPosition, SeekOrigin.Begin);
+			if( ( endPosition % 0x10 ) != 0 )
+			{
+				endPosition += 0x10 - ( endPosition % 0x10 );
+			}
+
+			vltbase.Chunk.Length = (int)( endPosition - position );
+			bw.BaseStream.Seek( position, SeekOrigin.Begin );
+			vltbase.Chunk.Write( bw );
+			bw.BaseStream.Seek( endPosition, SeekOrigin.Begin );
 		}
 
-		private VLTBase ReadChunk(BinaryReader br)
+		private VLTBase ReadChunk( BinaryReader br )
 		{
 
-			if (br.BaseStream.Position == br.BaseStream.Length)
+			if( br.BaseStream.Position == br.BaseStream.Length )
+			{
 				return null;
+			}
 
 			VLTChunk chunk = new VLTChunk();
-			chunk.Read(br);
+			chunk.Read( br );
 
-			if (chunk.IsValid)
+			if( chunk.IsValid )
 			{
 				VLTBase vltbase = null;
-				switch(chunk.ChunkId)
+				switch( chunk.ChunkId )
 				{
 					case VLTChunkId.Dependency:
 						vltbase = new VLTDependency();
@@ -922,12 +1162,12 @@ namespace vltedit
 					default:
 						vltbase = new VLTRaw();
 						break;
-				}				
+				}
 				vltbase.Chunk = chunk;
-				vltbase.Read(br);
-				chunk.SkipChunk(br.BaseStream);
+				vltbase.Read( br );
+				chunk.SkipChunk( br.BaseStream );
 				return vltbase;
-			}  
+			}
 			else
 			{
 				return null;
@@ -937,19 +1177,30 @@ namespace vltedit
 
 		public Stream RawStream
 		{
-			get { return _binRaw; }
+			get
+			{
+				return this._binRaw;
+			}
 		}
 
 		public Stream VltStream
 		{
-			get { return _binVlt; }
+			get
+			{
+				return this._binVlt;
+			}
 		}
 
-		public VLTBase GetChunk(VLTChunkId id)
+		public VLTBase GetChunk( VLTChunkId id )
 		{
-			foreach(VLTBase chunk in _chunks)
-				if (chunk.Chunk.ChunkId == id)
+			foreach( VLTBase chunk in this._chunks )
+			{
+				if( chunk.Chunk.ChunkId == id )
+				{
 					return chunk;
+				}
+			}
+
 			return null;
 		}
 
@@ -957,92 +1208,95 @@ namespace vltedit
 		{
 		}
 
-		public void Open(string vltFilename)
+		public void Open( string vltFilename )
 		{
-			FileInfo fi = new FileInfo(vltFilename);
-			_baseDir = fi.Directory.FullName;
-			_filename = vltFilename;
+			FileInfo fi = new FileInfo( vltFilename );
+			this._baseDir = fi.Directory.FullName;
+			this._filename = vltFilename;
 
-			FileStream fs = new FileStream(vltFilename, FileMode.Open, FileAccess.Read);
-			Open(fs, null);
+			FileStream fs = new FileStream( vltFilename, FileMode.Open, FileAccess.Read );
+			this.Open( fs, null );
 			fs.Close();
 		}
 
-		public void Open(Stream vlt, Stream bin)
+		public void Open( Stream vlt, Stream bin )
 		{
 			byte[] data = new byte[vlt.Length];
-			vlt.Read(data, 0, data.Length);
-			_binVlt = new MemoryStream(data);
-			
-			_chunks = new ArrayList();
-			BinaryReader br = new BinaryReader(_binVlt);
+			vlt.Read( data, 0, data.Length );
+			this._binVlt = new MemoryStream( data );
+
+			this._chunks = new ArrayList();
+			BinaryReader br = new BinaryReader( this._binVlt );
 
 			// Load up the chunks
 			VLTBase chunk;
 			do
 			{
-				chunk = ReadChunk(br);
-				if (chunk != null)
+				chunk = this.ReadChunk( br );
+				if( chunk != null )
 				{
-					_chunks.Add(chunk);
+					this._chunks.Add( chunk );
 				}
-			} while (chunk != null);
+			} while( chunk != null );
 
 			// Load up expression data
-			VLTExpression expChunk = GetChunk(VLTChunkId.Expression) as VLTExpression;
+			VLTExpression expChunk = this.GetChunk( VLTChunkId.Expression ) as VLTExpression;
 
-			for(int i=0; i<expChunk.Count; i++)
+			for( int i = 0; i < expChunk.Count; i++ )
 			{
 				VLTExpressionBlock block = expChunk[i];
-				block.ReadData(br);
+				block.ReadData( br );
 			}
 
 			// Load up raw bin data
-			if (bin == null)
+			if( bin == null )
 			{
-				DirectoryInfo di = new DirectoryInfo(_baseDir);
-				VLTDependency dep = GetChunk(VLTChunkId.Dependency) as VLTDependency;
-				string binName = dep.GetName(VLTDependency.BinFile);
-				FileInfo[] fi = di.GetFiles(binName);
-                if (fi.Length == 0)
-                	throw new Exception("Required file " + binName + " was not found.");
-				bin = new FileStream(fi[0].FullName, FileMode.Open, FileAccess.Read);
+				DirectoryInfo di = new DirectoryInfo( this._baseDir );
+				VLTDependency dep = this.GetChunk( VLTChunkId.Dependency ) as VLTDependency;
+				string binName = dep.GetName( VLTDependency.BinFile );
+				FileInfo[] fi = di.GetFiles( binName );
+				if( fi.Length == 0 )
+				{
+					throw new Exception( "Required file " + binName + " was not found." );
+				}
+
+				bin = new FileStream( fi[0].FullName, FileMode.Open, FileAccess.Read );
 				data = new byte[bin.Length];
-				bin.Read(data, 0, data.Length);
+				bin.Read( data, 0, data.Length );
 				bin.Close();
-			} 
+			}
 			else
 			{
 				data = new byte[bin.Length];
-				bin.Read(data, 0, data.Length);
+				bin.Read( data, 0, data.Length );
 			}
-			
-			_binRaw = new MemoryStream(data);
 
-			br = new BinaryReader(_binRaw);
-			
-			_binRaw.Seek(0, SeekOrigin.Begin);
-			chunk = ReadChunk(br);
-			chunk.Chunk.GotoStart(_binRaw);
-			if (chunk.Chunk.ChunkId == VLTChunkId.StringsRaw)
+			this._binRaw = new MemoryStream( data );
+
+			br = new BinaryReader( this._binRaw );
+
+			this._binRaw.Seek( 0, SeekOrigin.Begin );
+			chunk = this.ReadChunk( br );
+			chunk.Chunk.GotoStart( this._binRaw );
+			if( chunk.Chunk.ChunkId == VLTChunkId.StringsRaw )
 			{
-				int endPos = (int)_binRaw.Position + chunk.Chunk.DataLength;
-				while(_binRaw.Position < endPos)
+				int endPos = (int)this._binRaw.Position + chunk.Chunk.DataLength;
+				while( this._binRaw.Position < endPos )
 				{
-					string str = NullTerminatedString.Read(br);
-					if (str != "")
+					string str = NullTerminatedString.Read( br );
+					if( str != "" )
 					{
-						HashResolver.AddAuto(str);
+						HashResolver.AddAuto( str );
 					}
 				}
 			}
 
-			VLTPointers ptrChunk = GetChunk(VLTChunkId.Pointers) as VLTPointers;
-			ptrChunk.ResolveRawPointers(_binRaw);
-			
+			VLTPointers ptrChunk = this.GetChunk( VLTChunkId.Pointers ) as VLTPointers;
+			ptrChunk.ResolveRawPointers( this._binRaw );
+
 		}
 
-		
+
 
 	}
 }

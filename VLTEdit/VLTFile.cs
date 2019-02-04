@@ -57,43 +57,21 @@ namespace NFSTools.VLTEdit
 
 	public class VLTChunk : IFileAccess
 	{
-		VLTChunkId _chunkId;
-		int _length;
 		long _offset;
 
-		public VLTChunkId ChunkId
-		{
-			get
-			{
-				return this._chunkId;
-			}
-			set
-			{
-				this._chunkId = value;
-			}
-		}
+		public VLTChunkId ChunkId { get; set; }
 
-		public int Length
-		{
-			get
-			{
-				return this._length;
-			}
-			set
-			{
-				this._length = value;
-			}
-		}
+		public int Length { get; set; }
 
 		public int DataLength
 		{
 			get
 			{
-				return this._length - 0x8;
+				return this.Length - 0x8;
 			}
 			set
 			{
-				this._length = value + 0x8;
+				this.Length = value + 0x8;
 			}
 		}
 
@@ -101,7 +79,7 @@ namespace NFSTools.VLTEdit
 		{
 			get
 			{
-				return this._length >= 0x8;
+				return this.Length >= 0x8;
 			}
 		}
 
@@ -112,7 +90,7 @@ namespace NFSTools.VLTEdit
 
 		public void SkipChunk( Stream stream )
 		{
-			stream.Seek( this._offset + this._length, SeekOrigin.Begin );
+			stream.Seek( this._offset + this.Length, SeekOrigin.Begin );
 		}
 
 		#region IFileAccess Members
@@ -120,14 +98,14 @@ namespace NFSTools.VLTEdit
 		public void Read( BinaryReader br )
 		{
 			this._offset = br.BaseStream.Position;
-			this._chunkId = (VLTChunkId)br.ReadInt32();
-			this._length = br.ReadInt32();
+			this.ChunkId = (VLTChunkId)br.ReadInt32();
+			this.Length = br.ReadInt32();
 		}
 
 		public void Write( BinaryWriter bw )
 		{
-			bw.Write( (int)this._chunkId );
-			bw.Write( this._length );
+			bw.Write( (int)this.ChunkId );
+			bw.Write( this.Length );
 		}
 
 		#endregion
@@ -222,33 +200,21 @@ namespace NFSTools.VLTEdit
 
 	public class VLTRaw : VLTBase
 	{
-		byte[] _data;
-
-		public byte[] Data
-		{
-			get
-			{
-				return this._data;
-			}
-			set
-			{
-				this._data = value;
-			}
-		}
+		public byte[] Data { get; set; }
 
 		public Stream GetStream()
 		{
-			return new MemoryStream( this._data );
+			return new MemoryStream( this.Data );
 		}
 
 		public override void Read( BinaryReader br )
 		{
-			this._data = br.ReadBytes( this._chunk.DataLength );
+			this.Data = br.ReadBytes( this._chunk.DataLength );
 		}
 
 		public override void Write( BinaryWriter bw )
 		{
-			bw.Write( this._data );
+			bw.Write( this.Data );
 		}
 	}
 	public abstract class VLTDataBlock : IAddressable, IFileAccess
@@ -401,97 +367,43 @@ namespace NFSTools.VLTEdit
 	}
 	public class VLTDataClassLoad : VLTDataBlock
 	{
-		uint _nameHash;
-		int _collectionCount, _totalFieldsCount, _pointer;
-		int _num2, _zero1, _requiredFieldsCount, _zero2;
+		int _zero1, _zero2;
 
-		public uint NameHash
-		{
-			get
-			{
-				return this._nameHash;
-			}
-		}
+		public uint NameHash { get; private set; }
 
-		public int CollectionCount
-		{
-			get
-			{
-				return this._collectionCount;
-			}
-			set
-			{
-				this._collectionCount = value;
-			}
-		}
+		public int CollectionCount { get; set; }
 
-		public int Num2
-		{
-			get
-			{
-				return this._num2;
-			}
-			set
-			{
-				this._num2 = value;
-			}
-		}
+		public int Num2 { get; set; }
 
-		public int TotalFieldsCount
-		{
-			get
-			{
-				return this._totalFieldsCount;
-			}
-			set
-			{
-				this._totalFieldsCount = value;
-			}
-		}
+		public int TotalFieldsCount { get; set; }
 
-		public int RequiredFieldsCount
-		{
-			get
-			{
-				return this._requiredFieldsCount;
-			}
-			set
-			{
-				this._requiredFieldsCount = value;
-			}
-		}
+		public int RequiredFieldsCount { get; set; }
 
-		public int Pointer
-		{
-			get
-			{
-				return this._pointer;
-			}
-		}
+		public int Pointer { get; private set; }
 
 		public override void Read( BinaryReader br )
 		{
-			this._nameHash = br.ReadUInt32();
-			this._collectionCount = br.ReadInt32();
-			this._totalFieldsCount = br.ReadInt32();
+			this.NameHash = br.ReadUInt32();
+			this.CollectionCount = br.ReadInt32();
+			this.TotalFieldsCount = br.ReadInt32();
 
-			this._pointer = (int)br.BaseStream.Position;
+			this.Pointer = (int)br.BaseStream.Position;
 			br.ReadInt32();
-			this._num2 = br.ReadInt32();
+			this.Num2 = br.ReadInt32();
 			this._zero1 = br.ReadInt32();
-			this._requiredFieldsCount = br.ReadInt32();
+			this.RequiredFieldsCount = br.ReadInt32();
 			this._zero2 = br.ReadInt32();
 		}
 
 		public override void Write( BinaryWriter bw )
 		{
-			bw.Write( this._nameHash );
-			bw.Write( this._collectionCount );
-			bw.Write( this._totalFieldsCount );
+			bw.Write( this.NameHash );
+			bw.Write( this.CollectionCount );
+			bw.Write( this.TotalFieldsCount );
 			bw.Write( 0xEFFECADD );
-			bw.Write( this._num2 );
+			bw.Write( this.Num2 );
 			bw.Write( this._zero1 );
-			bw.Write( this._requiredFieldsCount );
+			bw.Write( this.RequiredFieldsCount );
 			bw.Write( this._zero2 );
 		}
 	}
@@ -499,48 +411,19 @@ namespace NFSTools.VLTEdit
 	{
 		public class OptionalData : IFileAccess
 		{
-			uint _nameHash;
-			int _pointer;
-			short _flags1;
-			short _flags2;
+			public uint NameHash { get; private set; }
 
-			public uint NameHash
-			{
-				get
-				{
-					return this._nameHash;
-				}
-			}
+			public int Pointer { get; private set; }
 
-			public int Pointer
-			{
-				get
-				{
-					return this._pointer;
-				}
-			}
+			public short Flags1 { get; private set; }
 
-			public short Flags1
-			{
-				get
-				{
-					return this._flags1;
-				}
-			}
-
-			public short Flags2
-			{
-				get
-				{
-					return this._flags2;
-				}
-			}
+			public short Flags2 { get; private set; }
 
 			public bool IsDataEmbedded
 			{
 				get
 				{
-					return ( this._flags2 & 0x20 ) != 0;
+					return ( this.Flags2 & 0x20 ) != 0;
 				}
 			}
 
@@ -548,81 +431,43 @@ namespace NFSTools.VLTEdit
 
 			public void Read( BinaryReader br )
 			{
-				this._nameHash = br.ReadUInt32();
-				this._pointer = (int)br.BaseStream.Position;
+				this.NameHash = br.ReadUInt32();
+				this.Pointer = (int)br.BaseStream.Position;
 				br.ReadInt32();
-				this._flags1 = br.ReadInt16();
-				this._flags2 = br.ReadInt16();
+				this.Flags1 = br.ReadInt16();
+				this.Flags2 = br.ReadInt16();
 			}
 
 			public void Write( BinaryWriter bw )
 			{
-				bw.Write( this._nameHash );
+				bw.Write( this.NameHash );
 				bw.Write( 0xEFFECADD ); // beware, sometimes this is a ptr, sometimes this is data
 										// recommend writing collload block before writing data
-				bw.Write( this._flags1 );
-				bw.Write( this._flags2 );
+				bw.Write( this.Flags1 );
+				bw.Write( this.Flags2 );
 			}
 
 			#endregion
 		}
 
-		uint _nameHash, _classNameHash, _parentHash;
-		int _countOpt1, _num1;
-		int _countOpt2, _countTypes, _pointer;
+		int _countOpt2;
 		uint[] _typeHashes;
 		OptionalData[] _optionalData;
 #if CARBON
 		short _countTypesTotal;
 #endif
 
-		public uint NameHash
-		{
-			get
-			{
-				return this._nameHash;
-			}
-		}
+		public uint NameHash { get; private set; }
 
-		public uint ClassNameHash
-		{
-			get
-			{
-				return this._classNameHash;
-			}
-		}
+		public uint ClassNameHash { get; private set; }
 
-		public uint ParentHash
-		{
-			get
-			{
-				return this._parentHash;
-			}
-		}
+		public uint ParentHash { get; private set; }
 
-		public int Count
-		{
-			get
-			{
-				return this._countTypes;
-			}
-		}
+		public int Count { get; private set; }
 
-		public int CountOptional
-		{
-			get
-			{
-				return this._countOpt1;
-			}
-		}
+		public int CountOptional { get; private set; }
 
-		public int Pointer
-		{
-			get
-			{
-				return this._pointer;
-			}
-		}
+		public int Pointer { get; private set; }
 
 		/*
 		public uint this[int index]
@@ -639,47 +484,41 @@ namespace NFSTools.VLTEdit
 			}
 		}
 
-		public int Num1
-		{
-			get
-			{
-				return this._num1;
-			}
-		}
+		public int Num1 { get; private set; }
 
 		public override void Read( BinaryReader br )
 		{
-			this._nameHash = br.ReadUInt32();
-			this._classNameHash = br.ReadUInt32();
-			this._parentHash = br.ReadUInt32();
-			this._countOpt1 = br.ReadInt32();
-			this._num1 = br.ReadInt32();            // not always 0, 0xc in one case
+			this.NameHash = br.ReadUInt32();
+			this.ClassNameHash = br.ReadUInt32();
+			this.ParentHash = br.ReadUInt32();
+			this.CountOptional = br.ReadInt32();
+			this.Num1 = br.ReadInt32();            // not always 0, 0xc in one case
 			this._countOpt2 = br.ReadInt32();
 
-			Debug.Assert( this._countOpt1 == this._countOpt2, "CountOpt1 not equal to CountOpt2" );
+			Debug.Assert( this.CountOptional == this._countOpt2, "CountOpt1 not equal to CountOpt2" );
 
 #if CARBON
-			this._countTypes = br.ReadInt16();
+			this.Count = br.ReadInt16();
 			this._countTypesTotal = br.ReadInt16();
 #else
 			_countTypes = br.ReadInt32();
 #endif
 
-			this._pointer = (int)br.BaseStream.Position;
+			this.Pointer = (int)br.BaseStream.Position;
 			br.ReadInt32();
-			this._typeHashes = new uint[this._countTypes];
-			for( int i = 0; i < this._countTypes; i++ )
+			this._typeHashes = new uint[this.Count];
+			for( int i = 0; i < this.Count; i++ )
 			{
 				this._typeHashes[i] = br.ReadUInt32();
 			}
 #if CARBON
-			for( int i = this._countTypes; i < this._countTypesTotal; i++ )
+			for( int i = this.Count; i < this._countTypesTotal; i++ )
 			{
 				br.ReadInt32();
 			}
 #endif
-			this._optionalData = new OptionalData[this._countOpt1];
-			for( int i = 0; i < this._countOpt1; i++ )
+			this._optionalData = new OptionalData[this.CountOptional];
+			for( int i = 0; i < this.CountOptional; i++ )
 			{
 				this._optionalData[i] = new OptionalData();
 				this._optionalData[i].Read( br );
@@ -688,30 +527,30 @@ namespace NFSTools.VLTEdit
 
 		public override void Write( BinaryWriter bw )
 		{
-			bw.Write( this._nameHash );
-			bw.Write( this._classNameHash );
-			bw.Write( this._parentHash );
-			bw.Write( this._countOpt1 );
-			bw.Write( this._num1 );
+			bw.Write( this.NameHash );
+			bw.Write( this.ClassNameHash );
+			bw.Write( this.ParentHash );
+			bw.Write( this.CountOptional );
+			bw.Write( this.Num1 );
 			bw.Write( this._countOpt2 );
 #if CARBON
-			bw.Write( (short)this._countTypes );
+			bw.Write( (short)this.Count );
 			bw.Write( this._countTypesTotal );
 #else
 			bw.Write(_countTypes);
 #endif
 			bw.Write( 0xEFFECADD );
-			for( int i = 0; i < this._countTypes; i++ )
+			for( int i = 0; i < this.Count; i++ )
 			{
 				bw.Write( this._typeHashes[i] );
 			}
 #if CARBON
-			for( int i = this._countTypes; i < this._countTypesTotal; i++ )
+			for( int i = this.Count; i < this._countTypesTotal; i++ )
 			{
 				bw.Write( (int)0 );
 			}
 #endif
-			for( int i = 0; i < this._countOpt1; i++ )
+			for( int i = 0; i < this.CountOptional; i++ )
 			{
 				this._optionalData[i].Write( bw );
 			}
@@ -725,119 +564,60 @@ namespace NFSTools.VLTEdit
 	}
 	public class VLTExpressionBlock : IFileAccess
 	{
-		uint _id;
-		VLTExpressionType _expressionType;
-#if !CARBON
-		int _zero;
-#endif
-		int _length;
-		int _offset;
-		VLTDataBlock _data;
+		public uint Id { get; set; }
 
-		public uint Id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				this._id = value;
-			}
-		}
+		public VLTExpressionType ExpressionType { get; set; }
 
-		public VLTExpressionType ExpressionType
-		{
-			get
-			{
-				return this._expressionType;
-			}
-			set
-			{
-				this._expressionType = value;
-			}
-		}
+		public int Length { get; set; }
 
-		public int Length
-		{
-			get
-			{
-				return this._length;
-			}
-			set
-			{
-				this._length = value;
-			}
-		}
+		public int Offset { get; set; }
 
-		public int Offset
-		{
-			get
-			{
-				return this._offset;
-			}
-			set
-			{
-				this._offset = value;
-			}
-		}
-
-		public VLTDataBlock Data
-		{
-			get
-			{
-				return this._data;
-			}
-			set
-			{
-				this._data = value;
-			}
-		}
+		public VLTDataBlock Data { get; set; }
 
 		public void ReadData( BinaryReader br )
 		{
-			br.BaseStream.Seek( this._offset, SeekOrigin.Begin );
-			this._data = VLTDataBlock.CreateOfType( this.ExpressionType );
-			this._data.Address = this._offset;
-			this._data.Expression = this;
-			this._data.Read( br );
+			br.BaseStream.Seek( this.Offset, SeekOrigin.Begin );
+			this.Data = VLTDataBlock.CreateOfType( this.ExpressionType );
+			this.Data.Address = this.Offset;
+			this.Data.Expression = this;
+			this.Data.Read( br );
 		}
 
 		public void WriteData( BinaryWriter bw )
 		{
-			bw.BaseStream.Seek( this._offset, SeekOrigin.Begin );
-			this._data.Write( bw );
+			bw.BaseStream.Seek( this.Offset, SeekOrigin.Begin );
+			this.Data.Write( bw );
 		}
 
 		#region IFileAccess Members
 
 		public void Read( BinaryReader br )
 		{
-			this._id = br.ReadUInt32();
-			this._expressionType = (VLTExpressionType)br.ReadUInt32();
+			this.Id = br.ReadUInt32();
+			this.ExpressionType = (VLTExpressionType)br.ReadUInt32();
 #if !CARBON
 			_zero = br.ReadInt32();
 #endif
-			this._length = br.ReadInt32();
-			this._offset = br.ReadInt32();
+			this.Length = br.ReadInt32();
+			this.Offset = br.ReadInt32();
 
 #if CARBON
-			if( this._expressionType == VLTExpressionType.ClassLoadData )
+			if( this.ExpressionType == VLTExpressionType.ClassLoadData )
 			{
-				Debug.Assert( this._length == 0x20, "sizeof(ClassLoadDataExpression) not 0x20" );
+				Debug.Assert( this.Length == 0x20, "sizeof(ClassLoadDataExpression) not 0x20" );
 			}
 #endif
 		}
 
 		public void Write( BinaryWriter bw )
 		{
-			bw.Write( this._id );
-			bw.Write( (uint)this._expressionType );
+			bw.Write( this.Id );
+			bw.Write( (uint)this.ExpressionType );
 #if !CARBON
 			bw.Write(_zero);
 #endif
-			bw.Write( this._length );
-			bw.Write( this._offset );
+			bw.Write( this.Length );
+			bw.Write( this.Offset );
 		}
 
 		#endregion
@@ -904,21 +684,9 @@ namespace NFSTools.VLTEdit
 			Load = 3,
 		}
 
-		int _offsetSource;
-		short _blockType, _identifier;
-		int _offsetDest;
+		short _blockType;
 
-		public int OffsetSource
-		{
-			get
-			{
-				return this._offsetSource;
-			}
-			set
-			{
-				this._offsetSource = value;
-			}
-		}
+		public int OffsetSource { get; set; }
 
 		public BlockType Type
 		{
@@ -932,46 +700,26 @@ namespace NFSTools.VLTEdit
 			}
 		}
 
-		public short Identifier
-		{
-			get
-			{
-				return this._identifier;
-			}
-			set
-			{
-				this._identifier = value;
-			}
-		}
+		public short Identifier { get; set; }
 
-		public int OffsetDest
-		{
-			get
-			{
-				return this._offsetDest;
-			}
-			set
-			{
-				this._offsetDest = value;
-			}
-		}
+		public int OffsetDest { get; set; }
 
 		#region IFileAccess Members
 
 		public void Read( BinaryReader br )
 		{
-			this._offsetSource = br.ReadInt32();
+			this.OffsetSource = br.ReadInt32();
 			this._blockType = br.ReadInt16();
-			this._identifier = br.ReadInt16();
-			this._offsetDest = br.ReadInt32();
+			this.Identifier = br.ReadInt16();
+			this.OffsetDest = br.ReadInt32();
 		}
 
 		public void Write( BinaryWriter bw )
 		{
-			bw.Write( this._offsetSource );
+			bw.Write( this.OffsetSource );
 			bw.Write( this._blockType );
-			bw.Write( this._identifier );
-			bw.Write( this._offsetDest );
+			bw.Write( this.Identifier );
+			bw.Write( this.OffsetDest );
 		}
 
 		#endregion
@@ -994,7 +742,7 @@ namespace NFSTools.VLTEdit
 					sb.Append( "SwiS" );
 					break;
 			}
-			sb.AppendFormat( "\tId={0}\tFrom={1:x}\tTo:{2:x}", this._identifier, this._offsetSource, this._offsetDest );
+			sb.AppendFormat( "\tId={0}\tFrom={1:x}\tTo:{2:x}", this.Identifier, this.OffsetSource, this.OffsetDest );
 			return sb.ToString();
 		}
 
@@ -1293,10 +1041,6 @@ namespace NFSTools.VLTEdit
 
 			VLTPointers ptrChunk = this.GetChunk( VLTChunkId.Pointers ) as VLTPointers;
 			ptrChunk.ResolveRawPointers( this._binRaw );
-
 		}
-
-
-
 	}
 }

@@ -10,34 +10,15 @@ namespace NFSTools.VLTEdit
 {
 	public class DataValueAttribute : Attribute
 	{
-		private string _name;
-		private bool _hex;
-
 		public DataValueAttribute( string name )
 		{
-			this._name = name;
-			this._hex = false;
+			this.Name = name;
+			this.Hex = false;
 		}
 
-		public bool Hex
-		{
-			get
-			{
-				return this._hex;
-			}
-			set
-			{
-				this._hex = value;
-			}
-		}
+		public bool Hex { get; set; }
 
-		public string Name
-		{
-			get
-			{
-				return this._name;
-			}
-		}
+		public string Name { get; }
 	}
 
 	public class VLTHasher
@@ -344,84 +325,17 @@ namespace NFSTools.VLTEdit
 
 	public abstract class VLTDataItem : IFileAccess
 	{
-		private uint _offset;
-		private bool _inline;
-		private uint _type;
-		private uint _name;
-		private int _arrayIndex;
-		private VLTDataRow _row;
+		public VLTDataRow DataRow { get; set; }
 
-		public VLTDataRow DataRow
-		{
-			get
-			{
-				return this._row;
-			}
-			set
-			{
-				this._row = value;
-			}
-		}
+		public int ArrayIndex { get; set; }
 
-		public int ArrayIndex
-		{
-			get
-			{
-				return this._arrayIndex;
-			}
-			set
-			{
-				this._arrayIndex = value;
-			}
-		}
+		public uint TypeHash { get; set; }
 
-		public uint TypeHash
-		{
-			get
-			{
-				return this._type;
-			}
-			set
-			{
-				this._type = value;
-			}
-		}
+		public uint NameHash { get; set; }
 
-		public uint NameHash
-		{
-			get
-			{
-				return this._name;
-			}
-			set
-			{
-				this._name = value;
-			}
-		}
+		public uint Offset { get; set; }
 
-		public uint Offset
-		{
-			get
-			{
-				return this._offset;
-			}
-			set
-			{
-				this._offset = value;
-			}
-		}
-
-		public bool InlineData
-		{
-			get
-			{
-				return this._inline;
-			}
-			set
-			{
-				this._inline = value;
-			}
-		}
+		public bool InlineData { get; set; }
 
 		public static VLTDataItem Instantiate( Type type )
 		{
@@ -434,19 +348,16 @@ namespace NFSTools.VLTEdit
 
 		public virtual void LoadExtra()
 		{
-
 		}
 
 		public override string ToString()
 		{
 			return "Cannot dump this type.";
 		}
-
 	}
 
 	public class VLTDataItemArray : VLTDataItem, IEnumerable
 	{
-		private short _maxCount, _validCount, _dataSize;
 		private ArrayList _items;
 		private int _align;
 		private uint _type;
@@ -464,14 +375,14 @@ namespace NFSTools.VLTEdit
 
 		public override void Read( BinaryReader br )
 		{
-			this._maxCount = br.ReadInt16();
-			this._validCount = br.ReadInt16();
-			this._dataSize = br.ReadInt16();
+			this.MaxCount = br.ReadInt16();
+			this.ValidCount = br.ReadInt16();
+			this.DataSize = br.ReadInt16();
 			br.ReadInt16();
 
 			ConstructorInfo mi = this._itemType.GetConstructor( Type.EmptyTypes );
 
-			for( int i = 0; i < this._maxCount; i++ )
+			for( int i = 0; i < this.MaxCount; i++ )
 			{
 				if( this._align > 0 )
 				{
@@ -485,7 +396,7 @@ namespace NFSTools.VLTEdit
 
 				if( item is VLTTypes.UnknownType )
 				{
-					( item as VLTTypes.UnknownType ).SetLength( this._dataSize );
+					( item as VLTTypes.UnknownType ).SetLength( this.DataSize );
 				}
 
 				item.Offset = (uint)br.BaseStream.Position;
@@ -499,6 +410,7 @@ namespace NFSTools.VLTEdit
 				this._items.Add( item );
 			}
 		}
+
 		public VLTDataItem this[int index]
 		{
 			get
@@ -519,37 +431,19 @@ namespace NFSTools.VLTEdit
 			}
 		}
 
-		public short MaxCount
-		{
-			get
-			{
-				return this._maxCount;
-			}
-		}
+		public short MaxCount { get; private set; }
 
-		public short ValidCount
-		{
-			get
-			{
-				return this._validCount;
-			}
-		}
+		public short ValidCount { get; private set; }
 
-		public short DataSize
-		{
-			get
-			{
-				return this._dataSize;
-			}
-		}
+		public short DataSize { get; private set; }
 
 		public override void Write( BinaryWriter bw )
 		{
-			bw.Write( this._maxCount );
-			bw.Write( this._validCount );
-			bw.Write( this._dataSize );
+			bw.Write( this.MaxCount );
+			bw.Write( this.ValidCount );
+			bw.Write( this.DataSize );
 			bw.Write( (short)0 );
-			for( int i = 0; i < this._maxCount; i++ )
+			for( int i = 0; i < this.MaxCount; i++ )
 			{
 				if( this._align > 0 )
 				{
@@ -574,49 +468,21 @@ namespace NFSTools.VLTEdit
 
 	public class VLTDataRow : IEnumerable
 	{
-		private VLTFile _vltFile;
-		private VLTDataCollectionLoad _collLoad;
 		private VLTDataItem[] _dataItem;
 		private bool[] _dataLoaded;
-		private VLTClass _vltClass;
-		public VLTClass VLTClass
-		{
-			get
-			{
-				return this._vltClass;
-			}
-			set
-			{
-				this._vltClass = value;
-			}
-		}
-		public VLTFile VLTFile
-		{
-			get
-			{
-				return this._vltFile;
-			}
-			set
-			{
-				this._vltFile = value;
-			}
-		}
-		public VLTDataCollectionLoad CollectionLoad
-		{
-			get
-			{
-				return this._collLoad;
-			}
-			set
-			{
-				this._collLoad = value;
-			}
-		}
+
+		public VLTClass VLTClass { get; set; }
+
+		public VLTFile VLTFile { get; set; }
+
+		public VLTDataCollectionLoad CollectionLoad { get; set; }
+
 		public VLTDataRow( int count )
 		{
 			this._dataItem = new VLTDataItem[count];
 			this._dataLoaded = new bool[count];
 		}
+
 		public VLTDataItem this[int index]
 		{
 			get
@@ -894,62 +760,23 @@ namespace NFSTools.VLTEdit
 			#endregion
 		}
 
-		private VLTFile _vltFile;
-		private uint _classHash;
-		private VLTDataClassLoad _classLoad;
 		private ClassField[] _classFields;
-		private ClassData _data;
-		private VLTDatabase _database;
-		private VLTPointers _pointers;
 
-		public VLTFile VLTFile
-		{
-			get
-			{
-				return this._vltFile;
-			}
-		}
+		public VLTFile VLTFile { get; private set; }
 
-		public VLTDatabase VLTDatabase
-		{
-			get
-			{
-				return this._database;
-			}
-			set
-			{
-				this._database = value;
-			}
-		}
+		public VLTDatabase VLTDatabase { get; set; }
 
-		public VLTPointers VLTPointers
-		{
-			get
-			{
-				return this._pointers;
-			}
-		}
-		public VLTDataClassLoad ClassLoad
-		{
-			get
-			{
-				return this._classLoad;
-			}
-		}
+		public VLTPointers VLTPointers { get; private set; }
 
-		public uint ClassHash
-		{
-			get
-			{
-				return this._classHash;
-			}
-		}
+		public VLTDataClassLoad ClassLoad { get; private set; }
+
+		public uint ClassHash { get; private set; }
 
 		public int FieldCount
 		{
 			get
 			{
-				return this._classLoad.TotalFieldsCount;
+				return this.ClassLoad.TotalFieldsCount;
 			}
 		}
 
@@ -961,27 +788,21 @@ namespace NFSTools.VLTEdit
 			}
 		}
 
-		public ClassData Data
-		{
-			get
-			{
-				return this._data;
-			}
-		}
+		public ClassData Data { get; private set; }
 
 		public void LoadClass( VLTDataClassLoad classLoad, VLTFile vltFile )
 		{
-			this._vltFile = vltFile;
-			this._classLoad = classLoad;
-			this._classHash = classLoad.NameHash;
+			this.VLTFile = vltFile;
+			this.ClassLoad = classLoad;
+			this.ClassHash = classLoad.NameHash;
 
-			this._pointers = vltFile.GetChunk( VLTChunkId.Pointers ) as VLTPointers;
-			int offset = this._pointers[classLoad.Pointer].OffsetDest;
+			this.VLTPointers = vltFile.GetChunk( VLTChunkId.Pointers ) as VLTPointers;
+			int offset = this.VLTPointers[classLoad.Pointer].OffsetDest;
 			vltFile.RawStream.Seek( offset, SeekOrigin.Begin );
 			BinaryReader br = new BinaryReader( vltFile.RawStream );
 
-			this._classFields = new ClassField[this._classLoad.TotalFieldsCount];
-			for( int i = 0; i < this._classLoad.TotalFieldsCount; i++ )
+			this._classFields = new ClassField[this.ClassLoad.TotalFieldsCount];
+			for( int i = 0; i < this.ClassLoad.TotalFieldsCount; i++ )
 			{
 				ClassField field = new ClassField();
 				field.Read( br );
@@ -992,7 +813,7 @@ namespace NFSTools.VLTEdit
 				this._classFields[i] = field;
 			}
 
-			this._data = new ClassData( this );
+			this.Data = new ClassData( this );
 
 
 		}
@@ -1013,7 +834,7 @@ namespace NFSTools.VLTEdit
 
 		public int CompareTo( object obj )
 		{
-			return this._classHash.CompareTo( ( obj as VLTClass )._classHash );
+			return this.ClassHash.CompareTo( ( obj as VLTClass ).ClassHash );
 		}
 
 		#endregion

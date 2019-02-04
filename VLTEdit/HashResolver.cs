@@ -1,3 +1,4 @@
+using NFSTools.LibNFS.Crypto;
 using System.Collections;
 using System.Globalization;
 using System.IO;
@@ -105,7 +106,7 @@ namespace NFSTools.VLTEdit
 					}
 					else
 					{
-						key = VLTHasher.Hash( line );
+						key = JenkinsHash.getHash32( line );
 						if( !_loadTable.ContainsKey( key ) )
 						{
 							_loadTable.Add( key, line );
@@ -118,7 +119,7 @@ namespace NFSTools.VLTEdit
 
 		public static void AddAuto( string value )
 		{
-			uint key = VLTHasher.Hash( value );
+			uint key = JenkinsHash.getHash32( value );
 			if( !_autoTable.ContainsKey( key ) )
 			{
 				_autoTable.Add( key, value );

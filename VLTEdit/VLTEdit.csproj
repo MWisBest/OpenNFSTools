@@ -151,6 +151,12 @@
   <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LibNFS\LibNFS.csproj">
+      <Project>{CCAF842A-8BA0-4551-95D2-8CABCFEA9777}</Project>
+      <Name>LibNFS</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent />

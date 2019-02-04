@@ -1,3 +1,4 @@
+using NFSTools.LibNFS.Crypto;
 using System;
 using System.Collections;
 using System.Data;
@@ -911,7 +912,7 @@ namespace NFSTools.VLTEdit
 			}
 			else
 			{
-				hash = VLTHasher.Hash( text );
+				hash = JenkinsHash.getHash32( text );
 			}
 
 			string matchText;
@@ -1019,7 +1020,7 @@ namespace NFSTools.VLTEdit
 			}
 			else
 			{
-				hash = VLTHasher.Hash( item );
+				hash = JenkinsHash.getHash32( item );
 			}
 
 			this.DumpTree( row, hash );
@@ -1292,7 +1293,7 @@ namespace NFSTools.VLTEdit
 						}
 						else
 						{
-							this.AddToConsole( string.Format( "hash({0})=0x{1:x}", args, VLTHasher.Hash( args ) ) );
+							this.AddToConsole( string.Format( "hash({0})=0x{1:x}", args, JenkinsHash.getHash32( args ) ) );
 						}
 
 						break;
@@ -1303,7 +1304,7 @@ namespace NFSTools.VLTEdit
 						}
 						else
 						{
-							this.AddToConsole( string.Format( "hash64({0})=0x{1:x}", args, VLTHasher.Hash64( args ) ) );
+							this.AddToConsole( string.Format( "hash64({0})=0x{1:x}", args, JenkinsHash.getHash64( args ) ) );
 						}
 
 						break;

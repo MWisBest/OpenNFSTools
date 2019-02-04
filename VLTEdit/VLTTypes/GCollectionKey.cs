@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using NFSTools.LibNFS.Crypto;
+using System.IO;
 
 namespace NFSTools.VLTEdit.VLTTypes
 {
@@ -17,7 +18,7 @@ namespace NFSTools.VLTEdit.VLTTypes
 
 		public override void Write( BinaryWriter bw )
 		{
-			bw.Write( VLTHasher.Hash( this.Value ) );
+			bw.Write( JenkinsHash.getHash32( this.Value ) );
 		}
 
 		public override string ToString()

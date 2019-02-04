@@ -14,32 +14,32 @@ namespace NFSTools.VLTEdit
 		public VLTTypeResolver()
 		{
 			this._typeTable = new Hashtable();
-			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::Double" ), typeof( VLTDataItems.Double ) );
-			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::Float" ), typeof( VLTDataItems.Float ) );
-			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::UInt64" ), typeof( VLTDataItems.UInt64 ) );
-			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::UInt32" ), typeof( VLTDataItems.UInt32 ) );
-			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::UInt16" ), typeof( VLTDataItems.UInt16 ) );
-			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::UInt8" ), typeof( VLTDataItems.UInt8 ) );
-			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::Int64" ), typeof( VLTDataItems.Int64 ) );
-			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::Int32" ), typeof( VLTDataItems.Int32 ) );
-			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::Int16" ), typeof( VLTDataItems.Int16 ) );
-			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::Int8" ), typeof( VLTDataItems.Int8 ) );
-			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::Bool" ), typeof( VLTDataItems.Bool ) );
-			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::Text" ), typeof( VLTDataItems.Text ) );
+			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::Double" ), typeof( VLTTypes.EADouble ) );
+			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::Float" ), typeof( VLTTypes.EAFloat ) );
+			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::UInt64" ), typeof( VLTTypes.EAUInt64 ) );
+			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::UInt32" ), typeof( VLTTypes.EAUInt32 ) );
+			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::UInt16" ), typeof( VLTTypes.EAUInt16 ) );
+			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::UInt8" ), typeof( VLTTypes.EAUInt8 ) );
+			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::Int64" ), typeof( VLTTypes.EAInt64 ) );
+			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::Int32" ), typeof( VLTTypes.EAInt32 ) );
+			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::Int16" ), typeof( VLTTypes.EAInt16 ) );
+			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::Int8" ), typeof( VLTTypes.EAInt8 ) );
+			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::Bool" ), typeof( VLTTypes.EABool ) );
+			this._typeTable.Add( VLTHasher.Hash( "EA::Reflection::Text" ), typeof( VLTTypes.EAText ) );
 
-			this._typeTable.Add( VLTHasher.Hash( "Attrib::Types::Matrix" ), typeof( VLTDataItems.Matrix ) );
-			this._typeTable.Add( VLTHasher.Hash( "Attrib::Types::Vector4" ), typeof( VLTDataItems.Vector4 ) );
-			this._typeTable.Add( VLTHasher.Hash( "Attrib::Types::Vector3" ), typeof( VLTDataItems.Vector3 ) );
-			this._typeTable.Add( VLTHasher.Hash( "Attrib::Types::Vector2" ), typeof( VLTDataItems.Vector2 ) );
-			this._typeTable.Add( VLTHasher.Hash( "Attrib::StringKey" ), typeof( VLTDataItems.StringKey ) );
-			this._typeTable.Add( VLTHasher.Hash( "Attrib::RefSpec" ), typeof( VLTDataItems.RefSpec ) );
-			this._typeTable.Add( VLTHasher.Hash( "Attrib::Blob" ), typeof( VLTDataItems.Blob ) );
+			this._typeTable.Add( VLTHasher.Hash( "Attrib::Types::Matrix" ), typeof( VLTTypes.AttribMatrix ) );
+			this._typeTable.Add( VLTHasher.Hash( "Attrib::Types::Vector4" ), typeof( VLTTypes.AttribVector4 ) );
+			this._typeTable.Add( VLTHasher.Hash( "Attrib::Types::Vector3" ), typeof( VLTTypes.AttribVector3 ) );
+			this._typeTable.Add( VLTHasher.Hash( "Attrib::Types::Vector2" ), typeof( VLTTypes.AttribVector2 ) );
+			this._typeTable.Add( VLTHasher.Hash( "Attrib::StringKey" ), typeof( VLTTypes.AttribStringKey ) );
+			this._typeTable.Add( VLTHasher.Hash( "Attrib::RefSpec" ), typeof( VLTTypes.AttribRefSpec ) );
+			this._typeTable.Add( VLTHasher.Hash( "Attrib::Blob" ), typeof( VLTTypes.AttribBlob ) );
 
-			this._typeTable.Add( VLTHasher.Hash( "UpgradeSpecs" ), typeof( VLTDataItems.UpgradeSpecs ) );
-			this._typeTable.Add( VLTHasher.Hash( "JunkmanMod" ), typeof( VLTDataItems.JunkmanMod ) );
-			this._typeTable.Add( VLTHasher.Hash( "AxlePair" ), typeof( VLTDataItems.AxlePair ) );
-			this._typeTable.Add( VLTHasher.Hash( "CarBodyMotion" ), typeof( VLTDataItems.CarBodyMotion ) );
-			this._typeTable.Add( VLTHasher.Hash( "GCollectionKey" ), typeof( VLTDataItems.GCollectionKey ) );
+			this._typeTable.Add( VLTHasher.Hash( "UpgradeSpecs" ), typeof( VLTTypes.UpgradeSpecs ) );
+			this._typeTable.Add( VLTHasher.Hash( "JunkmanMod" ), typeof( VLTTypes.JunkmanMod ) );
+			this._typeTable.Add( VLTHasher.Hash( "AxlePair" ), typeof( VLTTypes.AxlePair ) );
+			this._typeTable.Add( VLTHasher.Hash( "CarBodyMotion" ), typeof( VLTTypes.CarBodyMotion ) );
+			this._typeTable.Add( VLTHasher.Hash( "GCollectionKey" ), typeof( VLTTypes.GCollectionKey ) );
 
 
 		}
@@ -530,9 +530,9 @@ namespace NFSTools.VLTEdit
 
 				VLTDataItem item = mi.Invoke( null ) as VLTDataItem;
 
-				if( item is VLTDataItems.Unknown )
+				if( item is VLTTypes.UnknownType )
 				{
-					( item as VLTDataItems.Unknown ).SetLength( this._dataSize );
+					( item as VLTTypes.UnknownType ).SetLength( this._dataSize );
 				}
 
 				item.Offset = (uint)br.BaseStream.Position;
@@ -836,7 +836,7 @@ namespace NFSTools.VLTEdit
 
 					if( type == null )
 					{
-						type = typeof( VLTDataItems.Unknown );
+						type = typeof( VLTTypes.UnknownType );
 					}
 
 					VLTDataItem dataItem;
@@ -847,9 +847,9 @@ namespace NFSTools.VLTEdit
 					else
 					{
 						dataItem = VLTDataItem.Instantiate( type );
-						if( dataItem is VLTDataItems.Unknown )
+						if( dataItem is VLTTypes.UnknownType )
 						{
-							( dataItem as VLTDataItems.Unknown ).SetLength( field.Length );
+							( dataItem as VLTTypes.UnknownType ).SetLength( field.Length );
 						}
 					}
 

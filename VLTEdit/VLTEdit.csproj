@@ -118,6 +118,7 @@
     <Compile Include="VLTTypes\AttribVectors.cs" />
     <Compile Include="VLTTypes\AxlePair.cs" />
     <Compile Include="VLTTypes\CarBodyMotion.cs" />
+    <Compile Include="VLTTypes\DataValueAttribute.cs" />
     <Compile Include="VLTTypes\EABool.cs" />
     <Compile Include="VLTTypes\EADouble.cs" />
     <Compile Include="VLTTypes\EAFloat.cs" />
@@ -128,6 +129,8 @@
     <Compile Include="VLTTypes\JunkmanMod.cs" />
     <Compile Include="VLTTypes\AttribRefSpec.cs" />
     <Compile Include="VLTTypes\RuntimeLinkage.cs" />
+    <Compile Include="VLTTypes\VLTDataItem.cs" />
+    <Compile Include="VLTTypes\VLTDataItemArray.cs" />
     <Compile Include="VLTTypes\VLTTypeResolver.cs" />
     <Compile Include="VLTTypes\UnknownType.cs" />
     <Compile Include="VLTTypes\UpgradeSpecs.cs" />

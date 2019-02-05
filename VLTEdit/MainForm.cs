@@ -8,6 +8,8 @@ using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 
+using NFSTools.VLTEdit.VLTTypes;
+
 namespace NFSTools.VLTEdit
 {
 	public class MainForm : System.Windows.Forms.Form

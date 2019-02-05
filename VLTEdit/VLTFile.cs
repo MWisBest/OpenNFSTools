@@ -424,7 +424,11 @@ namespace NFSTools.VLTEdit
 			{
 				get
 				{
-					return ( this.Flags2 & 0x20 ) != 0;
+					if( ( this.Flags2 & 0x20 ) == 0 )
+					{
+						return ( this.Flags2 & 0x40 ) > 0;
+					}
+					return false;
 				}
 			}
 

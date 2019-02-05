@@ -759,7 +759,11 @@ namespace NFSTools.VLTEdit
 		{
 			get
 			{
-				return this._vltBlocks[offset];
+				if( this._vltBlocks.ContainsKey( offset ) )
+				{
+					return this._vltBlocks[offset];
+				}
+				return null;
 			}
 			set
 			{

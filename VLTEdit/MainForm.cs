@@ -1,6 +1,7 @@
 using NFSTools.LibNFS.Crypto;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.IO;
@@ -823,7 +824,7 @@ namespace NFSTools.VLTEdit
 
 			string nodeName, key;
 			TreeNode node, classNode, dbNode;
-			Hashtable nodes = new Hashtable();
+			Dictionary<string, TreeNode> nodes = new Dictionary<string, TreeNode>();
 
 			dbNode = this.tv.Nodes.Add( "Database" );
 			dbNode.Tag = this._db;

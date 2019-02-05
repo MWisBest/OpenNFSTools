@@ -1,17 +1,17 @@
 ﻿using NFSTools.LibNFS.Crypto;
 using System;
-using System.Collections;
+using System.Collections.Generic;
 
 namespace NFSTools.VLTEdit.VLTTypes
 {
 	public class VLTTypeResolver
 	{
-		private Hashtable _typeTable;
+		private Dictionary<uint, Type> _typeTable;
 		public static VLTTypeResolver Resolver = new VLTTypeResolver();
 
 		public VLTTypeResolver()
 		{
-			this._typeTable = new Hashtable();
+			this._typeTable = new Dictionary<uint, Type>();
 			this._typeTable.Add( JenkinsHash.getHash32( "EA::Reflection::Double" ), typeof( EADouble ) );
 			this._typeTable.Add( JenkinsHash.getHash32( "EA::Reflection::Float" ), typeof( EAFloat ) );
 			this._typeTable.Add( JenkinsHash.getHash32( "EA::Reflection::UInt8" ), typeof( EAUInt8 ) );
@@ -44,7 +44,7 @@ namespace NFSTools.VLTEdit.VLTTypes
 		{
 			if( this._typeTable.ContainsKey( hash ) )
 			{
-				return this._typeTable[hash] as Type;
+				return this._typeTable[hash];
 			}
 
 			return null;

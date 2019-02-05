@@ -1,5 +1,5 @@
 using NFSTools.LibNFS.Crypto;
-using System.Collections;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
@@ -8,22 +8,22 @@ namespace NFSTools.VLTEdit
 {
 	public class HashResolver
 	{
-		static Hashtable _loadTable;
-		static Hashtable _manualTable;
-		static Hashtable _autoTable;
-		static Hashtable _useTable;
+		private static Dictionary<uint, string> _loadTable;
+		private static Dictionary<uint, string> _manualTable;
+		private static Dictionary<uint, string> _autoTable;
+		private static Dictionary<uint, string> _useTable;
 
 		static HashResolver()
 		{
-			_autoTable = new Hashtable();
-			_useTable = new Hashtable();
+			_autoTable = new Dictionary<uint, string>();
+			_useTable = new Dictionary<uint, string>();
 			Initialize();
 		}
 
 		public static void Initialize()
 		{
-			_loadTable = new Hashtable();
-			_manualTable = new Hashtable();
+			_loadTable = new Dictionary<uint, string>();
+			_manualTable = new Dictionary<uint, string>();
 
 			FileInfo fi = new FileInfo( Application.ExecutablePath );
 			string filename = fi.Directory.FullName + "\\hashes.txt";
@@ -39,11 +39,11 @@ namespace NFSTools.VLTEdit
 			uint key = hash;
 			if( _autoTable.ContainsKey( key ) )
 			{
-				return (string)_autoTable[key];
+				return _autoTable[key];
 			}
 			else if( _loadTable.ContainsKey( key ) )
 			{
-				string value = (string)_loadTable[key];
+				string value = _loadTable[key];
 				if( !_useTable.ContainsKey( key ) )
 				{
 					if( !_autoTable.ContainsKey( key ) )
@@ -55,7 +55,7 @@ namespace NFSTools.VLTEdit
 			}
 			else if( _manualTable.ContainsKey( key ) )
 			{
-				string value = (string)_manualTable[key];
+				string value = _manualTable[key];
 				if( !_useTable.ContainsKey( key ) )
 				{
 					if( !_autoTable.ContainsKey( key ) )

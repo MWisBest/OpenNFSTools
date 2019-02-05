@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using NFSTools.LibNFS.Crypto;
@@ -399,12 +400,12 @@ namespace NFSTools.VLTEdit
 			public int Length;
 		}
 
-		private Hashtable _types;
-		private Hashtable _classes;
+		private Dictionary<uint, VLTType> _types;
+		private Dictionary<uint, VLTClass> _classes;
 
 		public VLTType GetType( uint hash )
 		{
-			return this._types[hash] as VLTType;
+			return this._types[hash];
 		}
 
 		public VLTClass[] GetClasses()
@@ -418,7 +419,7 @@ namespace NFSTools.VLTEdit
 		{
 			get
 			{
-				return this._classes[hash] as VLTClass;
+				return this._classes[hash];
 			}
 		}
 
@@ -429,7 +430,7 @@ namespace NFSTools.VLTEdit
 			vltFile.RawStream.Seek( offset, SeekOrigin.Begin );
 			BinaryReader br = new BinaryReader( vltFile.RawStream );
 
-			this._types = new Hashtable( dbLoad.Count );
+			this._types = new Dictionary<uint, VLTType>( dbLoad.Count );
 
 			for( int i = 0; i < dbLoad.Count; i++ )
 			{
@@ -441,7 +442,7 @@ namespace NFSTools.VLTEdit
 				HashResolver.AddAuto( type.TypeName );
 			}
 
-			this._classes = new Hashtable();
+			this._classes = new Dictionary<uint, VLTClass>();
 		}
 
 		public void LoadClass( VLTDataClassLoad classLoad, VLTFile vltFile )

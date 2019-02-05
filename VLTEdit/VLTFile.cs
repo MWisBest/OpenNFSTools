@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
@@ -751,14 +752,14 @@ namespace NFSTools.VLTEdit
 	public class VLTPointers : VLTBase
 	{
 		ArrayList _allBlocks;
-		Hashtable _vltBlocks;
+		Dictionary<int, VLTPointerBlock> _vltBlocks;
 		ArrayList _rawBlocks;
 
 		public VLTPointerBlock this[int offset]
 		{
 			get
 			{
-				return this._vltBlocks[offset] as VLTPointerBlock;
+				return this._vltBlocks[offset];
 			}
 			set
 			{
@@ -779,7 +780,7 @@ namespace NFSTools.VLTEdit
 		public override void Read( BinaryReader br )
 		{
 			this._allBlocks = new ArrayList();
-			this._vltBlocks = new Hashtable();
+			this._vltBlocks = new Dictionary<int, VLTPointerBlock>();
 			this._rawBlocks = new ArrayList();
 			bool loadVlt = false;
 			bool loadRaw = false;

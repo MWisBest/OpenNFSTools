@@ -115,6 +115,7 @@
     <Compile Include="VLTTypes\AttribBlob.cs" />
     <Compile Include="VLTTypes\AttribMatrix.cs" />
     <Compile Include="VLTTypes\AttribStringKey.cs" />
+    <Compile Include="VLTTypes\AttribStringKeyCarbon.cs" />
     <Compile Include="VLTTypes\AttribVectors.cs" />
     <Compile Include="VLTTypes\AxlePair.cs" />
     <Compile Include="VLTTypes\CarBodyMotion.cs" />

@@ -29,9 +29,14 @@ namespace NFSTools.VLTEdit.VLTTypes
 			this._typeTable.Add( JenkinsHash.getHash32( "Attrib::Types::Vector2" ), typeof( AttribVector2 ) );
 			this._typeTable.Add( JenkinsHash.getHash32( "Attrib::Types::Vector3" ), typeof( AttribVector3 ) );
 			this._typeTable.Add( JenkinsHash.getHash32( "Attrib::Types::Vector4" ), typeof( AttribVector4 ) );
-			this._typeTable.Add( JenkinsHash.getHash32( "Attrib::StringKey" ), typeof( AttribStringKey ) );
 			this._typeTable.Add( JenkinsHash.getHash32( "Attrib::RefSpec" ), typeof( AttribRefSpec ) );
 			this._typeTable.Add( JenkinsHash.getHash32( "Attrib::Blob" ), typeof( AttribBlob ) );
+
+#if CARBON
+			this._typeTable.Add( JenkinsHash.getHash32( "Attrib::StringKey" ), typeof( AttribStringKeyCarbon ) );
+#else
+			this._typeTable.Add( JenkinsHash.getHash32( "Attrib::StringKey" ), typeof( AttribStringKey ) );
+#endif
 
 			this._typeTable.Add( JenkinsHash.getHash32( "AxlePair" ), typeof( AxlePair ) );
 			this._typeTable.Add( JenkinsHash.getHash32( "CarBodyMotion" ), typeof( CarBodyMotion ) );

@@ -11,12 +11,14 @@ namespace NFSTools.LibNFS.Misc
 	{
 		public const string KEY_ROOT_32 = "SOFTWARE\\";
 		public const string KEY_ROOT_64 = "SOFTWARE\\Wow6432Node\\";
-		public const string SUB_UG_TO_MW = "EA GAMES\\";
-		public const string SUB_CARBON_UP = "Electronic Arts\\";
-		public const string ENTRY_UG = SUB_UG_TO_MW + "Need For Speed Underground\\";
-		public const string ENTRY_UG2 = SUB_UG_TO_MW + "Need for Speed Underground 2\\";
-		public const string ENTRY_MW = SUB_UG_TO_MW + "Need for Speed Most Wanted\\";
-		public const string ENTRY_CARBON = SUB_CARBON_UP + "Need for Speed Carbon\\";
+		public const string SUB_EA_GAMES = "EA GAMES\\";
+		public const string SUB_EA = "Electronic Arts\\";
+		public const string ENTRY_UG = SUB_EA_GAMES + "Need For Speed Underground\\";
+		public const string ENTRY_UG2 = SUB_EA_GAMES + "Need for Speed Underground 2\\";
+		public const string ENTRY_MW = SUB_EA_GAMES + "Need for Speed Most Wanted\\";
+		public const string ENTRY_CARBON = SUB_EA + "Need for Speed Carbon\\";
+		public const string ENTRY_PROSTREET = SUB_EA + "Need for Speed ProStreet\\";
+		public const string ENTRY_UNDERCOVER = SUB_EA_GAMES + "Need for Speed Undercover\\";
 		public const string DIR_KEY = "Install Dir";
 
 		/// <summary>
@@ -64,6 +66,22 @@ namespace NFSTools.LibNFS.Misc
 					installdirkv64 = subkey?.GetValue( DIR_KEY );
 					subkey?.Close();
 					break;
+				case Game.PROSTREET:
+					subkey = Registry.LocalMachine.OpenSubKey( KEY_ROOT_32 + ENTRY_PROSTREET, false );
+					installdirkv32 = subkey?.GetValue( DIR_KEY );
+					subkey?.Close();
+					subkey = Registry.LocalMachine.OpenSubKey( KEY_ROOT_64 + ENTRY_PROSTREET, false );
+					installdirkv64 = subkey?.GetValue( DIR_KEY );
+					subkey?.Close();
+					break;
+				case Game.UNDERCOVER:
+					subkey = Registry.LocalMachine.OpenSubKey( KEY_ROOT_32 + ENTRY_UNDERCOVER, false );
+					installdirkv32 = subkey?.GetValue( DIR_KEY );
+					subkey?.Close();
+					subkey = Registry.LocalMachine.OpenSubKey( KEY_ROOT_64 + ENTRY_UNDERCOVER, false );
+					installdirkv64 = subkey?.GetValue( DIR_KEY );
+					subkey?.Close();
+					break;
 				default:
 					throw new ArgumentException( "Unkown Game requested!", nameof( game ) );
 			}
@@ -90,7 +108,9 @@ namespace NFSTools.LibNFS.Misc
 			UG,
 			UG2,
 			MW,
-			CARBON
+			CARBON,
+			PROSTREET,
+			UNDERCOVER
 		}
 	}
 }

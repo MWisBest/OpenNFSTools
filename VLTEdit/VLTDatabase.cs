@@ -54,11 +54,11 @@ namespace NFSTools.VLTEdit
 		public class ClassData : IEnumerable
 		{
 			private VLTClass _vltClass;
-			private ArrayList _collection;
+			private List<VLTDataRow> _collection;
 			public ClassData( VLTClass vltClass )
 			{
 				this._vltClass = vltClass;
-				this._collection = new ArrayList( vltClass.ClassLoad.CollectionCount );
+				this._collection = new List<VLTDataRow>( vltClass.ClassLoad.CollectionCount );
 			}
 			public int Count
 			{
@@ -86,7 +86,7 @@ namespace NFSTools.VLTEdit
 			{
 				get
 				{
-					return this._collection[index] as VLTDataRow;
+					return this._collection[index];
 				}
 			}
 

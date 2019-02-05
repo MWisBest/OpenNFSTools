@@ -751,9 +751,9 @@ namespace NFSTools.VLTEdit
 
 	public class VLTPointers : VLTBase
 	{
-		ArrayList _allBlocks;
+		List<VLTPointerBlock> _allBlocks;
 		Dictionary<int, VLTPointerBlock> _vltBlocks;
-		ArrayList _rawBlocks;
+		List<VLTPointerBlock> _rawBlocks;
 
 		public VLTPointerBlock this[int offset]
 		{
@@ -779,9 +779,9 @@ namespace NFSTools.VLTEdit
 
 		public override void Read( BinaryReader br )
 		{
-			this._allBlocks = new ArrayList();
+			this._allBlocks = new List<VLTPointerBlock>();
 			this._vltBlocks = new Dictionary<int, VLTPointerBlock>();
-			this._rawBlocks = new ArrayList();
+			this._rawBlocks = new List<VLTPointerBlock>();
 			bool loadVlt = false;
 			bool loadRaw = false;
 			while( true )
@@ -856,7 +856,7 @@ namespace NFSTools.VLTEdit
 	{
 		string _filename;
 		string _baseDir;
-		ArrayList _chunks;
+		List<VLTBase> _chunks;
 		MemoryStream _binRaw;
 		MemoryStream _binVlt;
 
@@ -974,7 +974,7 @@ namespace NFSTools.VLTEdit
 			vlt.Read( data, 0, data.Length );
 			this._binVlt = new MemoryStream( data );
 
-			this._chunks = new ArrayList();
+			this._chunks = new List<VLTBase>();
 			BinaryReader br = new BinaryReader( this._binVlt );
 
 			// Load up the chunks

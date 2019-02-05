@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
@@ -7,7 +8,7 @@ namespace NFSTools.VLTEdit.VLTTypes
 {
 	public class VLTDataItemArray : VLTDataItem, IEnumerable
 	{
-		private ArrayList _items;
+		private List<VLTDataItem> _items;
 		private int _align;
 		private uint _type;
 		private Type _itemType;
@@ -18,7 +19,7 @@ namespace NFSTools.VLTEdit.VLTTypes
 			array._align = field.Alignment;
 			array._type = field.TypeHash;
 			array._itemType = type;
-			array._items = new ArrayList();
+			array._items = new List<VLTDataItem>();
 			return array;
 		}
 
@@ -64,7 +65,7 @@ namespace NFSTools.VLTEdit.VLTTypes
 		{
 			get
 			{
-				return this._items[index] as VLTDataItem;
+				return this._items[index];
 			}
 			set
 			{
@@ -110,7 +111,7 @@ namespace NFSTools.VLTEdit.VLTTypes
 						bw.BaseStream.Position += this._align - ( bw.BaseStream.Position % this._align );
 					}
 				}
-				( this._items[i] as VLTDataItem ).Write( bw );
+				this._items[i].Write( bw );
 			}
 		}
 
